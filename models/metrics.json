@@ -1,0 +1,60 @@
+{
+  "ddi": {
+    "n_pairs": 741,
+    "n_drugs": 39,
+    "n_features": 1378,
+    "significant_rate": 0.1970310391363023,
+    "screening_threshold": 0.35,
+    "class_distribution": {
+      "None": 478,
+      "Mild": 117,
+      "Moderate": 82,
+      "Severe": 64
+    },
+    "random_split": {
+      "roc_auc": 0.8140758207872302,
+      "recall": 0.7567567567567568,
+      "precision": 0.3783783783783784,
+      "accuracy": 0.7043010752688172,
+      "n_test": 186
+    },
+    "cold_drug_split": {
+      "roc_auc": 0.6788063370757278,
+      "roc_auc_std": 0.06023812995345239,
+      "recall": 0.60727969348659,
+      "precision": 0.2783143107989464,
+      "accuracy": 0.6278985507246376,
+      "flagged_rate": 0.4126811594202899,
+      "n_test": 2760,
+      "n_repeats": 10,
+      "held_out_drugs_example": [
+        "Atorvastatin",
+        "Carbamazepine",
+        "Fluconazole",
+        "Omeprazole",
+        "Phenytoin",
+        "Simvastatin",
+        "Theophylline",
+        "Trimethoprim"
+      ]
+    }
+  },
+  "amr": {
+    "n_isolates": 700,
+    "n_features": 1024,
+    "k": 5,
+    "random_split": {
+      "exact_match": 0.8514285714285714,
+      "per_label_accuracy": 0.979047619047619,
+      "macro_f1": 0.9214623373629284,
+      "n_test": 175
+    },
+    "cold_combination_split": {
+      "exact_match": 0.6666666666666666,
+      "per_label_accuracy": 0.9673202614379085,
+      "macro_f1": 0.9236073067093883,
+      "n_test": 204,
+      "n_unseen_combinations": 101
+    }
+  }
+}

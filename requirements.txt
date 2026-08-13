@@ -1,0 +1,11 @@
+# TrialSense — all free / open source, runs locally with no paid APIs.
+# Pinned to minimum versions verified working; newer releases are generally fine.
+rdkit>=2023.9.1          # molecular structures, fingerprints, drawing
+scikit-learn>=1.3        # Random Forest models
+numpy>=1.24
+pandas>=2.0
+streamlit>=1.30          # web UI
+plotly>=5.18             # charts (6.x supported)
+
+# Optional — only needed for capture_screens.py (headless screenshots):
+#   pip install playwright && playwright install chromium
