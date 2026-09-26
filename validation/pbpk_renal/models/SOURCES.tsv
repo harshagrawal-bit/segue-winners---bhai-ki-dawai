@@ -1,0 +1,10 @@
+drug	repo	branch	commit_sha	file	permalink
+Fluconazole	Fluconazole-Model	main	fa23aa5a5865d544b9c2aeba6ba4629df31de0ac	Fluconazole-Model.json	https://github.com/Open-Systems-Pharmacology/Fluconazole-Model/blob/fa23aa5a5865d544b9c2aeba6ba4629df31de0ac/Fluconazole-Model.json
+Metformin	Metformin-Model	master	5586d01d42ffa688a0fc751187f437b67ad8e013	Metformin-Model.json	https://github.com/Open-Systems-Pharmacology/Metformin-Model/blob/5586d01d42ffa688a0fc751187f437b67ad8e013/Metformin-Model.json
+Methotrexate	Methotrexate-Model	master	6cd01494129888e4bca14e79bfca7e2d48853624	Methotrexate-Model.json	https://github.com/Open-Systems-Pharmacology/Methotrexate-Model/blob/6cd01494129888e4bca14e79bfca7e2d48853624/Methotrexate-Model.json
+Methotrexate	Methotrexate-Model	master	6cd01494129888e4bca14e79bfca7e2d48853624	Methotrexate-Model.pksim5	https://github.com/Open-Systems-Pharmacology/Methotrexate-Model/blob/6cd01494129888e4bca14e79bfca7e2d48853624/Methotrexate-Model.pksim5
+Omeprazole	Omeprazole-Model	main	c8b0f70a40c8513146a32a350957a81d01737431	Omeprazole-Model.json	https://github.com/Open-Systems-Pharmacology/Omeprazole-Model/blob/c8b0f70a40c8513146a32a350957a81d01737431/Omeprazole-Model.json
+Atorvastatin	Atorvastatin-Model	master	bf3befea6c1269e48e9c193cd4a08aad7dfe314d	Atorvastatin-Model.json	https://github.com/Open-Systems-Pharmacology/Atorvastatin-Model/blob/bf3befea6c1269e48e9c193cd4a08aad7dfe314d/Atorvastatin-Model.json
+Ketoconazole	Ketoconazole-Model	main	bb8d0029bffdec2961eaab41d3f6dda149ff30ef	Ketoconazole-Model.json	https://github.com/Open-Systems-Pharmacology/Ketoconazole-Model/blob/bb8d0029bffdec2961eaab41d3f6dda149ff30ef/Ketoconazole-Model.json
+Ketoconazole	Ketoconazole-Model	main	bb8d0029bffdec2961eaab41d3f6dda149ff30ef	Ketoconazole-Model.pksim5	https://github.com/Open-Systems-Pharmacology/Ketoconazole-Model/blob/bb8d0029bffdec2961eaab41d3f6dda149ff30ef/Ketoconazole-Model.pksim5
+Theophylline	Theophylline-Model	master	0610b095ab3eb7adfa73df6298796ee7ad37368c	Theophylline-Model.pksim5	https://github.com/Open-Systems-Pharmacology/Theophylline-Model/blob/0610b095ab3eb7adfa73df6298796ee7ad37368c/Theophylline-Model.pksim5

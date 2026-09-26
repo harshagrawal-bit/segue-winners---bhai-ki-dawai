@@ -1,0 +1,22 @@
+gene	our_annotation	CARD_resistance_mechanism	CARD_AMR_gene_family	NCBI_product_name	CARD_ARO
+blaTEM-1	serine beta-lactamase (class A)	antibiotic inactivation	TEM beta-lactamase	broad-spectrum class A beta-lactamase TEM-1	ARO:3000873
+blaCTX-M-15	serine beta-lactamase (class A)	antibiotic inactivation	CTX-M beta-lactamase	extended-spectrum class A beta-lactamase CTX-M-15	ARO:3001878
+blaSHV	serine beta-lactamase (class A)	antibiotic inactivation	SHV beta-lactamase	broad-spectrum class A beta-lactamase SHV-1	ARO:3001059
+blaNDM-1	METALLO beta-lactamase (class B)	antibiotic inactivation	NDM beta-lactamase	subclass B1 metallo-beta-lactamase NDM-1	ARO:3000589
+blaVIM	METALLO beta-lactamase (class B)	antibiotic inactivation	VIM beta-lactamase	subclass B1 metallo-beta-lactamase VIM-1	ARO:3002271
+blaIMP	METALLO beta-lactamase (class B)	antibiotic inactivation	IMP beta-lactamase	subclass B1 metallo-beta-lactamase IMP-1	ARO:3002192
+blaKPC-2	serine carbapenemase (class A)	antibiotic inactivation	KPC beta-lactamase	carbapenem-hydrolyzing class A beta-lactamase KPC-2	ARO:3002312
+blaOXA-48	serine oxacillinase (class D)	antibiotic inactivation	OXA-48-like beta-lactamase	OXA-48 family carbapenem-hydrolyzing class D beta-lactamase OXA-48	ARO:3001782
+mecA	target modification (altered PBP2a)	antibiotic target replacement	PBP2-like beta-lactam resistant peptidoglycan transpeptidase	PBP2a family beta-lactam-resistant peptidoglycan transpeptidase MecA	ARO:3000617
+vanA	target modification (cell wall precursor remodelling)	antibiotic target alteration	Van ligase;glycopeptide resistance gene cluster	D-alanine--(R)-lactate ligase VanA	ARO:3000010
+ermB	ribosomal methylation	antibiotic target alteration	Erm-like 23S rRNA methyltransferase	23S rRNA (adenine(2058)-N(6))-methyltransferase Erm(B)	ARO:3000375
+armA	ribosomal methylation	antibiotic target alteration	16S rRNA methyltransferase (G1405)	16S rRNA (guanine(1405)-N(7))-methyltransferase ArmA	ARO:3000858
+cfr	ribosomal methylation	antibiotic target alteration	Cfr-like 23S rRNA methyltransferase	23S rRNA (adenine(2503)-C(8))-methyltransferase Cfr	ARO:3003441
+tetM	target protection	antibiotic target protection	tetracycline-resistant ribosomal protection protein	tetracycline resistance ribosomal protection protein Tet(M)	ARO:3000186
+qnrS1	target protection	antibiotic target protection	quinolone resistance protein (qnr)	quinolone resistance pentapeptide repeat protein QnrS1	ARO:3002790
+aac(6')-Ib	drug modification (acetyltransferase)	antibiotic inactivation	AAC(6')	AAC(6')-Ib family aminoglycoside 6'-N-acetyltransferase	ARO:3002546
+sul1	metabolic bypass / alternative insensitive enzyme	antibiotic target replacement	sulfonamide resistant sul	sulfonamide-resistant dihydropteroate synthase Sul1	ARO:3000410
+dfrA17	metabolic bypass / alternative insensitive enzyme	antibiotic target replacement	trimethoprim resistant dihydrofolate reductase dfr	trimethoprim-resistant dihydrofolate reductase DfrA17	ARO:3002860
+mcr-1	membrane modification (lipid A)	antibiotic target alteration	MCR phosphoethanolamine transferase	phosphoethanolamine--lipid A transferase MCR-1.1	ARO:3003689
+gyrA	(not annotated - point mutation)	antibiotic target alteration	fluoroquinolone resistant gyrA	(chromosomal point-mutation gene; not in NCBI ReferenceGeneCatalog)	ARO:3003294
+rpoB	(not annotated - point mutation)	antibiotic target alteration;antibiotic target replacement	rifamycin-resistant beta-subunit of RNA polymerase (rpoB)	(chromosomal point-mutation gene; not in NCBI ReferenceGeneCatalog)	ARO:3003283

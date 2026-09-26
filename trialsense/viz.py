@@ -333,3 +333,299 @@ def pill(text: str, color: str) -> str:
         f"padding:.2rem .6rem;border-radius:20px;font-size:.76rem;font-weight:600;"
         f"margin-right:.35rem;display:inline-block;margin-bottom:.3rem'>{text}</span>"
     )
+
+
+# =============================================================================
+# Module 3 feature charts
+#
+# Each of the six Module 3 features renders its own separate report, so each
+# gets its own dedicated figure rather than sharing a generic one.
+# =============================================================================
+
+
+def runway_chart(report) -> go.Figure:
+    """
+    Feature 1 — observed resistance, the fitted curve, and the projection cone.
+
+    Three visually distinct layers, because conflating them would be exactly the
+    dishonesty this feature exists to avoid: solid markers are OBSERVED data,
+    the solid line is the FIT to those points, and the dashed line plus shaded
+    band is EXTRAPOLATION. A reader must be able to see at a glance where the
+    evidence stops and the model starts.
+    """
+    from .surveillance import VIABILITY_THRESHOLD
+
+    fig = go.Figure()
+    fc = report.forecast
+
+    # Projection cone first, so it sits behind everything else.
+    if fc and fc.projected:
+        pyears = sorted(fc.projected)
+        fig.add_trace(go.Scatter(
+            x=pyears + pyears[::-1],
+            y=[fc.hi[y] for y in pyears] + [fc.lo[y] for y in pyears][::-1],
+            fill="toself", fillcolor="rgba(232,114,44,0.13)",
+            line=dict(width=0), hoverinfo="skip", showlegend=False,
+        ))
+
+    all_years = [p.year for p in report.points] + list(fc.projected if fc else [])
+    if all_years:
+        fig.add_shape(
+            type="line", x0=min(all_years), x1=max(all_years),
+            y0=VIABILITY_THRESHOLD, y1=VIABILITY_THRESHOLD,
+            line=dict(color=RISK_COLORS["Severe"], width=1.5, dash="dot"),
+        )
+        fig.add_annotation(
+            x=min(all_years), y=VIABILITY_THRESHOLD, xanchor="left", yanchor="bottom",
+            text=f"{VIABILITY_THRESHOLD:.0f}% — commercial viability line",
+            showarrow=False, font=dict(color=RISK_COLORS["Severe"], size=10),
+        )
+
+    if fc and fc.fitted:
+        fyears = sorted(fc.fitted)
+        fig.add_trace(go.Scatter(
+            x=fyears, y=[fc.fitted[y] for y in fyears],
+            mode="lines", name="Fitted trend",
+            line=dict(color=ACCENT, width=2.5),
+        ))
+
+    if fc and fc.projected:
+        pyears = sorted(fc.projected)
+        last_fit = max(fc.fitted) if fc.fitted else pyears[0]
+        bridge = [last_fit] + pyears
+        bvals = [fc.fitted.get(last_fit, fc.projected[pyears[0]])] + [
+            fc.projected[y] for y in pyears
+        ]
+        fig.add_trace(go.Scatter(
+            x=bridge, y=bvals, mode="lines", name="Projection",
+            line=dict(color=RISK_COLORS["High"], width=2.5, dash="dash"),
+        ))
+
+    obs = [p for p in report.points if p.comparable]
+    held = [p for p in report.points if not p.comparable]
+    if obs:
+        fig.add_trace(go.Scatter(
+            x=[p.year for p in obs], y=[p.percent for p in obs],
+            mode="markers", name="Observed (in fit)",
+            marker=dict(color=INK, size=9, line=dict(color=ACCENT, width=1.5)),
+        ))
+    if held:
+        fig.add_trace(go.Scatter(
+            x=[p.year for p in held], y=[p.percent for p in held],
+            mode="markers", name="Observed (excluded — see notes)",
+            marker=dict(color=MUTED, size=9, symbol="circle-open",
+                        line=dict(color=MUTED, width=2)),
+        ))
+
+    if report.launch_pct is not None:
+        fig.add_trace(go.Scatter(
+            x=[report.launch_year], y=[report.launch_pct],
+            mode="markers+text", name="At launch",
+            marker=dict(color=report.color, size=15, symbol="diamond",
+                        line=dict(color=INK, width=1.5)),
+            text=[f" {report.launch_pct:.0f}%"], textposition="middle right",
+            textfont=dict(color=INK, size=13),
+        ))
+
+    fig.update_layout(
+        height=380, margin=dict(l=10, r=10, t=30, b=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        xaxis=dict(title="Year", gridcolor=PANEL_EDGE, zeroline=False),
+        yaxis=dict(title="% resistant", range=[0, 100], gridcolor=PANEL_EDGE,
+                   zeroline=False),
+        legend=dict(orientation="h", y=-0.22, x=0, font=dict(size=10)),
+        hovermode="x unified",
+    )
+    return fig
+
+
+def portfolio_heatmap(report) -> go.Figure:
+    """Feature 3 — candidates x organisms, coloured by predicted resistance."""
+    cands = [c.name for c in report.candidates]
+    orgs = list(report.organisms)
+
+    z, text = [], []
+    for c in cands:
+        zrow, trow = [], []
+        for o in orgs:
+            cell = report.cells.get((c, o))
+            if cell is None or cell.resistance is None:
+                zrow.append(None)
+                trow.append("—")
+            else:
+                zrow.append(cell.resistance * 100)
+                trow.append(f"{cell.symbol} {cell.resistance:.0%}")
+        z.append(zrow)
+        text.append(trow)
+
+    fig = go.Figure(go.Heatmap(
+        z=z, x=[o[:26] for o in orgs], y=cands,
+        text=text, texttemplate="%{text}",
+        textfont=dict(size=12, color=INK),
+        colorscale=[
+            [0.0, "#1B5E3A"], [0.35, "#2E9E5B"], [0.5, "#E0A526"],
+            [0.75, "#E8722C"], [1.0, "#D6453D"],
+        ],
+        zmin=0, zmax=100,
+        colorbar=dict(title=dict(text="% resistant", side="right"),
+                      tickfont=dict(color=MUTED, size=10), outlinewidth=0),
+        hovertemplate="%{y} vs %{x}<br>predicted resistance %{z:.0f}%<extra></extra>",
+        xgap=3, ygap=3,
+    ))
+    fig.update_layout(
+        height=max(240, 70 * len(cands) + 110),
+        margin=dict(l=10, r=10, t=14, b=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        xaxis=dict(side="top", tickangle=-18, tickfont=dict(size=10)),
+        yaxis=dict(autorange="reversed", tickfont=dict(size=11)),
+    )
+    return fig
+
+
+def value_waterfall(report) -> go.Figure:
+    """Feature 5 — cumulative spend up to the phase where the problem surfaces."""
+    reached = [ln for ln in report.lines if ln.reached]
+    labels = [ln.phase for ln in reached] + ["Total exposed", "With TrialSense"]
+    values = [ln.cost for ln in reached] + [0.0, report.cost_with - report.cost_without]
+    measures = ["relative"] * len(reached) + ["total", "relative"]
+
+    fig = go.Figure(go.Waterfall(
+        orientation="v",
+        measure=measures,
+        x=labels,
+        y=values,
+        text=[f"{ln.cost:.0f}" for ln in reached]
+        + [f"{report.cost_without:.0f}", f"{report.cost_with:.2f}"],
+        textposition="outside",
+        textfont=dict(color=INK, size=11),
+        connector=dict(line=dict(color=PANEL_EDGE, width=1)),
+        increasing=dict(marker=dict(color=RISK_COLORS["High"])),
+        decreasing=dict(marker=dict(color=RISK_COLORS["Low"])),
+        totals=dict(marker=dict(color=RISK_COLORS["Severe"])),
+    ))
+    fig.update_layout(
+        height=330, margin=dict(l=10, r=10, t=34, b=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        yaxis=dict(title="Rs crore", gridcolor=PANEL_EDGE, zeroline=False),
+        xaxis=dict(tickangle=-12),
+        showlegend=False,
+    )
+    return fig
+
+
+def mobility_chart(report) -> go.Figure:
+    """Feature 6 — detected determinants ranked by how fast they spread."""
+    if not report.entries:
+        fig = go.Figure()
+        fig.update_layout(
+            height=180, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color=MUTED),
+            annotations=[dict(text="No determinants detected", showarrow=False,
+                              font=dict(color=MUTED, size=13))],
+            xaxis=dict(visible=False), yaxis=dict(visible=False),
+        )
+        return fig
+
+    entries = sorted(report.entries, key=lambda e: e.gene.spread_multiplier)
+    names = [e.gene.name for e in entries]
+    mults = [e.gene.spread_multiplier for e in entries]
+    colors = [
+        RISK_COLORS["Severe"] if m >= 2.5
+        else RISK_COLORS["High"] if m >= 1.8
+        else RISK_COLORS["Moderate"] if m > 1.0
+        else RISK_COLORS["Low"]
+        for m in mults
+    ]
+    labels = [e.label for e in entries]
+
+    fig = go.Figure(go.Bar(
+        x=mults, y=names, orientation="h",
+        marker=dict(color=colors),
+        text=[f"  {l}" for l in labels],
+        textposition="outside",
+        textfont=dict(color=MUTED, size=10),
+        hovertemplate="%{y}<br>spread factor %{x:.1f}x<extra></extra>",
+    ))
+    fig.add_shape(
+        type="line", x0=1.0, x1=1.0, y0=-0.5, y1=len(names) - 0.5,
+        line=dict(color=MUTED, width=1, dash="dot"),
+    )
+    fig.update_layout(
+        height=max(200, 46 * len(names) + 80),
+        margin=dict(l=10, r=170, t=26, b=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        xaxis=dict(title="Spread factor vs a chromosomal mutation (1.0x)",
+                   gridcolor=PANEL_EDGE, zeroline=False, range=[0, 3.6]),
+        yaxis=dict(tickfont=dict(size=11)),
+        showlegend=False,
+    )
+    return fig
+
+
+def novelty_map(report) -> go.Figure:
+    """Feature 4 — where along the genome the unexplained segments sit."""
+    L = max(1, report.sequence_length)
+    fig = go.Figure()
+
+    fig.add_shape(
+        type="rect", x0=0, x1=L, y0=0.38, y1=0.62,
+        fillcolor=PANEL, line=dict(color=PANEL_EDGE, width=1),
+    )
+    for seg in report.segments:
+        fig.add_shape(
+            type="rect", x0=seg.start, x1=seg.end, y0=0.30, y1=0.70,
+            fillcolor=RISK_COLORS["Moderate"], opacity=0.85,
+            line=dict(color=RISK_COLORS["High"], width=1.5),
+        )
+        fig.add_annotation(
+            x=(seg.start + seg.end) / 2, y=0.80,
+            text=f"{seg.length:,} bp unexplained", showarrow=False,
+            font=dict(color=RISK_COLORS["Moderate"], size=10),
+        )
+
+    fig.update_layout(
+        height=160, margin=dict(l=10, r=10, t=34, b=30),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        xaxis=dict(title="Position (bp)", range=[0, L], gridcolor=PANEL_EDGE,
+                   zeroline=False),
+        yaxis=dict(visible=False, range=[0, 1]),
+        showlegend=False,
+    )
+    return fig
+
+
+def source_comparison_chart(series_by_source: dict) -> go.Figure:
+    """
+    Feature 1 side panel — the same organism and class from different
+    surveillance programmes, plotted together.
+
+    Showing that official sources disagree is a deliberate honesty move. It
+    mirrors the documented AMRFinder-vs-ResFinder divergence, and it is a far
+    stronger position than quietly picking whichever series flatters us.
+    """
+    fig = go.Figure()
+    palette = [ACCENT, RISK_COLORS["High"], RISK_COLORS["Low"], RISK_COLORS["Moderate"]]
+    for i, (label, series) in enumerate(series_by_source.items()):
+        years = sorted(series)
+        fig.add_trace(go.Scatter(
+            x=years, y=[series[y] for y in years],
+            mode="lines+markers", name=label,
+            line=dict(color=palette[i % len(palette)], width=2),
+            marker=dict(size=7),
+        ))
+    fig.update_layout(
+        height=290, margin=dict(l=10, r=10, t=24, b=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=MUTED, size=11),
+        xaxis=dict(title="Year", gridcolor=PANEL_EDGE, zeroline=False),
+        yaxis=dict(title="% resistant", range=[0, 100], gridcolor=PANEL_EDGE,
+                   zeroline=False),
+        legend=dict(orientation="h", y=-0.25, x=0, font=dict(size=10)),
+        hovermode="x unified",
+    )
+    return fig

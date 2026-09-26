@@ -1,0 +1,178 @@
+gene,drug,drug_class,source
+aac(6')-Ib,"(class-level link only, no individual drugs enumerated)",aminoglycoside antibiotic,CARD ARO:3002546 (AAC(6')-Ib) confers_resistance_to_drug_class ARO:0000016 | https://card.mcmaster.ca/ontology/3002546
+aac(6')-Ib,amikacin,aminoglycoside antibiotic,CARD ARO:3002546 (AAC(6')-Ib) confers_resistance_to_antibiotic ARO:0000013 | https://card.mcmaster.ca/ontology/3002546
+aac(6')-Ib,kanamycin A,aminoglycoside antibiotic,CARD ARO:3002546 (AAC(6')-Ib) confers_resistance_to_antibiotic ARO:0000049 | https://card.mcmaster.ca/ontology/3002546
+aac(6')-Ib,tobramycin,aminoglycoside antibiotic,CARD ARO:3002546 (AAC(6')-Ib) confers_resistance_to_antibiotic ARO:0000052 | https://card.mcmaster.ca/ontology/3002546
+aac(6')-Ib,amikacin,aminoglycoside,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047284.1 node=aac(6')-Ib-AKT subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+aac(6')-Ib,kanamycin,aminoglycoside,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047284.1 node=aac(6')-Ib-AKT subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+aac(6')-Ib,tobramycin,aminoglycoside,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047284.1 node=aac(6')-Ib-AKT subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+armA,"(class-level link only, no individual drugs enumerated)",aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_drug_class ARO:0000016 | https://card.mcmaster.ca/ontology/3000858
+armA,G418,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:3000653 | https://card.mcmaster.ca/ontology/3000858
+armA,amikacin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000013 | https://card.mcmaster.ca/ontology/3000858
+armA,arbekacin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:3000654 | https://card.mcmaster.ca/ontology/3000858
+armA,dibekacin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000007 | https://card.mcmaster.ca/ontology/3000858
+armA,gentamicin B,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:3000655 | https://card.mcmaster.ca/ontology/3000858
+armA,gentamicin C,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000014 | https://card.mcmaster.ca/ontology/3000858
+armA,isepamicin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:3000652 | https://card.mcmaster.ca/ontology/3000858
+armA,kanamycin A,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000049 | https://card.mcmaster.ca/ontology/3000858
+armA,netilmicin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000038 | https://card.mcmaster.ca/ontology/3000858
+armA,sisomicin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000035 | https://card.mcmaster.ca/ontology/3000858
+armA,tobramycin,aminoglycoside antibiotic,CARD ARO:3000858 (armA) confers_resistance_to_antibiotic ARO:0000052 | https://card.mcmaster.ca/ontology/3000858
+armA,gentamicin,aminoglycoside,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047476.1 node=armA subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaCTX-M-15,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,"(class-level link only, no individual drugs enumerated)",imidazole antibiotic,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_drug_class ARO:3007500 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,ampicillin,penicillin beta-lactam,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_antibiotic ARO:3000637 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,cefalotin,cephalosporin,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_antibiotic ARO:3000704 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,cefazolin,cephalosporin,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_antibiotic ARO:0000058 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,ceftazidime,cephalosporin,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_antibiotic ARO:0000060 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,ceftriaxone,cephalosporin,CARD ARO:3001878 (CTX-M-15) confers_resistance_to_antibiotic ARO:0000062 | https://card.mcmaster.ca/ontology/3001878
+blaCTX-M-15,cephalosporin,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_048935.1 node=blaCTX-M-15 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaIMP,"(class-level link only, no individual drugs enumerated)",carbapenem,CARD ARO:3002192 (IMP-1) confers_resistance_to_drug_class ARO:0000020 | https://card.mcmaster.ca/ontology/3002192
+blaIMP,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3002192 (IMP-1) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3002192
+blaIMP,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3002192 (IMP-1) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3002192
+blaIMP,carbapenem,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_049172.1 node=blaIMP-1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaKPC-2,"(class-level link only, no individual drugs enumerated)",carbapenem,CARD ARO:3002312 (KPC-2) confers_resistance_to_drug_class ARO:0000020 | https://card.mcmaster.ca/ontology/3002312
+blaKPC-2,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3002312 (KPC-2) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3002312
+blaKPC-2,"(class-level link only, no individual drugs enumerated)",monobactam,CARD ARO:3002312 (KPC-2) confers_resistance_to_drug_class ARO:0000004 | https://card.mcmaster.ca/ontology/3002312
+blaKPC-2,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3002312 (KPC-2) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3002312
+blaKPC-2,carbapenem,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_049253.1 node=blaKPC-2 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaNDM-1,"(class-level link only, no individual drugs enumerated)",carbapenem,CARD ARO:3000589 (NDM-1) confers_resistance_to_drug_class ARO:0000020 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3000589 (NDM-1) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3000589 (NDM-1) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,ertapenem,carbapenem,CARD ARO:3000589 (NDM-1) confers_resistance_to_antibiotic ARO:0000070 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,imipenem,carbapenem,CARD ARO:3000589 (NDM-1) confers_resistance_to_antibiotic ARO:3000170 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,meropenem,carbapenem,CARD ARO:3000589 (NDM-1) confers_resistance_to_antibiotic ARO:0000073 | https://card.mcmaster.ca/ontology/3000589
+blaNDM-1,carbapenem,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_049326.1 node=blaNDM-1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaOXA-48,"(class-level link only, no individual drugs enumerated)",carbapenem,CARD ARO:3001782 (OXA-48) confers_resistance_to_drug_class ARO:0000020 | https://card.mcmaster.ca/ontology/3001782
+blaOXA-48,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3001782 (OXA-48) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3001782
+blaOXA-48,oxacillin,penicillin beta-lactam,CARD ARO:3001782 (OXA-48) confers_resistance_to_antibiotic ARO:0000056 | https://card.mcmaster.ca/ontology/3001782
+blaOXA-48,temocillin,penicillin beta-lactam,CARD ARO:3001782 (OXA-48) confers_resistance_to_antibiotic ARO:3003831 | https://card.mcmaster.ca/ontology/3001782
+blaOXA-48,carbapenem,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_049762.1 node=blaOXA-48 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaSHV,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3001059 (SHV-1) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3001059
+blaSHV,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3001059 (SHV-1) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3001059
+blaSHV,ampicillin,penicillin beta-lactam,CARD ARO:3001059 (SHV-1) confers_resistance_to_antibiotic ARO:3000637 | https://card.mcmaster.ca/ontology/3001059
+blaSHV,beta-lactam,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_049989.1 node=blaSHV-1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaTEM-1,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3000873 (TEM-1) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,"(class-level link only, no individual drugs enumerated)",monobactam,CARD ARO:3000873 (TEM-1) confers_resistance_to_drug_class ARO:0000004 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3000873 (TEM-1) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,amoxicillin,penicillin beta-lactam,CARD ARO:3000873 (TEM-1) confers_resistance_to_antibiotic ARO:0000064 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,ampicillin,penicillin beta-lactam,CARD ARO:3000873 (TEM-1) confers_resistance_to_antibiotic ARO:3000637 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,cefalotin,cephalosporin,CARD ARO:3000873 (TEM-1) confers_resistance_to_antibiotic ARO:3000704 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,cefazolin,cephalosporin,CARD ARO:3000873 (TEM-1) confers_resistance_to_antibiotic ARO:0000058 | https://card.mcmaster.ca/ontology/3000873
+blaTEM-1,beta-lactam,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_050145.1 node=blaTEM-1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+blaVIM,"(class-level link only, no individual drugs enumerated)",carbapenem,CARD ARO:3002271 (VIM-1) confers_resistance_to_drug_class ARO:0000020 | https://card.mcmaster.ca/ontology/3002271
+blaVIM,"(class-level link only, no individual drugs enumerated)",cephalosporin,CARD ARO:3002271 (VIM-1) confers_resistance_to_drug_class ARO:0000032 | https://card.mcmaster.ca/ontology/3002271
+blaVIM,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3002271 (VIM-1) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3002271
+blaVIM,carbapenem,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_050336.1 node=blaVIM-1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,"(class-level link only, no individual drugs enumerated)",lincosamide antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_drug_class ARO:0000017 | https://card.mcmaster.ca/ontology/3003441
+cfr,"(class-level link only, no individual drugs enumerated)",oxazolidinone antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_drug_class ARO:3000079 | https://card.mcmaster.ca/ontology/3003441
+cfr,"(class-level link only, no individual drugs enumerated)",phenicol antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_drug_class ARO:3000387 | https://card.mcmaster.ca/ontology/3003441
+cfr,"(class-level link only, no individual drugs enumerated)",streptogramin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_drug_class ARO:0000026 | https://card.mcmaster.ca/ontology/3003441
+cfr,azidamfenicol,phenicol antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000382 | https://card.mcmaster.ca/ontology/3003441
+cfr,chloramphenicol,phenicol antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000385 | https://card.mcmaster.ca/ontology/3003441
+cfr,clindamycin,lincosamide antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:0000066 | https://card.mcmaster.ca/ontology/3003441
+cfr,dalfopristin,streptogramin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000674 | https://card.mcmaster.ca/ontology/3003441
+cfr,griseoviridin,streptogramin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000673 | https://card.mcmaster.ca/ontology/3003441
+cfr,lincomycin,lincosamide antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:0000046 | https://card.mcmaster.ca/ontology/3003441
+cfr,madumycin II,streptogramin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000672 | https://card.mcmaster.ca/ontology/3003441
+cfr,thiamphenicol,phenicol antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000456 | https://card.mcmaster.ca/ontology/3003441
+cfr,tiamulin,pleuromutilin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000671 | https://card.mcmaster.ca/ontology/3003441
+cfr,virginiamycin M1,streptogramin antibiotic,CARD ARO:3003441 (cfrA (CARD synonym: cfr)) confers_resistance_to_antibiotic ARO:3000669 | https://card.mcmaster.ca/ontology/3003441
+cfr,chloramphenicol,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,clindamycin,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,florfenicol,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,linezolid,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,streptogramin b,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,tiamulin,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+cfr,virginiamycin,lincosamide;oxazolidinone;phenicol;pleuromutilin;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047631.1 node=cfr subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+dfrA17,"(class-level link only, no individual drugs enumerated)",diaminopyrimidine antibiotic,CARD ARO:3002860 (dfrA17) confers_resistance_to_drug_class ARO:3000171 | https://card.mcmaster.ca/ontology/3002860
+dfrA17,trimethoprim,diaminopyrimidine antibiotic,CARD ARO:3002860 (dfrA17) confers_resistance_to_antibiotic ARO:3000188 | https://card.mcmaster.ca/ontology/3002860
+dfrA17,trimethoprim,trimethoprim,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047709.1 node=dfrA17 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+ermB,"(class-level link only, no individual drugs enumerated)",lincosamide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_drug_class ARO:0000017 | https://card.mcmaster.ca/ontology/3000375
+ermB,"(class-level link only, no individual drugs enumerated)",macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_drug_class ARO:0000000 | https://card.mcmaster.ca/ontology/3000375
+ermB,"(class-level link only, no individual drugs enumerated)",streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_drug_class ARO:0000026 | https://card.mcmaster.ca/ontology/3000375
+ermB,azithromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000158 | https://card.mcmaster.ca/ontology/3000375
+ermB,clarithromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000065 | https://card.mcmaster.ca/ontology/3000375
+ermB,clindamycin,lincosamide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000066 | https://card.mcmaster.ca/ontology/3000375
+ermB,dalfopristin,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000674 | https://card.mcmaster.ca/ontology/3000375
+ermB,dirithromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000176 | https://card.mcmaster.ca/ontology/3000375
+ermB,erythromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000006 | https://card.mcmaster.ca/ontology/3000375
+ermB,griseoviridin,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000673 | https://card.mcmaster.ca/ontology/3000375
+ermB,lincomycin,lincosamide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000046 | https://card.mcmaster.ca/ontology/3000375
+ermB,madumycin II,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000672 | https://card.mcmaster.ca/ontology/3000375
+ermB,oleandomycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000867 | https://card.mcmaster.ca/ontology/3000375
+ermB,ostreogrycin B3,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000682 | https://card.mcmaster.ca/ontology/3000375
+ermB,patricin A,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000680 | https://card.mcmaster.ca/ontology/3000375
+ermB,patricin B,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000681 | https://card.mcmaster.ca/ontology/3000375
+ermB,pristinamycin IA,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000583 | https://card.mcmaster.ca/ontology/3000375
+ermB,pristinamycin IB,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000675 | https://card.mcmaster.ca/ontology/3000375
+ermB,pristinamycin IC,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000678 | https://card.mcmaster.ca/ontology/3000375
+ermB,quinupristin,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000584 | https://card.mcmaster.ca/ontology/3000375
+ermB,roxithromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000027 | https://card.mcmaster.ca/ontology/3000375
+ermB,spiramycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000156 | https://card.mcmaster.ca/ontology/3000375
+ermB,telithromycin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:0000057 | https://card.mcmaster.ca/ontology/3000375
+ermB,tylosin,macrolide antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000145 | https://card.mcmaster.ca/ontology/3000375
+ermB,vernamycin C,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000679 | https://card.mcmaster.ca/ontology/3000375
+ermB,virginiamycin M1,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000669 | https://card.mcmaster.ca/ontology/3000375
+ermB,virginiamycin S2,streptogramin antibiotic,CARD ARO:3000375 (ErmB) confers_resistance_to_antibiotic ARO:3000677 | https://card.mcmaster.ca/ontology/3000375
+ermB,clindamycin,lincosamide;macrolide;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047801.1 node=erm(B) subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+ermB,erythromycin,lincosamide;macrolide;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047801.1 node=erm(B) subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+ermB,streptogramin b,lincosamide;macrolide;streptogramin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047801.1 node=erm(B) subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+gyrA,"(class-level link only, no individual drugs enumerated)",fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_drug_class ARO:0000001 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,ciprofloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:0000036 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,enoxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:0000023 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,gatifloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000659 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,grepafloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000665 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,levofloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:0000071 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,lomefloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000660 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,moxifloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:0000074 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,nalidixic acid,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000661 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,norfloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000662 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,ofloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000663 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,pefloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000762 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,sparfloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000666 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,trovafloxacin,fluoroquinolone antibiotic,"CARD ARO:3003294 (E. coli gyrA, fluoroquinolone-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000664 | https://card.mcmaster.ca/ontology/3003294"
+gyrA,"(quinolone class, mutation-dependent)",quinolone,"NCBI AMRFinderPlus AMR_DNA-Escherichia.tsv, Escherichia gyrA point-mutation records class=QUINOLONE | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/AMR_DNA-Escherichia.tsv"
+mcr-1,"(class-level link only, no individual drugs enumerated)",peptide antibiotic,CARD ARO:3003689 (MCR-1.1) confers_resistance_to_drug_class ARO:3000053 | https://card.mcmaster.ca/ontology/3003689
+mcr-1,colistin A,nonribosomal peptide antibiotics,CARD ARO:3003689 (MCR-1.1) confers_resistance_to_antibiotic ARO:3000622 | https://card.mcmaster.ca/ontology/3003689
+mcr-1,colistin B,nonribosomal peptide antibiotics,CARD ARO:3003689 (MCR-1.1) confers_resistance_to_antibiotic ARO:3000624 | https://card.mcmaster.ca/ontology/3003689
+mcr-1,colistin,colistin,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_050417.1 node=mcr-1.1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+mecA,"(class-level link only, no individual drugs enumerated)",penicillin beta-lactam,CARD ARO:3000617 (mecA) confers_resistance_to_drug_class ARO:3000008 | https://card.mcmaster.ca/ontology/3000617
+mecA,ceftaroline,cephalosporin,CARD ARO:3000617 (mecA) confers_resistance_to_antibiotic ARO:3000651 | https://card.mcmaster.ca/ontology/3000617
+mecA,methicillin,penicillin beta-lactam,CARD ARO:3000617 (mecA) confers_resistance_to_antibiotic ARO:0000015 | https://card.mcmaster.ca/ontology/3000617
+mecA,methicillin,beta-lactam,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_047936.1 node=mecA subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+qnrS1,"(class-level link only, no individual drugs enumerated)",fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_drug_class ARO:0000001 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,ciprofloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:0000036 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,gatifloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:3000659 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,levofloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:0000071 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,moxifloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:0000074 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,nalidixic acid,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:3000661 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,norfloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:3000662 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,sparfloxacin,fluoroquinolone antibiotic,CARD ARO:3002790 (QnrS1) confers_resistance_to_antibiotic ARO:3000666 | https://card.mcmaster.ca/ontology/3002790
+qnrS1,quinolone,quinolone,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_050543.1 node=qnrS1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+rpoB,"(class-level link only, no individual drugs enumerated)",rifamycin antibiotic,"CARD ARO:3003283 (M. tuberculosis rpoB, rifampicin-resistant (mutation-dependent)) confers_resistance_to_drug_class ARO:3000157 | https://card.mcmaster.ca/ontology/3003283"
+rpoB,rifabutin,rifamycin antibiotic,"CARD ARO:3003283 (M. tuberculosis rpoB, rifampicin-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000530 | https://card.mcmaster.ca/ontology/3003283"
+rpoB,rifampin,rifamycin antibiotic,"CARD ARO:3003283 (M. tuberculosis rpoB, rifampicin-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000169 | https://card.mcmaster.ca/ontology/3003283"
+rpoB,rifapentine,rifamycin antibiotic,"CARD ARO:3003283 (M. tuberculosis rpoB, rifampicin-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000534 | https://card.mcmaster.ca/ontology/3003283"
+rpoB,rifaximin,rifamycin antibiotic,"CARD ARO:3003283 (M. tuberculosis rpoB, rifampicin-resistant (mutation-dependent)) confers_resistance_to_antibiotic ARO:3000517 | https://card.mcmaster.ca/ontology/3003283"
+sul1,"(class-level link only, no individual drugs enumerated)",sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_drug_class ARO:3000282 | https://card.mcmaster.ca/ontology/3000410
+sul1,mafenide,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000684 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfacetamide,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000683 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfadiazine,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000324 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfadimidine,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000325 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfadoxine,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000327 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfamethizole,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000699 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfamethoxazole,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000329 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfasalazine,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000698 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfisoxazole,sulfonamide antibiotic,CARD ARO:3000410 (sul1) confers_resistance_to_antibiotic ARO:3000330 | https://card.mcmaster.ca/ontology/3000410
+sul1,sulfonamide,sulfonamide,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_048081.1 node=sul1 subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+tetM,"(class-level link only, no individual drugs enumerated)",tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_drug_class ARO:3000050 | https://card.mcmaster.ca/ontology/3000186
+tetM,chlortetracycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:3000528 | https://card.mcmaster.ca/ontology/3000186
+tetM,demeclocycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:3000667 | https://card.mcmaster.ca/ontology/3000186
+tetM,doxycycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:0000069 | https://card.mcmaster.ca/ontology/3000186
+tetM,minocycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:3000152 | https://card.mcmaster.ca/ontology/3000186
+tetM,oxytetracycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:3000668 | https://card.mcmaster.ca/ontology/3000186
+tetM,tetracycline,tetracycline antibiotic,CARD ARO:3000186 (tet(M)) confers_resistance_to_antibiotic ARO:0000051 | https://card.mcmaster.ca/ontology/3000186
+tetM,tetracycline,tetracycline,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_048222.1 node=tet(M) subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"
+vanA,"(class-level link only, no individual drugs enumerated)",glycopeptide antibiotic,CARD ARO:3000010 (vanA) confers_resistance_to_drug_class ARO:3000081 | https://card.mcmaster.ca/ontology/3000010
+vanA,vancomycin,glycopeptide,"NCBI AMRFinderPlus ReferenceGeneCatalog.txt db 2026-08-07.1, NG_048323.1 node=vanA subclass field | https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/latest/ReferenceGeneCatalog.txt"

@@ -35,7 +35,7 @@ def main() -> int:
     print("=" * 70)
     print("TrialSense — model training")
     print("=" * 70)
-    print("\n[0/3] Validating drug structures against reference molecular weights…")
+    print("\n[0/4] Validating drug structures against reference molecular weights…")
     from trialsense.drugs import DRUGS, validate_drug_db
 
     problems = validate_drug_db()
@@ -47,7 +47,7 @@ def main() -> int:
     print(f"  OK — all {len(DRUGS)} structures parse and match their reference MW.")
 
     # --- Step 1: DDI model ---------------------------------------------------
-    print("\n[1/3] Module 1 — drug-drug interaction model")
+    print("\n[1/4] Module 1 — drug-drug interaction model")
     from trialsense.ddi import DDIModel, build_dataset, evaluate
 
     t0 = time.time()
@@ -78,7 +78,7 @@ def main() -> int:
     print(f"  Saved models/ddi_model.pkl ({time.time() - t0:.1f}s)")
 
     # --- Step 2: AMR model ---------------------------------------------------
-    print("\n[2/3] Module 3 — antimicrobial resistance model")
+    print("\n[2/4] Module 3 — antimicrobial resistance model")
     from trialsense.amr import AMRModel, build_amr_dataset, evaluate_amr
 
     t0 = time.time()
@@ -100,14 +100,56 @@ def main() -> int:
 
     amr_model = AMRModel().fit(Xa, Ya)
     amr_model.metrics = amr_metrics
+    stats = amr_model.training_stats
+    print(
+        f"  Recorded training distribution for out-of-distribution scoring "
+        f"(n={stats.get('n_train', 0)})."
+    )
     with open(MODELS_DIR / "amr_model.pkl", "wb") as fh:
         pickle.dump(amr_model, fh)
     print(f"  Saved models/amr_model.pkl ({time.time() - t0:.1f}s)")
 
-    # --- Step 3: metrics for the app's Methods tab ---------------------------
-    print("\n[3/3] Writing metrics")
+    # --- Step 3: resistance-trend forecaster --------------------------------
+    # Module 3 Feature 1 projects national resistance to a candidate's launch
+    # year. A projection nobody has tested is decoration, so we time-split it
+    # here: fit on early years only, predict the years held out, measure error.
+    print("\n[3/4] Module 3 Feature 1 — resistance-trend forecaster")
+    from trialsense.surveillance import SURVEILLANCE_DATA, backtest_forecast
+
+    n_series = sum(
+        len(abx) for org in SURVEILLANCE_DATA["icmr"].values() for abx in [org]
+    )
+    print(
+        f"  Loaded real surveillance series for "
+        f"{len(SURVEILLANCE_DATA['icmr'])} organisms (ICMR AMRSN 2016-2024)."
+    )
+    forecast_metrics = backtest_forecast(cutoff_year=2020)
+    if forecast_metrics.get("available"):
+        fm = forecast_metrics
+        print(
+            f"  Time-split backtest (fit <=2020, predict 2021-2024): "
+            f"MAE {fm['mae_pp']:.2f} pp over {fm['n_predictions']} predictions "
+            f"across {fm['n_series']} series"
+        )
+        print(
+            f"    within 5 pp: {fm['within_5pp']:.0%} | "
+            f"within 10 pp: {fm['within_10pp']:.0%}"
+        )
+    else:
+        print("  Not enough multi-year data to backtest.")
+
+    # --- Step 4: metrics for the app's Methods tab ---------------------------
+    print("\n[4/4] Writing metrics")
     with open(MODELS_DIR / "metrics.json", "w") as fh:
-        json.dump({"ddi": ddi_metrics, "amr": amr_metrics}, fh, indent=2)
+        json.dump(
+            {
+                "ddi": ddi_metrics,
+                "amr": amr_metrics,
+                "forecast": forecast_metrics,
+            },
+            fh,
+            indent=2,
+        )
     print("  Saved models/metrics.json")
 
     print("\n" + "=" * 70)
