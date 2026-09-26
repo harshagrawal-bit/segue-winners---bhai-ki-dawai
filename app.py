@@ -33,7 +33,8 @@ from trialsense.ddi import (
     build_dataset,
 )
 from trialsense.drugs import DRUG_NAMES, DRUGS, FLAG_LABELS, drug_from_smiles, get_drug
-from trialsense.pk import PatientProfile, personalize
+from trialsense.pk import PatientProfile, personalize, renal_study_plan
+from trialsense.pk_validation import validate as validate_pk
 from trialsense.report import build_report
 
 MODELS_DIR = Path(__file__).parent / "models"
@@ -110,6 +111,16 @@ def strain_sequence(strain_name: str) -> str:
 
 
 ddi_model, _amr_model, METRICS, from_cache = load_models()
+
+
+@st.cache_data(show_spinner=False)
+def pk_validation():
+    """Module 2 predictions scored against real renal impairment data."""
+    res = validate_pk()
+    return res.summary(), res.design_calls()
+
+
+PK_VAL, PK_DESIGN = pk_validation()
 
 
 # =============================================================================
@@ -369,6 +380,9 @@ with st.sidebar:
 
     age = st.slider("Age (years)", 18, 95, default.age)
     weight = st.slider("Weight (kg)", 35, 140, int(default.weight_kg))
+    height = st.slider("Height (cm)", 130, 200, int(default.height_cm),
+                       help="Used for body surface area, to turn eGFR into the "
+                            "patient's actual kidney clearance.")
     sex = st.radio("Sex", ["Male", "Female"],
                    index=0 if default.sex == "Male" else 1, horizontal=True)
     scr = st.slider("Serum creatinine (mg/dL)", 0.4, 6.0, float(default.serum_creatinine), 0.1,
@@ -382,14 +396,15 @@ with st.sidebar:
                           float(default.serum_potassium), 0.1)
 
     patient = PatientProfile(
-        age=age, weight_kg=weight, sex=sex, serum_creatinine=scr, alt=alt_val,
+        age=age, weight_kg=weight, height_cm=height, sex=sex,
+        serum_creatinine=scr, alt=alt_val,
         albumin=albumin, bilirubin=bilirubin, serum_potassium=potassium,
         label=default.label if active_case else "Custom profile",
     )
 
     st.markdown(
-        viz.card("", f"<b style='color:{viz.INK}'>{patient.creatinine_clearance():.0f}"
-                 f"</b> mL/min CrCl · {patient.ckd_stage()}<br>"
+        viz.card("", f"eGFR <b style='color:{viz.INK}'>{patient.egfr():.0f}"
+                 f"</b> mL/min/1.73m² · {patient.ckd_stage()}<br>"
                  f"Hepatic function factor <b style='color:{viz.INK}'>"
                  f"{patient.hepatic_function_factor():.2f}</b> · {patient.liver_status()}",
                  viz.ACCENT),
@@ -685,7 +700,7 @@ with tab_patient:
 
     st.warning(
         "**Simplified educational approximation.** Built on real pharmacokinetic "
-        "equations (Cockcroft-Gault; clearance-weighted organ scaling), but the "
+        "equations (CKD-EPI 2021 eGFR; clearance-weighted organ scaling), but the "
         "hepatic impairment factor and the risk weights are our own calibration. "
         "This is an R&D prioritisation aid — **not a validated clinical dosing "
         "tool, and not for treating patients.**"
@@ -693,12 +708,13 @@ with tab_patient:
 
     k1, k2, k3, k4 = st.columns(4)
     with k1:
-        crcl = patient.creatinine_clearance()
-        col = (viz.RISK_COLORS["Severe"] if crcl < 30 else
-               viz.RISK_COLORS["High"] if crcl < 60 else
-               viz.RISK_COLORS["Moderate"] if crcl < 90 else viz.RISK_COLORS["Low"])
-        st.markdown(viz.stat("Creatinine clearance", f"{crcl:.0f}",
-                             f"mL/min · {patient.ckd_stage()}", col), unsafe_allow_html=True)
+        gfr = patient.egfr()
+        col = (viz.RISK_COLORS["Severe"] if gfr < 30 else
+               viz.RISK_COLORS["High"] if gfr < 60 else
+               viz.RISK_COLORS["Moderate"] if gfr < 90 else viz.RISK_COLORS["Low"])
+        st.markdown(viz.stat("Kidney function (eGFR)", f"{gfr:.0f}",
+                             f"mL/min/1.73m² · {patient.renal_category()}", col),
+                    unsafe_allow_html=True)
     with k2:
         hf = patient.hepatic_function_factor()
         col = (viz.RISK_COLORS["Severe"] if hf < 0.45 else
@@ -764,14 +780,23 @@ with tab_patient:
     with st.expander("How the exposure numbers are calculated"):
         st.markdown(
             f"""
-**Step 1 — kidney function.** Cockcroft-Gault:
+**Step 1 — kidney function.** CKD-EPI 2021 (the equation FDA's 2024 renal
+guidance recommends), from creatinine, age and sex:
 
-`CrCl = (140 − age) × weight ÷ (72 × serum creatinine)` , × 0.85 if female
+`eGFR = 142 × min(SCr/κ, 1)^α × max(SCr/κ, 1)^−1.2 × 0.9938^age` (× 1.012 if female)
 
-For this profile: (140 − {patient.age}) × {patient.weight_kg:.0f} ÷ (72 × {patient.serum_creatinine:.1f})
-{"× 0.85 " if patient.sex.lower().startswith("f") else ""}= **{patient.creatinine_clearance():.1f} mL/min**
+For this profile: eGFR = **{patient.egfr():.1f} mL/min/1.73m²** →
+FDA category **{patient.renal_category()}**.
 
-Renal function factor KF = CrCl ÷ 120 = **{patient.renal_function_factor():.3f}**
+A drug is cleared by the patient's real kidney, not a standard-sized one, so
+eGFR is converted to absolute mL/min using body surface area
+({patient.body_surface_area():.2f} m²): **{patient.absolute_egfr():.1f} mL/min**.
+
+Renal function factor KF = absolute eGFR ÷ 90 (the lower edge of "normal"),
+capped at 1 = **{patient.renal_function_factor():.3f}**
+
+*For reference, Cockcroft-Gault CrCl (used by older drug labels) =
+{patient.creatinine_clearance():.1f} mL/min.*
 
 **Step 2 — liver function.** A simplified penalty from ALT, albumin, bilirubin
 and age gives HF = **{patient.hepatic_function_factor():.3f}**. *(This step is our
@@ -794,6 +819,46 @@ approximation, not a validated score — real practice uses Child-Pugh.)*
                 f"{d.fh:.2f}×{patient.hepatic_function_factor():.3f} = "
                 f"**{e.clearance_ratio:.3f}** → exposure **{e.exposure_ratio:.2f}×** normal"
             )
+
+    st.markdown("#### Trial design · renal impairment study")
+    st.caption(
+        "Which kidney study each drug needs, and whether patients with impaired "
+        "kidneys can join Phase 2/3. Follows the structure of FDA's 2024 renal "
+        "impairment guidance; the cut-offs are our own heuristics, and this is "
+        "not regulatory-grade PBPK. Does not depend on the patient profile above."
+    )
+    if PK_VAL.get("design_total"):
+        st.caption(
+            f"Checked against real renal studies: design call correct for "
+            f"{PK_VAL['design_correct']} of {PK_VAL['design_total']} drugs, "
+            f"{PK_VAL['design_missed_full']} full studies missed. Exposure "
+            f"numbers run about {1 - PK_VAL['bias']:.0%} low on average "
+            "(see Methods)."
+        )
+    dc1, dc2 = st.columns(2)
+    for col, d in ((dc1, drug_a), (dc2, drug_b)):
+        plan = renal_study_plan(d)
+        with col:
+            color = (viz.RISK_COLORS["High"] if plan.design == "Full study"
+                     else viz.RISK_COLORS["Low"])
+            st.markdown(viz.card(f"{d.name} — {plan.design}", plan.design_detail, color),
+                        unsafe_allow_html=True)
+            st.markdown(
+                "| Kidney function | Typical eGFR | Predicted exposure | Phase 2/3 |\n"
+                "|---|---|---|---|\n"
+                + "\n".join(
+                    f"| {c.category} | {c.typical_egfr:.0f} | {c.exposure_ratio:.2f}× "
+                    f"| {c.enrolment} |"
+                    for c in plan.categories
+                )
+            )
+            if plan.model_supported_candidate:
+                st.caption(
+                    "Exposure barely moves even in severe impairment: a candidate "
+                    "to discuss a model-supported approach (PBPK plus population "
+                    "PK from Phase 2/3) with the regulator instead of a "
+                    "standalone study."
+                )
 
 # =============================================================================
 # TAB 4 — Resistance (Module 3)
@@ -1547,6 +1612,38 @@ with tab_methods:
     else:
         st.info("Run `python train.py` to generate held-out evaluation metrics.")
 
+    if PK_VAL.get("n_observations"):
+        v = PK_VAL
+        st.markdown("**Module 2 — exposure predictions vs real renal impairment data**")
+        vc1, vc2 = st.columns(2)
+        with vc1:
+            st.markdown(
+                f"- **{v['n_observations']}** measured exposure changes across "
+                f"**{v['n_drugs']}** drugs, from FDA labels and published studies\n"
+                f"- Within 2× of the measured value: **{v['within_2x']:.0%}** "
+                f"(1.5×: {v['within_1_5x']:.0%})\n"
+                f"- Geometric mean fold error **{v['gmfe']:.2f}**; bias "
+                f"**{v['bias']:.2f}** (predictions run low)\n"
+                f"- **{v['no_change_statements_matched']} of "
+                f"{v['n_no_change_statements']}** 'kidney disease does not change "
+                "exposure' label statements correctly reproduced"
+            )
+        with vc2:
+            st.markdown(
+                f"- Study-design call correct for **{v['design_correct']} of "
+                f"{v['design_total']}** drugs\n"
+                f"- Full renal studies missed: **{v['design_missed_full']}**; "
+                f"unnecessary: **{v['design_unnecessary_full']}**"
+            )
+            st.caption(
+                "Exposure is under-predicted for kidney-cleared drugs, mostly in "
+                "moderate impairment — kidney disease also slows the liver, which "
+                "this simple model ignores, and the source studies disagree with "
+                "each other. The study-design decision is the robust output. "
+                "Reproduce with `python validate_pk.py`; every number traces to "
+                "a quote and URL in `data/renal_validation.json`."
+            )
+
     st.divider()
     st.markdown("#### Module 3 validation — how we know it helps")
     st.caption(
@@ -1746,8 +1843,8 @@ integration you never evaluated.
   renally excreted and risk flags are textbook clinical pharmacology.
 - **Interaction mechanisms.** Every mechanism described is a real, documented
   pathway (CYP inhibition/induction, transporter effects, additive toxicity).
-- **PK equations.** Cockcroft-Gault and clearance-weighted organ scaling are
-  the standard equations used in real dose-adjustment guidance.
+- **PK equations.** CKD-EPI 2021 eGFR, Cockcroft-Gault and clearance-weighted
+  organ scaling are the standard equations used in real dose-adjustment guidance.
 - **Gene → resistance mapping.** Real microbiology (blaNDM-1 → carbapenems,
   mecA → beta-lactams, vanA → glycopeptides, and so on).
 - **The ML pipelines.** Featurisation, training, and held-out evaluation are

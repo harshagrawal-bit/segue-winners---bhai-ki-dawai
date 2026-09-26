@@ -1,0 +1,881 @@
+[
+ {
+  "drug": "Allopurinol",
+  "fe": {
+   "value": null
+  },
+  "observations": [
+   {
+    "renal_group": "mild / moderate / severe (oxypurinol)",
+    "exclude_reason": "Data are for the active metabolite oxypurinol, not allopurinol itself, and group GFR cut-offs are not given.",
+    "quote": "CL/F(m) for patients with normal, mild, moderate and severe renal impairment was 1.8, 0.6, 0.3 and 0.18 l h(-1), respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22300439/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Amiodarone",
+  "fe": {
+   "value": null,
+   "quote": "there is negligible excretion of amiodarone or DEA in urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4c4ec9b0-13a5-49a8-b57b-b3f64e4316a7"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment (unspecified)",
+    "gfr_rep": 22,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "Renal impairment does not influence the pharmacokinetics of amiodarone or DEA.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4c4ec9b0-13a5-49a8-b57b-b3f64e4316a7",
+    "source_type": "FDA label",
+    "curation_note": "Severity not stated; tested at a typical severe-impairment GFR (22 mL/min), the most demanding case for a 'no change' claim. The IV label says the same; counted once."
+   }
+  ]
+ },
+ {
+  "drug": "Amoxicillin",
+  "fe": {
+   "value": 0.68,
+   "quote": "The average urinary recovery was 68% in patients with normal renal function.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/426503/"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio.",
+    "quote": "Expected half-life was 71 min for a corrected creatinine clearance of 100 ml/min per 70 kg and 16 h in the anephric patient.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/426503/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Aspirin",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "No quantitative or clear no-change renal exposure data found in label or accessible literature."
+ },
+ {
+  "drug": "Atorvastatin",
+  "fe": {
+   "value": null,
+   "quote": "Less than 2% of a dose of LIPITOR is recovered in urine following oral administration.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a60cc18b-0631-4cf0-b021-9f52224ece65"
+  },
+  "observations": [
+   {
+    "renal_group": "renal disease (unspecified)",
+    "gfr_rep": 22,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "Renal disease has no influence on the plasma concentrations or LDL-C reduction of LIPITOR",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a60cc18b-0631-4cf0-b021-9f52224ece65",
+    "source_type": "FDA label",
+    "curation_note": "Severity not stated; tested at a typical severe-impairment GFR (22 mL/min), the most demanding case for a 'no change' claim. Label notes ESRD was not studied."
+   }
+  ]
+ },
+ {
+  "drug": "Azithromycin",
+  "fe": {
+   "value": 0.06,
+   "quote": "Over the course of a week, approximately 6% of the administered dose appears as unchanged drug in urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=db52b91e-79f7-4cc1-9564-f2eee8e31c45"
+  },
+  "observations": [
+   {
+    "renal_group": "GFR 10 to 80 mL/min",
+    "gfr_low": 10,
+    "gfr_high": 80,
+    "measure": "AUC",
+    "auc_ratio": 1.042,
+    "quote": "Following the oral administration of a single 1.0 g dose of azithromycin (4 × 250 mg capsules), mean Cmax and AUC0–120 increased by 5.1% and 4.2%, respectively, in subjects with GFR 10 to 80 mL/min compared to subjects with GFR >80 mL/min.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=db52b91e-79f7-4cc1-9564-f2eee8e31c45",
+    "source_type": "FDA label"
+   },
+   {
+    "renal_group": "GFR <10 mL/min",
+    "gfr_low": null,
+    "gfr_high": 10,
+    "measure": "AUC",
+    "auc_ratio": 1.35,
+    "quote": "The mean Cmax and AUC0–120 increased 61% and 35%, respectively, in subjects with GFR <10 mL/min compared to subjects with GFR >80 mL/min.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=db52b91e-79f7-4cc1-9564-f2eee8e31c45",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Carbamazepine",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "No quantitative or clear no-change renal exposure data found in label or accessible literature."
+ },
+ {
+  "drug": "Ciprofloxacin",
+  "fe": {
+   "value": 0.45,
+   "quote": "Approximately 40 to 50% of an orally administered dose is excreted in the urine as unchanged drug.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=888dc7f9-ad9c-4c00-8d50-8ddfd9bd27c0"
+  },
+  "observations": [
+   {
+    "renal_group": "creatinine clearance less than 50 ml/min per 1.73 m2",
+    "gfr_low": null,
+    "gfr_high": 50,
+    "measure": "AUC",
+    "auc_ratio": 2.0,
+    "quote": "For the former group, the area under the curve of serum concentration versus time was doubled, the renal clearance of ciprofloxacin was cut to one-fourth, the total and nonrenal ciprofloxacin clearance was reduced by 50%, and the elimination half-life was prolonged by a factor of approximately 1.7.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/3300537/",
+    "source_type": "paper",
+    "curation_note": "Gasser 1987, single oral dose."
+   },
+   {
+    "renal_group": "Group II, Clcr 50-79 ml/min",
+    "gfr_low": 50,
+    "gfr_high": 79,
+    "measure": "AUC",
+    "auc_ratio": 2.29,
+    "quote": "The mean AUC in Group I was 14.7 mg.h/l, Group II was 33.7 (p < 0.001), Group III 63.8 (p < 0.001), HD 57.9 (p < 0.0001) and CAPD 44.3 (p < 0.001).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8428409/",
+    "source_type": "paper",
+    "curation_note": "Kowalsky 1993, 750 mg oral; reference Group I Clcr >= 80."
+   },
+   {
+    "renal_group": "Group III, Clcr 10-49 ml/min",
+    "gfr_low": 10,
+    "gfr_high": 49,
+    "measure": "AUC",
+    "auc_ratio": 4.34,
+    "quote": "The mean AUC in Group I was 14.7 mg.h/l, Group II was 33.7 (p < 0.001), Group III 63.8 (p < 0.001), HD 57.9 (p < 0.0001) and CAPD 44.3 (p < 0.001).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8428409/",
+    "source_type": "paper",
+    "curation_note": "Kowalsky 1993, 750 mg oral; reference Group I Clcr >= 80."
+   },
+   {
+    "renal_group": "Group I, 8-30 ml/min",
+    "gfr_low": 8,
+    "gfr_high": 30,
+    "measure": "CL",
+    "auc_ratio": 1.75,
+    "quote": "total plasma clearance, 770 (N), 440 (I), 378 (II) and 314 (IIIa) ml X min-1 were decreased in relation to the degree of renal impairment.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/3830244/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Singlas 1987, 500 mg oral; AUC = 1 / (CL/F) ratio vs normal 770 mL/min."
+   },
+   {
+    "renal_group": "Group II, less than 8 ml/min",
+    "gfr_low": null,
+    "gfr_high": 8,
+    "measure": "CL",
+    "auc_ratio": 2.04,
+    "quote": "total plasma clearance, 770 (N), 440 (I), 378 (II) and 314 (IIIa) ml X min-1 were decreased in relation to the degree of renal impairment.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/3830244/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Singlas 1987, 500 mg oral; AUC = 1 / (CL/F) ratio vs normal 770 mL/min."
+   },
+   {
+    "renal_group": "hemodialysis / CAPD",
+    "exclude_reason": "Dialysis patients only.",
+    "quote": "The mean AUC in Group I was 14.7 mg.h/l, Group II was 33.7 (p < 0.001), Group III 63.8 (p < 0.001), HD 57.9 (p < 0.0001) and CAPD 44.3 (p < 0.001).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8428409/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Clarithromycin",
+  "fe": {
+   "value": 0.3,
+   "quote": "after a 500 mg tablet every 12 hours, the urinary excretion of clarithromycin is somewhat greater, approximately 30%.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2e899f4a-a2e9-445c-a0ed-6ad811e997e6"
+  },
+  "observations": [
+   {
+    "renal_group": "CrCl 30-80 and < 30 mL/min",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio. Values come from a secondary review with internally conflicting figures.",
+    "quote": "At a creatinine clearance of 30 to 80 mL/min, clarithromycin's half-life is 12 h, and this interval increases to 32 h when the creatinine clearance falls below 30 mL/min.",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3250788/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Clopidogrel",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "Only pharmacodynamic renal data in the label."
+ },
+ {
+  "drug": "Diazepam",
+  "fe": {
+   "value": null
+  },
+  "observations": [
+   {
+    "renal_group": "end-stage renal insufficiency on maintenance haemodialysis",
+    "exclude_reason": "Dialysis patients; total drug also distorted by a 5-fold rise in unbound fraction.",
+    "quote": "Clearance of pharmacologically active unbound diazepam (intrinsic clearance) was not significantly different between renal patients and controls (23 vs 30 ml min-1 kg-1).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/7340884/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Digoxin",
+  "fe": {
+   "value": 0.6,
+   "quote": "Following intravenous administration to healthy volunteers, 50-70% of a digoxin dose is excreted unchanged in the urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d91e3646-4c63-4512-ab22-db39c085c4dc"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio.",
+    "quote": "In healthy volunteers with normal renal function, digoxin has a half-life of 1.5-2 days. The half-life in anuric patients is prolonged to 3.5-5 days.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d91e3646-4c63-4512-ab22-db39c085c4dc",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Diltiazem",
+  "fe": {
+   "value": 0.03,
+   "quote": "Diltiazem undergoes extensive metabolism in which only 2% to 4% of the unchanged drug appears in the urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1042fa13-e6af-46b9-8008-6c941f0978b1"
+  },
+  "observations": [
+   {
+    "renal_group": "severely impaired renal function (GFR 0.03-0.87 ml/s/1.73 m2, i.e. ~2-52 mL/min)",
+    "gfr_rep": 27,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "Diltiazem and its main metabolite, desacetyldiltiazem, had a pharmacokinetic profile similar to that in patients with normal renal function (peak plasma concentration, half-life and urinary excretion).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/6873142/",
+    "source_type": "paper",
+    "curation_note": "GFR range converted from ml/s (x60); midpoint used. Statement covers Cmax and half-life, not AUC directly."
+   }
+  ]
+ },
+ {
+  "drug": "Fluconazole",
+  "fe": {
+   "value": 0.8,
+   "quote": "In normal volunteers, fluconazole is cleared primarily by renal excretion, with approximately 80% of the administered dose appearing in the urine as unchanged drug.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f694c617-3383-416c-91b6-b94fda371204"
+  },
+  "observations": [
+   {
+    "renal_group": "Mild (51-80 ml/min)",
+    "gfr_low": 51,
+    "gfr_high": 80,
+    "measure": "AUC",
+    "auc_ratio": 1.128,
+    "quote": "Subjects were categorized as Normal (> 80 ml min(-1)), Mild (51-80 ml min(-1)), Moderate (30-50 ml min(-1)) or Severe (< 30 ml min(-1)) impairment group according to their Cockcroft and Gault creatinine clearance (CLcr) values. ... The ratios (95% confidence interval) for AUC (Renal impairment group/Normal group) were 112.8% (89.5, 142.1), 240.6% (128.2, 451.4) and 355.1% (259.3, 486.3) for the Mild, Moderate and Severe impairment groups, respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15151523/",
+    "source_type": "paper",
+    "curation_note": "Sobue 2004: fluconazole formed from IV fosfluconazole."
+   },
+   {
+    "renal_group": "Moderate (30-50 ml/min)",
+    "gfr_low": 30,
+    "gfr_high": 50,
+    "measure": "AUC",
+    "auc_ratio": 2.406,
+    "quote": "Subjects were categorized as Normal (> 80 ml min(-1)), Mild (51-80 ml min(-1)), Moderate (30-50 ml min(-1)) or Severe (< 30 ml min(-1)) impairment group according to their Cockcroft and Gault creatinine clearance (CLcr) values. ... The ratios (95% confidence interval) for AUC (Renal impairment group/Normal group) were 112.8% (89.5, 142.1), 240.6% (128.2, 451.4) and 355.1% (259.3, 486.3) for the Mild, Moderate and Severe impairment groups, respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15151523/",
+    "source_type": "paper",
+    "curation_note": "Sobue 2004: fluconazole formed from IV fosfluconazole."
+   },
+   {
+    "renal_group": "Severe (< 30 ml/min)",
+    "gfr_low": null,
+    "gfr_high": 30,
+    "measure": "AUC",
+    "auc_ratio": 3.551,
+    "quote": "Subjects were categorized as Normal (> 80 ml min(-1)), Mild (51-80 ml min(-1)), Moderate (30-50 ml min(-1)) or Severe (< 30 ml min(-1)) impairment group according to their Cockcroft and Gault creatinine clearance (CLcr) values. ... The ratios (95% confidence interval) for AUC (Renal impairment group/Normal group) were 112.8% (89.5, 142.1), 240.6% (128.2, 451.4) and 355.1% (259.3, 486.3) for the Mild, Moderate and Severe impairment groups, respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15151523/",
+    "source_type": "paper",
+    "curation_note": "Sobue 2004: fluconazole formed from IV fosfluconazole."
+   }
+  ]
+ },
+ {
+  "drug": "Fluoxetine",
+  "fe": {
+   "value": null,
+   "quote": "Most of the urinary radiolabelled products are metabolites and not the parent compound nor its active metabolite, norfluoxetine.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/8277145/"
+  },
+  "observations": [
+   {
+    "renal_group": "mild, moderate, or severe renal dysfunction",
+    "gfr_rep": 22,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "Cirrhosis of the liver significantly reduces the clearance of fluoxetine and norfluoxetine, but mild, moderate, or severe renal dysfunction does not affect fluoxetine or norfluoxetine pharmacokinetics.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8277145/",
+    "source_type": "paper",
+    "curation_note": "Covers up to severe; tested at severe."
+   },
+   {
+    "renal_group": "depressed patients on dialysis",
+    "exclude_reason": "Dialysis patients: dialysis is a removal route the model does not represent.",
+    "quote": "In depressed patients on dialysis (N=12), fluoxetine administered as 20 mg once daily for 2 months produced steady-state fluoxetine and norfluoxetine plasma concentrations comparable with those seen in patients with normal renal function.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c88f33ed-6dfb-4c5e-bc01-d8e36dd97299",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Furosemide",
+  "fe": {
+   "value": 0.588,
+   "quote": "The 24-hr percentage urinary recovery of unchanged drug (58.8 +/- 2.8% and 53.1 6.5%) and the glucuronide metabolite (17.8 +/- 1.5 and 21.3 +/- 3.4) were on the same order in the normal and cirrhotic groups.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/7075120/"
+  },
+  "observations": [
+   {
+    "renal_group": "renal failure",
+    "exclude_reason": "Severity of renal failure not stated, so no GFR can be assigned (would give AUC ratio 5.67 from total CL 1.53 vs 0.27 mL/min/kg).",
+    "quote": "Normal subjects had a total body clearance of furosemide of 1.53 +/- 0.11 (SE) ml/min/kg ... The corresponding values in patients with renal failure were 0.27 +/- 0.03 ml/min/kg",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/648078/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Ibuprofen",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "Only qualitative 'increased' statements, mixed with age effects."
+ },
+ {
+  "drug": "Ketoconazole",
+  "fe": {
+   "value": null,
+   "quote": "Approximately 13% of the dose is excreted in the urine, of which 2 to 4% is unchanged drug.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ca815a8-bccb-4ee2-a042-922373329cae"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment (unspecified)",
+    "gfr_rep": 22,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "In patients with hepatic or renal impairment, the overall pharmacokinetics of ketoconazole was not significantly different when compared with healthy subjects.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ca815a8-bccb-4ee2-a042-922373329cae",
+    "source_type": "FDA label",
+    "curation_note": "Severity not stated; tested at a typical severe-impairment GFR (22 mL/min), the most demanding case for a 'no change' claim."
+   }
+  ]
+ },
+ {
+  "drug": "Levofloxacin",
+  "fe": {
+   "value": 0.87,
+   "quote": "Following oral administration, approximately 87% of an administered dose was recovered as unchanged drug in urine within 48 hours",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9020cdeb-65fe-458f-bbbd-69265a49906e"
+  },
+  "observations": [
+   {
+    "renal_group": "CLCR 50 to 80 mL/min",
+    "gfr_low": 50,
+    "gfr_high": 80,
+    "measure": "AUC",
+    "auc_ratio": 1.996,
+    "quote": "AUC (mcg•h/mL) ... 500 mg oral tablet3* | 5.1 ± 0.8 | 1.3 ± 0.6 | 47.9 ± 6.8 ... 500 mg oral single dose tablet, patients with renal insufficiency: | CLCR 50 to 80 mL/min | 7.5 ± 1.8 | 1.5 ± 0.5 | 95.6 ± 11.8",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9020cdeb-65fe-458f-bbbd-69265a49906e",
+    "source_type": "FDA label",
+    "curation_note": "Label Table 8: 500 mg single oral dose; reference AUC 47.9 mcg·h/mL in healthy volunteers."
+   },
+   {
+    "renal_group": "CLCR 20 to 49 mL/min",
+    "gfr_low": 20,
+    "gfr_high": 49,
+    "measure": "AUC",
+    "auc_ratio": 3.802,
+    "quote": "AUC (mcg•h/mL) ... 500 mg oral tablet3* | 5.1 ± 0.8 | 1.3 ± 0.6 | 47.9 ± 6.8 ... CLCR 20 to 49 mL/min | 7.1 ± 3.1 | 2.1 ± 1.3 | 182.1 ± 62.6",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9020cdeb-65fe-458f-bbbd-69265a49906e",
+    "source_type": "FDA label",
+    "curation_note": "Label Table 8: 500 mg single oral dose; reference AUC 47.9 mcg·h/mL in healthy volunteers."
+   },
+   {
+    "renal_group": "CLCR <20 mL/min",
+    "gfr_low": null,
+    "gfr_high": 20,
+    "measure": "AUC",
+    "auc_ratio": 5.501,
+    "quote": "AUC (mcg•h/mL) ... 500 mg oral tablet3* | 5.1 ± 0.8 | 1.3 ± 0.6 | 47.9 ± 6.8 ... CLCR <20 mL/min | 8.2 ± 2.6 | 1.1 ± 1.0 | 263.5 ± 72.5",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9020cdeb-65fe-458f-bbbd-69265a49906e",
+    "source_type": "FDA label",
+    "curation_note": "Label Table 8: 500 mg single oral dose; reference AUC 47.9 mcg·h/mL in healthy volunteers."
+   }
+  ]
+ },
+ {
+  "drug": "Linezolid",
+  "fe": {
+   "value": 0.3,
+   "quote": "Under steady-state conditions, approximately 30% of the dose appears in the urine as linezolid, 40% as metabolite B, and 10% as metabolite A.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6e70e63b-bfd5-478d-a8ee-8ba22c9efabd"
+  },
+  "observations": [
+   {
+    "renal_group": "Moderate Renal Impairment 30 < CLCR < 80 mL/min",
+    "gfr_low": 30,
+    "gfr_high": 80,
+    "measure": "AUC",
+    "auc_ratio": 1.16,
+    "quote": "Healthy Subjects CLCR > 80 mL/min | Moderate Renal Impairment 30 < CLCR < 80 mL/min | Severe Renal Impairment 10 < CLCR < 30 mL/min | LINEZOLID | AUC0–∞, mcg h/mL | 110 (22) | 128 (53) | 127 (66)",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6e70e63b-bfd5-478d-a8ee-8ba22c9efabd",
+    "source_type": "FDA label",
+    "curation_note": "Single 600 mg oral dose."
+   },
+   {
+    "renal_group": "Severe Renal Impairment 10 < CLCR < 30 mL/min",
+    "gfr_low": 10,
+    "gfr_high": 30,
+    "measure": "AUC",
+    "auc_ratio": 1.15,
+    "quote": "Healthy Subjects CLCR > 80 mL/min | Moderate Renal Impairment 30 < CLCR < 80 mL/min | Severe Renal Impairment 10 < CLCR < 30 mL/min | LINEZOLID | AUC0–∞, mcg h/mL | 110 (22) | 128 (53) | 127 (66)",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6e70e63b-bfd5-478d-a8ee-8ba22c9efabd",
+    "source_type": "FDA label",
+    "curation_note": "Single 600 mg oral dose."
+   }
+  ]
+ },
+ {
+  "drug": "Lisinopril",
+  "fe": {
+   "value": 1.0,
+   "quote": "Lisinopril does not undergo metabolism and is excreted unchanged entirely in the urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=838c2d78-d2d8-4981-9ec9-e50ef9e1a5d8"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio.",
+    "quote": "The effective half-life was doubled and tripled in patients with mild and severe renal impairment, respectively, as compared to patients with a normal renal function.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/2834209/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Meropenem",
+  "fe": {
+   "value": 0.7,
+   "quote": "Meropenem is primarily excreted unchanged by the kidneys. Approximately 70% (50% - 75%) of the dose is excreted unchanged within 12 hours.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0d37e43b-ff8d-495d-b9af-4fd5fce53d56"
+  },
+  "observations": [
+   {
+    "renal_group": "GFR 30 to 80 ml/min",
+    "gfr_low": 30,
+    "gfr_high": 80,
+    "measure": "CL",
+    "auc_ratio": 2.514,
+    "quote": "The subjects were divided into four groups with glomerular filtration rates (GFR) of greater than 80, 30 to 80, 5 to 29, or less than 5 ml/min. There were linear correlations between the GFR and the rates for total plasma clearance as well as renal clearance of meropenem (group mean values for total clearance of 186, 74, 53, and 19 ml/min/1.73 m2, respectively).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/1510451/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Christensson 1992, 500 mg IV; AUC ratio = 1 / total-CL ratio vs GFR > 80 group."
+   },
+   {
+    "renal_group": "GFR 5 to 29 ml/min",
+    "gfr_low": 5,
+    "gfr_high": 29,
+    "measure": "CL",
+    "auc_ratio": 3.509,
+    "quote": "The subjects were divided into four groups with glomerular filtration rates (GFR) of greater than 80, 30 to 80, 5 to 29, or less than 5 ml/min. There were linear correlations between the GFR and the rates for total plasma clearance as well as renal clearance of meropenem (group mean values for total clearance of 186, 74, 53, and 19 ml/min/1.73 m2, respectively).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/1510451/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Christensson 1992, 500 mg IV; AUC ratio = 1 / total-CL ratio vs GFR > 80 group."
+   },
+   {
+    "renal_group": "GFR less than 5 ml/min",
+    "gfr_low": null,
+    "gfr_high": 5,
+    "measure": "CL",
+    "auc_ratio": 9.789,
+    "quote": "The subjects were divided into four groups with glomerular filtration rates (GFR) of greater than 80, 30 to 80, 5 to 29, or less than 5 ml/min. There were linear correlations between the GFR and the rates for total plasma clearance as well as renal clearance of meropenem (group mean values for total clearance of 186, 74, 53, and 19 ml/min/1.73 m2, respectively).",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/1510451/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Christensson 1992, 500 mg IV; AUC ratio = 1 / total-CL ratio vs GFR > 80 group."
+   }
+  ]
+ },
+ {
+  "drug": "Metformin",
+  "fe": {
+   "value": 0.9,
+   "quote": "Following oral administration, approximately 90% of the absorbed drug is eliminated via the renal route within the first 24 hours",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=23aa50c5-28fe-4322-b5c6-1f1c48409b16"
+  },
+  "observations": [
+   {
+    "renal_group": "Mild (CLcr 61 to 90 mL/min)",
+    "gfr_low": 61,
+    "gfr_high": 90,
+    "measure": "CL",
+    "auc_ratio": 1.438,
+    "quote": "Healthy, nondiabetic adults: ... 850 mg single dose (74)d ... Renal Clearance (mL/min) ... 552 (±139) ... Renal-impaired adults: 850 mg single dose Mild (CLcrg 61 to 90 mL/min) (5) ... 384 (±122)",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=23aa50c5-28fe-4322-b5c6-1f1c48409b16",
+    "source_type": "FDA label",
+    "converted": true,
+    "curation_note": "Label table gives RENAL clearance; AUC ratio = 1 / renal-CL ratio vs healthy 552 mL/min (metformin has no metabolism or biliary excretion)."
+   },
+   {
+    "renal_group": "Moderate (CLcr 31 to 60 mL/min)",
+    "gfr_low": 31,
+    "gfr_high": 60,
+    "measure": "CL",
+    "auc_ratio": 5.111,
+    "quote": "Healthy, nondiabetic adults: ... 850 mg single dose (74)d ... Renal Clearance (mL/min) ... 552 (±139) ... Moderate (CLcr 31 to 60 mL/min) (4) ... 108 (±57)",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=23aa50c5-28fe-4322-b5c6-1f1c48409b16",
+    "source_type": "FDA label",
+    "converted": true,
+    "curation_note": "Label table gives RENAL clearance; AUC ratio = 1 / renal-CL ratio vs healthy 552 mL/min (metformin has no metabolism or biliary excretion). n=4."
+   },
+   {
+    "renal_group": "Severe (CLcr 10 to 30 mL/min)",
+    "gfr_low": 10,
+    "gfr_high": 30,
+    "measure": "CL",
+    "auc_ratio": 4.246,
+    "quote": "Healthy, nondiabetic adults: ... 850 mg single dose (74)d ... Renal Clearance (mL/min) ... 552 (±139) ... Severe (CLcr 10 to 30 mL/min) (6) ... 130 (±90)",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=23aa50c5-28fe-4322-b5c6-1f1c48409b16",
+    "source_type": "FDA label",
+    "converted": true,
+    "curation_note": "Label table gives RENAL clearance; AUC ratio = 1 / renal-CL ratio vs healthy 552 mL/min (metformin has no metabolism or biliary excretion). n=6."
+   }
+  ]
+ },
+ {
+  "drug": "Methotrexate",
+  "fe": {
+   "value": 0.85,
+   "quote": "With intravenous administration, 80% to 90% of the administered dose is excreted unchanged in the urine within 24 hours.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dd035a9f-cd40-4314-b9d8-2294b8a924e2"
+  },
+  "observations": [
+   {
+    "renal_group": "CLCR lower than 45 ml/min",
+    "gfr_low": null,
+    "gfr_high": 45,
+    "measure": "CL",
+    "auc_ratio": 1.797,
+    "quote": "Subjects were divided into four groups, according to their creatinine clearance (CLCR); group 1: CLCR lower than 45 ml/min; group 2: CLCR between 45 and 60 ml/min, group 3: CLCR between 61 and 80 ml/min and group 4: CLCR higher than 80 ml/min. ... Clearance of total MTX was 64, 92, 96, 115 ml/min in groups 1 to 4, respectively",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9613341/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Low-dose IM methotrexate in RA patients (Bressolle 1998); reference = group 4 (CLCR > 80)."
+   },
+   {
+    "renal_group": "CLCR between 45 and 60 ml/min",
+    "gfr_low": 45,
+    "gfr_high": 60,
+    "measure": "CL",
+    "auc_ratio": 1.25,
+    "quote": "Subjects were divided into four groups, according to their creatinine clearance (CLCR); group 1: CLCR lower than 45 ml/min; group 2: CLCR between 45 and 60 ml/min, group 3: CLCR between 61 and 80 ml/min and group 4: CLCR higher than 80 ml/min. ... Clearance of total MTX was 64, 92, 96, 115 ml/min in groups 1 to 4, respectively",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9613341/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Low-dose IM methotrexate in RA patients (Bressolle 1998); reference = group 4 (CLCR > 80)."
+   },
+   {
+    "renal_group": "CLCR between 61 and 80 ml/min",
+    "gfr_low": 61,
+    "gfr_high": 80,
+    "measure": "CL",
+    "auc_ratio": 1.198,
+    "quote": "Subjects were divided into four groups, according to their creatinine clearance (CLCR); group 1: CLCR lower than 45 ml/min; group 2: CLCR between 45 and 60 ml/min, group 3: CLCR between 61 and 80 ml/min and group 4: CLCR higher than 80 ml/min. ... Clearance of total MTX was 64, 92, 96, 115 ml/min in groups 1 to 4, respectively",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9613341/",
+    "source_type": "paper",
+    "converted": true,
+    "curation_note": "Low-dose IM methotrexate in RA patients (Bressolle 1998); reference = group 4 (CLCR > 80)."
+   }
+  ]
+ },
+ {
+  "drug": "Metronidazole",
+  "fe": {
+   "value": 0.184,
+   "quote": "Total urinary recovery in healthy subjects was 108.0% of the dose. This breaks down to 18.4% metronidazole, 62.4% OH-M, and 27.2% A-M.",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/3731917/"
+  },
+  "observations": [
+   {
+    "renal_group": "end-stage renal disease (CLCR 8.1 mL/min)",
+    "gfr_rep": 8.1,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "Subjects with end-stage renal disease (ESRD; CL CR =8.1±9.1 mL/min) and who received a single intravenous infusion of metronidazole 500 mg had no significant change in metronidazole pharmacokinetics but had 2-fold higher Cmax of hydroxy-metronidazole and 5-fold higher Cmax of metronidazole acetate, compared to healthy subjects with normal renal function (CL CR =126±16 mL/min).",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a2883ca1-5a9a-4259-9d80-46ab67274384",
+    "source_type": "FDA label",
+    "curation_note": "Parent drug only; metabolites accumulate."
+   }
+  ]
+ },
+ {
+  "drug": "Midazolam",
+  "fe": {
+   "value": 0.005,
+   "quote": "The amount of midazolam excreted unchanged in the urine after a single intravenous dose is less than 0.5% (n=5).",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1abda8b8-48a8-4995-af86-39220d1aa240"
+  },
+  "observations": [
+   {
+    "renal_group": "ICU patients who developed acute renal failure",
+    "exclude_reason": "Acute kidney injury in critically ill ICU patients, not chronic kidney disease; confounded by illness.",
+    "quote": "Midazolam clearance was reduced (1.9 vs 2.8 mL/min/kg) and the half-life was prolonged (7.6 vs 13 hours) in the ARF patients.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1abda8b8-48a8-4995-af86-39220d1aa240",
+    "source_type": "FDA label"
+   },
+   {
+    "renal_group": "chronic renal failure patients (n=15)",
+    "exclude_reason": "Total clearance distorted by protein-binding change; severity not stated.",
+    "quote": "In a study of chronic renal failure patients (n=15) receiving a single intravenous dose, there was a two-fold increase in the clearance and volume of distribution but the half-life remained unchanged.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1abda8b8-48a8-4995-af86-39220d1aa240",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Omeprazole",
+  "fe": {
+   "value": 0.0,
+   "quote": "Following single dose oral administration of a buffered solution of omeprazole, little if any unchanged drug was excreted in urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b6761f84-53ac-4745-a8c8-1e5427d7e179"
+  },
+  "observations": [
+   {
+    "renal_group": "chronic renal impairment (CrCl 10-62 mL/min/1.73 m2)",
+    "gfr_rep": 36,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "In patients with chronic renal impairment (creatinine clearance between 10 and 62 mL/min/1.73 m2), the disposition of omeprazole was very similar to that in healthy subjects, although there was a slight increase in bioavailability. ... This increase in bioavailability is not considered to be clinically meaningful.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b6761f84-53ac-4745-a8c8-1e5427d7e179",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Phenytoin",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "No quantitative or clear no-change renal exposure data found in label or accessible literature."
+ },
+ {
+  "drug": "Rifampicin",
+  "fe": {
+   "value": null,
+   "quote": "Up to 30% of a dose is excreted in the urine, with about half of this being unchanged drug.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b389b1a3-672f-47e3-916c-4a9c044b211b"
+  },
+  "observations": [
+   {
+    "renal_group": "GFR 30-50, < 30, anuric",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio.",
+    "quote": "the mean half-life increased from 3.6 hours in healthy adults to 5.0, 7.3, and 11.0 hours in patients with glomerular filtration rates of 30 to 50 mL/min, less than 30 mL/min, and in anuric patients, respectively.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b389b1a3-672f-47e3-916c-4a9c044b211b",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Sertraline",
+  "fe": {
+   "value": 0.0,
+   "quote": "Unchanged sertraline was not detectable in the urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fda754f6-d0f3-4dce-a17a-927d64f912f7"
+  },
+  "observations": [
+   {
+    "renal_group": "mild to moderate (CLcr=30-60 mL/min)",
+    "gfr_rep": 45,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "In volunteers with mild to moderate (CLcr=30-60 mL/min), moderate to severe (CLcr=10-29 mL/min) or severe (receiving hemodialysis) renal impairment (N=10 each group), the pharmacokinetics and protein binding of 200 mg sertraline per day maintained for 21 days were not altered compared to age-matched volunteers (N=12) with no renal impairment.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fda754f6-d0f3-4dce-a17a-927d64f912f7",
+    "source_type": "FDA label"
+   },
+   {
+    "renal_group": "moderate to severe (CLcr=10-29 mL/min)",
+    "gfr_rep": 19.5,
+    "measure": "AUC",
+    "no_change": true,
+    "quote": "In volunteers with mild to moderate (CLcr=30-60 mL/min), moderate to severe (CLcr=10-29 mL/min) or severe (receiving hemodialysis) renal impairment (N=10 each group), the pharmacokinetics and protein binding of 200 mg sertraline per day maintained for 21 days were not altered compared to age-matched volunteers (N=12) with no renal impairment.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fda754f6-d0f3-4dce-a17a-927d64f912f7",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Simvastatin",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "Only a qualitative statement about another statin."
+ },
+ {
+  "drug": "Spironolactone",
+  "fe": {
+   "value": null
+  },
+  "observations": [],
+  "curation_note": "Label: renal impairment PK not specifically studied."
+ },
+ {
+  "drug": "Sulfamethoxazole",
+  "fe": {
+   "value": 0.25,
+   "quote": "The average percentage of the dose recovered in urine from 0 to 72 hours after a single oral dose of sulfamethoxazole and trimethoprim is 84.5% for total sulfonamide and 66.8% for free trimethoprim. Thirty percent of the total sulfonamide is excreted as free sulfamethoxazole",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62",
+   "curation_note": "fe derived: 0.845 x 0.30"
+  },
+  "observations": [
+   {
+    "renal_group": "eGFR 10 and 30 vs eGFR 70",
+    "exclude_reason": "AUC ratio derived from a population-PK SIMULATION (dose needed for equal exposure) against an eGFR-70 comparator, not a measured patient group.",
+    "quote": "To reach equivalent exposure, a dose reduction of 33.3% is needed in patients with an eGFR of 10 mL/minute/1.73 m2 and of 16.7% for an eGFR of 30 mL/minute/1.73 m2.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39148353/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Theophylline",
+  "fe": {
+   "value": 0.1,
+   "quote": "Beyond the first three months of life, approximately 10% of the theophylline dose is excreted unchanged in the urine.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7a108fa0-c230-475f-be93-6f864b98a410"
+  },
+  "observations": [
+   {
+    "renal_group": "anuric uremic chronic renal failure patients",
+    "gfr_low": null,
+    "gfr_high": null,
+    "measure": "CL",
+    "auc_ratio": 0.971,
+    "quote": "The theophylline mean total body clearance values (+/- S.D.) for group 1 were 68.0 +/- 14.5, 64.5 +/- 12.9, and 62.6 +/- 17.3 ml/kg.hr for acute renal failure patients, uremic chronic renal failure patients, and control patients, respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/7061728/",
+    "source_type": "paper",
+    "converted": true,
+    "gfr_rep": 5,
+    "curation_note": "Anuric, so GFR assumed ~5 mL/min. Bauer 1982, IV infusion, disease-matched controls."
+   },
+   {
+    "renal_group": "anuric acute renal failure patients",
+    "exclude_reason": "Acute kidney injury, not chronic kidney disease.",
+    "quote": "The theophylline mean total body clearance values (+/- S.D.) for group 1 were 68.0 +/- 14.5, 64.5 +/- 12.9, and 62.6 +/- 17.3 ml/kg.hr for acute renal failure patients, uremic chronic renal failure patients, and control patients, respectively.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/7061728/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Tobramycin",
+  "fe": {
+   "value": 0.93,
+   "quote": "In patients with normal renal function, up to 84% of the dose is recoverable from the urine in 8 hours and up to 93% in 24 hours.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c5a005b0-7b6f-4e30-df92-9a20b1ca66a1"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio.",
+    "quote": "The half-life average 82 min in normal subjects (endogenous creatinine clearance, greater than 80 ml/1.73 m2 per min) and was 33.7 hr in a totally anephric subject.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/972269/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Tramadol",
+  "fe": {
+   "value": 0.3,
+   "quote": "Approximately 30% of the dose is excreted in the urine as unchanged drug, whereas 60% of the dose is excreted as metabolites.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ec4e4e5-a56e-4198-8428-6b770b9bf27d"
+  },
+  "observations": [
+   {
+    "renal_group": "CLcr 10-30 and < 5 mL/min",
+    "exclude_reason": "Only half-life reported; half-life also depends on volume of distribution, so it cannot be converted to an AUC ratio. Renal groups were also dosed IV against an oral healthy reference, so clearances are not comparable.",
+    "quote": "Impaired renal function results in a decreased rate and extent of excretion of tramadol and its active metabolite, M1.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ec4e4e5-a56e-4198-8428-6b770b9bf27d",
+    "source_type": "FDA label"
+   }
+  ]
+ },
+ {
+  "drug": "Trimethoprim",
+  "fe": {
+   "value": 0.668,
+   "quote": "The average percentage of the dose recovered in urine from 0 to 72 hours after a single oral dose of sulfamethoxazole and trimethoprim is 84.5% for total sulfonamide and 66.8% for free trimethoprim.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f59d0c04-9c66-4d53-a0e1-cb55570deb62"
+  },
+  "observations": [
+   {
+    "renal_group": "eGFR 10 and 30 vs eGFR 70",
+    "exclude_reason": "AUC ratio derived from a population-PK SIMULATION (dose needed for equal exposure) against an eGFR-70 comparator, not a measured patient group.",
+    "quote": "To reach equivalent exposure, a dose reduction of 33.3% is needed in patients with an eGFR of 10 mL/minute/1.73 m2 and of 16.7% for an eGFR of 30 mL/minute/1.73 m2.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39148353/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Verapamil",
+  "fe": {
+   "value": 0.035,
+   "quote": "About 3% to 4% is excreted in the urine as unchanged drug.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e19ab8d8-dae5-489d-9805-7e7407bea06d"
+  },
+  "observations": [
+   {
+    "renal_group": "renal failure undergoing maintenance hemodialysis",
+    "exclude_reason": "Dialysis patients only.",
+    "quote": "The terminal elimination rate constant, clearance, volume of distribution, and bioavailability of verapamil were not significantly different between the two groups of subjects.",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/2045528/",
+    "source_type": "paper"
+   }
+  ]
+ },
+ {
+  "drug": "Warfarin",
+  "fe": {
+   "value": null,
+   "quote": "Very little warfarin is excreted unchanged in urine. Urinary excretion is in the form of metabolites.",
+   "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=19a69a72-ac5d-45d5-a94d-a5aaecbe4730"
+  },
+  "observations": [
+   {
+    "renal_group": "renal impairment (unspecified)",
+    "exclude_reason": "Qualitative statement about response, not exposure.",
+    "quote": "Renal clearance is considered to be a minor determinant of anticoagulant response to warfarin.",
+    "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=19a69a72-ac5d-45d5-a94d-a5aaecbe4730",
+    "source_type": "FDA label"
+   }
+  ]
+ }
+]

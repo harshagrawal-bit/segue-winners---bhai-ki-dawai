@@ -41,7 +41,7 @@ def main() -> int:
         knowledge_base_assess,
     )
     from trialsense.drugs import DRUGS, drug_from_smiles, validate_drug_db
-    from trialsense.pk import PatientProfile, personalize
+    from trialsense.pk import PatientProfile, personalize, renal_study_plan
     from trialsense.report import build_report
 
     models = Path(__file__).parent / "models"
@@ -677,6 +677,73 @@ def main() -> int:
         if not s.available:
             assert s.reason
     check("DNABERT-2 backend probe never raises", dnabert_backend_degrades)
+
+    # --- Module 2: kidney function and trial design ---------------------------
+    print("\n[Module 2 · kidney function and study plan]")
+
+    def ckd_epi_reference():
+        # Published CKD-EPI 2021 reference: 50-year-old man, SCr 1.0 → eGFR 92.
+        p = PatientProfile(age=50, sex="Male", serum_creatinine=1.0)
+        assert round(p.egfr()) == 92, p.egfr()
+        # Higher creatinine must always mean lower eGFR.
+        worse = PatientProfile(age=50, sex="Male", serum_creatinine=2.0)
+        assert worse.egfr() < p.egfr()
+        assert worse.renal_category() == "Moderate", worse.renal_category()
+    check("CKD-EPI 2021 matches the published reference value", ckd_epi_reference)
+
+    def absolute_egfr():
+        # At a body surface area of exactly 1.73 m², absolute = indexed eGFR.
+        p = PatientProfile(weight_kg=70, height_cm=175)
+        scale = p.body_surface_area() / 1.73
+        assert abs(p.absolute_egfr() - p.egfr() * scale) < 0.2
+        small = PatientProfile(weight_kg=45, height_cm=150)
+        assert small.absolute_egfr() < small.egfr(), "small body must de-index downward"
+    check("absolute eGFR scales with body surface area", absolute_egfr)
+
+    def healthy_adult_unchanged():
+        # A healthy average adult must not show inflated exposure for a
+        # renally cleared drug (regression: the old CrCl/120 factor did).
+        pers = personalize(DRUGS["Lisinopril"], DRUGS["Amoxicillin"], PatientProfile(), 0, 0.0)
+        assert all(abs(e.exposure_ratio - 1.0) < 0.02 for e in pers.exposures), pers.exposures
+    check("healthy average adult shows unchanged renal exposure", healthy_adult_unchanged)
+
+    def study_plan():
+        lis = renal_study_plan(DRUGS["Lisinopril"])
+        assert lis.design == "Full study"
+        assert lis.severe.exposure_ratio >= 2.0
+        sim = renal_study_plan(DRUGS["Simvastatin"])
+        assert sim.design == "Reduced study"
+        assert sim.model_supported_candidate
+        dig = renal_study_plan(DRUGS["Digoxin"])  # narrow margin, ≥2× in severe
+        assert dig.severe.enrolment.startswith("Exclude"), dig.severe.enrolment
+        # Exposure must rise monotonically as kidney function falls.
+        for name in DRUGS:
+            r = [c.exposure_ratio for c in renal_study_plan(DRUGS[name]).categories]
+            assert r == sorted(r), (name, r)
+    check("renal study plan picks full vs reduced designs sensibly", study_plan)
+
+    def control_case_stays_clean():
+        # The healthy control case must not pick up renal study actions.
+        case = DEMO_CASES[-1]
+        a, b = DRUGS[case.drug_a], DRUGS[case.drug_b]
+        ddi = analyze_pair(a, b, ddi_model)
+        pers = personalize(a, b, case.patient, ddi.headline_severity, ddi.kb_score)
+        rep = build_report(case.name, a, b, case.patient, ddi, pers, None)
+        assert not any("renal impairment study" in x for x in rep.actions), rep.actions
+    check("healthy control case gets no renal study actions", control_case_stays_clean)
+
+    def real_data_validation():
+        from trialsense.pk_validation import validate
+        res = validate()
+        s = res.summary()
+        assert s["n_observations"] >= 20, s["n_observations"]
+        # Every scored number must be traceable to a source.
+        assert all(o.url for o in res.scored), "observation without a source URL"
+        # The costly error: recommending a reduced study when real data show
+        # the kidney matters. Guard it so a model change cannot silently
+        # reintroduce it.
+        assert s["design_missed_full"] == 0, res.design_calls()
+    check("renal validation: no full study missed on real data", real_data_validation)
 
     print("\n" + "=" * 72)
     print(f"{len(PASS)} passed, {len(FAIL)} failed")

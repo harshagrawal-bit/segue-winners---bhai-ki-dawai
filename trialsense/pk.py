@@ -11,8 +11,15 @@ average enrolled patient.
 
 WHAT IS REAL PHARMACOLOGY
 -------------------------
-  * Cockcroft-Gault (1976) creatinine clearance estimate. Real, and still the
-    equation most drug labels use for renal dose adjustment.
+  * CKD-EPI 2021 (race-free) eGFR — the kidney-function equation FDA's 2024
+    renal impairment guidance recommends. It is converted to ABSOLUTE eGFR
+    (mL/min, de-indexed by body surface area) for exposure maths, as that
+    guidance recommends for dosing. This is what drives the calculation.
+  * Cockcroft-Gault (1976) creatinine clearance is still computed and shown,
+    because most older drug labels state their renal dose cut-offs in CrCl.
+  * FDA renal-function categories (normal / mild / moderate / severe / kidney
+    failure) and the full-versus-reduced study-design logic in that guidance,
+    used by renal_study_plan() to turn a prediction into a trial-design call.
   * The additive clearance model:
         CL_patient / CL_normal  =  fe * KF  +  fh * HF
     where fe/fh are the renal/hepatic fractions of clearance and KF/HF are the
@@ -33,6 +40,13 @@ WHAT IS SIMPLIFIED — SAY THIS OUT LOUD IN THE DEMO
   * The risk-escalation weights that turn an exposure ratio into a severity
     bump are our own calibration, informed by known pharmacology but not fitted
     to outcome data.
+  * Kidney disease is assumed to leave non-renal (hepatic) clearance intact.
+    In reality severe renal impairment also suppresses some liver enzymes and
+    transporters — which is exactly why FDA still asks for a reduced study for
+    drugs that are barely cleared by the kidney. The study plan reflects this;
+    the exposure numbers do not.
+  * The fe cut-off (0.3) and the 1.25x / 2x exposure bands that the study plan
+    uses are our own heuristics built around the guidance, not FDA thresholds.
   * Linear kinetics are assumed. Phenytoin in particular is famously non-linear,
     so its true exposure change is UNDER-estimated here.
   * Genetics (CYP2D6/2C19 poor-metaboliser status), drug transporters other than
@@ -50,9 +64,41 @@ from dataclasses import dataclass, field
 
 from .drugs import Drug
 
-# Reference healthy adult creatinine clearance (mL/min) used as the denominator
-# for the renal function factor.
-CRCL_NORMAL = 120.0
+# Reference kidney function (absolute eGFR, mL/min) for the renal function
+# factor. 90 is the lower bound of FDA's "normal" category, i.e. the control
+# group a renal impairment study compares against, so anyone at or above it
+# counts as full function (KF = 1).
+GFR_REFERENCE = 90.0
+
+# FDA 2024 renal impairment guidance categories, by eGFR (mL/min/1.73 m²).
+# Order matters: first lower bound the patient clears wins.
+RENAL_CATEGORIES = [
+    (90.0, "Normal"),
+    (60.0, "Mild"),
+    (30.0, "Moderate"),
+    (15.0, "Severe"),
+    (0.0, "Kidney failure"),
+]
+
+# A representative eGFR inside each impairment category, used by the study plan
+# to predict exposure for a typical member of that category.
+CATEGORY_TYPICAL_GFR = {"Mild": 75.0, "Moderate": 45.0, "Severe": 22.0}
+
+# Study-plan heuristics (ours, not FDA's). fe at or above this means the kidney
+# is a major elimination route.
+FE_MAJOR_RENAL = 0.3
+# Exposure bands: under 1.25x sits inside the usual 80-125% "no meaningful
+# change" window; 2x is where the guidance calls a change clinically important.
+AUC_NO_CHANGE = 1.25
+AUC_MEANINGFUL = 2.0
+
+
+def renal_category(egfr: float) -> str:
+    """FDA renal-function category for an eGFR in mL/min/1.73 m²."""
+    for lower, name in RENAL_CATEGORIES:
+        if egfr >= lower:
+            return name
+    return RENAL_CATEGORIES[-1][1]
 
 
 @dataclass
@@ -61,42 +107,81 @@ class PatientProfile:
 
     age: int = 45
     weight_kg: float = 70.0
-    sex: str = "Male"  # affects the Cockcroft-Gault constant only
+    sex: str = "Male"  # affects the CKD-EPI and Cockcroft-Gault constants
     serum_creatinine: float = 1.0  # mg/dL — kidney function proxy
     alt: float = 30.0  # U/L — liver enzyme, hepatocellular injury proxy
     albumin: float = 4.2  # g/dL — liver synthetic function proxy
     bilirubin: float = 0.8  # mg/dL — liver excretory function proxy
     serum_potassium: float = 4.2  # mmol/L — modifies arrhythmia risk
+    height_cm: float = 170.0  # for body surface area (absolute eGFR)
     label: str = "Custom profile"
 
+    @property
+    def is_female(self) -> bool:
+        return self.sex.lower().startswith("f")
+
     # ---------------------------------------------------------------- Kidney
+    def egfr(self) -> float:
+        """
+        CKD-EPI 2021 (race-free) eGFR in mL/min/1.73 m².
+
+            eGFR = 142 * min(SCr/k, 1)^a * max(SCr/k, 1)^-1.200
+                       * 0.9938^age  [* 1.012 if female]
+            k = 0.7 (F) / 0.9 (M);  a = -0.241 (F) / -0.302 (M)
+        """
+        k, a = (0.7, -0.241) if self.is_female else (0.9, -0.302)
+        ratio = max(0.1, self.serum_creatinine) / k
+        gfr = 142 * min(ratio, 1.0) ** a * max(ratio, 1.0) ** -1.200 * 0.9938 ** self.age
+        if self.is_female:
+            gfr *= 1.012
+        return round(gfr, 1)
+
+    def body_surface_area(self) -> float:
+        """Du Bois body surface area in m²."""
+        return round(0.007184 * self.weight_kg ** 0.425 * self.height_cm ** 0.725, 3)
+
+    def absolute_egfr(self) -> float:
+        """
+        eGFR de-indexed to this patient's body size, in mL/min.
+
+        The CKD-EPI number is scaled to a standard 1.73 m² body; drug clearance
+        depends on the patient's actual kidney, so FDA recommends absolute eGFR
+        for dosing. A small patient's absolute eGFR is lower than their indexed
+        one, which is what matters for how fast they clear a drug.
+        """
+        return round(self.egfr() * self.body_surface_area() / 1.73, 1)
+
     def creatinine_clearance(self) -> float:
         """
         Cockcroft-Gault estimated creatinine clearance in mL/min.
 
             CrCl = (140 - age) * weight / (72 * SCr)   [* 0.85 if female]
+
+        Shown for reference only — older drug labels state renal dose cut-offs
+        in CrCl. The exposure maths uses absolute eGFR.
         """
         crcl = ((140 - self.age) * self.weight_kg) / (72 * max(0.1, self.serum_creatinine))
-        if self.sex.lower().startswith("f"):
+        if self.is_female:
             crcl *= 0.85
         return round(crcl, 1)
 
     def renal_function_factor(self) -> float:
-        """Residual kidney function as a fraction of healthy (KF), capped at 1.0."""
-        return round(min(1.0, self.creatinine_clearance() / CRCL_NORMAL), 3)
+        """Residual kidney function as a fraction of normal (KF), capped at 1.0."""
+        return round(min(1.0, self.absolute_egfr() / GFR_REFERENCE), 3)
+
+    def renal_category(self) -> str:
+        """FDA renal-function category (Normal / Mild / … / Kidney failure)."""
+        return renal_category(self.egfr())
 
     def ckd_stage(self) -> str:
-        """Plain-English kidney status from the estimated clearance."""
-        crcl = self.creatinine_clearance()
-        if crcl >= 90:
-            return "Normal kidney function"
-        if crcl >= 60:
-            return "Mildly reduced kidney function"
-        if crcl >= 30:
-            return "Moderately reduced kidney function"
-        if crcl >= 15:
-            return "Severely reduced kidney function"
-        return "Kidney failure"
+        """Plain-English kidney status from the FDA category."""
+        return {
+            "Normal": "Normal kidney function",
+            "Mild": "Mildly reduced kidney function",
+            "Moderate": "Moderately reduced kidney function",
+            "Severe": "Severely reduced kidney function",
+            "Kidney failure": "Kidney failure",
+        }[self.renal_category()]
 
     # ---------------------------------------------------------------- Liver
     def hepatic_function_factor(self) -> float:
@@ -130,7 +215,7 @@ class PatientProfile:
     def summary_line(self) -> str:
         return (
             f"{self.age}y {self.sex.lower()}, {self.weight_kg:.0f} kg · "
-            f"CrCl {self.creatinine_clearance():.0f} mL/min · "
+            f"eGFR {self.egfr():.0f} mL/min/1.73m² · "
             f"ALT {self.alt:.0f} U/L · K⁺ {self.serum_potassium:.1f} mmol/L"
         )
 
@@ -241,7 +326,7 @@ def personalize(
     """
     kf = patient.renal_function_factor()
     hf = patient.hepatic_function_factor()
-    crcl = patient.creatinine_clearance()
+    gfr = patient.egfr()
 
     exposures = [compute_exposure(d, patient) for d in (drug_a, drug_b)]
     reasons: list[str] = []
@@ -273,13 +358,13 @@ def personalize(
     # --- 2. Organ-specific hazards ------------------------------------------
     for drug in (drug_a, drug_b):
         # Kidney-toxic drug given to an already-impaired kidney.
-        if drug.nephrotoxic and crcl < 60:
-            bump = 0.75 if crcl < 30 else 0.45
+        if drug.nephrotoxic and gfr < 60:
+            bump = 0.75 if gfr < 30 else 0.45
             adjusted += bump
             reasons.append(
                 f"{drug.name} can itself injure the kidney, and this profile "
                 f"already has {patient.ckd_stage().lower()} "
-                f"(CrCl {crcl:.0f} mL/min) — a self-reinforcing decline."
+                f"(eGFR {gfr:.0f} mL/min/1.73m²) — a self-reinforcing decline."
             )
         # Liver-toxic drug given to an already-impaired liver.
         if drug.hepatotoxic and hf < 0.65:
@@ -289,10 +374,10 @@ def personalize(
                 f"shows {patient.liver_status().lower()}."
             )
         # Metformin + advanced renal impairment: a specific, real, labelled risk.
-        if drug.name == "Metformin" and crcl < 30:
+        if drug.name == "Metformin" and gfr < 30:
             adjusted += 1.0
             reasons.append(
-                "Metformin is contraindicated below a CrCl of 30 mL/min: it "
+                "Metformin is contraindicated below an eGFR of 30 mL/min/1.73m²: it "
                 "accumulates and can cause life-threatening lactic acidosis. "
                 "This profile falls below that threshold."
             )
@@ -307,7 +392,7 @@ def personalize(
 
     # Potassium: an interaction that only becomes dangerous in the right kidney.
     k_raisers = [d for d in (drug_a, drug_b) if d.potassium_raising]
-    if k_raisers and crcl < 60:
+    if k_raisers and gfr < 60:
         adjusted += 0.6
         names = " and ".join(d.name for d in k_raisers)
         reasons.append(
@@ -373,4 +458,104 @@ def dose_guidance(drug: Drug, patient: PatientProfile) -> str:
         f"{drug.name}: markedly reduced clearance — approximately {pct:.0f}% of "
         "the standard maintenance dose would be needed to match normal exposure. "
         "Consider excluding this subgroup from early-phase cohorts."
+    )
+
+
+# =============================================================================
+# Trial design: what renal impairment study does this drug need?
+# =============================================================================
+
+
+@dataclass
+class CategoryCall:
+    """Predicted exposure and Phase 2/3 enrolment advice for one renal category."""
+
+    category: str  # "Mild" / "Moderate" / "Severe"
+    typical_egfr: float
+    exposure_ratio: float
+    enrolment: str  # plain-English Phase 2/3 advice
+
+
+@dataclass
+class RenalStudyPlan:
+    """
+    Module 2's answer to a clinical pharmacology team's planning question:
+    "what renal impairment study does this drug need, and can impaired
+    patients be enrolled in Phase 2/3?"
+    """
+
+    drug_name: str
+    fe: float
+    design: str  # "Full study" / "Reduced study"
+    design_detail: str
+    model_supported_candidate: bool  # low enough risk to discuss a PBPK/popPK route
+    categories: list[CategoryCall] = field(default_factory=list)
+
+    @property
+    def severe(self) -> CategoryCall:
+        return next(c for c in self.categories if c.category == "Severe")
+
+
+def _enrolment_advice(drug: Drug, exposure_ratio: float) -> str:
+    if exposure_ratio < AUC_NO_CHANGE:
+        return "Enrol at the standard dose."
+    if exposure_ratio < AUC_MEANINGFUL:
+        return "Enrol with an eGFR-based dose reduction and sparse PK sampling."
+    if drug.narrow_therapeutic_index:
+        return "Exclude until dedicated renal data exist (narrow safety margin)."
+    return "Enrol only with a reduced dose, or exclude until dedicated renal data exist."
+
+
+def renal_study_plan(drug: Drug) -> RenalStudyPlan:
+    """
+    Recommend a renal impairment study design, following the structure of
+    FDA's 2024 guidance ("Pharmacokinetics in Patients with Impaired Renal
+    Function"):
+
+      * Kidney is a major elimination route, or severe impairment is predicted
+        to change exposure meaningfully  →  FULL study (normal vs mild,
+        moderate and severe).
+      * Otherwise  →  REDUCED study (normal vs severe only), escalating to a
+        full study only if severe impairment turns out to matter. The guidance
+        still expects this for non-renal drugs, because kidney failure can
+        also suppress liver enzymes and transporters.
+
+    Where predicted exposure barely moves even in severe impairment, the drug is
+    flagged as a candidate to discuss a model-supported approach (PBPK plus
+    population PK from Phase 2/3) with the regulator. That is a conversation
+    starter, not a waiver: this model is not regulatory-grade PBPK.
+
+    Liver function is held normal so the plan isolates the kidney.
+    """
+    calls = []
+    for category, gfr in CATEGORY_TYPICAL_GFR.items():
+        kf = min(1.0, gfr / GFR_REFERENCE)
+        ratio = 1.0 / max(0.05, drug.fe * kf + drug.fh)
+        calls.append(CategoryCall(category, gfr, round(ratio, 2), _enrolment_advice(drug, ratio)))
+
+    severe_ratio = next(c.exposure_ratio for c in calls if c.category == "Severe")
+    pct = drug.fe * 100
+    if drug.fe >= FE_MAJOR_RENAL or severe_ratio >= AUC_MEANINGFUL:
+        design = "Full study"
+        detail = (
+            f"About {pct:.0f}% of {drug.name} leaves the body unchanged through the "
+            f"kidney, and exposure is predicted to reach {severe_ratio:.1f}× normal "
+            "in severe impairment. Every impairment category needs its own group "
+            "so a dose can be set for each."
+        )
+    else:
+        design = "Reduced study"
+        detail = (
+            f"Only about {pct:.0f}% of {drug.name} is cleared by the kidney, so a "
+            "reduced design comparing normal function with severe impairment "
+            "should be enough. Expand to all categories only if the severe group "
+            "shows a meaningful change."
+        )
+    return RenalStudyPlan(
+        drug_name=drug.name,
+        fe=drug.fe,
+        design=design,
+        design_detail=detail,
+        model_supported_candidate=severe_ratio < AUC_NO_CHANGE,
+        categories=calls,
     )

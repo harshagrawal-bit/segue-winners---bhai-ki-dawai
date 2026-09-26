@@ -24,7 +24,7 @@ from .amr import (
 )
 from .ddi import SEVERITY_LEVELS, DDIAssessment
 from .drugs import Drug
-from .pk import PatientProfile, PersonalizedRisk, dose_guidance
+from .pk import PatientProfile, PersonalizedRisk, dose_guidance, renal_study_plan
 
 RISK_BANDS = [
     (0, 25, "Low", "#2E7D32"),
@@ -390,12 +390,23 @@ def _recommend_actions(r: CandidateRiskReport) -> list[str]:
         if exp.recommended_dose_fraction < 0.9:
             actions.append(dose_guidance(drug, r.patient))
 
-    crcl = r.patient.creatinine_clearance()
-    if crcl < 60 and any(d.nephrotoxic for d in (r.drug_a, r.drug_b)):
+    if r.patient.egfr() < 60 and any(d.nephrotoxic for d in (r.drug_a, r.drug_b)):
         actions.append(
             "**Add renal function monitoring** at baseline and through the dosing "
-            "period; consider a minimum CrCl threshold as an inclusion criterion."
+            "period; consider a minimum eGFR threshold as an inclusion criterion."
         )
+
+    # Renal impairment study design (FDA 2024 guidance logic) — only raised when
+    # the subgroup under review actually has impaired kidneys, so a healthy
+    # control profile is not cluttered with drug-level planning notes.
+    for drug in (r.drug_a, r.drug_b):
+        plan = renal_study_plan(drug)
+        if r.patient.egfr() < 60 and plan.design == "Full study":
+            actions.append(
+                f"**Plan a full renal impairment study for {drug.name}** "
+                f"(normal vs mild, moderate and severe). Predicted exposure in "
+                f"severe impairment: {plan.severe.exposure_ratio:.1f}× normal."
+            )
     if any(d.qt_prolonging for d in (r.drug_a, r.drug_b)):
         actions.append(
             "**Add ECG monitoring and electrolyte correction** to the protocol — "

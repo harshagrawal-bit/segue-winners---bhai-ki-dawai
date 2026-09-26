@@ -26,8 +26,9 @@ streamlit run app.py       # opens the demo
 just takes longer to open. It is **required** for the out-of-distribution badge,
 which needs the training-distribution stats it records.
 
-Run `python smoke_test.py` to verify the whole pipeline end to end (**51
-checks**, no browser needed).
+Run `python smoke_test.py` to verify the whole pipeline end to end (**57
+checks**, no browser needed), and `python validate_pk.py` to score Module 2
+against real renal impairment data.
 
 **Five preloaded cases** are in the sidebar dropdown. Pick *Case 1* for the
 strongest single demo.
@@ -61,15 +62,28 @@ inflates. This is asserted in the smoke test.
 Recomputes the Module 1 severity for a specific patient subgroup:
 
 ```
-CrCl        = (140 − age) × weight ÷ (72 × serum creatinine)   [× 0.85 if female]
+eGFR        = CKD-EPI 2021 (creatinine, age, sex)          mL/min/1.73 m²
+abs eGFR    = eGFR × BSA ÷ 1.73                            mL/min (Du Bois BSA)
+KF          = min(1, abs eGFR ÷ 90)          (90 = lower edge of FDA "normal")
 CL_ratio    = fe × KF + (1 − fe) × HF        (renal + hepatic clearance fractions)
 AUC_ratio   = 1 ÷ CL_ratio                   (exact for linear kinetics)
 ```
 
+CKD-EPI and absolute eGFR follow FDA's 2024 renal impairment guidance.
+Cockcroft-Gault CrCl is still shown for reference, because older drug labels
+state their renal cut-offs in CrCl.
+
 Then applies named organ-specific hazards — nephrotoxic drug meeting an impaired
 kidney, potassium-raising drugs meeting a kidney that cannot excrete potassium,
-QT-prolonging drugs meeting low potassium, metformin below CrCl 30, sedatives in
+QT-prolonging drugs meeting low potassium, metformin below eGFR 30, sedatives in
 the over-75s.
+
+**Trial design output.** For each drug, `renal_study_plan()` predicts exposure
+for a typical mild / moderate / severe patient and recommends a **full** or
+**reduced** renal impairment study, plus Phase 2/3 enrolment advice per
+category — the planning decision a clinical pharmacology team actually spends
+money on. It follows the structure of the FDA guidance; the cut-offs (fe ≥ 0.3
+= major renal route; 1.25× and 2× exposure bands) are our own heuristics.
 
 This is the module that carries the pitch: **the same pairing is Moderate in an
 average adult and Severe in the elderly renal subgroup.** Pooling those patients
@@ -198,8 +212,9 @@ Judges should be able to assess this accurately, so here it is plainly.
   Calibration was checked against **24 well-known pairs** with published
   severities (warfarin + fluconazole, simvastatin + clarithromycin, theophylline
   + ciprofloxacin, …): **24/24 match**.
-- **PK equations.** Cockcroft-Gault and clearance-weighted organ scaling are the
-  standard equations behind real renal dose-adjustment guidance.
+- **PK equations.** CKD-EPI 2021 eGFR (de-indexed by body surface area),
+  Cockcroft-Gault and clearance-weighted organ scaling are the standard
+  equations behind real renal dose-adjustment guidance.
 - **Gene → resistance mapping.** Real microbiology (blaNDM-1 → carbapenems,
   mecA → β-lactams, vanA → glycopeptides, mcr-1 → colistin, …).
 - **Mechanism and mobility annotations.** The metallo-vs-serine β-lactamase
@@ -238,7 +253,12 @@ Judges should be able to assess this accurately, so here it is plainly.
   bilirubin. Real practice uses Child-Pugh, which needs clinical assessment a
   form field cannot capture.
 - **Risk weights** in Module 2 and the 60/40 composite split are reasoned, not
-  fitted to outcome data.
+  fitted to outcome data. The same goes for the renal study-plan cut-offs.
+- **Kidney disease is assumed not to affect liver clearance.** In reality
+  severe renal impairment also suppresses some liver enzymes and transporters,
+  so exposure for mostly non-renal drugs is *under*-estimated in severe
+  impairment. (This is why the study plan still recommends a reduced study for
+  them.)
 - **Linear kinetics assumed.** Phenytoin is famously non-linear, so its true
   exposure change is *under*-estimated here.
 - **Not modelled:** pharmacogenomics (CYP2D6/2C19 metaboliser status),
@@ -302,6 +322,40 @@ well short of production quality. Two deliberate choices follow from that:
 The ±0.060 spread across hold-outs is wide because 39 drugs is a small set —
 which is exactly why the evaluation pools several hold-outs and reports a
 standard deviation rather than quoting one flattering number.
+
+### Module 2 — validated against real renal impairment data
+
+`python validate_pk.py` compares Module 2's predicted exposure change with what
+was actually measured in patients with impaired kidneys. The data
+(`data/renal_validation.json`) come from FDA labels and published studies, and
+every number carries a verbatim quote and URL. Anything that could not be
+scored fairly is kept in the file with a written reason: half-life-only data,
+dialysis-only groups, acute kidney injury, metabolite-only data and simulated
+values.
+
+| Measure | Result |
+|---|---|
+| Measured exposure changes scored | 25, across 17 drugs (+ 9 "no change" label statements) |
+| Within 2× / 1.5× of measured | 88% / 64% |
+| Geometric mean fold error | 1.46 |
+| Bias (predicted ÷ measured) | 0.74 — predictions run low |
+| "No change" statements reproduced | 9 of 9 |
+| **Study-design call correct** | **16 of 17 drugs — 0 full studies missed, 1 unnecessary** |
+
+**Read this honestly.** The exposure numbers under-predict for kidney-cleared
+drugs, mostly in moderate impairment. They miss 7 of 13 measured changes of
+2× or more: six are called 1.25–2×, and one (ciprofloxacin, mild impairment,
+measured 2.3×) is called "no change". Kidney disease also slows the liver,
+which the additive model ignores, and the source studies disagree with each
+other (three ciprofloxacin studies give 1.75× to 4.3× for similar groups).
+Moving the "normal kidney" reference from 90 to 120 barely helps (GMFE 1.46 →
+1.40, and 1.43 when tuned on the other drugs and tested on the held-out one),
+so we did not change it.
+
+The **study-design decision** is the output that holds up. It picked the design
+the real data justify for 16 of 17 drugs, and never recommended a reduced study
+where the kidney turned out to matter — the error that costs a trial. The smoke
+test guards that property.
 
 ### Module 3 — resistance model
 
@@ -503,7 +557,7 @@ isolate carrying only SHV-1.
 
 | # | Scenario | What it demonstrates |
 |---|---|---|
-| 1 | Lisinopril + Trimethoprim, elderly renal, ESBL *E. coli* | **Subgroup escalation** — Moderate → Severe; composite 57 → 84 |
+| 1 | Lisinopril + Trimethoprim, elderly renal, ESBL *E. coli* | **Subgroup escalation** — Moderate → Severe; composite 64 → 82 |
 | 2 | Simvastatin + Clarithromycin, MRSA | A documented severe interaction recovered from structure |
 | 3 | Meropenem + Furosemide, carbapenem-resistant *K. pneumoniae* | **Portfolio decision** — the target organism already defeats the class |
 | 4 | Warfarin + Rifampicin, MDR-TB | **Enzyme induction** — failure looks like "the drug didn't work", not toxicity |
@@ -539,12 +593,15 @@ load-bearing:
 app.py                    Streamlit UI (5 tabs; Module 3 has 7 sub-tabs)
 train.py                  Trains + caches both models, writes metrics.json
 validate_module3.py       The proof layer — writes models/validation.json
-smoke_test.py             51 end-to-end checks, no browser required
+validate_pk.py            Scores Module 2 against real renal impairment data
+data/renal_validation.json  Sourced renal PK data (quote + URL per number)
+smoke_test.py             57 end-to-end checks, no browser required
 capture_screens.py        Headless-browser screenshots + live render check
 trialsense/
   drugs.py                39 drugs: structures + pharmacology (self-validating)
   ddi.py                  Module 1 — mechanism KB + structure-only ML filter
-  pk.py                   Module 2 — PK equations + risk escalation
+  pk.py                   Module 2 — PK equations, risk escalation, study plan
+  pk_validation.py        Module 2 — scoring against real renal data
   amr.py                  Module 3 core — k-mer pipeline, model, the two
                           decision thresholds, the mechanism floor, and the
                           mechanism/mobility annotations for all 21 determinants
