@@ -3,7 +3,7 @@
 TrialSense — end-to-end smoke test.
 
 Exercises every code path the Streamlit app uses, without needing a browser:
-all five demo cases, custom SMILES input, uploaded-sequence handling, every
+all five demo cases, all six Module 3 features, custom SMILES input, every
 Plotly figure, and the edge cases that would otherwise only surface live
 during a pitch.
 
@@ -241,6 +241,442 @@ def main() -> int:
         assert 0 <= rep.amr_component <= 100
         assert rep.band in ("Low", "Moderate", "High", "Critical")
     check("composite score stays within 0-100", composite_bounds)
+
+
+    # --- Module 3 features 1-6 -----------------------------------------------
+    # Each feature produces its own independent report, so each is checked
+    # independently here too.
+    print("\n[Module 3 · Feature 1 — Resistance Runway]")
+    from trialsense import surveillance as surv
+
+    def runway_known():
+        r = surv.build_runway_report("Klebsiella pneumoniae", "Carbapenems",
+                                     "Meropenem", 2035)
+        assert r.available, r.unavailable_reason
+        assert r.verdict in ("VIABLE", "NARROWING", "CLOSING", "CLOSED")
+        assert 0 <= r.launch_pct <= 100
+        assert r.launch_lo <= r.launch_pct <= r.launch_hi
+        assert r.headline() and r.plain_summary() and r.evidence_lines()
+        # 2015 is a different denominator and must never enter the fit
+        held = [p for p in r.points if not p.comparable]
+        assert all(p.year == 2015 for p in held), "only 2015 may be held out"
+        assert all(y >= 2016 for y in r.forecast.fitted), "fit used a 2015 point"
+    check("runway report builds and excludes the 2015 denominator break", runway_known)
+
+    def runway_unavailable():
+        # M. tuberculosis is not an AMRSN surveillance organism. Reporting an
+        # honest "no data" beats substituting a proxy.
+        org = surv.organism_for_strain("M. tuberculosis (MDR-TB)")
+        r = surv.build_runway_report(org, "Rifamycins", "Rifampicin", 2035)
+        assert not r.available
+        assert r.verdict == "UNKNOWN"
+        assert r.unavailable_reason
+    check("runway declines honestly when no surveillance series exists",
+          runway_unavailable)
+
+    def runway_monotone_sane():
+        # A rising series must not project below its last observation.
+        r = surv.build_runway_report("Acinetobacter baumannii", "Carbapenems",
+                                     "Meropenem", 2040)
+        assert r.launch_pct >= r.current_pct - 1.0
+        assert r.launch_pct <= 100.0
+    check("rising series projects upward and stays bounded", runway_monotone_sane)
+
+    def forecast_backtest_runs():
+        bt = surv.backtest_forecast(cutoff_year=2020)
+        assert bt["available"]
+        assert bt["n_predictions"] > 50
+        assert 0 < bt["mae_pp"] < 25, bt["mae_pp"]
+    check("forecast time-split backtest produces a sane error", forecast_backtest_runs)
+
+    print("\n[Module 3 · Feature 2 — Rescue Strategy]")
+    from trialsense import mechanisms as mech
+
+    def rescue_metallo_vs_serine():
+        # The distinction the whole feature exists for: identical class-level
+        # verdict, opposite business decision.
+        ndm = mech.build_rescue_report([("blaNDM-1", 0.96)], "Carbapenems", "X",
+                                       "s", amr_mod.ANTIBIOTIC_CLASSES)
+        kpc = mech.build_rescue_report([("blaKPC-2", 0.94)], "Carbapenems", "X",
+                                       "s", amr_mod.ANTIBIOTIC_CLASSES)
+        assert ndm.verdict == "DEAD END", ndm.verdict
+        assert kpc.verdict == "SALVAGEABLE", kpc.verdict
+        assert ndm.contrast_note() and kpc.contrast_note()
+    check("metallo vs serine carbapenemase give opposite verdicts",
+          rescue_metallo_vs_serine)
+
+    def rescue_unscreened_class():
+        # Metronidazole is Nitroimidazoles — not one of the twelve.
+        r = mech.build_rescue_report([], "Nitroimidazoles", "Metronidazole", "s",
+                                     amr_mod.ANTIBIOTIC_CLASSES)
+        assert r.verdict == "NOT SCREENED"
+        assert "not" in r.plain_summary().lower()
+    check("unscreened antibiotic class reports NOT SCREENED, not 'clear'",
+          rescue_unscreened_class)
+
+    def rescue_worst_governs():
+        # One rescuable and one unrescuable determinant must read DEAD END.
+        r = mech.build_rescue_report(
+            [("blaKPC-2", 0.9), ("blaNDM-1", 0.9)], "Carbapenems", "X", "s",
+            amr_mod.ANTIBIOTIC_CLASSES)
+        assert r.verdict == "DEAD END"
+        assert r.blocking[0].rescue_viable == "no", "worst blocker must sort first"
+    check("worst blocking determinant governs the rescue verdict",
+          rescue_worst_governs)
+
+    def all_genes_annotated():
+        for name, g in amr_mod.RESISTANCE_GENES.items():
+            assert g.mechanism_family != "unclassified", name
+            assert g.rescue_viable in ("yes", "partial", "no", "unknown"), name
+            assert g.mobility in ("plasmid", "integron", "transposon",
+                                  "sccmec", "chromosomal"), name
+            assert g.rescue_strategy and g.mobility_note, name
+    check("all 18 genes carry mechanism and mobility annotations",
+          all_genes_annotated)
+
+    print("\n[Module 3 · Feature 3 — Portfolio Screen]")
+    from trialsense import portfolio as port
+
+    def portfolio_grid():
+        cands = [
+            port.Candidate("Meropenem", "Carbapenems"),
+            port.Candidate("Linezolid", "Oxazolidinones"),
+            port.Candidate("Levofloxacin", "Fluoroquinolones"),
+        ]
+        orgs = ["K. pneumoniae (carbapenem-resistant)",
+                "E. coli ST131 (ESBL)",
+                "S. aureus MRSA (hospital-acquired)"]
+
+        def analyze(o):
+            seq = amr_mod.demo_strain_sequence(o)
+            return amr_mod.analyze_isolate(seq, amr_model, o)
+
+        g = port.screen_portfolio(cands, orgs, analyze)
+        assert len(g.cells) == 9
+        assert len(g.scores) == 3
+        assert g.n_combinations == 9
+        assert g.elapsed_seconds > 0
+        assert g.verdict in ("CLEAR LEADER", "CONTESTED", "NO VIABLE CANDIDATE")
+        assert g.plain_summary() and g.recommendation()
+        assert len(g.as_rows()) == 9
+        # ranking must be sorted by breadth of viability
+        v = [s.viable_against for s in g.scores]
+        assert v == sorted(v, reverse=True), v
+        viz.portfolio_heatmap(g).to_json()
+    check("portfolio grid screens NxM and ranks by viability", portfolio_grid)
+
+    def portfolio_unscreened_class():
+        cands = [port.Candidate("Metronidazole", "Nitroimidazoles")]
+        orgs = ["E. coli ST131 (ESBL)"]
+
+        def analyze(o):
+            return amr_mod.analyze_isolate(
+                amr_mod.demo_strain_sequence(o), amr_model, o)
+
+        g = port.screen_portfolio(cands, orgs, analyze)
+        cell = g.cells[("Metronidazole", "E. coli ST131 (ESBL)")]
+        assert not cell.screened
+        assert cell.resistance is None
+        assert cell.symbol == "—"
+    check("portfolio marks unscreened classes rather than scoring them 0",
+          portfolio_unscreened_class)
+
+    print("\n[Module 3 · Feature 4 — Dark Genome]")
+    from trialsense import novelty as nov
+
+    def novelty_clean_strains():
+        fp = 0
+        for name in amr_mod.DEMO_STRAINS:
+            seq = amr_mod.demo_strain_sequence(name)
+            r = nov.build_novelty_report(seq, name, amr_model,
+                                         len(amr_mod.detect_genes(seq)))
+            if r.segments:
+                fp += 1
+        assert fp == 0, f"{fp} clean strains produced false positives"
+    check("no false positives across all 12 clean demo strains",
+          novelty_clean_strains)
+
+    def novelty_detects_planted():
+        import numpy as _np
+
+        def foreign(gc, n, seed):
+            r = _np.random.RandomState(seed)
+            p = [(1 - gc) / 2, gc / 2, gc / 2, (1 - gc) / 2]
+            mot = ["".join(r.choice(list("ACGT"), size=8, p=p)) for _ in range(14)]
+            out = []
+            while sum(len(x) for x in out) < n:
+                out.append(mot[r.randint(len(mot))])
+            return "".join(out)[:n]
+
+        host = amr_mod.demo_strain_sequence("K. pneumoniae (carbapenem-resistant)")
+        cut = len(host) // 2
+        spiked = host[:cut] + foreign(0.22, 1200, 99) + host[cut:]
+        r = nov.build_novelty_report(spiked, "spiked", amr_model, 0)
+        assert r.segments, "planted unknown element was not detected"
+        assert r.verdict in ("UNEXPLAINED SEQUENCE", "CAUTION", "UNRELIABLE")
+        assert all(s.max_ref_similarity < nov.KNOWN_MATCH_THRESHOLD
+                   for s in r.segments)
+    check("planted unknown element is detected", novelty_detects_planted)
+
+    def ood_badge_present():
+        seq = amr_mod.demo_strain_sequence("E. coli ST131 (ESBL)")
+        r = nov.build_novelty_report(seq, "x", amr_model, 0)
+        assert r.ood_available, "retrain with train.py to store training stats"
+        assert 0 <= r.ood_percentile <= 100
+        assert r.ood_band in ("IN DISTRIBUTION", "BORDERLINE", "OUT OF DISTRIBUTION")
+    check("out-of-distribution badge is available and bounded", ood_badge_present)
+
+    def novelty_short_sequence():
+        r = nov.build_novelty_report("ACGT" * 40, "tiny", None, 0)
+        assert not r.scan_available
+        assert r.verdict == "NOT ASSESSED"
+        assert r.scan_unavailable_reason
+    check("too-short sequence reports NOT ASSESSED rather than CLEAN",
+          novelty_short_sequence)
+
+    print("\n[Module 3 · Feature 5 — Value of Early Detection]")
+    from trialsense import economics as econ
+
+    def value_triggered():
+        r = econ.build_value_report("Candidate-X", "K. pneu", 89.0, True)
+        assert r.cost_without > r.cost_with
+        assert r.expected_value_crore > 0
+        assert 0 < r.probability_reaching_discovery <= 1
+        assert r.verdict in ("HIGH VALUE", "MODERATE VALUE")
+        assert r.disclaimer()
+        viz.value_waterfall(r).to_json()
+    check("value report computes a positive expected value when triggered",
+          value_triggered)
+
+    def value_not_triggered():
+        # A clean screen must NOT claim a saving.
+        r = econ.build_value_report("Candidate-Y", "E. coli", 12.0, False)
+        assert r.expected_value_crore == 0.0
+        assert r.verdict == "CONFIRMATORY"
+        assert "no avoided cost" in r.plain_summary().lower() \
+            or "not" in r.plain_summary().lower()
+    check("clean screen claims no saving", value_not_triggered)
+
+    print("\n[Module 3 · Feature 6 — Spread Velocity]")
+
+    def mobility_plasmid_vs_chromosome():
+        plasmid = mech.build_mobility_report([("blaNDM-1", 0.96)], "s")
+        chrom = mech.build_mobility_report([("rpoB_S450L", 0.95)], "s")
+        assert plasmid.multiplier > chrom.multiplier
+        assert plasmid.verdict == "HIGHLY MOBILE"
+        assert chrom.verdict == "STATIC"
+        assert chrom.multiplier == 1.0
+        viz.mobility_chart(plasmid).to_json()
+    check("plasmid determinants score faster spread than chromosomal ones",
+          mobility_plasmid_vs_chromosome)
+
+    def mobility_fastest_governs():
+        # One plasmid gene among chromosomal ones still spreads at plasmid speed.
+        m = mech.build_mobility_report(
+            [("gyrA_S83L", 0.9), ("rpoB_S450L", 0.9), ("mcr-1", 0.9)], "s")
+        assert m.multiplier == 2.5, m.multiplier
+        assert m.last_resort_mobile(), "mcr-1 defeats a last-resort class"
+    check("fastest determinant governs the spread multiplier",
+          mobility_fastest_governs)
+
+    def mobility_empty():
+        m = mech.build_mobility_report([], "clean")
+        assert m.verdict == "NONE DETECTED"
+        assert m.multiplier == 1.0
+        viz.mobility_chart(m).to_json()
+    check("no determinants gives a neutral multiplier", mobility_empty)
+
+
+    print("\n[Module 3 · Feature 3 — ICMR cross-check]")
+
+    def crosscheck_runs():
+        strains = ["K. pneumoniae (carbapenem-resistant)", "E. coli ST131 (ESBL)"]
+        reports = {
+            s: amr_mod.analyze_isolate(amr_mod.demo_strain_sequence(s), amr_model, s)
+            for s in strains
+        }
+        cc = surv.cross_check_predictions(
+            reports,
+            amr_mod.ANTIBIOTIC_CLASSES,
+            {s: amr_mod.DEMO_STRAINS[s].genes for s in strains},
+            {g: gg.confers_resistance_to for g, gg in amr_mod.RESISTANCE_GENES.items()},
+        )
+        assert cc.rows, "no comparison rows produced"
+        assert cc.compared, "nothing had an ICMR reference"
+        assert cc.verdict in (
+            "CONSISTENT", "MOSTLY CONSISTENT", "DIVERGENT", "NO REFERENCE DATA")
+        assert cc.reference_year == 2024, cc.reference_year
+        assert cc.headline() and cc.plain_summary() and cc.caveat()
+        for r in cc.rows:
+            assert r.status in ("ALIGNED", "AS EXPECTED", "CONCERN", "NO REFERENCE")
+            assert r.explain()
+            assert 0 <= r.model_pct <= 100
+    check("ICMR cross-check produces comparable rows", crosscheck_runs)
+
+    def crosscheck_direction_logic():
+        # A strain carrying a determinant reading ABOVE national is expected,
+        # not a failure. Reading BELOW is the real concern.
+        above = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Carbapenems",
+            model_pct=90.0, real_pct=60.0, real_year=2024,
+            carries_determinant=True, determinants=["blaNDM-1"])
+        below = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Carbapenems",
+            model_pct=20.0, real_pct=60.0, real_year=2024,
+            carries_determinant=True, determinants=["blaNDM-1"])
+        clean_high = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Carbapenems",
+            model_pct=90.0, real_pct=20.0, real_year=2024,
+            carries_determinant=False)
+        clean_low = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Carbapenems",
+            model_pct=5.0, real_pct=60.0, real_year=2024,
+            carries_determinant=False)
+        assert above.status == "AS EXPECTED", above.status
+        assert below.status == "CONCERN", below.status       # under-call
+        assert clean_high.status == "CONCERN", clean_high.status  # over-call
+        assert clean_low.status == "AS EXPECTED", clean_low.status
+    check("cross-check judges against expected direction, not raw gap",
+          crosscheck_direction_logic)
+
+    def crosscheck_alignment_band():
+        tight = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Carbapenems",
+            model_pct=66.0, real_pct=60.0, real_year=2024,
+            carries_determinant=True, determinants=["blaNDM-1"])
+        assert tight.status == "ALIGNED", tight.status
+        assert abs(tight.delta - 6.0) < 1e-9
+    check("small gaps count as aligned regardless of direction",
+          crosscheck_alignment_band)
+
+    def crosscheck_large_expected_flagged():
+        # Carrying the gene explains a higher reading, not an arbitrary one.
+        huge = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Aminoglycosides",
+            model_pct=88.0, real_pct=28.0, real_year=2024,
+            carries_determinant=True, determinants=["aac(6')-Ib"])
+        assert huge.status == "AS EXPECTED"
+        assert huge.large_for_direction, "wide expected gap should still be flagged"
+        assert "wide gap" in huge.explain()
+    check("wide expected gaps are still surfaced for review",
+          crosscheck_large_expected_flagged)
+
+    def crosscheck_no_reference_honest():
+        # M. tuberculosis is not an AMRSN organism — must not be silently scored.
+        row = surv.CrossCheckRow(
+            organism="X", strain_name="s", antibiotic_class="Rifamycins",
+            model_pct=95.0, real_pct=None, real_year=None)
+        assert row.status == "NO REFERENCE"
+        assert row.delta is None
+        assert "no national reference" in row.explain().lower() \
+            or "no " in row.explain().lower()
+    check("missing reference data is reported, not scored as agreement",
+          crosscheck_no_reference_honest)
+
+    def crosscheck_attaches_to_grid():
+        from trialsense import portfolio as port2
+        cands = [port2.Candidate("Meropenem", "Carbapenems")]
+        orgs = ["K. pneumoniae (carbapenem-resistant)"]
+
+        def analyze(o):
+            return amr_mod.analyze_isolate(
+                amr_mod.demo_strain_sequence(o), amr_model, o)
+
+        g = port2.screen_portfolio(cands, orgs, analyze)
+        assert g.cross_check is None, "should not run until attached"
+        port2.attach_cross_check(
+            g,
+            {o: amr_mod.DEMO_STRAINS[o].genes for o in orgs},
+            {n: gg.confers_resistance_to
+             for n, gg in amr_mod.RESISTANCE_GENES.items()},
+        )
+        assert g.cross_check is not None
+        assert g.cross_check.compared
+    check("portfolio grid carries its ICMR cross-check", crosscheck_attaches_to_grid)
+
+
+    print("\n[Module 3 · per-drug resolution]")
+    from trialsense import perdrug as pd_mod
+
+    def perdrug_gentamicin_spared():
+        # The headline fix: aac(6')-Ib must NOT write off gentamicin.
+        r = pd_mod.resolve_gene("aac(6')-Ib", "Aminoglycosides")
+        assert r.resolved
+        assert "amikacin" in r.defeated
+        assert "gentamicin" not in r.defeated, "aac(6')-Ib does not modify gentamicin"
+        assert "gentamicin" in r.spared, "gentamicin must be reported as spared"
+        assert "plazomicin" in r.engineered_escape
+    check("aac(6')-Ib spares gentamicin", perdrug_gentamicin_spared)
+
+    def perdrug_arma_opposite():
+        # armA has the opposite profile — it DOES take gentamicin.
+        r = pd_mod.resolve_gene("armA", "Aminoglycosides")
+        assert "gentamicin" in r.defeated, "armA defeats gentamicin"
+        assert "gentamicin" not in r.spared
+    check("armA defeats gentamicin, unlike aac(6')-Ib", perdrug_arma_opposite)
+
+    def perdrug_no_false_sparing():
+        # Absence from a poorly curated database must never become a claim.
+        # 16S methyltransferases DO defeat plazomicin; CARD just omits it.
+        r = pd_mod.resolve_gene("armA", "Aminoglycosides")
+        assert "plazomicin" not in r.spared, (
+            "must not infer plazomicin sparing from a database gap")
+        v = pd_mod.class_verdict([r], "Aminoglycosides")
+        assert "plazomicin" not in v, v
+    check("no sparing claim is inferred from a database gap",
+          perdrug_no_false_sparing)
+
+    def perdrug_class_only_honest():
+        # CARD has only class-level links for KPC — we must not invent detail.
+        r = pd_mod.resolve_gene("blaKPC-2", "Carbapenems")
+        assert not r.resolved
+        assert not r.spared
+        assert "do not enumerate" in r.summary()
+    check("class-level-only genes report no invented per-drug detail",
+          perdrug_class_only_honest)
+
+    def perdrug_verdict_combines():
+        # Two genes together must cover more than either alone.
+        aac = pd_mod.resolve_gene("aac(6')-Ib", "Aminoglycosides")
+        arma = pd_mod.resolve_gene("armA", "Aminoglycosides")
+        one = pd_mod.class_verdict([aac], "Aminoglycosides")
+        both = pd_mod.class_verdict([aac, arma], "Aminoglycosides")
+        assert "gentamicin" in one, "gentamicin survives aac(6')-Ib alone"
+        assert "exhausted" in both or "gentamicin" not in both.split("but")[-1]
+    check("combined determinants narrow the surviving options",
+          perdrug_verdict_combines)
+
+    print("\n[Module 3 · cross-cutting]")
+
+    def unscreened_class_not_scored_as_zero():
+        # The regression this whole bug-fix exists for: metronidazole's class
+        # is not screened, and must not read as "0% resistance, susceptible".
+        a, b = DRUGS["Metronidazole"], DRUGS["Warfarin"]
+        p = PatientProfile()
+        ddi = analyze_pair(a, b, ddi_model)
+        pers = personalize(a, b, p, ddi.headline_severity, ddi.headline_score)
+        seq = amr_mod.demo_strain_sequence("K. pneumoniae (carbapenem-resistant)")
+        rep = build_report("x", a, b, p, ddi, pers,
+                           amr_mod.analyze_isolate(seq, amr_model, "s"))
+        assert not rep.amr_class_screened
+        assert rep.amr_component == 0.0
+        # composite_score is rounded for display; ddi_component is not
+        assert abs(rep.composite_score - rep.ddi_component) < 0.1
+        titles = " ".join(f.title for f in rep.findings)
+        assert "not screened" in titles.lower()
+        assert "remains susceptible" not in titles.lower()
+    check("unscreened antibiotic class is never reported as susceptible",
+          unscreened_class_not_scored_as_zero)
+
+    def dnabert_backend_degrades():
+        # The optional path must report its absence, never raise.
+        from trialsense import dnabert as bert
+        s = bert.check_backend()
+        assert isinstance(s.available, bool)
+        assert s.message()
+        if not s.available:
+            assert s.reason
+    check("DNABERT-2 backend probe never raises", dnabert_backend_degrades)
 
     print("\n" + "=" * 72)
     print(f"{len(PASS)} passed, {len(FAIL)} failed")

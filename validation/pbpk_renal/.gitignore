@@ -1,0 +1,9 @@
+# Large PK-Sim binaries — regenerate with the URLs in models/SOURCES.tsv
+# (Methotrexate 97 MB, Ketoconazole 82 MB, Theophylline 45 MB)
+models/*.pksim5
+
+# Exported simulations — rebuilt in the PK-Sim GUI per README section 3
+pkml/*.pkml
+
+# Keep: the snapshot .json model definitions, SOURCES.tsv, the script,
+# and pksim_renal_predictions.csv (the deliverable).

@@ -17,7 +17,11 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 
-from .amr import LAST_RESORT, AMRReport
+from .amr import (
+    LAST_RESORT,
+    RESISTANCE_CALL_THRESHOLD,
+    AMRReport,
+)
 from .ddi import SEVERITY_LEVELS, DDIAssessment
 from .drugs import Drug
 from .pk import PatientProfile, PersonalizedRisk, dose_guidance
@@ -81,6 +85,9 @@ class CandidateRiskReport:
     actions: list[str] = field(default_factory=list)
     amr_applicable: bool = False
     candidate_antibiotic: Drug | None = None
+    # False when the candidate IS an antibacterial but its class is outside the
+    # twelve Module 3 screens — distinct from "no antibacterial in this pairing".
+    amr_class_screened: bool = True
 
     @property
     def band(self) -> str:
@@ -138,6 +145,15 @@ def build_report(
     #   score 1.5 -> 41   2.42 (Severe threshold) -> 58   4.0 -> 76   5.0 -> 83
     ddi_norm = 1.0 - math.exp(-personalized.adjusted_score / 2.8)
     report.ddi_component = ddi_norm * 100
+
+    # Is the candidate's own class one Module 3 actually screens? If not, we
+    # cannot score resistance against it, and substituting 0.0 would read as
+    # "no resistance" when the truth is "never checked".
+    if report.amr_applicable and amr is not None and report.candidate_antibiotic:
+        cls = report.candidate_antibiotic.antibiotic_class or ""
+        if cls not in amr.probabilities:
+            report.amr_class_screened = False
+            report.amr_applicable = False
 
     # --- Component 2: resistance pressure on the candidate -------------------
     amr_norm = 0.0
@@ -233,12 +249,53 @@ def _collect_findings(r: CandidateRiskReport) -> list[Finding]:
         )
 
     # --- Module 3: resistance context
-    if r.amr_applicable and r.amr is not None:
+    #
+    # Three genuinely different situations, which earlier collapsed into two:
+    #   a) no antibacterial in the pairing      -> nothing to screen
+    #   b) antibacterial, class NOT screened    -> we did not check
+    #   c) antibacterial, class screened        -> a real result
+    # Conflating (b) with (c) produced a confident "remains susceptible,
+    # 0% predicted resistance" for drugs such as metronidazole, whose class
+    # (Nitroimidazoles) is not one of the twelve. An unrun check must never be
+    # rendered as a passed one.
+    if r.amr is not None and r.candidate_antibiotic is not None and not r.amr_class_screened:
+        ab = r.candidate_antibiotic
+        out.append(
+            Finding(
+                severity="Info",
+                module="Module 3 · Resistance",
+                title=f"{ab.antibiotic_class} is not screened by Module 3",
+                detail=(
+                    f"{ab.name} belongs to the {ab.antibiotic_class} class, which "
+                    f"is not among the {len(r.amr.probabilities)} classes this "
+                    "module screens. No resistance prediction is available for it "
+                    "— this is 'not checked', not 'no resistance found'. The "
+                    "resistance component is therefore excluded from the "
+                    "composite score, which reflects interaction and toxicity only."
+                ),
+            )
+        )
+        last = r.amr.last_resort_hits()
+        if last:
+            out.append(
+                Finding(
+                    severity="Critical",
+                    module="Module 3 · Resistance",
+                    title=f"Last-resort resistance detected ({', '.join(last)})",
+                    detail=(
+                        f"{r.amr.strain_name} is predicted resistant to "
+                        f"{', '.join(last)}. This does not bear on the candidate's "
+                        "own class, which was not screened, but it is material to "
+                        "the value of any successful agent against this organism."
+                    ),
+                )
+            )
+    elif r.amr_applicable and r.amr is not None:
         ab = r.candidate_antibiotic
         assert ab is not None
         target = ab.antibiotic_class or ""
-        prob = r.amr.probabilities.get(target, 0.0)
-        if prob >= 0.5:
+        prob = r.amr.probabilities[target]
+        if prob >= RESISTANCE_CALL_THRESHOLD:
             crit = target in LAST_RESORT
             out.append(
                 Finding(
@@ -248,9 +305,10 @@ def _collect_findings(r: CandidateRiskReport) -> list[Finding]:
                     detail=(
                         f"{r.amr.strain_name} carries determinants predicting "
                         f"resistance to the {target} class "
-                        f"({prob:.0%} confidence). {ab.name} belongs to that class, "
-                        "so this organism would likely not respond — a strong "
-                        "signal to reconsider the indication before trial entry."
+                        f"({prob:.0%} confidence). {ab.name} belongs to that "
+                        "class, so this organism would likely not respond — a "
+                        "strong signal to reconsider the indication before "
+                        "trial entry."
                     ),
                 )
             )
@@ -268,6 +326,7 @@ def _collect_findings(r: CandidateRiskReport) -> list[Finding]:
                     ),
                 )
             )
+
         last = r.amr.last_resort_hits()
         if last:
             out.append(
@@ -354,7 +413,7 @@ def _recommend_actions(r: CandidateRiskReport) -> list[str]:
     if r.amr_applicable and r.amr is not None and r.candidate_antibiotic is not None:
         ab = r.candidate_antibiotic
         target = ab.antibiotic_class or ""
-        if r.amr.probabilities.get(target, 0.0) >= 0.5:
+        if r.amr.probabilities.get(target, 0.0) >= RESISTANCE_CALL_THRESHOLD:
             viable = [c for c in r.amr.susceptible_classes()]
             actions.append(
                 f"**Reconsider the target indication for {ab.name}.** The modelled "

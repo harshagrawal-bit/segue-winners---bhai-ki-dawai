@@ -1,0 +1,712 @@
+{
+  "errors_calibration": {
+    "n_test_isolates": 175,
+    "n_label_decisions": 2100,
+    "shipped_threshold": 0.35,
+    "calibration_comparison": {
+      "raw_brier": 0.06991708359335508,
+      "calibrated_brier": 0.03745786482001485,
+      "raw_ece": 0.10021413131313131,
+      "calibrated_ece": 0.014531929033667153,
+      "raw_vme_at_035": 0.07890499194847021,
+      "raw_me_at_035": 0.10006761325219743,
+      "raw_vme_at_050": 0.19162640901771336,
+      "raw_me_at_050": 0.028397565922920892,
+      "raw_reliability": [
+        {
+          "bin": "0.0-0.1",
+          "predicted": 0.04641790935672515,
+          "observed": 0.0,
+          "n": 760
+        },
+        {
+          "bin": "0.1-0.2",
+          "predicted": 0.14416080741926016,
+          "observed": 0.02005730659025788,
+          "n": 349
+        },
+        {
+          "bin": "0.2-0.3",
+          "predicted": 0.24340134073046696,
+          "observed": 0.13592233009708737,
+          "n": 206
+        },
+        {
+          "bin": "0.3-0.4",
+          "predicted": 0.3473680213464696,
+          "observed": 0.27586206896551724,
+          "n": 116
+        },
+        {
+          "bin": "0.4-0.5",
+          "predicted": 0.4496313523809524,
+          "observed": 0.416,
+          "n": 125
+        },
+        {
+          "bin": "0.5-0.6",
+          "predicted": 0.5501320261437908,
+          "observed": 0.7352941176470589,
+          "n": 102
+        },
+        {
+          "bin": "0.6-0.7",
+          "predicted": 0.6494873536299767,
+          "observed": 0.8934426229508197,
+          "n": 122
+        },
+        {
+          "bin": "0.7-0.8",
+          "predicted": 0.7459444003527337,
+          "observed": 0.9814814814814815,
+          "n": 108
+        },
+        {
+          "bin": "0.8-0.9",
+          "predicted": 0.8538023412698412,
+          "observed": 1.0,
+          "n": 120
+        },
+        {
+          "bin": "0.9-1.0",
+          "predicted": 0.9392406832298138,
+          "observed": 1.0,
+          "n": 92
+        }
+      ]
+    },
+    "very_major_errors": 46,
+    "very_major_error_rate": 0.07407407407407407,
+    "major_errors": 54,
+    "major_error_rate": 0.036511156186612576,
+    "n_actually_resistant": 621,
+    "n_actually_susceptible": 1479,
+    "brier_score": 0.03745786482001485,
+    "expected_calibration_error": 0.014531929033667153,
+    "reliability": [
+      {
+        "bin": "0.0-0.1",
+        "predicted": 0.014570341629967709,
+        "observed": 0.012093726379440665,
+        "n": 1323
+      },
+      {
+        "bin": "0.1-0.2",
+        "predicted": 0.1427815827533797,
+        "observed": 0.16455696202531644,
+        "n": 79
+      },
+      {
+        "bin": "0.2-0.3",
+        "predicted": 0.2475251861592572,
+        "observed": 0.16666666666666666,
+        "n": 42
+      },
+      {
+        "bin": "0.3-0.4",
+        "predicted": 0.3441286656396618,
+        "observed": 0.4,
+        "n": 45
+      },
+      {
+        "bin": "0.4-0.5",
+        "predicted": 0.4439279370332424,
+        "observed": 0.5806451612903226,
+        "n": 31
+      },
+      {
+        "bin": "0.5-0.6",
+        "predicted": 0.5616896962800623,
+        "observed": 0.8333333333333334,
+        "n": 24
+      },
+      {
+        "bin": "0.6-0.7",
+        "predicted": 0.6514608312273297,
+        "observed": 0.7058823529411765,
+        "n": 34
+      },
+      {
+        "bin": "0.7-0.8",
+        "predicted": 0.7481719045709327,
+        "observed": 0.8444444444444444,
+        "n": 45
+      },
+      {
+        "bin": "0.8-0.9",
+        "predicted": 0.859526082364286,
+        "observed": 0.8775510204081632,
+        "n": 49
+      },
+      {
+        "bin": "0.9-1.0",
+        "predicted": 0.9948281937590886,
+        "observed": 0.9906542056074766,
+        "n": 428
+      }
+    ],
+    "threshold_sweep": [
+      {
+        "threshold": 0.05,
+        "very_major_error_rate": 0.011272141706924315,
+        "major_error_rate": 0.1852603110209601,
+        "flagged_rate": 0.4228571428571429
+      },
+      {
+        "threshold": 0.1,
+        "very_major_error_rate": 0.02576489533011272,
+        "major_error_rate": 0.1162947937795808,
+        "flagged_rate": 0.37
+      },
+      {
+        "threshold": 0.15,
+        "very_major_error_rate": 0.03864734299516908,
+        "major_error_rate": 0.09127789046653144,
+        "flagged_rate": 0.3485714285714286
+      },
+      {
+        "threshold": 0.2,
+        "very_major_error_rate": 0.04669887278582931,
+        "major_error_rate": 0.07167004732927654,
+        "flagged_rate": 0.3323809523809524
+      },
+      {
+        "threshold": 0.25,
+        "very_major_error_rate": 0.05314009661835749,
+        "major_error_rate": 0.06017579445571332,
+        "flagged_rate": 0.3223809523809524
+      },
+      {
+        "threshold": 0.3,
+        "very_major_error_rate": 0.057971014492753624,
+        "major_error_rate": 0.048005409060175794,
+        "flagged_rate": 0.31238095238095237
+      },
+      {
+        "threshold": 0.35,
+        "very_major_error_rate": 0.07407407407407407,
+        "major_error_rate": 0.036511156186612576,
+        "flagged_rate": 0.2995238095238095
+      },
+      {
+        "threshold": 0.4,
+        "very_major_error_rate": 0.08695652173913043,
+        "major_error_rate": 0.029749830966869506,
+        "flagged_rate": 0.29095238095238096
+      },
+      {
+        "threshold": 0.45,
+        "very_major_error_rate": 0.10305958132045089,
+        "major_error_rate": 0.023664638269100743,
+        "flagged_rate": 0.2819047619047619
+      },
+      {
+        "threshold": 0.5,
+        "very_major_error_rate": 0.11594202898550725,
+        "major_error_rate": 0.020960108181203516,
+        "flagged_rate": 0.2761904761904762
+      },
+      {
+        "threshold": 0.55,
+        "very_major_error_rate": 0.12399355877616747,
+        "major_error_rate": 0.0196078431372549,
+        "flagged_rate": 0.27285714285714285
+      },
+      {
+        "threshold": 0.6,
+        "very_major_error_rate": 0.14814814814814814,
+        "major_error_rate": 0.018255578093306288,
+        "flagged_rate": 0.26476190476190475
+      }
+    ],
+    "recommended_threshold": 0.05,
+    "recommended_vme": 0.011272141706924315,
+    "recommended_me": 0.1852603110209601
+  },
+  "clade_holdout": {
+    "n_clades": 8,
+    "mean_macro_f1": 0.9038815784787516,
+    "std_macro_f1": 0.02138463294387236,
+    "worst_macro_f1": 0.8829659071887996,
+    "per_clade": [
+      {
+        "held_out_gc": 0.327,
+        "n_test": 94,
+        "macro_f1": 0.8864675043380904,
+        "per_label_accuracy": 0.9388297872340425
+      },
+      {
+        "held_out_gc": 0.38,
+        "n_test": 82,
+        "macro_f1": 0.9495876478357297,
+        "per_label_accuracy": 0.9705284552845529
+      },
+      {
+        "held_out_gc": 0.39,
+        "n_test": 80,
+        "macro_f1": 0.8928181250274275,
+        "per_label_accuracy": 0.9510416666666667
+      },
+      {
+        "held_out_gc": 0.507,
+        "n_test": 98,
+        "macro_f1": 0.9244709520701114,
+        "per_label_accuracy": 0.95578231292517
+      },
+      {
+        "held_out_gc": 0.521,
+        "n_test": 87,
+        "macro_f1": 0.9080173770967982,
+        "per_label_accuracy": 0.9568965517241379
+      },
+      {
+        "held_out_gc": 0.572,
+        "n_test": 98,
+        "macro_f1": 0.8980494213357023,
+        "per_label_accuracy": 0.9421768707482994
+      },
+      {
+        "held_out_gc": 0.656,
+        "n_test": 81,
+        "macro_f1": 0.8886756929373537,
+        "per_label_accuracy": 0.9578189300411523
+      },
+      {
+        "held_out_gc": 0.664,
+        "n_test": 80,
+        "macro_f1": 0.8829659071887996,
+        "per_label_accuracy": 0.9447916666666667
+      }
+    ]
+  },
+  "novelty": {
+    "clean_strains_assessed": 12,
+    "false_positives": 0,
+    "false_positive_rate": 0.0,
+    "spiked_cases": 7,
+    "detected": 7,
+    "sensitivity": 1.0,
+    "peak_divergence_clean": 0.11841487884521484,
+    "peak_divergence_spiked_min": 0.23159006237983704
+  },
+  "forecast_backtest": {
+    "available": true,
+    "cutoff_year": 2020,
+    "n_series": 46,
+    "n_predictions": 184,
+    "mae_pp": 4.925388516229972,
+    "median_ae_pp": 3.5518905862515453,
+    "p90_ae_pp": 11.994629980782607,
+    "within_5pp": 0.6358695652173914,
+    "within_10pp": 0.8532608695652174,
+    "best": [
+      {
+        "organism": "Staphylococcus aureus",
+        "antibiotic": "Vancomycin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.15,
+        "max_err_pp": 0.6
+      },
+      {
+        "organism": "Enterococcus faecium",
+        "antibiotic": "Vancomycin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.7807132066427096,
+        "max_err_pp": 1.4487710941748269
+      },
+      {
+        "organism": "Staphylococcus aureus",
+        "antibiotic": "Linezolid",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.8,
+        "max_err_pp": 1.8800000000000001
+      }
+    ],
+    "worst": [
+      {
+        "organism": "Escherichia coli",
+        "antibiotic": "Imipenem",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 13.559214543058816,
+        "max_err_pp": 18.247069663108697
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "antibiotic": "Imipenem",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 15.535215795598862,
+        "max_err_pp": 18.57799783838925
+      },
+      {
+        "organism": "Klebsiella pneumoniae",
+        "antibiotic": "Ciprofloxacin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 17.18139707870737,
+        "max_err_pp": 22.95409425432178
+      }
+    ]
+  },
+  "gene_coverage": {
+    "note": "ICMR AMRSN 2018 molecular surveillance: 369 E. coli + 374 K. pneumoniae across 7 centres. Two caveats on individual rows: the OXA figure is for the OXA-1 group rather than OXA-48 specifically, and SHV is reported at family level without separating narrow-spectrum from extended-spectrum variants. Both are indicative rather than exact.",
+    "caveat": "Demo-strain frequencies are a design choice, not a sample of Indian isolates. This table shows COVERAGE of the determinants that matter in India, not predictive accuracy.",
+    "n_demo_strains": 12,
+    "icmr_genes_covered": 8,
+    "icmr_genes_listed": 8,
+    "rows": [
+      {
+        "gene": "blaTEM-1",
+        "icmr_prevalence": 0.54,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 1,
+        "demo_strain_frequency": 0.08333333333333333
+      },
+      {
+        "gene": "blaCTX-M-15",
+        "icmr_prevalence": 0.4,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 4,
+        "demo_strain_frequency": 0.3333333333333333
+      },
+      {
+        "gene": "blaNDM-1",
+        "icmr_prevalence": 0.27,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 1,
+        "demo_strain_frequency": 0.08333333333333333
+      },
+      {
+        "gene": "blaOXA-48",
+        "icmr_prevalence": 0.22,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 1,
+        "demo_strain_frequency": 0.08333333333333333
+      },
+      {
+        "gene": "blaVIM",
+        "icmr_prevalence": 0.19,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 0,
+        "demo_strain_frequency": 0.0
+      },
+      {
+        "gene": "blaSHV",
+        "icmr_prevalence": 0.16,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 1,
+        "demo_strain_frequency": 0.08333333333333333
+      },
+      {
+        "gene": "blaKPC-2",
+        "icmr_prevalence": 0.15,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 1,
+        "demo_strain_frequency": 0.08333333333333333
+      },
+      {
+        "gene": "blaIMP",
+        "icmr_prevalence": 0.15,
+        "in_our_reference_set": true,
+        "demo_strains_carrying": 0,
+        "demo_strain_frequency": 0.0
+      }
+    ]
+  },
+  "cross_check": {
+    "available": true,
+    "verdict": "MOSTLY CONSISTENT",
+    "reference_year": 2024,
+    "n_strains": 11,
+    "n_rows": 76,
+    "n_compared": 49,
+    "n_aligned": 14,
+    "n_as_expected": 34,
+    "n_concern": 1,
+    "n_flagged": 16,
+    "n_no_reference": 27,
+    "mae_pp": 41.182105919480215,
+    "aligned_mae_pp": 5.054710698244703,
+    "flagged": [
+      {
+        "organism": "Staphylococcus aureus",
+        "strain": "S. aureus MRSA (hospital-acquired)",
+        "antibiotic_class": "Glycopeptides",
+        "model_pct": 27.84187538651824,
+        "real_pct": 0.0,
+        "delta": 27.84187538651824,
+        "status": "CONCERN",
+        "carries_determinant": false,
+        "determinants": [],
+        "explanation": "Model 28% vs ICMR 0% (2024, from Vancomycin) \u2014 +28 pp. \u26a0 Over-call. The isolate carries no determinant for this class, yet the model reads well above the national rate. This is the signature of a class-level mapping that is too broad."
+      },
+      {
+        "organism": "Salmonella Typhi",
+        "strain": "S. Typhi H58 (XDR, South Asia)",
+        "antibiotic_class": "Cephalosporins",
+        "model_pct": 100.0,
+        "real_pct": 2.0,
+        "delta": 98.0,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaCTX-M-15"
+        ],
+        "explanation": "Model 100% vs ICMR 2% (2024, from Ceftriaxone) \u2014 +98 pp. Expected direction: this isolate carries blaCTX-M-15, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 98 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Staphylococcus aureus",
+        "strain": "S. aureus (linezolid-resistant, cfr)",
+        "antibiotic_class": "Oxazolidinones",
+        "model_pct": 100.0,
+        "real_pct": 2.5,
+        "delta": 97.5,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "cfr"
+        ],
+        "explanation": "Model 100% vs ICMR 2% (2024, from Linezolid) \u2014 +98 pp. Expected direction: this isolate carries cfr, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 98 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Salmonella Typhi",
+        "strain": "S. Typhi H58 (XDR, South Asia)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 98.7648602748186,
+        "real_pct": 2.5,
+        "delta": 96.2648602748186,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaCTX-M-15"
+        ],
+        "explanation": "Model 99% vs ICMR 2% (2024, from Ampicillin) \u2014 +96 pp. Expected direction: this isolate carries blaCTX-M-15, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 96 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Escherichia coli",
+        "strain": "E. coli ST131 (ESBL)",
+        "antibiotic_class": "Aminoglycosides",
+        "model_pct": 100.0,
+        "real_pct": 27.5,
+        "delta": 72.5,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "aac(6')-Ib"
+        ],
+        "explanation": "Model 100% vs ICMR 28% (2024, from Amikacin) \u2014 +72 pp. Expected direction: this isolate carries aac(6')-Ib, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 72 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Enterococcus faecium",
+        "strain": "E. faecium (VRE)",
+        "antibiotic_class": "Glycopeptides",
+        "model_pct": 100.0,
+        "real_pct": 29.549999999999997,
+        "delta": 70.45,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "vanA"
+        ],
+        "explanation": "Model 100% vs ICMR 30% (2024, from Teicoplanin, Vancomycin) \u2014 +70 pp. Expected direction: this isolate carries vanA, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 70 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "strain": "P. aeruginosa (MDR)",
+        "antibiotic_class": "Aminoglycosides",
+        "model_pct": 96.29629629629629,
+        "real_pct": 28.45,
+        "delta": 67.84629629629629,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "aac(6')-Ib"
+        ],
+        "explanation": "Model 96% vs ICMR 28% (2024, from Amikacin, Gentamicin) \u2014 +68 pp. Expected direction: this isolate carries aac(6')-Ib, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 68 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "strain": "P. aeruginosa (MDR)",
+        "antibiotic_class": "Fluoroquinolones",
+        "model_pct": 100.0,
+        "real_pct": 44.5,
+        "delta": 55.5,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "gyrA_S83L"
+        ],
+        "explanation": "Model 100% vs ICMR 44% (2024, from Ciprofloxacin, Levofloxacin) \u2014 +56 pp. Expected direction: this isolate carries gyrA_S83L, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 56 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "strain": "P. aeruginosa (MDR)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 83.68357479572296,
+        "real_pct": 30.7,
+        "delta": 52.98357479572296,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaKPC-2"
+        ],
+        "explanation": "Model 84% vs ICMR 31% (2024, from Piperacillin-tazobactam) \u2014 +53 pp. Expected direction: this isolate carries blaKPC-2, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 53 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "strain": "P. aeruginosa (MDR)",
+        "antibiotic_class": "Cephalosporins",
+        "model_pct": 83.68357479572296,
+        "real_pct": 34.15,
+        "delta": 49.53357479572296,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaKPC-2"
+        ],
+        "explanation": "Model 84% vs ICMR 34% (2024, from Cefepime, Ceftazidime) \u2014 +50 pp. Expected direction: this isolate carries blaKPC-2, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 50 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "strain": "P. aeruginosa (MDR)",
+        "antibiotic_class": "Carbapenems",
+        "model_pct": 83.68357479572296,
+        "real_pct": 40.55,
+        "delta": 43.133574795722964,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaKPC-2"
+        ],
+        "explanation": "Model 84% vs ICMR 41% (2024, from Imipenem, Meropenem) \u2014 +43 pp. Expected direction: this isolate carries blaKPC-2, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 43 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Escherichia coli",
+        "strain": "E. coli ST131 (ESBL)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 100.0,
+        "real_pct": 58.7,
+        "delta": 41.3,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaCTX-M-15",
+          "blaSHV"
+        ],
+        "explanation": "Model 100% vs ICMR 59% (2024, from Piperacillin-tazobactam) \u2014 +41 pp. Expected direction: this isolate carries blaCTX-M-15, blaSHV, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 41 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Escherichia coli",
+        "strain": "E. coli (colistin-resistant, mcr-1)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 98.67994441871238,
+        "real_pct": 58.7,
+        "delta": 39.97994441871238,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "blaCTX-M-15"
+        ],
+        "explanation": "Model 99% vs ICMR 59% (2024, from Piperacillin-tazobactam) \u2014 +40 pp. Expected direction: this isolate carries blaCTX-M-15, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 40 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Klebsiella pneumoniae",
+        "strain": "K. pneumoniae (carbapenem-resistant)",
+        "antibiotic_class": "Aminoglycosides",
+        "model_pct": 100.0,
+        "real_pct": 60.1,
+        "delta": 39.9,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "aac(6')-Ib"
+        ],
+        "explanation": "Model 100% vs ICMR 60% (2024, from Amikacin) \u2014 +40 pp. Expected direction: this isolate carries aac(6')-Ib, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 40 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Staphylococcus aureus",
+        "strain": "S. aureus (linezolid-resistant, cfr)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 91.09477124183006,
+        "real_pct": 52.4,
+        "delta": 38.69477124183006,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "mecA"
+        ],
+        "explanation": "Model 91% vs ICMR 52% (2024, from Cefoxitin (MRSA)) \u2014 +39 pp. Expected direction: this isolate carries mecA, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 39 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      },
+      {
+        "organism": "Staphylococcus aureus",
+        "strain": "S. aureus MRSA (hospital-acquired)",
+        "antibiotic_class": "Penicillins",
+        "model_pct": 88.1606376171112,
+        "real_pct": 52.4,
+        "delta": 35.76063761711121,
+        "status": "AS EXPECTED",
+        "carries_determinant": true,
+        "determinants": [
+          "mecA"
+        ],
+        "explanation": "Model 88% vs ICMR 52% (2024, from Cefoxitin (MRSA)) \u2014 +36 pp. Expected direction: this isolate carries mecA, so it should sit above a national average that mixes resistant and susceptible isolates. \u26a0 But 36 pp is a wide gap. Carrying the gene explains a higher reading, not an arbitrarily higher one \u2014 check whether this class is mapped too broadly."
+      }
+    ]
+  },
+  "deployed_pipeline": {
+    "available": true,
+    "n_strains": 12,
+    "without_mechanism_floor": {
+      "very_major": 5,
+      "major": 0,
+      "total_calls": 144,
+      "accuracy": 0.9652777777777778,
+      "errors": [
+        {
+          "type": "very_major",
+          "strain": "K. pneumoniae (carbapenem-resistant)",
+          "antibiotic_class": "Fluoroquinolones",
+          "probability": 0.4765793528505391
+        },
+        {
+          "type": "very_major",
+          "strain": "S. aureus MSSA (methicillin-susceptible)",
+          "antibiotic_class": "Penicillins",
+          "probability": 0.37913158965790683
+        },
+        {
+          "type": "very_major",
+          "strain": "P. aeruginosa (MDR)",
+          "antibiotic_class": "Carbapenems",
+          "probability": 0.11069418386491559
+        },
+        {
+          "type": "very_major",
+          "strain": "A. baumannii (XDR)",
+          "antibiotic_class": "Penicillins",
+          "probability": 0.39166291797870745
+        },
+        {
+          "type": "very_major",
+          "strain": "A. baumannii (XDR)",
+          "antibiotic_class": "Carbapenems",
+          "probability": 0.48173076923076924
+        }
+      ]
+    },
+    "with_mechanism_floor": {
+      "very_major": 0,
+      "major": 0,
+      "total_calls": 144,
+      "accuracy": 1.0,
+      "errors": []
+    },
+    "very_major_fixed": 5,
+    "major_introduced": 0
+  },
+  "generated_seconds": 144.8
+}

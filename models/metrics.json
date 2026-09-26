@@ -44,17 +44,80 @@
     "n_features": 1024,
     "k": 5,
     "random_split": {
-      "exact_match": 0.8514285714285714,
-      "per_label_accuracy": 0.979047619047619,
-      "macro_f1": 0.9214623373629284,
+      "exact_match": 0.5885714285714285,
+      "per_label_accuracy": 0.950952380952381,
+      "macro_f1": 0.9000752717627508,
       "n_test": 175
     },
     "cold_combination_split": {
-      "exact_match": 0.6666666666666666,
-      "per_label_accuracy": 0.9673202614379085,
-      "macro_f1": 0.9236073067093883,
-      "n_test": 204,
-      "n_unseen_combinations": 101
+      "exact_match": 0.5114155251141552,
+      "per_label_accuracy": 0.9425418569254186,
+      "macro_f1": 0.8407831429802943,
+      "n_test": 219,
+      "n_unseen_combinations": 113
     }
+  },
+  "forecast": {
+    "available": true,
+    "cutoff_year": 2020,
+    "n_series": 46,
+    "n_predictions": 184,
+    "mae_pp": 4.925388516229972,
+    "median_ae_pp": 3.5518905862515453,
+    "p90_ae_pp": 11.994629980782607,
+    "within_5pp": 0.6358695652173914,
+    "within_10pp": 0.8532608695652174,
+    "best": [
+      {
+        "organism": "Staphylococcus aureus",
+        "antibiotic": "Vancomycin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.15,
+        "max_err_pp": 0.6
+      },
+      {
+        "organism": "Enterococcus faecium",
+        "antibiotic": "Vancomycin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.7807132066427096,
+        "max_err_pp": 1.4487710941748269
+      },
+      {
+        "organism": "Staphylococcus aureus",
+        "antibiotic": "Linezolid",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 0.8,
+        "max_err_pp": 1.8800000000000001
+      }
+    ],
+    "worst": [
+      {
+        "organism": "Escherichia coli",
+        "antibiotic": "Imipenem",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 13.559214543058816,
+        "max_err_pp": 18.247069663108697
+      },
+      {
+        "organism": "Pseudomonas aeruginosa",
+        "antibiotic": "Imipenem",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 15.535215795598862,
+        "max_err_pp": 18.57799783838925
+      },
+      {
+        "organism": "Klebsiella pneumoniae",
+        "antibiotic": "Ciprofloxacin",
+        "n_train": 5,
+        "n_test": 4,
+        "mae_pp": 17.18139707870737,
+        "max_err_pp": 22.95409425432178
+      }
+    ]
   }
 }
