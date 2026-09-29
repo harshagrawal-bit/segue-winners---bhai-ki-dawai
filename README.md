@@ -209,9 +209,26 @@ Judges should be able to assess this accurately, so here it is plainly.
 - **Pharmacology profiles.** CYP450 roles, P-glycoprotein handling, fraction
   renally excreted, risk flags — standard clinical pharmacology.
 - **Interaction mechanisms.** Every mechanism described is real and documented.
-  Calibration was checked against **24 well-known pairs** with published
-  severities (warfarin + fluconazole, simvastatin + clarithromycin, theophylline
-  + ciprofloxacin, …): **24/24 match**.
+  Calibration is checked against **27 well-known pairs** with published
+  severities, reproducibly — run `python -m trialsense.known_pairs`:
+
+  | Measure | Result |
+  |---|---|
+  | Exact severity match | 21/27 (78%) |
+  | Within one severity level | **27/27** (100%) |
+  | Agree on clinically significant or not | **27/27** (100%) |
+  | **Under-calls** (we say safe, published says dangerous) | **0** |
+
+  All 6 disagreements are over-calls — the safe direction for a
+  screening tool, costing an unnecessary review rather than a missed hazard. The
+  set includes negative controls (azithromycin + simvastatin, levofloxacin +
+  theophylline) chosen as near-misses of pairs that *are* dangerous.
+
+  **This check found a real defect.** On its first run it scored methotrexate +
+  trimethoprim as Mild against a published Severe, because additive folate
+  blockade was not modelled at all. A rule was added to `ddi.py`, guarded so it
+  does not fire on co-trimoxazole, where the same combined action is the
+  therapeutic intent.
 - **PK equations.** CKD-EPI 2021 eGFR (de-indexed by body surface area),
   Cockcroft-Gault and clearance-weighted organ scaling are the standard
   equations behind real renal dose-adjustment guidance.
@@ -265,7 +282,14 @@ Judges should be able to assess this accurately, so here it is plainly.
   transporters beyond P-gp, protein-binding displacement, disease-state effects.
 - **The resistance-runway projection** is an extrapolation, drawn as a dashed
   line with a widening cone precisely so it cannot be mistaken for observation.
-  Its backtested error is 4.93 pp — real, but not a guarantee.
+  Its backtested error is 4.93 pp overall — but that average hides its own
+  structure. On series with six or more annual observations the error is
+  **0.48 pp**; on series with fewer it is **5.13 pp**, and all three worst
+  series have five points. Forecasts now carry an `n_points` count and a
+  `reliability` flag so a thin projection is visible as thin. The 95%
+  prediction intervals were measured to cover **82.6%** of held-out actuals,
+  not 95% — treat them as roughly 80% bands. This is a mean absolute error in
+  percentage points, NOT an accuracy percentage.
 - **The cost model in Feature 5** is a transparent decision-analysis model over
   user-adjustable assumptions, **not** a measured saving. Nobody has run a drug
   programme through this tool for ten years. The claim we defend is narrow: the
@@ -361,8 +385,13 @@ test guards that property.
 
 | Split | Macro-F1 | Per-label accuracy | Exact match |
 |---|---|---|---|
-| Random split | 0.900 | 95.1% | 58.9% |
-| **Cold-combination split** (unseen gene combinations) | **0.841** | 94.3% | 51.1% |
+| Random split | 0.916 | 95.9% | 64.6% |
+| **Cold-combination split** (unseen gene combinations) | **0.763** | 92.3% | 44.0% |
+
+**These are CONSTRUCTED isolates.** On real genomes with laboratory
+susceptibility results the model scores 0.526 — approximately chance. See
+"What happens on real bacteria" below, and read that section before quoting
+any number in this table.
 
 Holding macro-F1 on gene combinations never seen in training shows the model
 detects genes *compositionally* rather than memorising whole-isolate
@@ -370,13 +399,50 @@ fingerprints — the property that determines whether it works on a new field
 isolate. Gene identification on the 12 bundled strains: **34/34 genes found,
 zero false positives**, including a correctly clean susceptible control.
 
+Gene detection is also the one layer that survives contact with real genomes:
+on 42 real assemblies it found genuine determinants — mecA in 9 real
+*S. aureus*, blaSHV in 5, plus blaNDM-1, blaVIM and blaCTX-M-15 — at a 13.8%
+false-resistance rate. It is precise but narrow: 21 reference genes cannot
+cover real resistance, so it misses 73% of laboratory-confirmed resistance.
+
+### What happens on real bacteria
+
+Every figure above is measured on isolates we constructed. The honest test is
+real genomes with bench susceptibility results, and Module 3 was measured
+against 42 of them (350 laboratory labels, BV-BRC, `evidence = "Laboratory
+Method"` only — other groups' machine-learning predictions were filtered out
+so we never score a prediction against a prediction).
+
+| Test set | Accuracy | Very major | Major |
+|---|---|---|---|
+| Constructed isolates | 0.927 | 1.1% | 9.7% |
+| **Real genomes + laboratory AST** | **0.526** | **47.2%** | **47.7%** |
+
+With 176 resistant and 174 susceptible comparisons, **0.526 is chance**, and no
+threshold rescues it — the full sweep peaks at 0.503.
+
+The reason is architectural, not a tuning problem. The model trains on ~900 bp
+cassettes planted in ~2.6 kb of background; a real genome is 2.5–7 Mb, where a
+determinant is about 0.02% of the sequence, so a whole-genome 5-mer profile is
+dominated by ordinary housekeeping DNA.
+
+**So the defensible claim is narrow:** Module 3 detects 21 known resistance
+genes in real genomes with high precision and resolves two point-mutation
+determinants to the specific codon. It does not predict laboratory phenotype
+on real bacteria. Reproduce with `python validate_real.py`; full write-up in
+[reports/AUDIT_RESPONSE.md](reports/AUDIT_RESPONSE.md).
+
 ### Swapping to real sequences made these numbers worse. We kept the swap.
 
 |  | synthetic cassettes | real NCBI sequences |
 |---|---|---|
-| macro-F1 (random) | 0.989 | **0.900** |
-| macro-F1 (cold-combination) | 0.925 | **0.841** |
-| exact match (random) | 0.891 | **0.589** |
+| macro-F1 (random) | 0.989 | **0.916** |
+| macro-F1 (cold-combination) | 0.925 | **0.763** |
+| exact match (random) | 0.891 | **0.646** |
+
+The cold-combination figure fell again, from 0.841 to 0.763, when gene
+sampling was reweighted to real ICMR prevalence. Rare determinants became
+rare, which is harder and more honest.
 
 That drop is the honest measurement of how much synthetic data had been
 flattering us. Real genes share bacterial codon usage, real families overlap,
@@ -403,23 +469,30 @@ checks, all reproduced by `python validate_module3.py`.
 Regulators do not score susceptibility devices on accuracy. They count two
 error types, because the costs are wildly asymmetric.
 
-**The classifier alone**, on held-out synthetic-background isolates at the
-shipped 0.35 screening threshold:
+**The classifier alone**, on held-out constructed isolates at the shipped
+0.10 screening threshold:
 
 | | Rate |
 |---|---|
-| Very major (predicted S, actually R) | 7.41% |
-| Major (predicted R, actually S) | 3.65% |
+| Very major (predicted S, actually R) | 3.15% |
+| Major (predicted R, actually S) | 14.39% |
+
+The threshold is derived, not chosen: `derive_threshold.py` states an explicit
+cost — one missed resistance equals ten unnecessary confirmatory assays — and
+minimises expected cost over a sweep. It moved from 0.35 to 0.10, which brings
+the very-major rate to the ~1.5% order commercial devices are held to on a
+300-isolate held-out set. The previous 0.35 did not meet that, and the comment
+justifying it quoted numbers that a retrain had invalidated.
 
 **The deployed pipeline**, which is classifier + gene detection + mechanism
 floor, across all 12 bundled strains (144 class calls):
 
 | | Very major | Major | Correct |
 |---|---|---|---|
-| Classifier alone | 5 | 0 | 96.5% |
-| **+ gene detection override** | **0** | **0** | **100.0%** |
+| Classifier alone | 3 | 1 | 97.2% |
+| **+ gene detection override** | **0** | 1 | **99.3%** |
 
-The gene layer removes **5 very-major errors and introduces
+The gene layer removes **3 very-major errors and introduces
 0**. It can only ever raise a probability, and it fires only where a
 real reference sequence matches, so it cannot invent danger.
 
@@ -442,7 +515,7 @@ would be the same unexamined-claim problem this suite exists to catch, so:
 |---|---|---|
 | Brier score | 0.0699 | **0.0375** |
 | Expected calibration error | 0.1002 | **0.0145** |
-| Major errors @0.35 | 10.01% | **3.65%** |
+| Expected calibration error (current model) | — | **0.017** |
 
 #### 3. Clade-held-out validation
 
@@ -450,7 +523,7 @@ An entire species background removed from training, tested only on it —
 population-structure control, rather than a random split that lets
 near-identical isolates land on both sides.
 
-**macro-F1 0.904 ± 0.021** across 8 held-out clades, worst clade
+**macro-F1 0.897 ± 0.021** across 8 held-out clades, worst clade
 **0.883**.
 
 #### 3b. Two thresholds, because there are two questions
@@ -472,13 +545,34 @@ exactly what an equivocal band is for.
 
 #### 4. Dark Genome detector
 
-| | Result |
-|---|---|
-| False positives | **0 of 12** clean demo strains |
-| Sensitivity | **7 of 7** planted unknown elements found |
-| Separation | clean peak 0.118 vs spiked minimum 0.232 |
+**The previous claim here — 0 false positives, 7 of 7 sensitivity — was
+withdrawn.** All 19 of those cases came from the same generator that produced
+the training data, so it showed the detector could separate one generator's
+two modes. Tested on 42 real genomes, the shipped thresholds flagged something
+in **every single one, at 21.75 segments per megabase** — roughly 100 flags on
+a 5 Mb genome. Real genomes carry prophages, genomic islands and rRNA operons;
+generated "clean" strains are uniform by construction.
 
-The detection floor sits between those with better than 2× margin either side.
+Recalibrated by splitting the 42 genomes in half, sweeping thresholds on one
+half and reporting on the other. **Held-out half:**
+
+| thresholds | false alarms | sensitivity to a real foreign insert |
+|---|---|---|
+| 8.0 / 0.18 (previous) | 21.75 /Mb | 100% |
+| **25.0 / 0.40 (shipped)** | **1.57 /Mb** | **52%** |
+
+Sensitivity is measured with a real 1200 bp segment taken from the most
+GC-distant genome in the set and inserted into a real recipient — both donor
+and recipient are real sequence, so this does not repeat the original mistake
+of testing a generator against itself.
+
+**The trade-off is real and is not tuned away.** The frontier runs from 100%
+sensitivity at ~22 flags/Mb to ~24% at 0.5 flags/Mb. Tetranucleotide
+composition cannot distinguish an acquired element from a native genomic
+island, because both are compositionally foreign to the host core. We chose
+about eight flags per genome — reviewable by a person — and accept that this
+misses roughly half of true insertions. Reproduce with
+`python validate_novelty_real.py` and `python calibrate_novelty.py`.
 
 #### 5. Forecast backtest — the number that makes Feature 1 real
 

@@ -102,8 +102,12 @@ EXTRAP_WARN <- 0.20
 # from 0.21% to 0.00% - i.e. AUC_inf is window-insensitive once the terminal
 # phase is captured, which is exactly the property that makes this safe.
 AUTO_EXTEND    <- TRUE
-EXTEND_FACTOR  <- 10      # multiple of the model's own end time to extend to
-EXTEND_POINTS  <- 3000    # target number of output points over the new window
+# Tried in order, as multiples of the model's own end time. Stops at the first
+# window that brings the extrapolated tail within EXTRAP_WARN. A single 10x
+# step is NOT enough for heavily renally-cleared drugs at low eGFR: fluconazole
+# at eGFR 10 still had a 69% extrapolated tail at 240 h.
+EXTEND_SCHEDULE <- c(10, 50, 200, 1000)
+EXTEND_POINTS   <- 3000   # target number of output points over the new window
 
 # Provenance: exact commit pinned at download time (2026-09-26).
 # Frozen here on purpose so the CSV always cites the precise model revision.
@@ -325,31 +329,52 @@ evaluate_pkml <- function(pkml_path, drug) {
                 (!is.na(first$frac) && first$frac > EXTRAP_WARN)
 
   if (AUTO_EXTEND && needs_more) {
-    new_end_h <- (if (is.na(first$end_h)) 24 else first$end_h) * EXTEND_FACTOR
-    retry <- tryCatch({
-      sim2 <- loadSimulation(pkml_path)
-      clearOutputs(sim2)
-      setOutputs(quantitiesOrPaths = sel$path, simulation = sim2)
-      setOutputInterval(simulation = sim2,
-                        startTime  = 0,
-                        endTime    = new_end_h * 60,          # minutes
-                        resolution = EXTEND_POINTS / (new_end_h * 60))
-      run_once(sim2)
-    }, error = function(e) list(err = "extend_failed", msg = conditionMessage(e)))
+    base_h    <- if (is.na(first$end_h)) 24 else first$end_h
+    tried     <- character(0)
+    converged <- FALSE
 
-    if (is.null(retry$err) && !is.na(retry$auc) &&
-        (is.na(first$frac) || is.na(retry$frac) || retry$frac <= first$frac)) {
-      best <- retry
+    for (mult in EXTEND_SCHEDULE) {
+      new_end_h <- base_h * mult
+      retry <- tryCatch({
+        sim2 <- loadSimulation(pkml_path)
+        clearOutputs(sim2)
+        setOutputs(quantitiesOrPaths = sel$path, simulation = sim2)
+        setOutputInterval(simulation = sim2,
+                          startTime  = 0,
+                          endTime    = new_end_h * 60,        # minutes
+                          resolution = EXTEND_POINTS / (new_end_h * 60))
+        run_once(sim2)
+      }, error = function(e) list(err = "extend_failed", msg = conditionMessage(e)))
+
+      if (!is.null(retry$err) || is.na(retry$auc)) break
+
+      tried <- c(tried, sprintf("%.4gh:%s", new_end_h,
+                                if (is.na(retry$frac)) "NA"
+                                else sprintf("%.1f%%", 100 * retry$frac)))
+
+      # keep the window with the smallest extrapolated tail seen so far
+      if (is.na(best$frac) || (!is.na(retry$frac) && retry$frac <= best$frac)) {
+        best <- retry
+      }
+      if (!is.na(retry$frac) && retry$frac <= EXTRAP_WARN) {
+        converged <- TRUE
+        break
+      }
+    }
+
+    if (length(tried)) {
       extend_note <- sprintf(
-        paste0("observation window extended %.4g h -> %.4g h to capture the ",
-               "terminal phase (extrapolated tail %s -> %s); dosing unchanged"),
-        first$end_h, retry$end_h,
+        paste0("observation window extended from %.4g h (tail %s); tried %s; ",
+               "kept %.4g h with tail %s%s; dosing unchanged"),
+        base_h,
         if (is.na(first$frac)) "NA" else sprintf("%.1f%%", 100 * first$frac),
-        if (is.na(retry$frac)) "NA" else sprintf("%.1f%%", 100 * retry$frac))
+        paste(tried, collapse = ", "),
+        best$end_h,
+        if (is.na(best$frac)) "NA" else sprintf("%.1f%%", 100 * best$frac),
+        if (converged) "" else " (never reached the acceptance limit)")
     } else {
       extend_note <- sprintf(
-        "window extension to %.4g h did not improve the estimate; kept the model's own %.4g h window",
-        new_end_h, first$end_h)
+        "window extension failed; kept the model's own %.4g h window", base_h)
     }
   }
 

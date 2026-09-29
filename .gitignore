@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 models/*.pkl
 .DS_Store
+
+# Downloaded genome assemblies (188 MB). Re-fetch with:
+#   python -m trialsense.ingest
+# The manifest, labels and MISSING_DATA.md ARE tracked, so the data set
+# stays reproducible without committing the sequences themselves.
+data/real/genomes/

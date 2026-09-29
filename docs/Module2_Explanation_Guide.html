@@ -1,0 +1,872 @@
+<title>Module 2 Explanation Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ink:#17242B;--ink-soft:#47585F;--ink-faint:#76868C;
+    --paper:#FBFCFC;--panel:#F2F6F6;--rule:#D4DDE0;--rule-firm:#A9BAC0;
+    --accent:#0E6E7D;--ok:#1F5F4B;--ok-bg:#EAF3EF;
+    --warn:#A33A22;--warn-bg:#FBEFEC;--note:#7A4E17;--note-bg:#F7F0E6;
+    --measure:70ch;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+      --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+      --accent:#4FB3C4;--ok:#67C39E;--ok-bg:#142A23;
+      --warn:#E58A70;--warn-bg:#2E1A15;--note:#D6A868;--note-bg:#2B2317;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+    --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+    --accent:#4FB3C4;--ok:#67C39E;--ok-bg:#142A23;
+    --warn:#E58A70;--warn-bg:#2E1A15;--note:#D6A868;--note-bg:#2B2317;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14.5px;line-height:1.62;
+    -webkit-font-smoothing:antialiased}
+  .sheet{max-width:920px;margin:0 auto;padding-inline:24px;padding-block:46px 70px}
+  h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;text-wrap:balance;margin:0}
+  p{margin:0 0 13px;max-width:var(--measure)}p:last-child{margin-bottom:0}
+  ul,ol{margin:0 0 13px;padding-left:21px;max-width:var(--measure)}li{margin-bottom:6px}
+  strong{font-weight:600}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--panel);
+    padding:1px 5px;border-radius:2px}
+
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px}
+  .masthead h1{font-size:33px;font-weight:600;line-height:1.15;margin-top:10px}
+  .masthead .sub{color:var(--ink-soft);max-width:var(--measure);margin-top:12px}
+
+  .part{margin-top:52px}
+  .part-head{display:flex;gap:18px;align-items:baseline;border-bottom:1px solid var(--rule-firm);
+    padding-bottom:11px;margin-bottom:24px}
+  .part-no{font-family:"IBM Plex Mono",monospace;font-size:32px;font-weight:600;
+    color:var(--rule-firm);line-height:1}
+  .part-head h2{font-size:24px;font-weight:600;line-height:1.2}
+
+  h3.sec{font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:28px 0 11px}
+
+  .tbl-wrap{overflow-x:auto;margin:0 0 16px}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--rule-firm);
+    white-space:nowrap}
+  td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:none}
+  td.k{font-family:"IBM Plex Mono",monospace;font-size:11.5px;white-space:nowrap;
+    color:var(--ink-faint);width:150px}
+
+  .callout{border-left:3px solid var(--accent);background:var(--panel);padding:13px 17px;
+    margin:0 0 16px;max-width:var(--measure)}
+  .callout.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+  .callout.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+  .callout .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    display:block;margin-bottom:5px}
+  .callout p{font-size:13.5px}
+
+  pre{background:var(--panel);border:1px solid var(--rule);padding:13px 15px;
+    overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.55;
+    margin:0 0 16px}
+  pre code{background:none;padding:0;font-size:inherit}
+
+  .numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+  .numbers div{background:var(--paper);padding:11px 13px}
+  .numbers dt{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink-faint);margin:0}
+  .numbers dd{margin:3px 0 0;font-size:18px;font-weight:600;font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums}
+  .numbers dd small{font-size:11px;font-weight:400;color:var(--ink-soft);display:block;
+    font-family:"IBM Plex Sans",sans-serif;line-height:1.4;margin-top:2px}
+
+  .define{border:1px solid var(--rule-firm);background:var(--panel);padding:14px 17px;
+    margin:0 0 18px;max-width:var(--measure)}
+  .define dt{font-weight:600;font-size:13.5px;margin-top:9px}
+  .define dt:first-child{margin-top:0}
+  .define dd{margin:2px 0 0;font-size:13.5px;color:var(--ink-soft)}
+
+  footer{margin-top:54px;padding-top:20px;border-top:2px solid var(--ink);
+    font-size:12px;color:var(--ink-faint);max-width:var(--measure)}
+
+  @media print{
+    body{background:#fff;font-size:10pt}
+    .sheet{max-width:none;padding:0}
+    .part{page-break-before:always}
+    .part:first-of-type{page-break-before:avoid}
+    .callout,pre,table,.numbers,.define{page-break-inside:avoid}
+    h3.sec,.part-head{page-break-after:avoid}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="eyebrow">TrialSense · Segue 3.0 · Explanation Guide</div>
+  <h1>Module&nbsp;2 — Personalised Drug Exposure and Renal Study Planning</h1>
+  <p class="sub">
+    What the module does, how it is built, what data it uses, how well it works,
+    and where it fails. Written for readers with an engineering background and no
+    healthcare training. Every term is defined the first time it is used.
+  </p>
+  <dl class="numbers" style="margin-top:24px">
+    <div><dt>ML models</dt><dd>0<small>equations, not learning</small></dd></div>
+    <div><dt>Drugs covered</dt><dd>39</dd></div>
+    <div><dt>Validation records</dt><dd>25<small>across 17 drugs</small></dd></div>
+    <div><dt>Within 2×</dt><dd>88%<small>standard acceptance bar</small></dd></div>
+    <div><dt>Study design correct</dt><dd>16 / 17</dd></div>
+    <div><dt>Costly errors</dt><dd>0<small>missed full studies</small></dd></div>
+  </dl>
+</header>
+
+<!-- ============ PART 1 ============ -->
+<section class="part" style="page-break-before:avoid">
+  <div class="part-head"><div class="part-no">01</div><div><h2>Problem Statement</h2></div></div>
+
+  <h3 class="sec">1.1 · The words you need first</h3>
+  <dl class="define">
+    <dt>Kidney clearance</dt>
+    <dd>Some drugs leave the body through the kidneys, unchanged. The kidneys filter them out into urine.</dd>
+    <dt>Liver clearance</dt>
+    <dd>Other drugs are broken down by the liver into different chemicals before leaving the body.</dd>
+    <dt>Exposure (AUC)</dt>
+    <dd>The total amount of drug in the blood, added up over time. If the body removes a drug more slowly, the drug stays longer and the exposure is higher.</dd>
+    <dt>eGFR</dt>
+    <dd>A number describing how well the kidneys are working, calculated from a routine blood test. Around 90 or above is normal. Below 15 means the kidneys have essentially stopped.</dd>
+    <dt>fe</dt>
+    <dd>The fraction of a drug that leaves through the kidneys unchanged. A value of 0.90 means 90% leaves through the kidneys and 10% by other routes.</dd>
+  </dl>
+
+  <h3 class="sec">1.2 · What goes wrong</h3>
+  <p>
+    Module 1 decides whether two drugs interact, and how serious that is. It answers
+    that question for an average healthy adult.
+  </p>
+  <p>
+    Real patients are not average. Kidney function varies widely between people of the
+    same age. When a patient's kidneys work at half their normal rate, a drug that
+    leaves through the kidneys is removed at half the rate — so it builds up in the
+    blood. The dose printed on the box was chosen for someone whose kidneys work
+    normally.
+  </p>
+  <p>
+    The result is that the same two drugs, at the same doses, can be safe in one
+    patient and dangerous in another. If a clinical trial puts both kinds of patient
+    into one group and reports the average, the danger to the second kind is hidden
+    inside that average.
+  </p>
+
+  <h3 class="sec">1.3 · The two questions Module 2 answers</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Question</th><th>Who asks it</th><th>What Module 2 returns</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>For this patient</strong> — how much does each drug build up, and does that change the risk of the interaction?</td>
+          <td>A clinical pharmacology team screening who can safely join a trial</td>
+          <td>A predicted exposure figure per drug, a revised risk level, and a written reason for every change</td>
+        </tr>
+        <tr>
+          <td><strong>For this drug</strong> — what kind of kidney study does it need before trials begin?</td>
+          <td>The team planning the trial programme, and the committee funding it</td>
+          <td>Either "Full study" or "Reduced study", with the reason stated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">1.4 · Why the second question involves money</h3>
+  <p>
+    Before a drug is approved, regulators expect the company to measure how kidney
+    impairment changes that drug's exposure. There are two accepted designs:
+  </p>
+  <ul>
+    <li><strong>Full study</strong> — four separate groups of patients: normal kidney
+        function, mild impairment, moderate impairment, and severe impairment.</li>
+    <li><strong>Reduced study</strong> — two groups only: normal function and severe
+        impairment. If the severe group shows no meaningful change, nothing further
+        is needed.</li>
+  </ul>
+  <p>
+    A reduced study recruits roughly half as many patients. Across our 39 drugs,
+    Module 2 recommends a full study for 15 and a reduced study for 24.
+  </p>
+  <div class="callout warn">
+    <span class="lbl">The error that actually matters</span>
+    <p>
+      The two mistakes are not equally expensive. Recommending an unnecessary full
+      study wastes part of one study. Recommending a reduced study when the kidney
+      genuinely matters means the problem is not found until much later in
+      development — after far more money has been committed. Module 2 is measured on
+      those two error types separately, not on a single accuracy score.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">02</div><div><h2>Tech Stack</h2></div></div>
+
+  <h3 class="sec">2.1 · What the product runs on</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Version</th><th>Why it is used</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Python</td><td class="k">3.13</td>
+            <td>The language the whole module is written in</td></tr>
+        <tr><td class="k">math (built in)</td><td class="k">—</td>
+            <td>The only library the core calculation needs. The equations are arithmetic, powers and one logarithm</td></tr>
+        <tr><td class="k">Streamlit</td><td class="k">≥1.30</td>
+            <td>Builds the web page where the user types in the patient details and reads the result</td></tr>
+        <tr><td class="k">Plotly</td><td class="k">≥5.18</td>
+            <td>Draws the exposure chart</td></tr>
+        <tr><td class="k">pandas</td><td class="k">≥2.0</td>
+            <td>Arranges results into tables for display</td></tr>
+        <tr><td class="k">NumPy</td><td class="k">≥1.24</td>
+            <td>Used indirectly by pandas and Plotly</td></tr>
+        <tr><td class="k">RDKit</td><td class="k">≥2023.9.1</td>
+            <td>Handles chemical structures. Used by Modules 1 and 2 for the drug list, not by the exposure calculation</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    No paid services. No internet connection needed while running. No graphics card.
+    The whole module runs on an ordinary laptop processor.
+  </p>
+
+  <h3 class="sec">2.2 · Extra software used only for checking, not for running</h3>
+  <p>
+    A separate set of tools is used to check Module 2's equation against detailed
+    physics-based simulation. None of it is needed to use the product.
+  </p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Version</th><th>Why it is used</th></tr></thead>
+      <tbody>
+        <tr><td class="k">PK-Sim</td><td class="k">12.3.173</td>
+            <td>Free, published simulation software that models the whole body organ by organ. Used as an independent reference</td></tr>
+        <tr><td class="k">R</td><td class="k">4.6.1</td>
+            <td>Runs the exported simulations without opening the PK-Sim window</td></tr>
+        <tr><td class="k">ospsuite (R package)</td><td class="k">12.4.5</td>
+            <td>Loads a saved simulation, runs it, and reports the exposure figure</td></tr>
+        <tr><td class="k">rSharp (R package)</td><td class="k">1.2.3</td>
+            <td>Connects R to the simulation engine. The version is fixed deliberately — newer versions break file loading</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">03</div><div><h2>Models Used</h2></div></div>
+
+  <div class="callout warn">
+    <span class="lbl">State this plainly if asked</span>
+    <p>
+      <strong>Module 2 contains no machine learning.</strong> Nothing is trained,
+      nothing learns from examples, and there are no weights to fit. It is a set of
+      published equations, a table of drug properties, and threshold rules. Calling it
+      "AI" would be inaccurate.
+    </p>
+  </div>
+
+  <h3 class="sec">3.1 · The four published equations</h3>
+  <p>
+    These are standard equations from clinical pharmacology. We implemented them; we
+    did not invent them.
+  </p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Equation</th><th>What it converts</th><th>Into</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CKD-EPI 2021</strong></td>
+            <td>A creatinine blood test result, plus age and sex</td>
+            <td>eGFR — a kidney function score. This is the current standard version, which does not use race as an input</td></tr>
+        <tr><td><strong>Du Bois formula</strong></td>
+            <td>Height and weight</td>
+            <td>Body surface area, in square metres</td></tr>
+        <tr><td><strong>Absolute eGFR</strong></td>
+            <td>eGFR and body surface area</td>
+            <td>Kidney function adjusted to the patient's actual body size. The standard eGFR number is scaled to a fixed reference body; drug removal depends on the real one</td></tr>
+        <tr><td><strong>Cockcroft-Gault</strong></td>
+            <td>Age, weight, sex, creatinine</td>
+            <td>An older kidney measure. Displayed for reference only, because some older drug labels state their limits in this unit. The calculation does not use it</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">3.2 · The one equation that is ours</h3>
+  <pre><code>KF  = kidney function as a fraction of normal   = min(1, absolute eGFR / 90)
+HF  = liver function as a fraction of normal
+fe  = fraction of the drug removed by the kidney
+fh  = fraction removed by everything else       = 1 - fe
+
+CL_ratio  = fe x KF  +  fh x HF
+AUC_ratio = 1 / CL_ratio</code></pre>
+  <p>
+    Read in words: the drug's total removal rate is the kidney part scaled by how well
+    the kidneys work, plus the non-kidney part scaled by how well the liver works. If
+    the body removes the drug at half the normal rate, the drug builds up to twice the
+    normal level.
+  </p>
+  <p>
+    This is why the answer depends on which drug is being asked about. A drug with
+    <code>fe = 0.90</code> in a patient with badly reduced kidney function builds up
+    severely. A drug with <code>fe = 0.00</code> in the same patient is barely affected,
+    because the kidneys were never removing it.
+  </p>
+
+  <h3 class="sec">3.3 · The rule tables</h3>
+  <p>Beyond the equations, the module applies fixed rules:</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Rule set</th><th>Contents</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Kidney function categories</td>
+            <td>Normal (90+), Mild (60–89), Moderate (30–59), Severe (15–29), Kidney failure (below 15)</td>
+            <td>FDA 2024 renal impairment guidance</td></tr>
+        <tr><td>Exposure bands</td>
+            <td>Below 1.25× is treated as no meaningful change. 2× or above is a clinically important change</td>
+            <td>Standard regulatory practice</td></tr>
+        <tr><td>Study design rule</td>
+            <td>Full study if <code>fe</code> is 0.30 or above, or if severe impairment is predicted to reach 2× exposure. Otherwise reduced study</td>
+            <td>Our rule, following the structure of the FDA guidance</td></tr>
+        <tr><td>Named hazards</td>
+            <td>Nine specific situations, listed in section 3.4</td>
+            <td>Standard clinical pharmacology</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">3.4 · The named hazards</h3>
+  <p>
+    These are situations where one property of a drug meets one weakness of a patient.
+    Each one adds to the risk score and writes a sentence explaining why.
+  </p>
+  <ul>
+    <li>A drug that can injure the kidney, given to a patient whose kidneys are already impaired.</li>
+    <li>A drug that can injure the liver, given to a patient with reduced liver function.</li>
+    <li>Metformin specifically, in a patient with eGFR below 30 — a stated contraindication.</li>
+    <li>A sedating drug given to a patient aged 75 or over.</li>
+    <li>A drug that raises blood potassium, in a patient whose kidneys cannot remove potassium.</li>
+    <li>A drug that raises potassium, in a patient whose potassium is already high.</li>
+    <li>A drug that affects heart rhythm, in a patient whose potassium is low.</li>
+    <li>A drug with a narrow safety margin that also builds up in this patient.</li>
+    <li>Reduced clearance generally, which scales the whole interaction risk upward.</li>
+  </ul>
+  <p>
+    The module also records reasons the risk is <em>lower</em> than average — for
+    example, a patient under 60 with normal kidney and liver function.
+  </p>
+</section>
+
+<!-- ============ PART 4 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">04</div><div><h2>Dataset</h2></div></div>
+
+  <p>Module 2 uses three separate collections of data, for three different purposes.</p>
+
+  <h3 class="sec">4.1 · Drug properties — the input to the calculation</h3>
+  <p>
+    A table of <strong>39 drugs</strong> in <code>trialsense/drugs.py</code>. For each
+    drug it holds the chemical structure, the fraction removed by the kidney
+    (<code>fe</code>), and a set of yes/no flags — whether it can injure the kidney,
+    whether it affects heart rhythm, whether it has a narrow safety margin, and so on.
+  </p>
+  <p>
+    These values come from standard clinical pharmacology references. They are
+    described in the code as approximate and rounded. The chemical structures are
+    checked automatically: the code recalculates each molecule's weight and fails if it
+    does not match the published value, so a typing error cannot reach the demo
+    unnoticed.
+  </p>
+
+  <h3 class="sec">4.2 · Real patient data — used to check the predictions</h3>
+  <p>
+    The file <code>data/renal_validation.json</code> holds what actually happened to
+    drug exposure in patients with impaired kidneys. It was collected from FDA drug
+    labels and published studies.
+  </p>
+  <div class="tbl-wrap">
+    <table><tbody>
+      <tr><td>Drugs with a record in the file</td><td class="num">39</td></tr>
+      <tr><td>Drugs with a usable number</td><td class="num">17</td></tr>
+      <tr><td>Observations scored</td><td class="num">25</td></tr>
+      <tr><td>Records excluded, each with a stated reason</td><td class="num">19</td></tr>
+      <tr><td>Labels stating plainly that kidney disease changes nothing</td><td class="num">9</td></tr>
+    </tbody></table>
+  </div>
+  <p>
+    Every scored observation carries a word-for-word quote from its source and a link,
+    so any number can be traced back. Records are excluded for stated reasons — for
+    example, patients on dialysis are excluded because dialysis removes drug by a route
+    the equation does not represent.
+  </p>
+  <div class="callout">
+    <span class="lbl">An important distinction</span>
+    <p>
+      This data is the <strong>reference</strong>, not a training set. It is never used
+      to adjust the equation. If it were, reporting accuracy against it afterwards
+      would be meaningless.
+    </p>
+  </div>
+
+  <h3 class="sec">4.3 · Simulation models — an independent second check</h3>
+  <p>
+    Seven published whole-body simulation models were downloaded from the Open Systems
+    Pharmacology project on GitHub: Fluconazole, Metformin, Methotrexate, Omeprazole,
+    Atorvastatin, Ketoconazole and Theophylline. Each is pinned to the exact version it
+    was downloaded from, recorded with its web address.
+  </p>
+  <p>
+    These provide a second opinion from a completely different method. The real patient
+    data in 4.2 is the primary reference; the simulations test whether the equation
+    behaves correctly across kidney function levels where real data is thin.
+  </p>
+
+  <h3 class="sec">4.4 · Patient data — none is stored</h3>
+  <p>
+    The patient details used by the module — age, weight, height, sex, and four routine
+    blood test results — are typed in by the user when they use it. Nothing is saved,
+    and no patient records are held anywhere in the project.
+  </p>
+  <p>
+    All seven inputs are measurements that any hospital already takes. The module needs
+    no new test and no new equipment.
+  </p>
+</section>
+
+<!-- ============ PART 5 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">05</div><div><h2>Training Process</h2></div></div>
+
+  <div class="callout warn">
+    <span class="lbl">Direct answer</span>
+    <p>
+      <strong>There is no training.</strong> Module 2 has no model that learns from
+      examples, so there is no training step, no training data, and no training time.
+      Running the module produces the same answer for the same inputs every time.
+    </p>
+  </div>
+
+  <h3 class="sec">5.1 · What was done instead — setting it up</h3>
+  <p>
+    The work that replaces training was choosing and checking the fixed values. These
+    steps were carried out once, in this order.
+  </p>
+  <ol>
+    <li>
+      <strong>Implement the published equations.</strong> CKD-EPI 2021 and Du Bois were
+      written out from their published definitions.
+    </li>
+    <li>
+      <strong>Check the implementation against a known answer.</strong> The published
+      reference case for CKD-EPI 2021 is a 50-year-old man with a creatinine of 1.0,
+      whose eGFR should be 92. Our code returns 92. This is an automated test, so it
+      runs every time.
+    </li>
+    <li>
+      <strong>Choose the reference point for normal kidney function.</strong> Set at an
+      eGFR of 90, because that is the lower edge of the FDA's "normal" category — the
+      group a kidney study compares everyone else against.
+    </li>
+    <li>
+      <strong>Adopt the FDA category boundaries.</strong> 90, 60, 30 and 15. Taken from
+      the guidance rather than chosen by us.
+    </li>
+    <li>
+      <strong>Choose the exposure bands.</strong> 1.25× and 2×, following standard
+      regulatory practice for what counts as no meaningful change and what counts as
+      clinically important.
+    </li>
+    <li>
+      <strong>Choose the study design cut-off.</strong> A drug is treated as mainly
+      kidney-removed when <code>fe</code> is 0.30 or above. This one is our decision and
+      is labelled as such in the code.
+    </li>
+    <li>
+      <strong>Write the liver function scoring.</strong> Built from three routine blood
+      tests, plus an age adjustment. This is labelled in the code as giving a sensible
+      ordering of patients rather than validated absolute values.
+    </li>
+    <li>
+      <strong>Check the whole thing against real data.</strong> Described in Part 6.
+      Nothing was adjusted afterwards to make those numbers look better.
+    </li>
+  </ol>
+
+  <h3 class="sec">5.2 · How to reproduce it</h3>
+  <pre><code>.venv\Scripts\activate
+pip install -r requirements.txt
+
+python smoke_test.py        # runs the automated checks, including Module 2
+streamlit run app.py        # opens the web interface</code></pre>
+  <p>
+    There is no training command, because there is nothing to train. The numbers in
+    Part 6 are produced by the validation code and can be regenerated at any time.
+  </p>
+</section>
+
+<!-- ============ PART 6 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">06</div><div><h2>Validity &amp; Accuracy</h2></div></div>
+
+  <h3 class="sec">6.1 · How the checking was done</h3>
+  <p>
+    Module 2's prediction was compared against 25 real observations covering 17 drugs,
+    taken from FDA labels and published studies. For each one, the module was given
+    only the drug's <code>fe</code> value and the patients' kidney function, and asked
+    to predict the exposure change. That prediction was compared with what the source
+    reported.
+  </p>
+  <p>
+    Predictions are scored the way this kind of model is scored in published
+    literature: by <strong>fold error</strong>, meaning how many times too high or too
+    low the prediction was. A fold error of 1.0 is exact. The usual acceptance bar for
+    this class of model is a factor of 2.
+  </p>
+
+  <h3 class="sec">6.2 · How close the numbers are</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Measure</th><th class="num">Result</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Within 2×</td><td class="num"><strong>88%</strong></td>
+            <td>Clears the usual acceptance bar</td></tr>
+        <tr><td>Within 1.5×</td><td class="num">64%</td><td></td></tr>
+        <tr><td>Within 1.25×</td><td class="num">40%</td><td></td></tr>
+        <tr><td>Average fold error</td><td class="num">1.46</td>
+            <td>Typically off by about 46%</td></tr>
+        <tr><td>Bias</td><td class="num">0.74</td>
+            <td>Below 1 means the module <strong>under-predicts</strong>: it says the drug builds up less than it really does, by about 26% on average</td></tr>
+        <tr><td>Correct exposure band</td><td class="num">65%</td>
+            <td>Whether prediction and reality fall in the same band (no change / adjust / meaningful)</td></tr>
+        <tr><td>Meaningful changes missed</td><td class="num">7 of 13</td>
+            <td>Cases where reality showed a 2×-or-more change and the module predicted less</td></tr>
+        <tr><td>"No change" statements matched</td><td class="num">9 of 9</td>
+            <td>Where a label stated plainly that kidney disease changes nothing, the module agreed every time</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">6.3 · How often the decision is right</h3>
+  <p>
+    The exposure figure is an intermediate step. The output that gets acted on is the
+    study design recommendation, and it is measured separately.
+  </p>
+  <dl class="numbers">
+    <div><dt>Drugs assessed</dt><dd>17</dd></div>
+    <div><dt>Design correct</dt><dd>16<small>of 17</small></dd></div>
+    <div><dt>Missed full study</dt><dd>0<small>the costly error</small></dd></div>
+    <div><dt>Unnecessary full study</dt><dd>1<small>the cheap error</small></dd></div>
+  </dl>
+  <div class="callout ok">
+    <span class="lbl">The result worth stating</span>
+    <p>
+      Across 17 drugs with real data, the module never once recommended a reduced study
+      when the evidence called for a full one. Its single error was the opposite kind —
+      recommending a full study for one drug that did not need it, which wastes part of
+      one study rather than allowing a problem through.
+    </p>
+  </div>
+
+  <h3 class="sec">6.4 · Why the numbers in 6.2 and 6.3 look inconsistent</h3>
+  <p>
+    The module under-predicts, yet gets the decision right almost every time. That is
+    not a contradiction, and the reason is worth understanding.
+  </p>
+  <p>
+    The decision depends on which side of a threshold the answer falls, not on the
+    exact figure. A prediction can be 26% too low and still land on the correct side.
+    The prediction is also only one of two triggers for a full study — a drug with
+    <code>fe</code> of 0.30 or above gets a full study regardless of the predicted
+    number. That second rule catches cases the prediction alone would miss.
+  </p>
+
+  <h3 class="sec">6.5 · Why it under-predicts</h3>
+  <p>
+    The reason is written in the module's own documentation. The equation assumes that
+    when the kidneys fail, everything else keeps working normally. In reality, kidney
+    failure also slows the liver's ability to break down drugs. The equation cannot see
+    that, so it predicts less build-up than actually happens.
+  </p>
+  <p>
+    This is a known missing piece with a named cause, not unexplained error. It is
+    stated rather than hidden because the direction is safe to state: the module errs
+    toward under-estimating build-up, and the decision layer is built to tolerate that.
+  </p>
+
+  <h3 class="sec">6.6 · Automated tests</h3>
+  <p>
+    Module 2 is covered by automated checks that run with <code>python smoke_test.py</code>:
+  </p>
+  <ul>
+    <li>CKD-EPI 2021 returns the published reference value of 92.</li>
+    <li>Higher creatinine always produces a lower eGFR.</li>
+    <li>Body size adjustment works in the right direction — a smaller body gives a lower absolute figure.</li>
+    <li>A healthy average adult shows unchanged exposure, not inflated exposure.</li>
+    <li>Exposure figures never run away to impossible values.</li>
+    <li>The study design rule picks sensibly across known drugs.</li>
+    <li>A healthy control patient generates no kidney study recommendations.</li>
+    <li>Every scored observation has a traceable source link.</li>
+    <li>The count of missed full studies is asserted to be zero, so a future change cannot quietly reintroduce that error.</li>
+  </ul>
+
+  <h3 class="sec">6.7 · The independent simulation check</h3>
+  <p>
+    A second check compares the equation against whole-body simulation in PK-Sim. This
+    work is <strong>in progress and not yet complete</strong>.
+  </p>
+  <p>
+    The first attempt produced numbers that had to be discarded. The simulations had
+    been built without their metabolism and transport components attached, so they
+    described a drug removed entirely by the kidney rather than the real drug. They are
+    being rebuilt correctly. The results are excluded from this report rather than
+    reported with a caveat.
+  </p>
+  <div class="callout warn">
+    <span class="lbl">A limit found during that work</span>
+    <p>
+      PK-Sim's kidney disease model accepts eGFR values from 0 to 60 only, because
+      chronic kidney disease is defined as eGFR below 60. The "Mild" category, which
+      sits between 60 and 89, therefore cannot be checked by simulation at all. This is
+      a property of the published model, not of our work, and it is stated openly.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PART 7 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">07</div><div><h2>Dependencies</h2></div></div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Depends on</th><th>For what</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Module 1</strong></td>
+            <td>The starting risk level and score for a drug pair</td>
+            <td>Module 2 adjusts Module 1's answer for a specific patient. It does not decide whether two drugs interact — that is Module 1's job. If Module 1's starting value is wrong, Module 2 adjusts a wrong number</td></tr>
+        <tr><td><code>trialsense/drugs.py</code></td>
+            <td>The <code>fe</code> value and the yes/no flags for each drug</td>
+            <td>This is the single most influential input. The study design recommendation for a drug is driven mainly by its <code>fe</code></td></tr>
+        <tr><td><code>data/renal_validation.json</code></td>
+            <td>The real observations used for checking</td>
+            <td>Needed only for validation, not to run the module</td></tr>
+        <tr><td>Python, Streamlit, Plotly</td>
+            <td>Running the code and showing the result</td>
+            <td>Standard, free, and installed from <code>requirements.txt</code></td></tr>
+        <tr><td>PK-Sim, R, ospsuite, rSharp</td>
+            <td>The independent simulation check</td>
+            <td>Optional. Not required to run the product</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">7.1 · What does not depend on Module 2</h3>
+  <p>
+    Module 3, which handles antibiotic resistance, is entirely separate. It shares no
+    data and no code with Module 2. A failure in one does not affect the other.
+  </p>
+</section>
+
+<!-- ============ PART 8 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">08</div><div><h2>Limitations</h2></div></div>
+
+  <h3 class="sec">8.1 · Accuracy limits</h3>
+  <ul>
+    <li><strong>It under-predicts.</strong> On average it says drugs build up about 26% less than they really do.</li>
+    <li><strong>It missed 7 of 13 meaningful changes.</strong> Where real data showed a 2×-or-greater rise, the module predicted a smaller rise in more than half of those cases.</li>
+    <li><strong>The exposure band is right about 65% of the time.</strong> The decision built on top of it is right 16 times out of 17, but the underlying number is less reliable than that figure suggests.</li>
+  </ul>
+
+  <h3 class="sec">8.2 · Limits of the inputs</h3>
+  <ul>
+    <li><code>fe</code> is a single rounded number per drug. In reality it varies with dose, formulation and the patient's genetics.</li>
+    <li>The liver function score is built from three blood tests. The code states plainly that it gives a sensible ordering of patients but that the absolute values are not validated.</li>
+    <li>eGFR is an estimate calculated from a blood test, not a direct measurement of kidney function.</li>
+    <li>The source studies report kidney function in different units and often as a range. Each group was collapsed to one representative figure, which adds error on top of the module's own.</li>
+  </ul>
+
+  <h3 class="sec">8.3 · What the model does not represent at all</h3>
+  <ul>
+    <li>Transporter proteins that actively pump drugs out of the body.</li>
+    <li>Changes in how tightly a drug binds to blood proteins.</li>
+    <li>Dialysis, which removes drug by a route the equation has no term for.</li>
+    <li>Genetic differences between individuals in drug-processing enzymes.</li>
+    <li>Interactions involving more than two drugs at once.</li>
+  </ul>
+
+  <h3 class="sec">8.4 · Population limits</h3>
+  <div class="callout warn">
+    <span class="lbl">Be precise about this one</span>
+    <p>
+      Module 2 has <strong>not</strong> been validated on Indian patient data, and no
+      such dataset is used. The equations are population-agnostic: CKD-EPI 2021 does not
+      take race as an input, and the validation sources are mostly non-Indian. The
+      module does respond to body size, so a smaller patient is predicted to accumulate
+      more of a kidney-removed drug — but that is a consequence of the equation, not a
+      finding validated against Indian measurements.
+    </p>
+    <p>
+      Module 3 is the part of the project that uses genuine Indian data. The two claims
+      should not be merged.
+    </p>
+  </div>
+
+  <h3 class="sec">8.5 · Scope limits</h3>
+  <ul>
+    <li>39 drugs, chosen for demonstration coverage. It is not a complete formulary.</li>
+    <li>The validation covers 17 of those 39. The other 22 have no usable published number.</li>
+    <li>The study design rule follows the structure of the FDA guidance but is our own interpretation, not an approved method.</li>
+    <li>This is a research screening prototype. It is not a diagnostic tool and not a clinical decision-support system.</li>
+  </ul>
+</section>
+
+<!-- ============ PART 9 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">09</div><div><h2>Future Scope</h2></div></div>
+
+  <h3 class="sec">9.1 · Highest value — add the missing mechanism</h3>
+  <p>
+    The equation currently assumes the liver keeps working normally when the kidneys
+    fail. Adding a term that reduces non-kidney removal as kidney function falls should
+    correct the under-prediction, because it targets the known cause.
+  </p>
+  <p>
+    The important condition: the shape of that term must be worked out from a source
+    other than the 25 validation observations. If it were fitted to those observations
+    and then scored against them, the resulting accuracy figure would be meaningless.
+    The simulation work in section 6.7 is intended to supply that independent source.
+  </p>
+
+  <h3 class="sec">9.2 · Improve the most influential input</h3>
+  <p>
+    Because the answer depends heavily on <code>fe</code>, and <code>fe</code> is
+    currently a rounded textbook value, replacing it with a sourced figure from each
+    drug's regulatory label would improve accuracy without changing any equation.
+  </p>
+  <p>
+    Testing showed that when <code>fe</code> is varied by 0.10 either way, the study
+    design recommendation changes for <strong>4 of 39 drugs</strong> and stays the same
+    for the other 35. Those four sit near the 0.30 cut-off, so sourcing accurate
+    <code>fe</code> values for them specifically would address most of the fragility.
+  </p>
+
+  <h3 class="sec">9.3 · Report uncertainty instead of hiding it</h3>
+  <p>
+    The study design rule currently returns one of two answers. A third option —
+    marking a drug as borderline when its <code>fe</code> sits close to the cut-off and
+    the value is not from a sourced reference — would turn hidden fragility into a
+    visible flag. This requires no new data.
+  </p>
+
+  <h3 class="sec">9.4 · Complete the simulation check</h3>
+  <p>
+    Rebuild the simulations correctly for three to four drugs spanning a wide range of
+    <code>fe</code>, including at least one barely removed by the kidney as a negative
+    control. Any correction term should show no effect there.
+  </p>
+
+  <h3 class="sec">9.5 · Extend the validation set</h3>
+  <p>
+    22 of the 39 drugs have no usable published figure. Extending the collection would
+    give a larger test set, and would allow splitting it into one part for development
+    and a separate part for testing — which is what would make a future correction term
+    credible.
+  </p>
+
+  <h3 class="sec">9.6 · Indian population work</h3>
+  <p>
+    Two things would be needed, in order. First, real Indian body size distributions
+    from published national survey data, replacing a single assumed figure. Second,
+    published Indian studies of drug exposure in kidney impairment, which would be the
+    only way to genuinely validate an Indian claim. The second is a literature
+    collection project and should not be described as done until it is.
+  </p>
+</section>
+
+<!-- ============ PART 10 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">10</div><div><h2>Conclusion</h2></div></div>
+
+  <h3 class="sec">What has been built</h3>
+  <p>
+    Module 2 takes seven routine measurements about a patient and a drug's kidney
+    removal fraction, and returns two things: how much that drug is expected to build up
+    in that patient, and what kind of kidney impairment study the drug needs before
+    trials. It uses four published equations, one equation of our own, and a set of
+    fixed rules. It contains no machine learning and nothing that was trained.
+  </p>
+
+  <h3 class="sec">What the measurements establish</h3>
+  <dl class="numbers">
+    <div><dt>Within 2×</dt><dd>88%<small>25 real observations</small></dd></div>
+    <div><dt>Average fold error</dt><dd>1.46</dd></div>
+    <div><dt>Bias</dt><dd>0.74<small>under-predicts</small></dd></div>
+    <div><dt>Design correct</dt><dd>16 / 17<small>drugs</small></dd></div>
+    <div><dt>Missed full studies</dt><dd>0</dd></div>
+    <div><dt>"No change" agreed</dt><dd>9 / 9</dd></div>
+  </dl>
+
+  <h3 class="sec">The principal limitation</h3>
+  <div class="callout warn">
+    <span class="lbl">Stated once, clearly</span>
+    <p>
+      The exposure prediction is biased low. It says drugs build up about 26% less than
+      they actually do, and it misses more than half of the large changes. The cause is
+      known and named: the equation holds non-kidney removal at full strength when the
+      kidneys fail, and real kidney failure slows that too.
+    </p>
+    <p>
+      What survives that limitation is the decision. Across 17 drugs with real data, the
+      recommendation was correct 16 times, and the one error was in the safe direction.
+    </p>
+  </div>
+
+  <h3 class="sec">How to describe it honestly</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Do not say</th><th>Say instead</th></tr></thead>
+      <tbody>
+        <tr><td>"Module 2 uses AI"</td><td>"Module 2 is published equations and rules. Module 3 is where the machine learning is"</td></tr>
+        <tr><td>"Validated on Indian patients"</td><td>"Population-agnostic equations, validated on FDA label data. No Indian PK dataset"</td></tr>
+        <tr><td>"88% accurate"</td><td>"88% of predictions fall within a factor of 2, the usual bar for this kind of model"</td></tr>
+        <tr><td>"It can waive kidney studies"</td><td>"It recommends which design to use. It is a starting point for a regulator conversation, not an approval"</td></tr>
+        <tr><td>"We saved X crore"</td><td>"A reduced study recruits about half as many patients. We have not run a real programme through this"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">A measurement worth recording</h3>
+  <p>
+    The most useful finding from building this module is not the accuracy figure. It is
+    that a prediction can be systematically wrong in a known direction and still support
+    a correct decision, provided the two are measured separately. Reporting a single
+    combined accuracy score would have concealed both halves of that result.
+  </p>
+</section>
+
+<footer>
+  <p>
+    TrialSense is a research screening prototype for pharmaceutical research and
+    development. It is not a diagnostic tool and not a clinical decision-support system.
+    No output should be used to treat anyone.
+  </p>
+  <p style="margin-top:10px">
+    Figures in Part 6 are produced by <code>trialsense/pk_validation.py</code> and can be
+    regenerated at any time. Automated checks run with <code>python smoke_test.py</code>.
+  </p>
+</footer>
+
+</div>

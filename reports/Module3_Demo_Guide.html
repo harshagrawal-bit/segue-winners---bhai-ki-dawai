@@ -1,0 +1,825 @@
+<title>Module 3 Demonstration Guide</title>
+<div style="border:3px solid #b3261e;background:#fff4f2;padding:16px 20px;margin:0 0 24px;border-radius:8px">
+<p style="margin:0 0 8px;font-weight:700;color:#b3261e;font-size:1.05em">
+READ THIS FIRST — this document was written before real-genome validation</p>
+<p style="margin:0 0 8px">
+Module 3 has since been measured against <strong>42 real bacterial genomes with
+350 laboratory-measured susceptibility results</strong>. On that test it scores
+<strong>0.526 accuracy</strong>, which with 176 resistant and 174 susceptible
+comparisons is approximately <strong>chance</strong>. No threshold changes this;
+the sweep peaks at 0.503.</p>
+<p style="margin:0 0 8px">
+Every accuracy figure in this document is measured on <strong>constructed</strong>
+isolates — generated background sequence with real resistance genes planted into
+it. Those figures are correct for constructed isolates and must not be presented
+as real-world performance.</p>
+<p style="margin:0">
+What did transfer is <strong>gene detection</strong>: on real genomes it found
+genuine determinants (mecA in 9 real <em>S. aureus</em>, blaSHV in 5, plus
+blaNDM-1, blaVIM, blaCTX-M-15) at a 13.8% false-resistance rate, though it misses
+73% of laboratory-confirmed resistance because 21 reference genes cannot cover
+real resistance. Full analysis: <strong>reports/AUDIT_RESPONSE.md</strong>.</p>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ink:#17242B; --ink-soft:#47585F; --ink-faint:#76868C;
+    --paper:#FBFCFC; --panel:#F2F6F6; --rule:#D4DDE0; --rule-firm:#A9BAC0;
+    --accent:#0E6E7D; --say:#1F5F4B; --say-bg:#EAF3EF;
+    --warn:#A33A22; --warn-bg:#FBEFEC; --do:#7A4E17; --do-bg:#F7F0E6;
+    --measure:68ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink:#E4ECEE; --ink-soft:#A9BAC0; --ink-faint:#7E9198;
+      --paper:#10181C; --panel:#182328; --rule:#2A3941; --rule-firm:#3D505A;
+      --accent:#4FB3C4; --say:#67C39E; --say-bg:#142A23;
+      --warn:#E58A70; --warn-bg:#2E1A15; --do:#D6A868; --do-bg:#2B2317;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink:#E4ECEE; --ink-soft:#A9BAC0; --ink-faint:#7E9198;
+    --paper:#10181C; --panel:#182328; --rule:#2A3941; --rule-firm:#3D505A;
+    --accent:#4FB3C4; --say:#67C39E; --say-bg:#142A23;
+    --warn:#E58A70; --warn-bg:#2E1A15; --do:#D6A868; --do-bg:#2B2317;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet { max-width:900px; margin:0 auto; padding-inline:24px; padding-block:48px 72px; }
+  h1,h2,h3,h4 { font-family:"IBM Plex Serif",Georgia,serif; text-wrap:balance; margin:0; }
+  p { margin:0 0 14px; max-width:var(--measure); }
+  p:last-child { margin-bottom:0; }
+  ul,ol { margin:0 0 14px; padding-left:22px; max-width:var(--measure); }
+  li { margin-bottom:7px; }
+  strong { font-weight:600; }
+
+  .eyebrow {
+    font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+  }
+  .masthead { border-bottom:2px solid var(--ink); padding-bottom:20px; }
+  .masthead h1 { font-size:34px; font-weight:600; line-height:1.15; margin-top:10px; }
+  .masthead .sub { color:var(--ink-soft); max-width:var(--measure); margin-top:12px; }
+
+  .part { margin-top:56px; }
+  .part-head { display:flex; gap:18px; align-items:baseline; border-bottom:1px solid var(--rule-firm);
+               padding-bottom:12px; margin-bottom:26px; }
+  .part-no { font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:600;
+             color:var(--rule-firm); line-height:1; }
+  .part-head h2 { font-size:25px; font-weight:600; line-height:1.2; }
+
+  h3.sec { font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:600;
+           letter-spacing:.1em; text-transform:uppercase; color:var(--accent);
+           margin:32px 0 12px; }
+  h4.q { font-family:"IBM Plex Sans",sans-serif; font-size:14.5px; font-weight:600;
+         margin:18px 0 6px; }
+
+  /* SAY blocks — the words they speak */
+  .say { border-left:3px solid var(--say); background:var(--say-bg); padding:14px 18px;
+         margin:0 0 16px; max-width:var(--measure); }
+  .say .lbl, .do .lbl, .stop .lbl {
+    font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+    letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px; }
+  .say .lbl { color:var(--say); }
+  .say p { font-family:"IBM Plex Serif",Georgia,serif; font-size:16px; line-height:1.6; }
+  .do { border-left:3px solid var(--do); background:var(--do-bg); padding:13px 18px;
+        margin:0 0 16px; max-width:var(--measure); }
+  .do .lbl { color:var(--do); }
+  .do p { font-size:14px; margin-bottom:6px; }
+  .stop { border-left:3px solid var(--warn); background:var(--warn-bg); padding:13px 18px;
+          margin:0 0 16px; max-width:var(--measure); }
+  .stop .lbl { color:var(--warn); }
+  .stop p { font-size:14px; }
+
+  /* feature blocks */
+  .feature { border:1px solid var(--rule); margin-bottom:26px; }
+  .feature > header {
+    background:var(--panel); padding:13px 18px; border-bottom:1px solid var(--rule);
+    display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+  .feature > header h3 { font-size:18px; font-weight:600; font-family:"IBM Plex Serif",serif; }
+  .feature > header .tag {
+    font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+    letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); }
+  .feature .body { padding:18px; }
+  .fq { font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+        letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint);
+        margin:16px 0 5px; }
+  .fq:first-child { margin-top:0; }
+
+  .tbl-wrap { overflow-x:auto; margin:0 0 18px; }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+       letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);
+       border-bottom:1px solid var(--rule-firm); white-space:nowrap; }
+  td.num,th.num { text-align:right; font-family:"IBM Plex Mono",monospace;
+                  font-variant-numeric:tabular-nums; }
+  tbody tr:last-child td { border-bottom:none; }
+
+  /* script timeline */
+  .beat { display:grid; grid-template-columns:78px 1fr; gap:18px; margin-bottom:22px;
+          padding-bottom:22px; border-bottom:1px solid var(--rule); }
+  .beat:last-child { border-bottom:none; }
+  .beat .clock { font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600;
+                 color:var(--accent); font-variant-numeric:tabular-nums; }
+  .beat .clock small { display:block; color:var(--ink-faint); font-weight:400;
+                       font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+                       margin-top:3px; }
+  .beat .content { min-width:0; }
+
+  .numbers { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+             gap:1px; background:var(--rule); border:1px solid var(--rule); }
+  .numbers div { background:var(--paper); padding:12px 14px; }
+  .numbers dt { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.09em;
+                text-transform:uppercase; color:var(--ink-faint); margin:0; }
+  .numbers dd { margin:3px 0 0; font-size:19px; font-weight:600;
+                font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; }
+  .numbers dd small { font-size:12px; font-weight:400; color:var(--ink-soft);
+                      display:block; font-family:"IBM Plex Sans",sans-serif; }
+
+  footer { margin-top:56px; padding-top:22px; border-top:2px solid var(--ink);
+           font-size:12.5px; color:var(--ink-faint); max-width:var(--measure); }
+
+  @media print {
+    body { background:#fff; font-size:10.5pt; }
+    .sheet { max-width:none; padding:0; }
+    .part { page-break-before:always; }
+    .part:first-of-type { page-break-before:avoid; }
+    .feature,.say,.do,.stop,.beat,table { page-break-inside:avoid; }
+    h3.sec,.part-head { page-break-after:avoid; }
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="eyebrow">TrialSense · Segue 3.0 · Internal briefing</div>
+  <h1>Module&nbsp;3 Demonstration Guide</h1>
+  <p class="sub">
+    What to say, what to show, and what to answer. Written for presenters with an
+    engineering background and no healthcare training. Every technical term is
+    defined the first time it appears.
+  </p>
+</header>
+
+<!-- ================= PART 1 ================= -->
+<section class="part" style="page-break-before:avoid">
+  <div class="part-head"><div class="part-no">01</div><div><h2>The problem we are solving</h2></div></div>
+
+  <h3 class="sec">Stated plainly</h3>
+  <p>
+    A pharmaceutical company that wants to sell a new antibiotic must first prove it
+    works. That process takes roughly nine years and costs in the order of two hundred
+    crore rupees.
+  </p>
+  <p>
+    The money is spent in stages. Laboratory work first, then testing in small groups
+    of people, then testing in large groups of people. Costs rise sharply at each
+    stage. The final stage is by far the most expensive.
+  </p>
+  <p>
+    Bacteria develop the ability to survive antibiotics. This is called
+    <strong>resistance</strong>. It happens over years, and it spreads. When a
+    bacterium becomes resistant to a drug, that drug stops working against it
+    permanently.
+  </p>
+
+  <h3 class="sec">Where the money is lost</h3>
+  <p>
+    A company can spend the full nine years developing a drug, only to find in the
+    final testing stage that the bacteria it was designed for had already become
+    resistant. The drug is sound. The target was wrong.
+  </p>
+  <p>
+    At that point the spending is unrecoverable. The information that would have
+    prevented it — whether those bacteria were already resistant — existed from the
+    start. Nobody checked it computationally, because there was no straightforward way
+    to do so.
+  </p>
+
+  <h3 class="sec">Who this affects</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Who</th><th>Their problem</th><th>What they need</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>R&amp;D teams at pharmaceutical companies</td>
+          <td>They commit years of work before finding out whether the target was viable</td>
+          <td>A reliable answer on day one</td>
+        </tr>
+        <tr>
+          <td>The committee that approves budgets</td>
+          <td>They approve spending without knowing which candidates are already obsolete</td>
+          <td>A ranked comparison across the whole pipeline</td>
+        </tr>
+        <tr>
+          <td>Smaller Indian manufacturers</td>
+          <td>One failed programme is proportionally far more damaging than for a large multinational</td>
+          <td>Low-cost screening before commitment</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="say">
+    <span class="lbl">Opening line</span>
+    <p>
+      “A company spends around nine years and two hundred crore developing an
+      antibiotic. The most expensive way that fails is not safety — it is discovering
+      late that the bacteria it was built for had already become resistant. Module 3
+      answers that question on day one, before the money is committed.”
+    </p>
+  </div>
+</section>
+
+<!-- ================= PART 2 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">02</div><div><h2>What Module 3 does</h2></div></div>
+
+  <h3 class="sec">The input</h3>
+  <p>
+    Module 3 takes the genetic sequence of one bacterial sample. A genetic sequence is
+    a long text file containing only the letters A, C, G and T. It can be a sample we
+    supply, or a file the user uploads.
+  </p>
+
+  <h3 class="sec">The processing</h3>
+  <ol>
+    <li>
+      <strong>Search for known resistance genes.</strong> Certain short sections of
+      bacterial DNA are known to make a bacterium resistant to particular antibiotics.
+      We hold the published sequences for twenty-one of these. The module compares the
+      uploaded sequence against each one.
+    </li>
+    <li>
+      <strong>Score the whole sequence statistically.</strong> Separately, a trained
+      model reads the overall pattern of the DNA and estimates resistance across
+      twelve antibiotic groups. This handles cases where no exact gene match is found.
+    </li>
+    <li>
+      <strong>Combine the two.</strong> Where the gene search finds a definite match,
+      its result takes priority, because it is the more reliable of the two.
+    </li>
+  </ol>
+
+  <h3 class="sec">The output</h3>
+  <p>
+    Six separate reports, each answering a different question. They are not merged
+    into a single score, because a single number would conceal cases where the six
+    answers disagree.
+  </p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Report</th><th>Question it answers</th></tr></thead>
+      <tbody>
+        <tr><td>Runway</td><td>Will this drug still work at launch, not just today?</td></tr>
+        <tr><td>Rescue</td><td>Resistance was found — can it be worked around?</td></tr>
+        <tr><td>Portfolio</td><td>Which of our candidates performs best across all targets?</td></tr>
+        <tr><td>Unknown</td><td>Is there anything here we cannot identify?</td></tr>
+        <tr><td>Value</td><td>What is finding this early worth in rupees?</td></tr>
+        <tr><td>Spread</td><td>How quickly is this resistance moving through the population?</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="say">
+    <span class="lbl">Overview line</span>
+    <p>
+      “The input is a DNA file. The module searches it for twenty-one known resistance
+      genes, scores it with a trained model, and produces six separate reports. We keep
+      them separate on purpose, because a single combined number would hide the cases
+      where the reports disagree — and those are the cases that matter.”
+    </p>
+  </div>
+</section>
+
+<!-- ================= PART 3 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">03</div><div><h2>The six features in detail</h2></div></div>
+
+  <!-- F1 -->
+  <div class="feature">
+    <header><h3>1 · Runway</h3><span class="tag">Strongest feature — lead with this</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>Projects how resistant the target bacteria will be in the year the drug would
+         actually reach market, rather than how resistant they are today.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>India's national health research body publishes resistance figures every
+            year. We hold that data from 2016 to 2024.</li>
+        <li>The module fits a curve through those figures.</li>
+        <li>It extends the curve forward to the launch year the user enters.</li>
+        <li>It reports where the line crosses the level at which the drug would no
+            longer be commercially worth selling.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>Development takes around a decade. Today's resistance figure is not the figure
+         the finished drug will face. Every existing tool reports today's.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>Existing tools are built for hospital staff treating a patient now, so a
+         present-day answer is correct for them. No tool we found projects forward to a
+         specific product's launch year.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>It prevents a company spending nine years building a product for a market that
+         will have disappeared by the time it is finished. That is the entire
+         development budget, not a portion of it.</p>
+    </div>
+  </div>
+
+  <!-- F2 -->
+  <div class="feature">
+    <header><h3>2 · Rescue</h3><span class="tag">Most technically impressive</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>When resistance is found, it determines whether the programme can be saved by
+         adding a second drug, or whether it must be abandoned.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>The module identifies which gene caused the resistance.</li>
+        <li>It looks up how that gene works. Different genes block a drug by different
+            physical means.</li>
+        <li>Some of those means can be counteracted by adding a second compound
+            alongside the main drug. Others cannot.</li>
+        <li>It returns one of three results: fixable, partially fixable, or not
+            fixable — with the specific reason.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>Two different genes can produce an identical result on screen — both reported
+         as resistance to the same antibiotic group — while requiring opposite
+         business decisions. One needs a few months of reformulation. The other needs
+         the programme cancelled. Reporting only the group name loses that distinction
+         entirely.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>Other tools report which antibiotic groups are affected. They do not report
+         whether anything can be done about it. That second question is the one that
+         determines what the company actually does next.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>It works in both directions. It prevents a team abandoning a programme that a
+         small change would have saved, and it prevents a team spending months
+         attempting a fix that cannot work.</p>
+    </div>
+  </div>
+
+  <!-- F3 -->
+  <div class="feature">
+    <header><h3>3 · Portfolio</h3><span class="tag">Best visual moment</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>Tests every drug candidate the company holds against every bacterial target it
+         is considering, and presents the results as a single grid.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>The user selects several candidate drugs and several target bacteria.</li>
+        <li>The module runs the full analysis for every combination.</li>
+        <li>Each result is shown as a coloured cell — green for viable, red for
+            blocked.</li>
+        <li>It ranks the candidates and recommends which to advance.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>A company does not hold one candidate. It holds several, and has funding to
+         advance one or two. The decision is comparative, not individual.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>Every comparable tool analyses one bacterial sample at a time. This works at
+         the level the funding decision is actually made.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>Producing this grid by laboratory testing takes weeks and costs lakhs. Here it
+         takes seconds. The saving is direct and easy to verify.</p>
+    </div>
+  </div>
+
+  <!-- F4 -->
+  <div class="feature">
+    <header><h3>4 · Unknown</h3><span class="tag">Answers the hardest question</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>Identifies sections of the DNA that appear to have come from another organism
+         but do not match any gene we know about.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>DNA acquired from a different organism has measurably different
+            statistical properties from the organism's own DNA.</li>
+        <li>The module measures those properties in short overlapping sections along
+            the sequence.</li>
+        <li>Sections already explained by an identified gene are set aside.</li>
+        <li>Anything remaining that still looks foreign is reported, along with its
+            position.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>Every tool of this kind can only find what is already in its database. When
+         such a tool reports nothing, that is indistinguishable from confirming that
+         nothing is there. Those are very different statements.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>This is the only part of the system that reports the existence of something it
+         cannot name. It is a deliberately weaker claim than a gene identification, and
+         it is the honest one.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>It prevents a false clearance. A company proceeding on the assumption that
+         nothing was found, when in fact nothing was recognised, is the most expensive
+         possible error.</p>
+    </div>
+  </div>
+
+  <!-- F5 -->
+  <div class="feature">
+    <header><h3>5 · Value</h3><span class="tag">Handle carefully — see Part 5</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>Converts the finding into a rupee figure: what it would have cost to discover
+         the same problem later in the process.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>The user enters the cost of each development stage and the probability of
+            passing it. Published figures are supplied as starting values.</li>
+        <li>The module identifies the stage at which this problem would normally have
+            surfaced without a computational check.</li>
+        <li>It totals the spending committed by that point.</li>
+        <li>It weights that total by the probability the programme would have survived
+            far enough to reach it.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>The people who approve budgets do not evaluate scientific findings. They
+         evaluate financial cases. A finding that cannot be expressed in rupees does
+         not reach them.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>Other tools produce a scientific result and stop. This translates it into the
+         format required by the person who authorises the spending.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>Strictly speaking it does not reduce cost. It <strong>measures</strong> the
+         reduction the other features produce, which is what makes the case for using
+         them at all.</p>
+    </div>
+  </div>
+
+  <!-- F6 -->
+  <div class="feature">
+    <header><h3>6 · Spread</h3><span class="tag">Short segment</span></header>
+    <div class="body">
+      <div class="fq">What it does</div>
+      <p>Reports how quickly a resistance gene moves through a bacterial population.</p>
+
+      <div class="fq">How it works</div>
+      <ol>
+        <li>Some resistance genes sit on a section of DNA that bacteria can pass
+            directly to other bacteria, including bacteria of a different species.</li>
+        <li>Others are fixed in the main chromosome and pass only to the bacterium's
+            own descendants.</li>
+        <li>The first kind spreads far faster. The module checks which kind each
+            detected gene is.</li>
+        <li>It applies a corresponding adjustment to the Runway projection.</li>
+      </ol>
+
+      <div class="fq">Why it is needed</div>
+      <p>The Runway projection is fitted to historical averages. A transferable gene
+         spreads faster than that history implies, so the projection would otherwise be
+         too optimistic.</p>
+
+      <div class="fq">Why it makes us stand out</div>
+      <p>Resistance is normally reported as a fixed property. Reporting it as something
+         with a rate of change is unusual, and it is what makes a forward projection
+         meaningful.</p>
+
+      <div class="fq">How it reduces cost</div>
+      <p>It corrects the timeline. A team planning against an unadjusted estimate is
+         planning against a deadline that is further away than the real one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 4 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">04</div><div><h2>Managing the volume of output</h2></div></div>
+
+  <p>
+    Module 3 produces six reports, each with several sections. Presenting all of it
+    will exhaust the available time and the judges' attention. The following selection
+    is deliberate.
+  </p>
+
+  <h3 class="sec">Show three, hold three</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>In the demo</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rescue</strong></td><td>Show</td><td>Establishes technical depth fastest</td></tr>
+        <tr><td><strong>Portfolio</strong></td><td>Show</td><td>Visual and immediately understood</td></tr>
+        <tr><td><strong>Runway</strong></td><td>Show</td><td>Backed by real government data</td></tr>
+        <tr><td>Spread</td><td>Mention in one line</td><td>Supports Runway, not independent</td></tr>
+        <tr><td>Unknown</td><td>Hold for questions</td><td>Requires setup to appreciate</td></tr>
+        <tr><td>Value</td><td>Hold for questions</td><td>Attracts scrutiny; better on request</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="do">
+    <span class="lbl">Rule</span>
+    <p>One number per screen. Each feature has one figure worth stating aloud. Read
+       that figure, explain what it means, move on. Do not narrate the rest of the
+       screen — the judges can see it.</p>
+  </div>
+
+  <h3 class="sec">The one number per feature</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Say only this</th></tr></thead>
+      <tbody>
+        <tr><td>Core scan</td><td>“Five resistance genes found. This one is the problem.”</td></tr>
+        <tr><td>Runway</td><td>“66% today, 84% by their launch year.”</td></tr>
+        <tr><td>Rescue</td><td>“Dead end — and here is the specific reason.”</td></tr>
+        <tr><td>Portfolio</td><td>“Sixteen combinations, five seconds.”</td></tr>
+        <tr><td>Unknown</td><td>“Clean, and the sample is typical of our training data.”</td></tr>
+        <tr><td>Value</td><td>“₹100 crore, but every input is adjustable.”</td></tr>
+        <tr><td>Spread</td><td>“Transferable, so the estimate is optimistic.”</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="stop">
+    <span class="lbl">Avoid</span>
+    <p>Do not read out the list of gene names. Do not explain the twelve antibiotic
+       groups. Do not walk through the settings panel. If a judge wants that detail
+       they will ask, and answering on request is far stronger than volunteering it.</p>
+  </div>
+</section>
+
+<!-- ================= PART 5 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">05</div><div><h2>Anticipated questions</h2></div></div>
+
+  <h4 class="q">“You have no healthcare background. How do you know this is correct?”</h4>
+  <div class="say"><p>
+    “We did not decide any of the biology. Every gene sequence comes from the
+    reference database maintained by the United States National Center for
+    Biotechnology Information, with accession numbers you can look up. Every
+    resistance relationship comes from two published databases. Our contribution is
+    the engineering — the pipeline, the validation, and the decision logic built on
+    top of established science.”
+  </p></div>
+
+  <h4 class="q">“How accurate is it?”</h4>
+  <div class="say"><p>
+    “0.84 on our most demanding test, where the model is evaluated on gene
+    combinations it never saw during training. The easier test gives 0.90. We quote
+    the harder number. In the deployed system the gene search overrides the model
+    where it finds a definite match, and that removes every missed detection in our
+    test set.”
+  </p></div>
+
+  <h4 class="q">“Is your data real?”</h4>
+  <div class="say"><p>
+    “The gene sequences are real and the national resistance figures are real. The DNA
+    surrounding the genes in our sample files is constructed, because complete
+    annotated genomes are far larger than a demonstration can carry. We state that in
+    our documentation rather than leaving it to be discovered.”
+  </p></div>
+
+  <h4 class="q">“Tools for this already exist. Why build another?”</h4>
+  <div class="say"><p>
+    “Existing tools are built for hospital staff treating a patient today, and they
+    are better at that than we are. They do not project to a launch year, they do not
+    say whether resistance can be worked around, and they do not compare a portfolio
+    of candidates. Those three questions determine whether a company funds a
+    programme. That is the gap we built for.”
+  </p></div>
+
+  <h4 class="q">“Your cost saving figure — where does it come from?”</h4>
+  <div class="say"><p>
+    “It is a calculator, not a measurement. Every input is a slider seeded with a
+    published default. We are not claiming to have saved anyone money. The claim we
+    would defend is narrower: running this check costs effectively nothing, and not
+    running it costs at minimum one failed development stage.”
+  </p></div>
+
+  <h4 class="q">“What happens with bacteria you have never seen?”</h4>
+  <div class="say"><p>
+    “Two things. The Unknown report flags DNA that looks acquired from elsewhere but
+    matches nothing we hold — so we report its presence without claiming to identify
+    it. And the system measures how similar the sample is to its training data, and
+    says so, rather than sounding equally confident about everything.”
+  </p></div>
+
+  <h4 class="q">“What is the weakest part?”</h4>
+  <div class="say"><p>
+    “The statistical model. On its own it misses too much. We do not ship it on its
+    own — the gene search overrides it. The underlying reason is our training data:
+    the genes are real but the surrounding DNA is constructed. Replacing it with
+    complete public genomes is the single change that would improve this most, and
+    those genomes come with laboratory-confirmed results attached.”
+  </p></div>
+
+  <h4 class="q">“How would you improve it?”</h4>
+  <div class="say"><p>
+    “Complete real genomes from the public pathogen database. That fixes the training
+    data and gives us laboratory-confirmed labels instead of ones we assign. Every
+    other improvement is smaller than that one.”
+  </p></div>
+
+  <div class="stop">
+    <span class="lbl">If you do not know an answer</span>
+    <p>Say “I do not know, and I would rather check than guess.” It costs nothing and
+       protects the credibility of everything you have already said. A presenter who
+       has admitted one limit is believed on the rest.</p>
+  </div>
+</section>
+
+<!-- ================= PART 6 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">06</div><div><h2>Presentation script</h2></div></div>
+  <p>Approximately four minutes. Timings are cumulative.</p>
+
+  <div class="beat">
+    <div class="clock">0:00<small>Setup</small></div>
+    <div class="content">
+      <div class="do"><span class="lbl">Before you speak</span>
+        <p>Case 3 already loaded. The ③ Resistance tab already open. Do not select
+           anything while talking.</p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">0:00<small>The problem</small></div>
+    <div class="content">
+      <div class="say"><p>
+        “A company spends around nine years and two hundred crore developing an
+        antibiotic. The most expensive way that fails is not safety — it is
+        discovering late that the bacteria it was built for had already become
+        resistant. The information existed from the start. Nobody checked it.”
+      </p></div>
+      <div class="say"><p>
+        “Our user is an R&amp;D team at an Indian pharmaceutical company. They are
+        considering a drug against one of India's most common hospital infections.
+        This is Module 3 analysing that bacteria's DNA.”
+      </p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">0:35<small>Core scan</small></div>
+    <div class="content">
+      <div class="say"><p>
+        “It has read the DNA and found five resistance genes. This one is called
+        blaNDM-1 — and it is worth noting that NDM stands for New Delhi. It was first
+        identified in a patient here in 2008, and it is now across South Asian
+        hospitals. It defeats the exact antibiotic group this company was planning to
+        develop.”
+      </p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">1:05<small>Rescue</small></div>
+    <div class="content">
+      <div class="do"><span class="lbl">Click</span><p>Rescue sub-tab</p></div>
+      <div class="say"><p>
+        “Here is where we go past what other tools do. They tell you resistance
+        exists. That is not a decision.”
+      </p></div>
+      <div class="say"><p>
+        “Bacteria block antibiotics by different physical means. Some of those can be
+        counteracted by adding a second compound. If this were a different gene, that
+        is exactly what we would recommend — a few months of reformulation, and the
+        programme survives.”
+      </p></div>
+      <div class="say"><p>
+        “This gene works differently, and no available second compound counteracts it.
+        Identical result on screen. Completely opposite business decision. One is a
+        formulation change. This one means re-scoping a two hundred crore programme.”
+      </p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">2:00<small>Portfolio</small></div>
+    <div class="content">
+      <div class="do"><span class="lbl">Click</span><p>Portfolio sub-tab — let the grid appear while you speak</p></div>
+      <div class="say"><p>
+        “A company does not hold one candidate. It holds several and can fund one or
+        two. Four candidates against four targets — sixteen combinations, five
+        seconds. The same grid by laboratory testing is weeks of work.”
+      </p></div>
+      <div class="say"><p>
+        “And the answer is not the one they started with. The drug they were about to
+        develop is blocked against three of the four. A different candidate is clear
+        against all four.”
+      </p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">2:45<small>Runway</small></div>
+    <div class="content">
+      <div class="do"><span class="lbl">Click</span><p>Runway sub-tab</p></div>
+      <div class="say"><p>
+        “Every other tool reports resistance today. A drug starting now reaches market
+        around 2035, so today is the wrong year to ask about.”
+      </p></div>
+      <div class="say"><p>
+        “This is real data — India's national surveillance network, 2016 through 2024.
+        Resistance has risen from 46% to 66%. Projected to 2035: 84%. It crosses the
+        level where the drug stops being commercially worth selling around 2030 —
+        five years before they would even launch.”
+      </p></div>
+      <div class="say"><p>
+        “And we tested the projection rather than just drawing it. We fitted it on
+        data up to 2020 only, then asked it to predict the four years it had never
+        seen. Mean error: 4.93 percentage points.”
+      </p></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="clock">3:30<small>Close</small></div>
+    <div class="content">
+      <div class="say"><p>
+        “One last point, because it is the part I would want to hear.”
+      </p></div>
+      <div class="say"><p>
+        “We were training on constructed DNA. We replaced it with real published
+        sequences from the NCBI reference database — and our headline accuracy fell
+        from 0.99 to 0.90. We kept the change. That gap was the constructed data
+        flattering us, and we would rather report the number that is true.”
+      </p></div>
+      <div class="say"><p>
+        “The product got better, not worse, because gene detection on real sequences
+        is exact — so we let it override the statistical model. Missed detections went
+        from five to zero. Our honest figure on the hardest test is 0.84.”
+      </p></div>
+      <div class="do"><span class="lbl">Then</span><p>Stop talking. Let them ask.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 7 ================= -->
+<section class="part">
+  <div class="part-head"><div class="part-no">07</div><div><h2>Figures to know without looking</h2></div></div>
+
+  <dl class="numbers">
+    <div><dt>Honest accuracy</dt><dd>0.763<small>hardest held-out test</small></dd></div>
+    <div><dt>Forecast error</dt><dd>4.93 pp<small>184 unseen predictions</small></dd></div>
+    <div><dt>Missed detections</dt><dd>0<small>in the shipped system</small></dd></div>
+    <div><dt>Gene sequences</dt><dd>21<small>real, from NCBI</small></dd></div>
+    <div><dt>Gene search</dt><dd>12 / 12<small>samples, no false matches</small></dd></div>
+    <div><dt>Real data span</dt><dd>2016–24<small>ICMR national figures</small></dd></div>
+    <div><dt>Validation checks</dt><dd>8<small>each a different question</small></dd></div>
+    <div><dt>Automated tests</dt><dd>51<small>all passing</small></dd></div>
+  </dl>
+
+  <h3 class="sec">Phrases to avoid, and their replacements</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Do not say</th><th>Say instead</th></tr></thead>
+      <tbody>
+        <tr><td>“We use real bacterial genomes”</td><td>“Real gene sequences, constructed surrounding DNA”</td></tr>
+        <tr><td>“Laboratory validated”</td><td>“We assign the sample contents, so the labels are ours”</td></tr>
+        <tr><td>“It discovers new resistance genes”</td><td>“It flags DNA it cannot identify”</td></tr>
+        <tr><td>“We saved them ₹45 crore”</td><td>“The calculator estimates ₹45 crore”</td></tr>
+        <tr><td>“99% accurate”</td><td>“0.84 on the hardest test”</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="do">
+    <span class="lbl">Final instruction</span>
+    <p>If time runs short, present Rescue, then Portfolio, then the closing paragraph
+       about accuracy falling. Those three carry the module on their own.</p>
+  </div>
+</section>
+
+<footer>
+  <p>
+    TrialSense is a research screening prototype for pharmaceutical R&amp;D. It is not
+    a diagnostic tool and not a clinical decision-support system. No output should be
+    used to treat anyone.
+  </p>
+</footer>
+
+</div>

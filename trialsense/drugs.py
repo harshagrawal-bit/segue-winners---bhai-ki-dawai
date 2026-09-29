@@ -47,6 +47,7 @@ FLAG_LABELS = {
     "myopathy_risk": "can cause muscle injury (myopathy)",
     "narrow_therapeutic_index": "has a narrow therapeutic window",
     "seizure_risk": "lowers the seizure threshold",
+    "antifolate": "blocks the folate pathway",
 }
 
 
@@ -82,6 +83,9 @@ class Drug:
     myopathy_risk: bool = False
     narrow_therapeutic_index: bool = False
     seizure_risk: bool = False
+    # Blocks folate metabolism. Two antifolates together deepen the same
+    # block; dangerous when one of them has a narrow safety margin.
+    antifolate: bool = False
 
     # Is this an antibacterial? Links Module 1 to Module 3.
     antibiotic_class: str | None = None
@@ -416,6 +420,7 @@ _DRUG_LIST: list[Drug] = [
         drug_class="Antifolate / DMARD",
         mw_ref=454.44,
         fe=0.90,
+        antifolate=True,
         nephrotoxic=True,
         hepatotoxic=True,
         narrow_therapeutic_index=True,
@@ -524,6 +529,7 @@ _DRUG_LIST: list[Drug] = [
         drug_class="Dihydrofolate reductase inhibitor",
         mw_ref=290.32,
         fe=0.60,
+        antifolate=True,
         potassium_raising=True,
         antibiotic_class="Trimethoprim-sulfonamides",
         note="Blocks the renal epithelial sodium channel like amiloride — a "
@@ -535,6 +541,7 @@ _DRUG_LIST: list[Drug] = [
         drug_class="Sulfonamide antibiotic",
         mw_ref=253.28,
         fe=0.20,
+        antifolate=True,
         cyp_inhibitor=["CYP2C9"],
         nephrotoxic=True,
         antibiotic_class="Trimethoprim-sulfonamides",

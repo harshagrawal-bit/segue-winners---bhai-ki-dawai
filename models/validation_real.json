@@ -1,0 +1,2044 @@
+{
+  "data": {
+    "classification": "real genomes, laboratory-confirmed AST labels",
+    "source": "BV-BRC (evidence = 'Laboratory Method' only)",
+    "n_isolates": 42,
+    "caveat": "isolates were selected for breadth of bench testing, so they over-represent strains somebody had reason to test; these rates describe this set, not a patient population"
+  },
+  "screening": {
+    "threshold": 0.1,
+    "n_comparisons": 350,
+    "n_resistant": 176,
+    "n_susceptible": 174,
+    "accuracy": 0.5257142857142857,
+    "very_major_error_rate": 0.4715909090909091,
+    "major_error_rate": 0.47701149425287354,
+    "sensitivity": 0.5284090909090909,
+    "specificity": 0.5229885057471264,
+    "by_class": {
+      "Aminoglycosides": {
+        "tp": 9,
+        "fp": 3,
+        "tn": 20,
+        "fn": 10,
+        "vme": 0.5263157894736842,
+        "me": 0.13043478260869565
+      },
+      "Carbapenems": {
+        "tp": 11,
+        "fp": 18,
+        "tn": 2,
+        "fn": 2,
+        "vme": 0.15384615384615385,
+        "me": 0.9
+      },
+      "Cephalosporins": {
+        "tp": 13,
+        "fp": 15,
+        "tn": 0,
+        "fn": 0,
+        "vme": 0.0,
+        "me": 1.0
+      },
+      "Fluoroquinolones": {
+        "tp": 1,
+        "fp": 5,
+        "tn": 11,
+        "fn": 20,
+        "vme": 0.9523809523809523,
+        "me": 0.3125
+      },
+      "Glycopeptides": {
+        "tp": 0,
+        "fp": 6,
+        "tn": 6,
+        "fn": 4,
+        "vme": 1.0,
+        "me": 0.5
+      },
+      "Macrolides": {
+        "tp": 11,
+        "fp": 5,
+        "tn": 9,
+        "fn": 8,
+        "vme": 0.42105263157894735,
+        "me": 0.35714285714285715
+      },
+      "Oxazolidinones": {
+        "tp": 0,
+        "fp": 2,
+        "tn": 10,
+        "fn": 5,
+        "vme": 1.0,
+        "me": 0.16666666666666666
+      },
+      "Penicillins": {
+        "tp": 21,
+        "fp": 20,
+        "tn": 0,
+        "fn": 0,
+        "vme": 0.0,
+        "me": 1.0
+      },
+      "Polymyxins": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 8,
+        "fn": 7,
+        "vme": 1.0,
+        "me": 0.0
+      },
+      "Rifamycins": {
+        "tp": 6,
+        "fp": 0,
+        "tn": 6,
+        "fn": 6,
+        "vme": 0.5,
+        "me": 0.0
+      },
+      "Tetracyclines": {
+        "tp": 5,
+        "fp": 1,
+        "tn": 14,
+        "fn": 17,
+        "vme": 0.7727272727272727,
+        "me": 0.06666666666666667
+      },
+      "Trimethoprim-sulfonamides": {
+        "tp": 16,
+        "fp": 8,
+        "tn": 5,
+        "fn": 4,
+        "vme": 0.2,
+        "me": 0.6153846153846154
+      }
+    }
+  },
+  "confirmed": {
+    "threshold": 0.5,
+    "n_comparisons": 350,
+    "n_resistant": 176,
+    "n_susceptible": 174,
+    "accuracy": 0.5257142857142857,
+    "very_major_error_rate": 0.5625,
+    "major_error_rate": 0.3850574712643678,
+    "sensitivity": 0.4375,
+    "specificity": 0.6149425287356322,
+    "by_class": {
+      "Aminoglycosides": {
+        "tp": 5,
+        "fp": 1,
+        "tn": 22,
+        "fn": 14,
+        "vme": 0.7368421052631579,
+        "me": 0.043478260869565216
+      },
+      "Carbapenems": {
+        "tp": 11,
+        "fp": 18,
+        "tn": 2,
+        "fn": 2,
+        "vme": 0.15384615384615385,
+        "me": 0.9
+      },
+      "Cephalosporins": {
+        "tp": 12,
+        "fp": 15,
+        "tn": 0,
+        "fn": 1,
+        "vme": 0.07692307692307693,
+        "me": 1.0
+      },
+      "Fluoroquinolones": {
+        "tp": 0,
+        "fp": 2,
+        "tn": 14,
+        "fn": 21,
+        "vme": 1.0,
+        "me": 0.125
+      },
+      "Glycopeptides": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 12,
+        "fn": 4,
+        "vme": 1.0,
+        "me": 0.0
+      },
+      "Macrolides": {
+        "tp": 11,
+        "fp": 3,
+        "tn": 11,
+        "fn": 8,
+        "vme": 0.42105263157894735,
+        "me": 0.21428571428571427
+      },
+      "Oxazolidinones": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 12,
+        "fn": 5,
+        "vme": 1.0,
+        "me": 0.0
+      },
+      "Penicillins": {
+        "tp": 19,
+        "fp": 20,
+        "tn": 0,
+        "fn": 2,
+        "vme": 0.09523809523809523,
+        "me": 1.0
+      },
+      "Polymyxins": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 8,
+        "fn": 7,
+        "vme": 1.0,
+        "me": 0.0
+      },
+      "Rifamycins": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 6,
+        "fn": 12,
+        "vme": 1.0,
+        "me": 0.0
+      },
+      "Tetracyclines": {
+        "tp": 3,
+        "fp": 0,
+        "tn": 15,
+        "fn": 19,
+        "vme": 0.8636363636363636,
+        "me": 0.0
+      },
+      "Trimethoprim-sulfonamides": {
+        "tp": 16,
+        "fp": 8,
+        "tn": 5,
+        "fn": 4,
+        "vme": 0.2,
+        "me": 0.6153846153846154
+      }
+    }
+  },
+  "gene_detection": {
+    "gyrA_S83L": 12,
+    "mecA": 9,
+    "sul1": 7,
+    "rpoB_S450L": 7,
+    "blaSHV": 5,
+    "aac(6')-Ib": 4,
+    "blaTEM-1": 4,
+    "tetM": 3,
+    "ermB": 3,
+    "blaVIM": 2,
+    "armA": 2,
+    "blaCTX-M-15": 2,
+    "dfrA17": 1,
+    "blaNDM-1": 1,
+    "qnrS1": 1,
+    "blaKPC-2": 1
+  },
+  "allele_states": {
+    "rpoB_S450L:undetermined": 7,
+    "gyrA_S83L:undetermined": 8,
+    "gyrA_S83L:wild_type": 3,
+    "gyrA_S83L:resistant": 1
+  },
+  "runtime_seconds": 174.5,
+  "per_isolate": [
+    {
+      "genome_id": "1280.15930",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.021
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.648
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.658
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.009
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.428
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "1280.15931",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.567
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.061
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.558
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.612
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.009
+        }
+      }
+    },
+    {
+      "genome_id": "1280.15938",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.698
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.76
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.521
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.132
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.015
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 0.564
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "1280.16051",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.009
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 0.564
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.521
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.556
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.76
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.048
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "1280.16052",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.009
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.527
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.561
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.255
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 0.57
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.021
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "1280.16436",
+      "organism": "Staphylococcus aureus",
+      "genes": [
+        "mecA"
+      ],
+      "classes": {
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.558
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.009
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.76
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 0.567
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.524
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.021
+        }
+      }
+    },
+    {
+      "genome_id": "1352.10125",
+      "organism": "Enterococcus faecium",
+      "genes": [
+        "tetM"
+      ],
+      "classes": {
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.125
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.587
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.12
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.028
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.77
+        }
+      }
+    },
+    {
+      "genome_id": "1352.10126",
+      "organism": "Enterococcus faecium",
+      "genes": [
+        "ermB",
+        "tetM"
+      ],
+      "classes": {
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.297
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.792
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.247
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.073
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.766
+        }
+      }
+    },
+    {
+      "genome_id": "1352.10127",
+      "organism": "Enterococcus faecium",
+      "genes": [],
+      "classes": {
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.156
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.587
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.12
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.028
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.151
+        }
+      }
+    },
+    {
+      "genome_id": "1352.10128",
+      "organism": "Enterococcus faecium",
+      "genes": [
+        "ermB",
+        "tetM",
+        "mecA"
+      ],
+      "classes": {
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.125
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.786
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.129
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.08
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.766
+        }
+      }
+    },
+    {
+      "genome_id": "1352.10129",
+      "organism": "Enterococcus faecium",
+      "genes": [],
+      "classes": {
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.247
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.587
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.256
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.184
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.275
+        }
+      }
+    },
+    {
+      "genome_id": "1352.4398",
+      "organism": "Enterococcus faecium",
+      "genes": [],
+      "classes": {
+        "Glycopeptides": {
+          "lab": 0,
+          "p": 0.268
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.188
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 0.849
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.256
+        },
+        "Oxazolidinones": {
+          "lab": 0,
+          "p": 0.073
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.587
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.015
+        }
+      }
+    },
+    {
+      "genome_id": "287.32645",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "aac(6')-Ib",
+        "sul1",
+        "blaVIM",
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.759
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.824
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.557
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.41
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.523
+        }
+      }
+    },
+    {
+      "genome_id": "287.32646",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "rpoB_S450L",
+        "sul1"
+      ],
+      "classes": {
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.417
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.018
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.442
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.795
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.021
+        }
+      }
+    },
+    {
+      "genome_id": "287.32647",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "blaVIM",
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.018
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.525
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.795
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.559
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.428
+        }
+      }
+    },
+    {
+      "genome_id": "287.32668",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "sul1",
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.525
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.018
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.854
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.444
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.021
+        }
+      }
+    },
+    {
+      "genome_id": "287.34624",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "sul1",
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.525
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.018
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.021
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.843
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.444
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        }
+      }
+    },
+    {
+      "genome_id": "287.5956",
+      "organism": "Pseudomonas aeruginosa",
+      "genes": [
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.44
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.417
+        },
+        "Oxazolidinones": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.018
+        },
+        "Glycopeptides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.199
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.744
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.037
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "28901.21720",
+      "organism": "Salmonella enterica",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.944
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.057
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "28901.22054",
+      "organism": "Salmonella enterica",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.944
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.057
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        }
+      }
+    },
+    {
+      "genome_id": "28901.22371",
+      "organism": "Salmonella enterica",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.057
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.944
+        }
+      }
+    },
+    {
+      "genome_id": "28901.23138",
+      "organism": "Salmonella enterica",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.899
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.057
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "28901.23171",
+      "organism": "Salmonella enterica",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.939
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.057
+        }
+      }
+    },
+    {
+      "genome_id": "28901.24807",
+      "organism": "Salmonella enterica",
+      "genes": [],
+      "classes": {
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.009
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.057
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.927
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "470.1561",
+      "organism": "Acinetobacter baumannii",
+      "genes": [],
+      "classes": {
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.958
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.015
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.988
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "470.1562",
+      "organism": "Acinetobacter baumannii",
+      "genes": [],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.988
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.015
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.958
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "470.1563",
+      "organism": "Acinetobacter baumannii",
+      "genes": [],
+      "classes": {
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.859
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.025
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.982
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 0.989
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "470.22944",
+      "organism": "Acinetobacter baumannii",
+      "genes": [
+        "sul1",
+        "armA",
+        "mecA"
+      ],
+      "classes": {
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.015
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.755
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.988
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.853
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.76
+        }
+      }
+    },
+    {
+      "genome_id": "470.24294",
+      "organism": "Acinetobacter baumannii",
+      "genes": [
+        "sul1",
+        "armA",
+        "mecA"
+      ],
+      "classes": {
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.752
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.988
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.844
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.76
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.015
+        }
+      }
+    },
+    {
+      "genome_id": "470.5040",
+      "organism": "Acinetobacter baumannii",
+      "genes": [],
+      "classes": {
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.015
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.76
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Glycopeptides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.988
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 0.958
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Oxazolidinones": {
+          "lab": 1,
+          "p": 0.021
+        }
+      }
+    },
+    {
+      "genome_id": "562.30349",
+      "organism": "Escherichia coli",
+      "genes": [
+        "dfrA17",
+        "ermB",
+        "sul1",
+        "blaNDM-1"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.029
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.392
+        },
+        "Glycopeptides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.991
+        },
+        "Oxazolidinones": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.804
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "562.58783",
+      "organism": "Escherichia coli",
+      "genes": [
+        "gyrA_S83L",
+        "qnrS1",
+        "rpoB_S450L"
+      ],
+      "classes": {
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.992
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.581
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "562.58786",
+      "organism": "Escherichia coli",
+      "genes": [],
+      "classes": {
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.366
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.998
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "562.7635",
+      "organism": "Escherichia coli",
+      "genes": [
+        "gyrA_S83L",
+        "blaTEM-1"
+      ],
+      "classes": {
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.489
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.999
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "562.7712",
+      "organism": "Escherichia coli",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.389
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.993
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "genome_id": "562.7724",
+      "organism": "Escherichia coli",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.59
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Macrolides": {
+          "lab": 0,
+          "p": 0.011
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.993
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        }
+      }
+    },
+    {
+      "genome_id": "573.12928",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        },
+        "Cephalosporins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 0,
+          "p": 1.0
+        },
+        "Fluoroquinolones": {
+          "lab": 0,
+          "p": 0.047
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.709
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "573.12972",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "blaSHV",
+        "aac(6')-Ib",
+        "blaCTX-M-15"
+      ],
+      "classes": {
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.761
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.684
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.047
+        }
+      }
+    },
+    {
+      "genome_id": "573.13071",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "blaSHV"
+      ],
+      "classes": {
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.047
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 0,
+          "p": 0.686
+        },
+        "Tetracyclines": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.008
+        }
+      }
+    },
+    {
+      "genome_id": "573.18476",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "blaSHV",
+        "blaTEM-1",
+        "aac(6')-Ib",
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.686
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 0,
+          "p": 0.712
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.047
+        },
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Glycopeptides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Oxazolidinones": {
+          "lab": 1,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "genome_id": "573.18477",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "blaTEM-1",
+        "blaSHV",
+        "blaKPC-2"
+      ],
+      "classes": {
+        "Cephalosporins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.047
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.008
+        },
+        "Polymyxins": {
+          "lab": 0,
+          "p": 0.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Oxazolidinones": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Carbapenems": {
+          "lab": 1,
+          "p": 0.709
+        }
+      }
+    },
+    {
+      "genome_id": "573.62712",
+      "organism": "Klebsiella pneumoniae",
+      "genes": [
+        "blaSHV",
+        "blaCTX-M-15",
+        "aac(6')-Ib",
+        "blaTEM-1",
+        "gyrA_S83L"
+      ],
+      "classes": {
+        "Rifamycins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Aminoglycosides": {
+          "lab": 1,
+          "p": 0.75
+        },
+        "Tetracyclines": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Macrolides": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Polymyxins": {
+          "lab": 1,
+          "p": 0.0
+        },
+        "Fluoroquinolones": {
+          "lab": 1,
+          "p": 0.047
+        },
+        "Penicillins": {
+          "lab": 1,
+          "p": 1.0
+        },
+        "Trimethoprim-sulfonamides": {
+          "lab": 1,
+          "p": 1.0
+        }
+      }
+    }
+  ]
+}

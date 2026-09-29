@@ -1,0 +1,361 @@
+{
+  "method": "half-split on 42 real genomes; thresholds chosen on the calibration half, reported on the held-out test half",
+  "n_calibration": 21,
+  "n_test": 21,
+  "grid": [
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 26.33264182181735,
+      "sensitivity": 1.0
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 9.17381688718527,
+      "sensitivity": 0.7142857142857143
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 4.934082706525105,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 3.114047934182156,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 2.2198111963257934,
+      "sensitivity": 0.5238095238095238
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 1.2098497041586078,
+      "sensitivity": 0.3333333333333333
+    },
+    {
+      "z_floor": 8.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5681033393440419,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 21.956142022426214,
+      "sensitivity": 1.0
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 9.17381688718527,
+      "sensitivity": 0.7142857142857143
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 4.934082706525105,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 3.114047934182156,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 2.2198111963257934,
+      "sensitivity": 0.5238095238095238
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 1.2098497041586078,
+      "sensitivity": 0.3333333333333333
+    },
+    {
+      "z_floor": 12.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5681033393440419,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 8.679356573311752,
+      "sensitivity": 0.7142857142857143
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 8.100732801757635,
+      "sensitivity": 0.6666666666666666
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 4.8920009776848055,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 3.114047934182156,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 2.2198111963257934,
+      "sensitivity": 0.5238095238095238
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 1.2098497041586078,
+      "sensitivity": 0.3333333333333333
+    },
+    {
+      "z_floor": 16.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5681033393440419,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 3.9556825109881437,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 3.9556825109881437,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 3.8609986210974703,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 3.103527501972081,
+      "sensitivity": 0.5714285714285714
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 2.2198111963257934,
+      "sensitivity": 0.5238095238095238
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 1.2098497041586078,
+      "sensitivity": 0.3333333333333333
+    },
+    {
+      "z_floor": 20.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5681033393440419,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 1.8831573656033982,
+      "sensitivity": 0.47619047619047616
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 1.8831573656033982,
+      "sensitivity": 0.47619047619047616
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 1.8831573656033982,
+      "sensitivity": 0.47619047619047616
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 1.8831573656033982,
+      "sensitivity": 0.47619047619047616
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 1.8515960689731736,
+      "sensitivity": 0.47619047619047616
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 1.199329271948533,
+      "sensitivity": 0.3333333333333333
+    },
+    {
+      "z_floor": 25.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5681033393440419,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 0.5891442037641916,
+      "sensitivity": 0.2857142857142857
+    },
+    {
+      "z_floor": 30.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.5260216105037425,
+      "sensitivity": 0.23809523809523808
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 40.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.03156129663022455,
+      "sensitivity": 0.047619047619047616
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.18,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.25,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.3,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.35,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.4,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.45,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    },
+    {
+      "z_floor": 50.0,
+      "abs_floor": 0.5,
+      "segments_per_mb": 0.0,
+      "sensitivity": 0.0
+    }
+  ],
+  "chosen": {
+    "z_floor": 25.0,
+    "abs_floor": 0.4
+  },
+  "test_half": {
+    "shipped": {
+      "segments_per_mb": 21.753202069788646,
+      "sensitivity": 1.0
+    },
+    "chosen": {
+      "segments_per_mb": 1.5663965248154914,
+      "sensitivity": 0.5238095238095238
+    }
+  },
+  "shipped_before": {
+    "z_floor": 8.0,
+    "abs_floor": 0.18
+  }
+}

@@ -422,6 +422,42 @@ def assess_mechanisms(a: Drug, b: Drug) -> tuple[float, list[Mechanism]]:
                 )
             )
 
+    # --- Additive folate blockade.
+    #
+    # Handled separately rather than as an ADDITIVE_PD entry, because that table
+    # fires whenever both drugs carry a flag and this interaction must NOT fire
+    # for every antifolate pair. Trimethoprim and sulfamethoxazole are
+    # co-formulated and given together deliberately — their combined action on
+    # the folate pathway is the therapeutic point, not a hazard.
+    #
+    # The danger is additive blockade when one agent has a narrow safety margin,
+    # which in this set means methotrexate. Methotrexate plus trimethoprim is a
+    # documented cause of severe marrow suppression.
+    #
+    # This rule was added after an automated check against published severities
+    # scored the pairing Mild — an error in the dangerous direction, caused by
+    # the mechanism simply not being modelled.
+    if (
+        a.antifolate
+        and b.antifolate
+        and (a.narrow_therapeutic_index or b.narrow_therapeutic_index)
+    ):
+        nti = a.name if a.narrow_therapeutic_index else b.name
+        mechs.append(
+            Mechanism(
+                kind="additive_pd",
+                severity=2.4,
+                consequence="additive_toxicity",
+                text=(
+                    f"{a.name} and {b.name} both block the folate pathway, at "
+                    f"different points. Their effects compound, and {nti} has a "
+                    "narrow safety margin — the combination is a documented "
+                    "cause of severe bone-marrow suppression. Monitor blood "
+                    "counts, or avoid the pairing."
+                ),
+            )
+        )
+
     score = 0.0
     if mechs:
         ordered = sorted(mechs, key=lambda m: -m.severity)

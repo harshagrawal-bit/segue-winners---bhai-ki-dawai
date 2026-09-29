@@ -1,0 +1,769 @@
+<title>Module 3 Hard Questions</title>
+<div style="border:3px solid #b3261e;background:#fff4f2;padding:16px 20px;margin:0 0 24px;border-radius:8px">
+<p style="margin:0 0 8px;font-weight:700;color:#b3261e;font-size:1.05em">
+READ THIS FIRST — this document was written before real-genome validation</p>
+<p style="margin:0 0 8px">
+Module 3 has since been measured against <strong>42 real bacterial genomes with
+350 laboratory-measured susceptibility results</strong>. On that test it scores
+<strong>0.526 accuracy</strong>, which with 176 resistant and 174 susceptible
+comparisons is approximately <strong>chance</strong>. No threshold changes this;
+the sweep peaks at 0.503.</p>
+<p style="margin:0 0 8px">
+Every accuracy figure in this document is measured on <strong>constructed</strong>
+isolates — generated background sequence with real resistance genes planted into
+it. Those figures are correct for constructed isolates and must not be presented
+as real-world performance.</p>
+<p style="margin:0">
+What did transfer is <strong>gene detection</strong>: on real genomes it found
+genuine determinants (mecA in 9 real <em>S. aureus</em>, blaSHV in 5, plus
+blaNDM-1, blaVIM, blaCTX-M-15) at a 13.8% false-resistance rate, though it misses
+73% of laboratory-confirmed resistance because 21 reference genes cannot cover
+real resistance. Full analysis: <strong>reports/AUDIT_RESPONSE.md</strong>.</p>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ink:#17242B;--ink-soft:#47585F;--ink-faint:#76868C;
+    --paper:#FBFCFC;--panel:#F2F6F6;--rule:#D4DDE0;--rule-firm:#A9BAC0;
+    --accent:#0E6E7D;--say:#1F5F4B;--say-bg:#EAF3EF;
+    --hot:#A33A22;--hot-bg:#FBEFEC;--warn:#7A4E17;--warn-bg:#F7F0E6;
+    --measure:70ch;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+    --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+    --accent:#4FB3C4;--say:#67C39E;--say-bg:#142A23;
+    --hot:#E58A70;--hot-bg:#2E1A15;--warn:#D6A868;--warn-bg:#2B2317;}}
+  :root[data-theme="dark"]{
+    --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+    --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+    --accent:#4FB3C4;--say:#67C39E;--say-bg:#142A23;
+    --hot:#E58A70;--hot-bg:#2E1A15;--warn:#D6A868;--warn-bg:#2B2317;}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14.5px;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .sheet{max-width:900px;margin:0 auto;padding-inline:24px;padding-block:46px 70px}
+  h1,h2,h3{font-family:"IBM Plex Serif",Georgia,serif;text-wrap:balance;margin:0}
+  p{margin:0 0 12px;max-width:var(--measure)}p:last-child{margin-bottom:0}
+  ul{margin:0 0 12px;padding-left:20px;max-width:var(--measure)}li{margin-bottom:5px}
+  strong{font-weight:600}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--panel);
+    padding:1px 5px;border-radius:2px}
+
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px}
+  .masthead h1{font-size:33px;font-weight:600;line-height:1.15;margin-top:10px}
+  .masthead .sub{color:var(--ink-soft);max-width:var(--measure);margin-top:12px}
+
+  .part{margin-top:50px}
+  .part-head{display:flex;gap:16px;align-items:baseline;border-bottom:1px solid var(--rule-firm);
+    padding-bottom:11px;margin-bottom:8px}
+  .part-no{font-family:"IBM Plex Mono",monospace;font-size:30px;font-weight:600;
+    color:var(--rule-firm);line-height:1}
+  .part-head h2{font-size:23px;font-weight:600;line-height:1.2}
+  .part-sub{color:var(--ink-faint);font-size:13px;margin-bottom:22px}
+
+  h3.band{font-family:"IBM Plex Sans",sans-serif;font-size:12px;font-weight:600;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--accent);
+    margin:30px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+
+  .qa{margin-bottom:22px;padding-bottom:20px;border-bottom:1px dotted var(--rule)}
+  .qa:last-child{border-bottom:none}
+  .q{display:flex;gap:11px;align-items:flex-start;margin-bottom:9px}
+  .q .heat{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;
+    letter-spacing:.07em;padding:3px 7px;border-radius:2px;flex:none;margin-top:3px;
+    white-space:nowrap}
+  .h3{background:var(--hot-bg);color:var(--hot);border:1px solid currentColor}
+  .h2{background:var(--warn-bg);color:var(--warn);border:1px solid currentColor}
+  .h1{background:var(--panel);color:var(--ink-faint);border:1px solid var(--rule-firm)}
+  .q .text{font-family:"IBM Plex Serif",Georgia,serif;font-size:16.5px;font-weight:600;
+    line-height:1.4}
+  .a{border-left:3px solid var(--say);background:var(--say-bg);padding:12px 16px;
+    max-width:var(--measure)}
+  .a .lbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--say);display:block;
+    margin-bottom:5px}
+  .a p{font-size:14px;margin-bottom:9px}
+  .why{font-size:12.5px;color:var(--ink-faint);margin-top:9px;max-width:var(--measure);
+    padding-left:3px;border-left:2px solid var(--rule);padding-left:11px}
+  .why strong{color:var(--ink-soft)}
+
+  .callout{border-left:3px solid var(--accent);background:var(--panel);padding:13px 17px;
+    margin:0 0 18px;max-width:var(--measure)}
+  .callout.hot{border-left-color:var(--hot);background:var(--hot-bg)}
+  .callout .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);display:block;
+    margin-bottom:5px}
+  .callout p{font-size:13.5px}
+
+  .tbl-wrap{overflow-x:auto;margin:0 0 16px}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--rule-firm)}
+  tbody tr:last-child td{border-bottom:none}
+
+  footer{margin-top:52px;padding-top:20px;border-top:2px solid var(--ink);
+    font-size:12px;color:var(--ink-faint);max-width:var(--measure)}
+
+  @media print{
+    body{background:#fff;font-size:10pt}
+    .sheet{max-width:none;padding:0}
+    .part{page-break-before:always}
+    .part:first-of-type{page-break-before:avoid}
+    .qa,.callout,table{page-break-inside:avoid}
+    h3.band,.part-head{page-break-after:avoid}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="eyebrow">TrialSense · Segue 3.0 · Question preparation</div>
+  <h1>Module&nbsp;3 — Hard Questions and Prepared Answers</h1>
+  <p class="sub">
+    Every difficult question a judge could ask about the six features, split into
+    knowledge questions and limitation questions. Answers are written to be spoken
+    aloud, not read.
+  </p>
+  <div class="tbl-wrap" style="margin-top:22px">
+    <table>
+      <thead><tr><th>Marker</th><th>Meaning</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td><span class="heat h3">SEVERE</span></td>
+            <td>Could damage credibility if fumbled</td><td>Memorise word for word</td></tr>
+        <tr><td><span class="heat h2">HARD</span></td>
+            <td>Needs a precise answer</td><td>Know the numbers</td></tr>
+        <tr><td><span class="heat h1">ROUTINE</span></td>
+            <td>Straightforward if you know the system</td><td>Read once</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout hot" style="margin-top:20px">
+    <span class="lbl">The single most important rule</span>
+    <p>
+      If you do not know, say <strong>“I do not know, and I would rather check than
+      guess.”</strong> One admitted gap makes every other answer more believable. One
+      invented answer makes every other answer suspect.
+    </p>
+  </div>
+</header>
+
+<!-- ============ F1 ============ -->
+<section class="part" style="page-break-before:avoid">
+  <div class="part-head"><div class="part-no">01</div><div><h2>Feature 1 — Runway</h2></div></div>
+  <p class="part-sub">Projects resistance forward to the year the drug would launch.</p>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">What exactly are you fitting, and why that shape?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“An S-shaped curve, fitted by least squares after transforming the percentages
+         so the problem becomes linear. We use an S-shape because resistance cannot go
+         above 100%. Klebsiella carbapenem resistance rises about 2.5 points a year —
+         a straight line extended to 2035 gives over 110%, which is not a number. The
+         S-curve flattens as it approaches a ceiling, which is also what the real
+         process does.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> to find out whether you chose the
+      model or just used a default.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">You excluded 2015. Why? That looks like dropping inconvenient data.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“It measures a different thing. 2015 covered only blood and spinal-fluid
+         samples; 2016 onward covers all sample types. Joining them creates a false
+         step — the MRSA figure reads 42.6% for 2015 and 28.4% for 2016, and both are
+         correct for their own sample set. We still display the 2015 point, marked as
+         excluded, rather than deleting it.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> excluding data is the classic way to
+      make a trend look better. Showing the point rather than hiding it is the answer.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">How did you test the forecast?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“We fitted it using only data up to 2020, then asked it to predict 2021 to
+         2024 — four years it had never seen. 184 predictions across 46 series. Mean
+         error 4.93 percentage points, and 85% landed within ten points.”</p></div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">You have nine years of data and you are projecting eleven years forward. Justify that.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“You are right that it is a long extrapolation, and we do not present it as a
+         measurement. It is drawn as a dashed line inside a widening uncertainty band
+         precisely so it cannot be mistaken for data.”</p>
+      <p>“What we can defend is the near term, because we measured it — four years
+         ahead, within five percentage points. Beyond that the honest statement is
+         that the direction is reliable and the exact figure is not. For a go or
+         no-go decision, direction is usually what matters.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> this is the strongest technical
+      objection to Feature 1. Concede the point immediately, then narrow to what you
+      measured.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Your sources disagree by fifteen points. Which one is right?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“We do not know, and neither does anyone else. ICMR, WHO and the national
+         disease centre report different figures for the same organism and year,
+         because they sample different hospitals and different specimen types. We show
+         all of them and let the user choose, rather than picking one silently.”</p>
+      <p>“Disagreement between surveillance programmes is documented and normal. The
+         same is true of the established gene-detection tools — two government tools
+         run on identical data produce different gene lists.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">What breaks your projection?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“A new drug entering the market, a policy change on antibiotic use, or an
+         outbreak of a different strain. The model assumes the trend continues, and it
+         cannot detect any of those. It should be re-run when new surveillance data is
+         published, not treated as a permanent answer.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">Does this work for every bacterium?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“No — seven, because that is what ICMR reports. Tuberculosis is not one of
+         them, and for it we return ‘no data available’ rather than substituting a
+         similar organism.”</p></div>
+  </div>
+</section>
+
+<!-- ============ F2 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">02</div><div><h2>Feature 2 — Rescue</h2></div></div>
+  <p class="part-sub">Determines whether detected resistance can be worked around.</p>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">Explain the difference between the two enzyme types — in your own words, no jargon.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Both types are proteins the bacterium makes to destroy the antibiotic. They
+         differ in how they are built. One type has a standard protein structure at its
+         active site, and there are existing compounds that plug that site. The other
+         uses a zinc atom to do the cutting, and those same compounds do not bind to
+         it.”</p>
+      <p>“So the practical difference is: for the first type you add a second compound
+         and the drug works again. For the second type there is nothing available to
+         add. Same result on screen, opposite business decision.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> this is your headline claim. If you
+      can only repeat the technical terms without explaining them, the claim collapses.
+      <strong>Practise this one aloud.</strong></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Who decided these relationships? Did you?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“No. They come from two published databases — CARD, maintained by a university
+         research group, and NCBI's reference gene catalogue. Every relationship in our
+         project has the source recorded with a link. We wrote the first version from
+         textbook references and then checked all 21 genes against both databases.”</p></div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">What if one of your 21 entries is wrong? Everything downstream would be wrong.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Correct, and that is why we cross-checked all 21 against two independent
+         databases rather than trusting our own notes. The check found genuine
+         differences, and we recorded them rather than silently picking one.”</p>
+      <p>“It also found one error in our own labelling — a resistance marker was
+         labelled with a position number that belongs to a different organism. We fixed
+         it. That is the process working.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> a lookup table is only as good as its
+      contents. Naming a mistake you found is the strongest possible answer.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">You said you cannot detect single-letter changes. Isn't that a large share of real resistance?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Yes, and it is a genuine limit. Two of our 21 markers work that way. Our
+         method counts short letter patterns across a whole region, and a single letter
+         changing does not shift those counts measurably.”</p>
+      <p>“So for those two we report that the region is present, not that the resistant
+         version is present. We say that explicitly rather than implying we detected
+         something we did not. Resolving it needs a different technique that reads
+         individual positions.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> it is a real technical gap. Knowing
+      exactly which two genes and exactly why is what separates understanding from
+      recitation.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">What happens with a gene not in your list?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“No mechanism assessment — we return nothing rather than guessing. Feature 4
+         may still flag the region as unidentified foreign DNA, which is a weaker but
+         honest statement.”</p></div>
+  </div>
+</section>
+
+<!-- ============ F3 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">03</div><div><h2>Feature 3 — Portfolio</h2></div></div>
+  <p class="part-sub">Screens every candidate against every target organism.</p>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">How do you rank the candidates, and why that rule?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“By how many organisms the candidate remains usable against, with lower average
+         predicted resistance as the tie-break.”</p>
+      <p>“I will be straight with you — that is our judgement, not a validated rule. No
+         evidence says breadth is the correct primary criterion. It is a starting point
+         a user would adjust to their own priorities.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> ranking rules often hide unexamined
+      assumptions. Conceding it is a choice is stronger than defending it as science.</div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">This feature has no data or model of its own. So what have you actually validated?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“That is exactly right, and it is why we validated it differently. Every
+         prediction in the grid is compared against the real ICMR national figure for
+         the same organism and antibiotic group — 49 comparisons.”</p>
+      <p>“We judge each one against its expected direction rather than expecting the
+         numbers to match, because ours describes one sample and ICMR describes a
+         national population. A sample chosen because it is resistant should read
+         higher than a national average.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> orchestration features are usually
+      unvalidated. Yours is not — but only because we built that check specifically.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Your cross-check flagged sixteen of forty-nine. That is a third. Explain.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Most of those are expected. Our samples are built to carry resistance genes,
+         so they should read above a national average that includes ordinary samples.
+         The check separates differences that go the direction we predicted from those
+         that do not.”</p>
+      <p>“The ones that genuinely concerned us we investigated. One showed our grouping
+         was too coarse in one place, and we fixed it — we now report individual drugs
+         rather than whole families where the reference data supports it.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">Does this account for cost or manufacturability?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“No. Resistance only. A real portfolio decision also weighs manufacturing cost,
+         regulatory position and market size, and none of that is in here.”</p></div>
+  </div>
+</section>
+
+<!-- ============ F4 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">04</div><div><h2>Feature 4 — Unknown</h2></div></div>
+  <p class="part-sub">Flags DNA that looks acquired but matches nothing known.</p>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Why count four-letter patterns? Why not three, or six?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Four is the conventional choice for this kind of comparison, and there is a
+         practical reason. Four letters gives 256 possible combinations. In a 900-letter
+         window that is roughly three or four counts per combination, which is enough to
+         be stable.”</p>
+      <p>“Five letters gives 1,024 combinations, so most of them appear zero or once —
+         the measurement becomes mostly noise. We tested this and five performed
+         noticeably worse.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">Why do you use two thresholds instead of one?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Because the relative measure becomes unstable when few windows remain — a
+         small spread inflates it. We require a window to be both statistically unusual
+         and absolutely different. On our test set the absolute measure separated
+         cleanly where the relative one did not.”</p></div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">You tested it by planting sequences you wrote yourself. That is circular.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“It is a fair criticism and I will not argue with it. We have never tested it
+         against a genuinely novel resistance gene, because we do not have one — by
+         definition.”</p>
+      <p>“What the test does establish is that the detector responds to foreign
+         composition rather than to anything specific about our reference set, and that
+         it stays silent on all twelve unmodified samples. The stronger test would be to
+         withhold a real gene from the reference set and see if it is flagged. That is
+         the next thing we would do.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> self-generated test data is a real
+      weakness. Naming the better experiment shows you understand why.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">If it fires, what does the user actually do? It sounds like it just creates worry.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“It reports the position — start and end. The action is to sequence that region
+         properly and identify it, which is a targeted piece of laboratory work rather
+         than an open-ended search.”</p>
+      <p>“The alternative is worse. Every tool in this category reports only what is in
+         its database, so silence from one of them is indistinguishable from
+         confirmation that nothing is there. Those are very different statements, and a
+         company proceeding on the wrong one is the expensive case.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">What is your false alarm rate on real genomes?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“We do not know. Zero across our twelve samples, but those are constructed, and
+         a real genome contains far more naturally occurring foreign regions that have
+         nothing to do with resistance. I would expect the rate to be higher on real
+         data and we have not measured it.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> a tempting question to bluff. Do not.
+      The honest answer is short and costs nothing.</div>
+  </div>
+</section>
+
+<!-- ============ F5 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">05</div><div><h2>Feature 5 — Value</h2></div></div>
+  <p class="part-sub">Converts a finding into a rupee figure. The most attackable feature.</p>
+
+  <div class="callout hot">
+    <span class="lbl">Before any question is asked</span>
+    <p>
+      Say the disclaimer <strong>first</strong>, unprompted: “This is a calculator, not a
+      measurement.” A judge who hears it from you cannot use it against you.
+    </p>
+  </div>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Where do your stage costs come from?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“They are order-of-magnitude figures for anti-infective development, supplied
+         as starting values. They are not from a specific study, and I would not defend
+         any individual number. Every one is a slider the user replaces with their own
+         figures.”</p></div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">This number is made up.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“You are right not to trust it, and that is why it is a slider rather than a
+         headline. What are your numbers? Let us put them in.”</p>
+      <p>“The claim we would actually defend does not depend on any of them: running
+         this check costs effectively nothing, and not running it costs at minimum one
+         failed development stage. That gap holds whatever figures you use.”</p></div>
+    <div class="why"><strong>Why this works:</strong> agreeing instantly and offering to
+      change the inputs live converts an attack into a demonstration. Do not defend the
+      number.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Why assume the problem surfaces at that particular stage?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Because that is the first stage where the drug is tested against patients who
+         actually have the infection. Earlier stages test safety, not whether it works
+         on the target. It is a reasoned assumption and it is also a dropdown the user
+         can change.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Expected value assumes the company is indifferent to risk. Pharmaceutical companies are not.</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“That is a good point and we have not modelled it. A smaller company facing a
+         single large loss behaves very differently from one running twenty programmes.
+         Our figure treats them the same, which understates the value for the smaller
+         company — which is the user we are actually aiming at.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> this comes from someone with a finance
+      background. Recognising it as correct earns more than deflecting.</div>
+  </div>
+</section>
+
+<!-- ============ F6 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">06</div><div><h2>Feature 6 — Spread</h2></div></div>
+  <p class="part-sub">Reports how quickly a resistance gene moves through a population.</p>
+
+  <h3 class="band">Knowledge questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h1">ROUTINE</span>
+      <span class="text">In your own words, what is the difference between the two kinds of gene?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Some resistance genes sit on a small separate loop of DNA that a bacterium can
+         pass directly to another bacterium, including one of a completely different
+         species. Others are fixed inside the main chromosome and only pass to that
+         bacterium's own descendants. The first kind spreads far faster.”</p></div>
+  </div>
+
+  <h3 class="band">Limitation questions</h3>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">Where does the number 2.5 come from?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“It is a reasoned estimate of relative magnitude, not a measured value, and the
+         interface says so on the same screen.”</p>
+      <p>“What is defensible is the ordering — transferable genes demonstrably spread
+         faster than fixed ones. One well-documented example went from first description
+         in 2015 to reports on multiple continents within about eighteen months, which
+         no fixed mutation does. What we cannot defend is that the factor is exactly
+         2.5 rather than 2 or 3. Deriving it from observed spread rates is on our
+         list.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> an unexplained constant invites
+      exactly this. Conceding the specific number while defending the ordering is the
+      correct split.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">The eighteen-month figure — is that your data or someone else's?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Someone else's. It is a documented published observation, not something we
+         measured. We have measured nothing about spread rates ourselves.”</p></div>
+  </div>
+</section>
+
+<!-- ============ CROSS-CUTTING ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">07</div><div><h2>Questions about the whole module</h2></div></div>
+  <p class="part-sub">These are the ones most likely to be asked, and the ones that decide the round.</p>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">You have no healthcare background. Why should I believe any of this?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Because we did not decide any of the biology. Every gene sequence comes from
+         NCBI's reference database with a catalogue number you can look up. Every
+         resistance relationship comes from two published databases. Every resistance
+         figure comes from ICMR's published reports.”</p>
+      <p>“What we built is the engineering — the pipeline, the validation, and the
+         decision logic on top of settled science. That is what engineers do.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">What is the single weakest part of Module 3?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“The training data. The gene sequences are real, but the DNA around them is
+         constructed and we assign which genes each sample carries — so the labels are
+         ours, not laboratory-confirmed.”</p>
+      <p>“That is why the model on its own has a missed-detection rate above the
+         standard applied to commercial testing equipment. We do not ship it on its own;
+         the gene search overrides it. The fix is complete public genomes that come with
+         laboratory results attached.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> to see whether you know. Having a
+      specific answer ready is worth more than the weakness costs you.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">If I handed you a real bacterial genome right now, would this work?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“The pipeline would run — it accepts a standard sequence file and the same code
+         path executes. The gene search should perform well, because it compares against
+         real published sequences.”</p>
+      <p>“The statistical model would perform worse than our figures suggest, because a
+         real genome is millions of letters with noise and incomplete regions, and ours
+         are clean and short. I would not claim otherwise.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> the most direct test of whether you
+      understand your own limits. A confident “yes, it works” here would be a lie.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Which of the six features would you delete?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“The cost calculator, if forced. It carries no data of its own and it attracts
+         the most scepticism. We keep it because a scientific finding that cannot be
+         stated in rupees does not reach the person who approves the budget — but it is
+         the one that rests on the least evidence.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">Free government tools already do this. Why build another?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“They do the gene search better than we do, and we use their data. They are
+         built for hospital staff treating a patient today.”</p>
+      <p>“They do not project to a launch year, they do not say whether the resistance
+         can be worked around, and they do not compare a portfolio of candidates. Those
+         three questions decide whether a company funds a programme, and that is the gap
+         we built for.”</p></div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h2">HARD</span>
+      <span class="text">What did you get wrong during development?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“Several things, and we kept a record. The unknown-element detector originally
+         scored clean samples higher than deliberately modified ones — it was
+         rediscovering genes we had already found. We rebuilt it three times.”</p>
+      <p>“We also reported a drug group we do not check as having zero resistance rather
+         than as unchecked, and we had a position number that belongs to a different
+         organism. Eight defects in total, all found by our own testing, all documented.”</p></div>
+    <div class="why"><strong>Why this is a good question to get:</strong> a validation
+      process that never finds anything is not evidence of correctness. This is your
+      strongest answer — do not shorten it.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q"><span class="heat h3">SEVERE</span>
+      <span class="text">Would you bet two hundred crore on this output?</span></div>
+    <div class="a"><span class="lbl">Say</span>
+      <p>“No, and it is not designed for that. It is a screening tool — it tells a team
+         which questions to ask a laboratory first, not what to conclude.”</p>
+      <p>“What I would say is that spending two hundred crore <em>without</em> running
+         this check is worse, because the check costs effectively nothing and takes
+         seconds.”</p></div>
+    <div class="why"><strong>Why they ask:</strong> a trap. Answering “yes” overclaims
+      immediately. The correct answer reframes what the tool is for.</div>
+  </div>
+</section>
+
+<!-- ============ TRAPS ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">08</div><div><h2>Questions built on a wrong assumption</h2></div></div>
+  <p class="part-sub">Correct the premise politely, then answer. Do not accept a false framing.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>They say</th><th>The error</th><th>Your correction</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>“So your AI predicts all six of these things.”</td>
+          <td>There is one model, not six</td>
+          <td>“One of the six uses a trained model. The rest are similarity matching and
+              published lookups — deliberately, because encoded science beats a guess
+              where the science is settled.”</td>
+        </tr>
+        <tr>
+          <td>“Your accuracy is 99%.”</td>
+          <td>That was the old figure on constructed sequences</td>
+          <td>“It was, on constructed sequences. On real ones it is 0.84 on the hardest
+              test. We replaced the data and kept the lower number.”</td>
+        </tr>
+        <tr>
+          <td>“You are using real patient genomes.”</td>
+          <td>Real genes, constructed scaffolds</td>
+          <td>“Real gene sequences with catalogue numbers, placed into constructed
+              surrounding DNA. No patient data at all.”</td>
+        </tr>
+        <tr>
+          <td>“So this tells doctors which antibiotic to give.”</td>
+          <td>Wrong user entirely</td>
+          <td>“No — it is for R&amp;D teams deciding what to develop. It is not a
+              diagnostic and nothing here should be used to treat anyone.”</td>
+        </tr>
+        <tr>
+          <td>“You have validated this against lab results.”</td>
+          <td>Never claimed, and not true</td>
+          <td>“We have not. We validated against published national statistics and
+              against labels we assigned ourselves. Laboratory confirmation would need
+              the public genome database, which is our next step.”</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout hot">
+    <span class="lbl">Why this section matters most</span>
+    <p>
+      A judge restating your work incorrectly, in good faith, is the most likely way an
+      overclaim enters the record. If you nod along, that becomes what you claimed.
+      Correcting a compliment is uncomfortable and it is the right move every time.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DRILL ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">09</div><div><h2>What to practise, in order</h2></div></div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Priority</th><th>Question</th><th>Why first</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>“Explain the two enzyme types in your own words”</td>
+            <td>Your headline claim collapses without it</td></tr>
+        <tr><td><strong>2</strong></td><td>“Why should I believe you with no healthcare background”</td>
+            <td>Most likely question in the room</td></tr>
+        <tr><td><strong>3</strong></td><td>“What is the weakest part”</td>
+            <td>Sets up your strongest answer</td></tr>
+        <tr><td><strong>4</strong></td><td>“This cost number is made up”</td>
+            <td>Only works if the reply is instant</td></tr>
+        <tr><td><strong>5</strong></td><td>“Would you bet two hundred crore on it”</td>
+            <td>A trap that catches unprepared teams</td></tr>
+        <tr><td><strong>6</strong></td><td>“What did you get wrong”</td>
+            <td>Your best material — do not improvise it</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="lbl">Method</span>
+    <p>
+      Have a teammate read the question aloud and answer without looking. If you pause
+      to think for more than two seconds, you have not learned it yet. Six questions,
+      three rounds each.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>
+    All figures quoted in these answers are reproducible from
+    <code>models/metrics.json</code> and <code>models/validation.json</code> by running
+    <code>python train.py</code> and <code>python validate_module3.py</code>.
+  </p>
+  <p style="margin-top:10px">
+    TrialSense is a research screening prototype. It is not a diagnostic tool and not a
+    clinical decision-support system.
+  </p>
+</footer>
+
+</div>

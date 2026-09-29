@@ -1,0 +1,7576 @@
+{
+  "562.30349": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain CCUG 70745",
+    "class_labels": {
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 1,
+      "Glycopeptides": 1,
+      "Carbapenems": 1,
+      "Oxazolidinones": 1,
+      "Rifamycins": 1,
+      "Macrolides": 1,
+      "Penicillins": 1,
+      "Cephalosporins": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256/128",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "562.58783": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain ENV323",
+    "class_labels": {
+      "Tetracyclines": 1,
+      "Carbapenems": 0,
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Polymyxins": 0,
+      "Cephalosporins": 0,
+      "Penicillins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "piperacillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      }
+    ]
+  },
+  "562.58786": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain ENV463",
+    "class_labels": {
+      "Penicillins": 1,
+      "Fluoroquinolones": 0,
+      "Cephalosporins": 1,
+      "Aminoglycosides": 0,
+      "Polymyxins": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Carbapenems": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "norfloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "cefoxitin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "clsi",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "ertapenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      },
+      {
+        "antibiotic": "cefuroxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "eucast",
+        "pmid": [
+          29184361
+        ]
+      }
+    ]
+  },
+  "562.7635": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain 505545",
+    "class_labels": {
+      "Macrolides": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 0,
+      "Tetracyclines": 0,
+      "Cephalosporins": 0,
+      "Carbapenems": 0,
+      "Penicillins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "norfloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "cefepime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      }
+    ]
+  },
+  "562.7712": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain 403726_aEPEC",
+    "class_labels": {
+      "Aminoglycosides": 1,
+      "Fluoroquinolones": 0,
+      "Penicillins": 1,
+      "Tetracyclines": 1,
+      "Cephalosporins": 0,
+      "Macrolides": 0,
+      "Carbapenems": 0,
+      "Trimethoprim-sulfonamides": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      }
+    ]
+  },
+  "562.7724": {
+    "organism": "Escherichia coli",
+    "name": "Escherichia coli strain 703753",
+    "class_labels": {
+      "Fluoroquinolones": 0,
+      "Cephalosporins": 0,
+      "Macrolides": 0,
+      "Tetracyclines": 1,
+      "Penicillins": 0,
+      "Carbapenems": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Aminoglycosides": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "norfloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "cefepime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "cefepime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30127495
+        ]
+      }
+    ]
+  },
+  "573.18476": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae strain CCUG 70742",
+    "class_labels": {
+      "Macrolides": 1,
+      "Penicillins": 1,
+      "Carbapenems": 1,
+      "Polymyxins": 0,
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 1,
+      "Cephalosporins": 1,
+      "Glycopeptides": 1,
+      "Oxazolidinones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "clarithromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "==24",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ertapenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "==0.38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==6",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256/128",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "573.18477": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae strain CCUG 70747",
+    "class_labels": {
+      "Cephalosporins": 1,
+      "Fluoroquinolones": 1,
+      "Aminoglycosides": 1,
+      "Polymyxins": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Oxazolidinones": 1,
+      "Rifamycins": 1,
+      "Carbapenems": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">32/608",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "==16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefuroxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "573.62712": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae MGL_K_10",
+    "class_labels": {
+      "Rifamycins": 1,
+      "Aminoglycosides": 1,
+      "Tetracyclines": 1,
+      "Macrolides": 1,
+      "Polymyxins": 1,
+      "Fluoroquinolones": 1,
+      "Penicillins": 1,
+      "Trimethoprim-sulfonamides": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "polymyxin b",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "13",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "573.12928": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae 96",
+    "class_labels": {
+      "Aminoglycosides": 0,
+      "Cephalosporins": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Penicillins": 0,
+      "Fluoroquinolones": 0,
+      "Carbapenems": 0,
+      "Tetracyclines": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "cefuroxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "4/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      }
+    ]
+  },
+  "573.12972": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae 3244",
+    "class_labels": {
+      "Tetracyclines": 1,
+      "Cephalosporins": 1,
+      "Penicillins": 1,
+      "Aminoglycosides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Carbapenems": 0,
+      "Fluoroquinolones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "16/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "cefoxitin",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">2/38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.125",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28776045,
+          28512093
+        ]
+      }
+    ]
+  },
+  "573.13071": {
+    "organism": "Klebsiella pneumoniae",
+    "name": "Klebsiella pneumoniae KPN1052ec",
+    "class_labels": {
+      "Cephalosporins": 1,
+      "Fluoroquinolones": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Penicillins": 1,
+      "Carbapenems": 0,
+      "Tetracyclines": 0,
+      "Aminoglycosides": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">2/38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "16/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          28512093,
+          28776045
+        ]
+      }
+    ]
+  },
+  "287.5956": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa strain CCUG 70744",
+    "class_labels": {
+      "Rifamycins": 1,
+      "Macrolides": 1,
+      "Penicillins": 1,
+      "Oxazolidinones": 1,
+      "Aminoglycosides": 0,
+      "Glycopeptides": 1,
+      "Carbapenems": 1,
+      "Cephalosporins": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Polymyxins": 0,
+      "Fluoroquinolones": 1,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "clarithromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256/128",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefuroxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">32/608",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "==0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ertapenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "==8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "==64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": "==256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "287.32668": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa 20200317_MGL_47",
+    "class_labels": {
+      "Tetracyclines": 1,
+      "Penicillins": 1,
+      "Aminoglycosides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Fluoroquinolones": 1,
+      "Macrolides": 1,
+      "Polymyxins": 1,
+      "Rifamycins": 1,
+      "Carbapenems": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "polymyxin b",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "25",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "287.34624": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa 20200317_MGL_47",
+    "class_labels": {
+      "Macrolides": 1,
+      "Penicillins": 1,
+      "Aminoglycosides": 1,
+      "Carbapenems": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Polymyxins": 1,
+      "Tetracyclines": 1,
+      "Rifamycins": 1,
+      "Fluoroquinolones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "polymyxin b",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "287.32645": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa MGL_95",
+    "class_labels": {
+      "Aminoglycosides": 1,
+      "Macrolides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Penicillins": 1,
+      "Fluoroquinolones": 1,
+      "Tetracyclines": 1,
+      "Rifamycins": 1,
+      "Carbapenems": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "11",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "10",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "287.32646": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa MGL_96",
+    "class_labels": {
+      "Tetracyclines": 1,
+      "Fluoroquinolones": 1,
+      "Penicillins": 1,
+      "Aminoglycosides": 1,
+      "Rifamycins": 1,
+      "Macrolides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Carbapenems": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "287.32647": {
+    "organism": "Pseudomonas aeruginosa",
+    "name": "Pseudomonas aeruginosa MGL_100",
+    "class_labels": {
+      "Aminoglycosides": 1,
+      "Fluoroquinolones": 1,
+      "Carbapenems": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Penicillins": 1,
+      "Tetracyclines": 1,
+      "Macrolides": 1,
+      "Rifamycins": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "12",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "470.5040": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii strain CCUG 70743",
+    "class_labels": {
+      "Fluoroquinolones": 1,
+      "Macrolides": 1,
+      "Penicillins": 1,
+      "Glycopeptides": 1,
+      "Carbapenems": 1,
+      "Aminoglycosides": 1,
+      "Cephalosporins": 1,
+      "Polymyxins": 0,
+      "Trimethoprim-sulfonamides": 1,
+      "Oxazolidinones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "==32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "==16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ertapenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "==48",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "==64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "==64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefuroxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">32/608",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">256/128",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Resistant",
+        "measurement": ">256",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "470.22944": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii MGL_Ab_3",
+    "class_labels": {
+      "Fluoroquinolones": 1,
+      "Aminoglycosides": 1,
+      "Penicillins": 1,
+      "Tetracyclines": 1,
+      "Carbapenems": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Rifamycins": 1,
+      "Polymyxins": 1,
+      "Macrolides": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "polymyxin b",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": null,
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "470.24294": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii MGL_Ab_3",
+    "class_labels": {
+      "Polymyxins": 1,
+      "Aminoglycosides": 1,
+      "Rifamycins": 1,
+      "Carbapenems": 1,
+      "Tetracyclines": 1,
+      "Penicillins": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Macrolides": 1,
+      "Fluoroquinolones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "polymyxin b",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "carbenicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "neomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "doxycycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Disk diffusion",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          37549252
+        ]
+      }
+    ]
+  },
+  "470.1561": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii strain MRSN4119",
+    "class_labels": {
+      "Cephalosporins": 1,
+      "Penicillins": 1,
+      "Aminoglycosides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Tetracyclines": 1,
+      "Fluoroquinolones": 1,
+      "Carbapenems": 1,
+      "Polymyxins": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "==8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">=16/304",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">2/38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "==128",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ticarcillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">64/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefoxitin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      }
+    ]
+  },
+  "470.1562": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii strain MRSN3941",
+    "class_labels": {
+      "Aminoglycosides": 1,
+      "Carbapenems": 1,
+      "Fluoroquinolones": 1,
+      "Cephalosporins": 1,
+      "Penicillins": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Polymyxins": 1,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "==16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "==8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ticarcillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">64/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefoxitin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">=16/304",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "piperacillin/tazobactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=128/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">2/38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Resistant",
+        "measurement": "==192",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      }
+    ]
+  },
+  "470.1563": {
+    "organism": "Acinetobacter baumannii",
+    "name": "Acinetobacter baumannii strain MRSN5540",
+    "class_labels": {
+      "Tetracyclines": 1,
+      "Cephalosporins": 1,
+      "Fluoroquinolones": 1,
+      "Carbapenems": 1,
+      "Aminoglycosides": 1,
+      "Trimethoprim-sulfonamides": 1,
+      "Penicillins": 1,
+      "Polymyxins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefoxitin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "tobramycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">2/38",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Resistant",
+        "measurement": ">=16/304",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "ceftazidime",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">=64",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "amikacin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": ">32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "==0.75",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": [
+          23812239
+        ]
+      }
+    ]
+  },
+  "1280.15938": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain 0780-1302-2015",
+    "class_labels": {
+      "Penicillins": 0,
+      "Macrolides": 0,
+      "Carbapenems": 0,
+      "Oxazolidinones": 0,
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 0,
+      "Tetracyclines": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Glycopeptides": 0,
+      "Cephalosporins": 0,
+      "Rifamycins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "1280.16052": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain 0908-2002-2015",
+    "class_labels": {
+      "Fluoroquinolones": 0,
+      "Carbapenems": 0,
+      "Penicillins": 0,
+      "Rifamycins": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Glycopeptides": 0,
+      "Aminoglycosides": 0,
+      "Macrolides": 0,
+      "Cephalosporins": 0,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "1280.15930": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain 13C",
+    "class_labels": {
+      "Aminoglycosides": 0,
+      "Oxazolidinones": 0,
+      "Penicillins": 1,
+      "Trimethoprim-sulfonamides": 0,
+      "Cephalosporins": 1,
+      "Fluoroquinolones": 1,
+      "Rifamycins": 0,
+      "Macrolides": 0,
+      "Tetracyclines": 0,
+      "Glycopeptides": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "<=8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": "<=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "minocycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "==4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "minocycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "<=4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      }
+    ]
+  },
+  "1280.15931": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain LAC",
+    "class_labels": {
+      "Cephalosporins": 1,
+      "Oxazolidinones": 0,
+      "Glycopeptides": 0,
+      "Aminoglycosides": 0,
+      "Tetracyclines": 0,
+      "Penicillins": 1,
+      "Trimethoprim-sulfonamides": 0,
+      "Macrolides": 1,
+      "Rifamycins": 0,
+      "Fluoroquinolones": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ceftriaxone",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": "==32",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Resistant",
+        "measurement": ">16",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "minocycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "minocycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": "==16/8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">16/8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "penicillin",
+        "class": "Penicillins",
+        "phenotype": "Resistant",
+        "measurement": ">8",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "CLSI",
+        "pmid": null
+      }
+    ]
+  },
+  "1280.16051": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain 1014-2602-2015",
+    "class_labels": {
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 0,
+      "Cephalosporins": 0,
+      "Carbapenems": 0,
+      "Tetracyclines": 0,
+      "Penicillins": 0,
+      "Glycopeptides": 0,
+      "Macrolides": 0,
+      "Oxazolidinones": 0,
+      "Rifamycins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "==0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "1280.16436": {
+    "organism": "Staphylococcus aureus",
+    "name": "Staphylococcus aureus strain 0257-2201-2015",
+    "class_labels": {
+      "Penicillins": 0,
+      "Aminoglycosides": 0,
+      "Fluoroquinolones": 0,
+      "Macrolides": 0,
+      "Cephalosporins": 0,
+      "Carbapenems": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Rifamycins": 0,
+      "Glycopeptides": 0,
+      "Oxazolidinones": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "oxacillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.25",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "cefazolin",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "moxifloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "trimethoprim/sulfamethoxazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5/9.5",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "<=1",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin/sulbactam",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=8/4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "amoxicillin/clavulanic acid",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=4/2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "==2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "==4",
+        "unit": "mg/L",
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": null
+      }
+    ]
+  },
+  "1352.4398": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 270",
+    "class_labels": {
+      "Glycopeptides": 0,
+      "Tetracyclines": 0,
+      "Penicillins": 0,
+      "Aminoglycosides": 0,
+      "Oxazolidinones": 0,
+      "Rifamycins": 1,
+      "Macrolides": 1,
+      "Fluoroquinolones": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "20",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "27",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "25",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "27",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "30",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "29",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "rifampin",
+        "class": "Rifamycins",
+        "phenotype": "Resistant",
+        "measurement": "6",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": "10",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      },
+      {
+        "antibiotic": "levofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "20",
+        "unit": "mm",
+        "method": "Disk diffusion",
+        "standard": "CLSI",
+        "pmid": null
+      }
+    ]
+  },
+  "1352.10125": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 17651_4#1",
+    "class_labels": {
+      "Penicillins": 0,
+      "Glycopeptides": 0,
+      "Macrolides": 1,
+      "Aminoglycosides": 1,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      }
+    ]
+  },
+  "1352.10126": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 17328_1#79",
+    "class_labels": {
+      "Glycopeptides": 0,
+      "Penicillins": 0,
+      "Macrolides": 1,
+      "Aminoglycosides": 1,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "4",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      }
+    ]
+  },
+  "1352.10127": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 17651_2#87",
+    "class_labels": {
+      "Glycopeptides": 0,
+      "Penicillins": 0,
+      "Macrolides": 1,
+      "Aminoglycosides": 1,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "4",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      }
+    ]
+  },
+  "1352.10128": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 17651_2#88",
+    "class_labels": {
+      "Glycopeptides": 0,
+      "Penicillins": 0,
+      "Macrolides": 1,
+      "Aminoglycosides": 1,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "1",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      }
+    ]
+  },
+  "1352.10129": {
+    "organism": "Enterococcus faecium",
+    "name": "Enterococcus faecium strain 17651_2#89",
+    "class_labels": {
+      "Glycopeptides": 0,
+      "Penicillins": 0,
+      "Macrolides": 1,
+      "Aminoglycosides": 0,
+      "Oxazolidinones": 0,
+      "Tetracyclines": 1
+    },
+    "evidence": [
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Broth dilution",
+        "standard": "EUCAST",
+        "pmid": [
+          30401778
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "<=2",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "erythromycin",
+        "class": "Macrolides",
+        "phenotype": "Resistant",
+        "measurement": ">=8",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "linezolid",
+        "class": "Oxazolidinones",
+        "phenotype": "Susceptible",
+        "measurement": "2",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Vitek_2-P607_card",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "teicoplanin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Resistant",
+        "measurement": ">=16",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      },
+      {
+        "antibiotic": "vancomycin",
+        "class": "Glycopeptides",
+        "phenotype": "Susceptible",
+        "measurement": "<=0.5",
+        "unit": "mg/L",
+        "method": "MIC",
+        "standard": "EUCAST",
+        "pmid": [
+          38219758
+        ]
+      }
+    ]
+  },
+  "28901.24807": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica IndS87",
+    "class_labels": {
+      "Trimethoprim-sulfonamides": 0,
+      "Macrolides": 0,
+      "Tetracyclines": 0,
+      "Fluoroquinolones": 1,
+      "Aminoglycosides": 0,
+      "Penicillins": 0,
+      "Carbapenems": 0,
+      "Polymyxins": 0,
+      "Cephalosporins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "sulfonamides",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "nalidixic acid",
+        "class": "Fluoroquinolones",
+        "phenotype": "Resistant",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "imipenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "colistin",
+        "class": "Polymyxins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI, EUCAST",
+        "pmid": [
+          35861536
+        ]
+      }
+    ]
+  },
+  "28901.21720": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica AUSMDU00018105",
+    "class_labels": {
+      "Trimethoprim-sulfonamides": 0,
+      "Tetracyclines": 0,
+      "Carbapenems": 0,
+      "Fluoroquinolones": 0,
+      "Penicillins": 0,
+      "Aminoglycosides": 0,
+      "Macrolides": 0,
+      "Cephalosporins": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "trimethoprim",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "sulfathiazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      }
+    ]
+  },
+  "28901.22054": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica AUSMDU00033118",
+    "class_labels": {
+      "Trimethoprim-sulfonamides": 0,
+      "Carbapenems": 0,
+      "Tetracyclines": 0,
+      "Fluoroquinolones": 0,
+      "Penicillins": 0,
+      "Cephalosporins": 0,
+      "Aminoglycosides": 0,
+      "Macrolides": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "sulfathiazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "streptomycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      }
+    ]
+  },
+  "28901.22371": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica AUSMDU00018920",
+    "class_labels": {
+      "Fluoroquinolones": 0,
+      "Aminoglycosides": 0,
+      "Tetracyclines": 0,
+      "Trimethoprim-sulfonamides": 0,
+      "Cephalosporins": 0,
+      "Penicillins": 0,
+      "Macrolides": 0,
+      "Carbapenems": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "sulfathiazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      }
+    ]
+  },
+  "28901.23138": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica AUSMDU00033639",
+    "class_labels": {
+      "Macrolides": 0,
+      "Tetracyclines": 0,
+      "Carbapenems": 0,
+      "Fluoroquinolones": 0,
+      "Cephalosporins": 0,
+      "Aminoglycosides": 0,
+      "Penicillins": 0,
+      "Trimethoprim-sulfonamides": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "trimethoprim",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      }
+    ]
+  },
+  "28901.23171": {
+    "organism": "Salmonella enterica",
+    "name": "Salmonella enterica AUSMDU00004705",
+    "class_labels": {
+      "Trimethoprim-sulfonamides": 0,
+      "Penicillins": 0,
+      "Tetracyclines": 0,
+      "Aminoglycosides": 0,
+      "Macrolides": 0,
+      "Carbapenems": 0,
+      "Cephalosporins": 0,
+      "Fluoroquinolones": 0
+    },
+    "evidence": [
+      {
+        "antibiotic": "trimethoprim",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ampicillin",
+        "class": "Penicillins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "tetracycline",
+        "class": "Tetracyclines",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "kanamycin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "gentamicin",
+        "class": "Aminoglycosides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "azithromycin",
+        "class": "Macrolides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "meropenem",
+        "class": "Carbapenems",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "sulfathiazole",
+        "class": "Trimethoprim-sulfonamides",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "cefotaxime",
+        "class": "Cephalosporins",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      },
+      {
+        "antibiotic": "ciprofloxacin",
+        "class": "Fluoroquinolones",
+        "phenotype": "Susceptible",
+        "measurement": "",
+        "unit": null,
+        "method": "Agar dilution",
+        "standard": "CLSI",
+        "pmid": [
+          34907895
+        ]
+      }
+    ]
+  }
+}

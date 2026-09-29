@@ -95,10 +95,37 @@ MIN_BACKGROUND_POOL = 6
 # the background and its spread.
 CORE_QUANTILE = 0.6
 
-# Detection floors. Both must be exceeded. Calibrated against the validation
-# set described in the module docstring.
-Z_FLOOR = 8.0
-ABSOLUTE_FLOOR = 0.18
+# Detection floors. Both must be exceeded.
+#
+# RECALIBRATED AGAINST REAL GENOMES. The previous values (8.0 / 0.18) were
+# tuned on generated "clean" strains, whose composition is uniform because a
+# generator made it so. Real genomes are not uniform — they carry prophages,
+# genomic islands and rRNA operons — and measured against 42 real assemblies
+# the old floors flagged something in every single one, at 21.75 segments per
+# megabase. On a 5 Mb genome that is roughly a hundred flagged regions, which
+# is noise rather than a screening signal.
+#
+# These values come from calibrate_novelty.py, which splits the 42 genomes in
+# half, sweeps the thresholds on one half and reports on the other. Measured
+# on the HELD-OUT half:
+#
+#                       false alarms      sensitivity to a real foreign insert
+#     8.0  / 0.18       21.75 per Mb      100%
+#     25.0 / 0.40        1.57 per Mb       52%   <- SHIPPED
+#
+# THE TRADE-OFF IS REAL AND IS NOT TUNED AWAY. There is no setting that is
+# good at both: the frontier runs from 100% sensitivity at ~22 flags/Mb to
+# ~24% sensitivity at 0.5 flags/Mb. Tetranucleotide composition cannot tell a
+# genuine acquired element from a native genomic island, because both are
+# compositionally foreign to the host core. We chose roughly eight flags per
+# genome, which a person can actually review, and accept that this misses
+# about half of true insertions.
+#
+# Anyone quoting the old "0% false positives, 100% sensitivity" figure should
+# know it was measured on 19 cases from the same generator that produced the
+# training data.
+Z_FLOOR = 25.0
+ABSOLUTE_FLOOR = 0.40
 
 
 def _cosine(a: np.ndarray, b: np.ndarray) -> float:
@@ -397,6 +424,10 @@ def novelty_scan(
     diag["available"] = True
     diag["peak_excess"] = float(excess.max())
     diag["peak_z"] = float(z.max())
+    # Exposed so threshold calibration can sweep without re-running the scan.
+    diag["_starts"] = np.asarray(starts)
+    diag["_z"] = z
+    diag["_excess"] = excess
 
     flagged = [
         i for i in range(len(starts))
@@ -502,3 +533,23 @@ def build_novelty_report(
         rpt.ood_percentile = pct
         rpt.ood_band = band if avail else "UNKNOWN"
     return rpt
+
+
+def scan_statistics(sequence: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Per-window (starts, robust_z, excess_divergence) for one sequence.
+
+    Threshold calibration needs to try many Z_FLOOR / ABSOLUTE_FLOOR pairs
+    against the same sequence. The expensive part of novelty_scan is building
+    the window profiles and the host background, and that does not depend on
+    the thresholds at all — so this runs it once and hands back the statistics
+    the thresholds are applied to. Sweeping over these is what makes a grid
+    search affordable instead of an overnight job.
+
+    Returns three empty arrays when the scan could not run.
+    """
+    _, diag = novelty_scan(sequence)
+    if not diag.get("available"):
+        empty = np.empty(0)
+        return empty, empty, empty
+    return diag["_starts"], diag["_z"], diag["_excess"]

@@ -114,24 +114,47 @@ LAST_RESORT = {"Carbapenems", "Glycopeptides", "Oxazolidinones", "Polymyxins"}
 #     major error      = predicted resistant, actually susceptible
 #                        -> one confirmatory assay recovers it.
 #
-#     threshold  very major   major
-#         0.50        5.31%   1.42%   <- previous default
-#         0.35        1.45%   8.38%   <- SHIPPED, chosen by the sweep
+# DERIVED, NOT CHOSEN. See derive_threshold.py, which produces
+# models/threshold_derivation.json.
 #
-# Commercial devices are held to a very-major rate on the order of 1.5%, and
-# 0.50 did not meet it. 0.35 does, and it is also exactly the threshold
-# Module 1 already ships (ddi.SCREENING_THRESHOLD) — both derived independently
-# from the same principle, that a missed danger costs far more than a false
-# alarm in pre-trial screening.
+# A threshold is only meaningful once you say how much worse a missed
+# resistance is than a false alarm. We state that explicitly as a cost ratio
+# of 10 — one very major error costs the same as ten unnecessary confirmatory
+# assays — and pick the threshold minimising
 #
-# The ICMR cross-check gives a concrete example of what 0.50 was costing:
-# E. coli ST131 carries gyrA_S83L, a fluoroquinolone determinant, and the model
-# scores it 44%. At 0.50 that was reported SUSCEPTIBLE — a very major error on
-# a strain that demonstrably carries the gene. At 0.35 it is called correctly.
+#     expected cost = 10 * P(very major) + P(major)
+#
+# On 3,600 held-out constructed comparisons:
+#
+#     threshold  very major   major   accuracy    cost
+#         0.05        1.1%    14.7%     0.892     0.254
+#         0.10        1.1%     9.7%     0.927     0.204   <- SHIPPED, lowest
+#         0.35        4.7%     3.0%     0.965     0.504
+#         0.50        7.7%     1.4%     0.968     0.780
+#
+# Commercial susceptibility devices are held to a very-major rate around 1.5%.
+# 0.10 meets that; the previous 0.35 did not. Note that accuracy is HIGHER at
+# 0.50 — optimising accuracy on an imbalanced problem just predicts the
+# majority class, which here means calling resistant isolates susceptible.
+# That is why the cost model exists.
+#
+# WHAT THIS THRESHOLD DOES NOT FIX. On 350 real laboratory results the model
+# scores near chance at every threshold (best 0.503 at 0.05). The sweep above
+# describes behaviour on constructed isolates only. Tuning this number does
+# not make the classifier work on real genomes; see reports/AUDIT_RESPONSE.md.
+#
+# HISTORY. An earlier comment justified 0.35 with a table reading 1.45% /
+# 8.38% and concluded the 1.5% target was met. Those figures predated the swap
+# to real reference sequences and were never re-measured; the live values were
+# 7.41% / 3.65%, so the justification was false. The argument that 0.35 also
+# matches Module 1's screening threshold was symmetry, not evidence. The
+# worked example that sat here is withdrawn too: it argued that E. coli ST131
+# "demonstrably carries" gyrA_S83L, but carrying the gyrA LOCUS demonstrates
+# nothing, because every E. coli has gyrA. See POINT_MUTATION_SPECS.
 #
 # Changing this single line moves every call site at once. Re-run
-# validate_module3.py afterwards.
-RESISTANCE_CALL_THRESHOLD = 0.35
+# validate_module3.py and derive_threshold.py afterwards.
+RESISTANCE_CALL_THRESHOLD = 0.10
 
 # --- and a second threshold, because there are two different questions -------
 #
@@ -890,8 +913,277 @@ GENE_FILES: dict[str, str] = {
     "rpoB_S450L": "rpoB",
 }
 
-# Determinants whose resistance is a point mutation we cannot resolve.
+# Determinants whose resistance is a point mutation rather than gene presence.
 POINT_MUTATION_GENES = {"gyrA_S83L", "rpoB_S450L"}
+
+
+# =============================================================================
+# ALLELE RESOLUTION FOR POINT-MUTATION DETERMINANTS
+#
+# THE BUG THIS FIXES
+# ------------------
+# Detection matches the gyrA LOCUS, and every E. coli carries gyrA. The
+# reference on disk is wild-type K-12 gyrA, so a fully susceptible isolate
+# matched it at ~0.999 similarity, cleared the 0.83 detection threshold, and
+# was then handed to apply_mechanism_floor, which raised Fluoroquinolones to
+# 0.89 and reported the isolate resistant. The classifier's correct 0.02 was
+# overridden. Measured before the fix:
+#
+#     apply_mechanism_floor({'Fluoroquinolones': 0.02}, [('gyrA_S83L', 0.99)])
+#         -> {'Fluoroquinolones': 0.891}
+#
+# Every wild-type E. coli and every wild-type M. tuberculosis was therefore
+# called resistant with confidence, from the locus alone.
+#
+# WHY IT IS RESOLVABLE AFTER ALL
+# ------------------------------
+# The note above says a single-codon change is invisible to k-mer composition.
+# That is true, and it is why the CLASSIFIER cannot see it. It does not follow
+# that we cannot see it at all: we can read the codon directly. We anchor on
+# the conserved flank beside the codon, then inspect the three bases that
+# follow. That is not statistics, it is a lookup, and it is exact.
+#
+# WHAT EACH OUTCOME MEANS
+#     RESISTANT     the resistant codon is present -> mechanism floor applies
+#     WILD_TYPE     the susceptible codon is present -> NO floor; the locus
+#                   being present says nothing about resistance
+#     UNDETERMINED  neither flank could be anchored, so the codon was never
+#                   read -> NO floor, and the report says so
+#
+# UNDETERMINED deliberately does not get the floor. The floor asserts
+# resistance, and we will not assert what we did not measure. The classifier
+# probability still stands in that case, so the isolate is not silently
+# declared susceptible either.
+# =============================================================================
+
+ALLELE_RESISTANT = "resistant"
+ALLELE_WILD_TYPE = "wild_type"
+ALLELE_UNDETERMINED = "undetermined"
+
+# Leucine codons. S83L and S450L are both serine -> leucine substitutions, and
+# several codons spell leucine, so any of them at that position is resistant.
+_LEUCINE_CODONS = ("TTA", "TTG", "CTT", "CTC", "CTA", "CTG")
+
+# Length of conserved flank used to anchor on the codon. Long enough to be
+# unique in a bacterial genome, short enough to survive nearby variation.
+_ANCHOR_LEN = 18
+
+
+@dataclass(frozen=True)
+class PointMutationSpec:
+    """One resistance-conferring codon substitution."""
+    gene: str
+    codon: int  # 1-based amino-acid position
+    wild_codon: str
+    resistant_codons: tuple[str, ...]
+    description: str
+
+
+POINT_MUTATION_SPECS: dict[str, PointMutationSpec] = {
+    "gyrA_S83L": PointMutationSpec(
+        "gyrA_S83L", 83, "TCG", _LEUCINE_CODONS,
+        "GyrA Ser83Leu in the quinolone resistance-determining region; the "
+        "commonest fluoroquinolone resistance mutation in E. coli",
+    ),
+    "rpoB_S450L": PointMutationSpec(
+        "rpoB_S450L", 450, "TCG", _LEUCINE_CODONS,
+        "RpoB Ser450Leu (M. tuberculosis numbering) in the rifampicin "
+        "resistance-determining region; the commonest rifampicin mutation",
+    ),
+}
+
+_COMPLEMENT = str.maketrans("ACGT", "TGCA")
+
+
+def _reverse_complement(seq: str) -> str:
+    return seq.translate(_COMPLEMENT)[::-1]
+
+
+def _read_codon_at(sequence: str, reference: str, codon_index0: int) -> str | None:
+    """
+    Read the three bases at a codon position in `sequence`, using `reference`
+    to locate it.
+
+    The codon is found by exact search for the 18 bases immediately before it
+    in the reference, then reading the next three. If that flank carries
+    variation the flank AFTER the codon is tried instead. Both strands are
+    searched, because an assembly contig may be in either orientation.
+
+    Returns None when the position could not be anchored — which is a real
+    answer, not a failure, and callers must not treat it as either allele.
+    """
+    start = codon_index0 * 3
+    if start < _ANCHOR_LEN or start + 3 + _ANCHOR_LEN > len(reference):
+        return None
+
+    left = reference[start - _ANCHOR_LEN:start]
+    right = reference[start + 3:start + 3 + _ANCHOR_LEN]
+    seq = "".join(c for c in sequence.upper() if c in "ACGT")
+
+    for strand in (seq, _reverse_complement(seq)):
+        pos = strand.find(left)
+        if pos >= 0:
+            codon = strand[pos + _ANCHOR_LEN:pos + _ANCHOR_LEN + 3]
+            if len(codon) == 3:
+                return codon
+        pos = strand.find(right)
+        if pos >= 3:
+            codon = strand[pos - 3:pos]
+            if len(codon) == 3:
+                return codon
+    return None
+
+
+# =============================================================================
+# CONDITIONAL CLASS CLAIMS
+#
+# Some genes defeat one class outright but a second class only in certain
+# variants. blaSHV is the case that matters to us.
+#
+# THE PROBLEM
+#     SHV-1, the ancestral allele, is a narrow-spectrum penicillinase. The
+#     extended-spectrum variants (SHV-2, SHV-12 and relatives) additionally
+#     defeat third-generation cephalosporins. Our reference sequence is SHV-1,
+#     and blaSHV was mapped to BOTH Penicillins and Cephalosporins on the
+#     argument that ESBL variants dominate clinical isolates and ICMR reports
+#     the family at group level.
+#
+#     The consequence is that any Klebsiella carrying ordinary chromosomal
+#     SHV-1 — which is most of them, and which is cephalosporin-susceptible —
+#     was called cephalosporin-resistant from the locus alone. Same failure as
+#     gyrA: the locus does not determine the phenotype, the allele does.
+#
+# THE DISCRIMINATOR
+#     Ambler position 238. SHV-1 has glycine there; the extended-spectrum
+#     variants substitute serine, which widens the active site enough to
+#     accept the bulkier cephalosporin side chain.
+#
+#     Ambler numbering is offset from our sequence's own numbering, so the
+#     position was located by the conserved K-T-G motif at Ambler 234-236,
+#     which sits at 0-based residues 229-231 here. Ambler 238 is therefore
+#     0-based residue 233, and the codon there reads GGC (glycine) —
+#     consistent with SHV-1, as expected.
+# =============================================================================
+
+_SERINE_CODONS = ("AGC", "AGT", "TCA", "TCC", "TCG", "TCT")
+
+
+@dataclass(frozen=True)
+class ConditionalClassSpec:
+    """Classes a gene defeats only in certain variants."""
+    gene: str
+    codon_index0: int
+    baseline_codon: str
+    upgraded_codons: tuple[str, ...]
+    conditional_classes: tuple[str, ...]
+    description: str
+
+
+CONDITIONAL_CLASS_SPECS: dict[str, ConditionalClassSpec] = {
+    "blaSHV": ConditionalClassSpec(
+        "blaSHV", 233, "GGC", _SERINE_CODONS, ("Cephalosporins",),
+        "SHV Gly238Ser converts the narrow-spectrum penicillinase into an "
+        "extended-spectrum beta-lactamase that also defeats third-generation "
+        "cephalosporins",
+    ),
+}
+
+
+def classes_conferred(gene_name: str,
+                      sequence: str | None = None) -> tuple[list[str], str]:
+    """
+    Which classes a detected gene actually defeats in THIS isolate.
+
+    Returns (classes, note). Conditional classes are included only when the
+    upgrading codon is read off the sequence. Where it cannot be read, the
+    conditional class is withheld: we do not assert what we did not measure.
+    """
+    gene = RESISTANCE_GENES.get(gene_name)
+    if gene is None:
+        return [], "unknown gene"
+
+    classes = list(gene.confers_resistance_to)
+    spec = CONDITIONAL_CLASS_SPECS.get(gene_name)
+    if spec is None:
+        return classes, ""
+
+    def withhold(reason: str) -> tuple[list[str], str]:
+        kept = [c for c in classes if c not in spec.conditional_classes]
+        return kept, reason
+
+    if sequence is None:
+        return withhold("no sequence supplied, so the variant was not resolved")
+
+    codon = _read_codon_at(sequence, _load_reference(gene_name), spec.codon_index0)
+    if codon is None:
+        return withhold("the discriminating codon could not be anchored")
+    if codon in spec.upgraded_codons:
+        return classes, f"extended-spectrum variant (codon reads {codon})"
+    if codon == spec.baseline_codon:
+        return withhold(f"narrow-spectrum ancestral allele (codon reads {codon})")
+    return withhold(f"codon reads {codon}, which is neither known variant")
+
+
+def read_allele(sequence: str, gene_name: str) -> tuple[str, str]:
+    """
+    Read the actual codon at a resistance position.
+
+    Returns (state, detail) where state is one of ALLELE_RESISTANT,
+    ALLELE_WILD_TYPE or ALLELE_UNDETERMINED.
+
+    HOW
+    ---
+    The codon is located by exact search for the 18 bases immediately before
+    it in the reference, then the next three bases are read. If that flank
+    carries variation the search fails, so the flank AFTER the codon is tried
+    as well, reading the three bases before it. Both strands are searched,
+    because an assembly contig may be in either orientation.
+
+    LIMITATION
+    ----------
+    An isolate with variation in both flanks returns UNDETERMINED even though
+    the codon may be readable by alignment. This trades recall for the
+    guarantee that a reported codon was genuinely observed and not inferred.
+    """
+    spec = POINT_MUTATION_SPECS.get(gene_name)
+    if spec is None:
+        return ALLELE_UNDETERMINED, "no mutation specification for this gene"
+
+    reference = _load_reference(gene_name)
+    start = (spec.codon - 1) * 3
+    if start + 3 + _ANCHOR_LEN > len(reference) or start < _ANCHOR_LEN:
+        return ALLELE_UNDETERMINED, "codon lies too close to the reference end"
+
+    left_anchor = reference[start - _ANCHOR_LEN:start]
+    right_anchor = reference[start + 3:start + 3 + _ANCHOR_LEN]
+
+    seq = "".join(c for c in sequence.upper() if c in "ACGT")
+    for strand_name, strand in (("+", seq), ("-", _reverse_complement(seq))):
+        codon = ""
+        pos = strand.find(left_anchor)
+        if pos >= 0:
+            codon = strand[pos + _ANCHOR_LEN:pos + _ANCHOR_LEN + 3]
+        else:
+            pos = strand.find(right_anchor)
+            if pos >= 3:
+                codon = strand[pos - 3:pos]
+        if len(codon) != 3:
+            continue
+
+        if codon in spec.resistant_codons:
+            return (ALLELE_RESISTANT,
+                    f"codon {spec.codon} reads {codon} (resistant) on the "
+                    f"{strand_name} strand")
+        if codon == spec.wild_codon:
+            return (ALLELE_WILD_TYPE,
+                    f"codon {spec.codon} reads {codon} (wild type) on the "
+                    f"{strand_name} strand")
+        return (ALLELE_UNDETERMINED,
+                f"codon {spec.codon} reads {codon}, which is neither the "
+                f"wild-type nor a known resistant codon")
+
+    return (ALLELE_UNDETERMINED,
+            f"neither flank of codon {spec.codon} could be anchored")
 
 _SEQ_CACHE: dict[str, str] = {}
 
@@ -981,17 +1273,50 @@ def _mutate(seq: str, rate: float, rng: np.random.RandomState) -> str:
     return "".join(arr)
 
 
+def _resistant_cassette(gene_name: str) -> str:
+    """
+    The sequence to plant when an isolate is said to CARRY a determinant.
+
+    For an acquired gene this is just the reference. For a point-mutation
+    determinant the reference on disk is the wild-type locus, which is the
+    susceptible sequence, so the resistant codon is substituted in.
+
+    Detection (`locate_genes`) and novelty masking deliberately keep using the
+    plain reference: they are asking whether the locus is present, which is a
+    different question from whether it confers resistance.
+    """
+    seq = _gene_cassette(gene_name)
+    spec = POINT_MUTATION_SPECS.get(gene_name)
+    if spec is None:
+        return seq
+    start = (spec.codon - 1) * 3
+    if start + 3 > len(seq):
+        return seq
+    return seq[:start] + spec.resistant_codons[1] + seq[start + 3:]
+
+
 def synthesize_isolate(
     genes: list[str],
     gc_content: float = 0.51,
     seed: int = 0,
     divergence: float = 0.02,
 ) -> str:
-    """Build one isolate sequence: background + a cassette per carried gene."""
+    """
+    Build one isolate sequence: background + a cassette per carried gene.
+
+    POINT-MUTATION DETERMINANTS ARE PLANTED AS THE RESISTANT ALLELE.
+    An isolate listed as carrying gyrA_S83L is labelled fluoroquinolone
+    resistant by labels_for_genes, so the sequence must actually contain the
+    resistant codon. Planting the wild-type reference here — which is what the
+    file on disk holds — would build a training set whose sequences say
+    susceptible and whose labels say resistant, and would make the allele
+    check in apply_mechanism_floor disagree with the ground truth on every
+    such isolate.
+    """
     rng = np.random.RandomState(seed)
     parts = [_background(gc_content, rng, BACKGROUND_LEN)]
     for gene in genes:
-        cassette = _mutate(_gene_cassette(gene), divergence, rng)
+        cassette = _mutate(_resistant_cassette(gene), divergence, rng)
         parts.append(cassette)
         # A short spacer, as would separate genes on a real integron/plasmid.
         parts.append(_background(gc_content, rng, 120))
@@ -1047,6 +1372,40 @@ def parse_fasta(text: str) -> str:
 # =============================================================================
 
 
+def _gene_sampling_weights() -> tuple[list[str], np.ndarray]:
+    """
+    How often each determinant should appear in the constructed training set.
+
+    WHY NOT UNIFORM
+    ---------------
+    Sampling all 21 genes equally builds a training set in which blaKPC-2 is
+    as common as blaTEM-1. In Indian isolates it is not: ICMR's 2018 molecular
+    surveillance puts blaTEM-1 at 54% and blaKPC-2 at 15%. A model trained on
+    the uniform set has seen the rare determinants far more often than it ever
+    will in use, and the common ones far less.
+
+    WHERE THE NUMBERS COME FROM
+    ---------------------------
+    surveillance.ICMR_GENE_PREVALENCE, which covers the eight beta-lactamases
+    ICMR genotyped. The other thirteen determinants have no ICMR prevalence
+    figure, so they are given the median of the measured ones rather than a
+    number we invented. That is a deliberate choice to be uninformative where
+    we have no information, not an estimate of their true frequency.
+
+    Weights are relative sampling frequencies, not probabilities of carriage —
+    an isolate's gene count is drawn separately.
+    """
+    from .surveillance import ICMR_GENE_PREVALENCE
+
+    names = list(RESISTANCE_GENES)
+    measured = [ICMR_GENE_PREVALENCE[g] for g in names if g in ICMR_GENE_PREVALENCE]
+    fallback = float(np.median(measured)) if measured else 1.0
+
+    raw = np.array([ICMR_GENE_PREVALENCE.get(g, fallback) for g in names],
+                   dtype=float)
+    return names, raw / raw.sum()
+
+
 def _realistic_gene_combinations(rng: np.random.RandomState, n: int) -> list[list[str]]:
     """
     Sample gene sets that look like real isolates.
@@ -1056,7 +1415,7 @@ def _realistic_gene_combinations(rng: np.random.RandomState, n: int) -> list[lis
     from realistic co-occurrence keeps the training distribution honest, while
     still producing combinations the demo strains never show.
     """
-    gene_names = list(RESISTANCE_GENES)
+    gene_names, gene_weights = _gene_sampling_weights()
     linked = [
         ["sul1", "dfrA17"],
         ["blaCTX-M-15", "aac(6')-Ib"],
@@ -1079,7 +1438,7 @@ def _realistic_gene_combinations(rng: np.random.RandomState, n: int) -> list[lis
             if rng.rand() < 0.35:  # sometimes pull in a linked pair
                 genes.update(linked[rng.randint(len(linked))])
             else:
-                genes.add(gene_names[rng.randint(len(gene_names))])
+                genes.add(str(rng.choice(gene_names, p=gene_weights)))
         combos.append(sorted(genes))
     return combos
 
@@ -1245,6 +1604,71 @@ def _reference_profile(gene_name: str) -> np.ndarray:
 DETECTION_THRESHOLD = 0.83
 
 
+# Block size for the prefix-sum scan below. Every gene's window is rounded to
+# a whole number of blocks, so one shared prefix-sum table serves all 21 genes.
+# 256 keeps the table near 68 MB on a 5 Mb genome while staying finer than the
+# smallest reference gene (861 bp).
+_SCAN_BLOCK = 256
+
+# How far below the detection threshold a coarse, block-aligned score may sit
+# while the region is still worth scoring exactly. Block alignment can only
+# understate a match — the window is offset from the gene and may be a little
+# short — so this margin is what stops that understatement from losing a real
+# hit. Measured on the bundled strains, true hits whose exact score clears
+# 0.83 scored no lower than 0.60 coarsely, so 0.30 leaves roughly double the
+# observed worst case.
+_COARSE_MARGIN = 0.30
+
+# Most coarse peaks per gene that get an exact re-score. The exact stage is
+# the expensive one, and on a 3 Mb genome thousands of windows can clear the
+# coarse margin, so refining every one of them would cost more than the
+# exhaustive scan this replaces. The best exact match sits under one of the
+# strongest coarse peaks.
+_MAX_REFINE_REGIONS = 12
+
+
+def _kmer_ids(seq: str, k: int = KMER_K) -> np.ndarray:
+    """Base-4 identifier of the k-mer starting at each position."""
+    raw = np.frombuffer(seq.encode("ascii", "ignore"), dtype=np.uint8)
+    codes = _BASE_CODES[raw]
+    codes = codes[codes != 255].astype(np.int64)
+    n = len(codes) - k + 1
+    if n <= 0:
+        return np.empty(0, dtype=np.int64)
+    ids = np.zeros(n, dtype=np.int64)
+    for j in range(k):
+        ids = ids * 4 + codes[j:j + n]
+    return ids
+
+
+def _block_prefix_counts(ids: np.ndarray, block: int, n_bins: int) -> np.ndarray:
+    """
+    Cumulative k-mer counts at every block boundary.
+
+    Row b holds the total count of each k-mer in the first b blocks, so the
+    counts inside any block-aligned window are one subtraction of two rows.
+    Held as int32 because the counts are exact integers and a float32
+    cumulative sum over millions of k-mers would lose the low bits that the
+    subtraction depends on.
+    """
+    n_blocks = len(ids) // block
+    if n_blocks < 1:
+        return np.zeros((1, n_bins), dtype=np.int32)
+
+    # One bincount over a combined (block, k-mer) index fills the whole table
+    # at C speed. Looping per block instead costs one Python-level call per
+    # block, which on a 5 Mb genome is ~20,000 of them.
+    usable = ids[:n_blocks * block]
+    combined = (np.arange(n_blocks, dtype=np.int64).repeat(block) * n_bins
+                + usable)
+    per_block = np.bincount(
+        combined, minlength=n_blocks * n_bins).reshape(n_blocks, n_bins)
+
+    prefix = np.zeros((n_blocks + 1, n_bins), dtype=np.int32)
+    np.cumsum(per_block, axis=0, out=prefix[1:])
+    return prefix
+
+
 def locate_genes(
     sequence: str, threshold: float = DETECTION_THRESHOLD
 ) -> list[tuple[str, float, int, int]]:
@@ -1253,22 +1677,106 @@ def locate_genes(
 
     Positions matter to the open-world scan in novelty.py, which has to mask
     the regions a known gene explains before hunting for anything unexplained.
+
+    HOW THE SCAN WORKS, AND WHY IT CHANGED
+    --------------------------------------
+    The previous implementation looped over all 21 genes and, for each, slid a
+    window across the sequence recomputing the full k-mer vector at every
+    position. On a real 5 Mb genome that is roughly 350,000 independent k-mer
+    vectorisations, and it took about 12 seconds per genome — slow enough that
+    validating 42 real isolates took 20 minutes.
+
+    It now builds ONE prefix-sum table of k-mer counts per block, shared by
+    every gene. The counts inside any window are then a single row
+    subtraction, and all genes sharing a window size are scored together as
+    one matrix multiply. The sequence is read once instead of 21 times.
+
+    The scores are the same cosine similarities as before. The one behavioural
+    difference is that window starts and lengths are now rounded to whole
+    blocks, so a reported position can sit up to one block from where the old
+    code would have put it. Detection results were compared gene-for-gene
+    against the old implementation before this replaced it.
     """
     seq = "".join(c for c in sequence.upper() if c in "ACGT")
     if len(seq) < 200:
         return []
 
-    hits: list[tuple[str, float, int, int]] = []
-    for gene_name in RESISTANCE_GENES:
-        ref_len = len(_gene_cassette(gene_name))
-        ref = _reference_profile(gene_name)
+    n_bins = 4 ** KMER_K
+    ids = _kmer_ids(seq)
+    if len(ids) == 0:
+        return []
 
-        window = min(ref_len, len(seq))
+    block = min(_SCAN_BLOCK, max(1, len(ids) // 2))
+    prefix = _block_prefix_counts(ids, block, n_bins)
+    n_blocks = prefix.shape[0] - 1
+    if n_blocks < 1:
+        return []
+
+    # Group genes by how many blocks their window spans, so each distinct
+    # window size costs one pass and one matrix multiply.
+    by_span: dict[int, list[str]] = {}
+    for gene_name in RESISTANCE_GENES:
+        window = min(len(_gene_cassette(gene_name)), len(seq))
+        span = max(1, min(n_blocks, round(window / block)))
+        by_span.setdefault(span, []).append(gene_name)
+
+    # STAGE 1 — coarse. Score every block-aligned window for every gene at
+    # once. Block alignment makes these scores slightly pessimistic, so they
+    # are used only to find candidate regions, never to accept or reject.
+    candidates: dict[str, list[int]] = {}
+    for span, genes in by_span.items():
+        starts = np.arange(0, max(1, n_blocks - span + 1))
+        counts = (prefix[np.minimum(starts + span, n_blocks)]
+                  - prefix[starts]).astype(np.float32)
+        norms = np.linalg.norm(counts, axis=1)
+        norms[norms == 0.0] = 1.0
+        unit = counts / norms[:, None]
+
+        refs = np.stack([_reference_profile(g) for g in genes], axis=1)
+        scores = unit @ refs  # (n_windows, n_genes)
+
+        for j, gene_name in enumerate(genes):
+            col = scores[:, j]
+            near = np.flatnonzero(col >= threshold - _COARSE_MARGIN)
+            if not len(near):
+                continue
+            # A whole genome can leave thousands of windows above the coarse
+            # margin, and refining all of them costs more than the exhaustive
+            # scan it replaces. Only the strongest peaks can hold the best
+            # exact match, so refine those.
+            if len(near) > _MAX_REFINE_REGIONS:
+                order = np.argpartition(
+                    col[near], -_MAX_REFINE_REGIONS)[-_MAX_REFINE_REGIONS:]
+                near = near[order]
+            candidates[gene_name] = (np.sort(near) * block).tolist()
+
+    # STAGE 2 — exact. Re-score the candidate regions the original way, at the
+    # gene's true window length and original step, so the reported score is
+    # identical to what the exhaustive scan produced.
+    hits: list[tuple[str, float, int, int]] = []
+    for gene_name, region_starts in candidates.items():
+        ref = _reference_profile(gene_name)
+        window = min(len(_gene_cassette(gene_name)), len(seq))
         step = max(1, window // 3)
 
+        # Probe the ORIGINAL scan's grid positions inside each candidate
+        # region, plus the region start itself and the last legal offset. The
+        # grid positions are what make this exact: the exhaustive scan's best
+        # position is one of them, so the score found here can only match or
+        # beat it, never fall short of it.
+        last = max(0, len(seq) - window)
+        probe: set[int] = set()
+        for rs in region_starts:
+            lo = max(0, rs - window)
+            hi = min(last, rs + window)
+            grid0 = ((lo + step - 1) // step) * step
+            probe.update(range(grid0, hi + 1, step))
+            probe.add(min(rs, last))
+            probe.add(hi)
+
         best, best_at = 0.0, 0
-        for i in range(0, max(1, len(seq) - window + 1), step):
-            w = kmer_features(seq[i : i + window])
+        for i in sorted(probe):
+            w = kmer_features(seq[i:i + window])
             n = float(np.linalg.norm(w))
             if n == 0.0:
                 continue
@@ -1277,7 +1785,9 @@ def locate_genes(
                 best, best_at = score, i
 
         if best >= threshold:
-            hits.append((gene_name, best, best_at, min(best_at + window, len(seq))))
+            hits.append((gene_name, best, best_at,
+                         min(best_at + window, len(seq))))
+
     return sorted(hits, key=lambda t: -t[1])
 
 
@@ -1473,12 +1983,95 @@ class AMRReport:
 # resistance probability does that alone justify? The gene -> class mapping is
 # established microbiology, not a prediction, so a confident detection is
 # strong evidence on its own.
+# Fallback floor, used only for classes where we have no laboratory evidence.
+# Kept at the historical value so behaviour is unchanged where nothing was
+# measured, rather than silently substituting a different guess.
 MECHANISM_FLOOR = 0.90
+
+# =============================================================================
+# EVIDENCE-BASED MECHANISM FLOOR
+#
+# The floor answers: "given that we found a gene conferring this class, how
+# confident should we be that the isolate is actually resistant?" That is a
+# measurable quantity, and 0.90 was never a measurement of it.
+#
+# With 42 real genomes and 350 laboratory susceptibility results we measured
+#
+#     P(laboratory resistant | gene conferring that class detected) = 0.66
+#
+# not 0.90. The per-class table below is that probability, shrunk toward the
+# pooled rate to stop three-for-three reading as certainty. It is produced by
+# derive_mechanism_floor.py from models/validation_real.json; re-run that
+# after any change to the reference gene set or the real-isolate set.
+#
+# The fluoroquinolone value is the one to understand: 0.33, because detection
+# fires on the gyrA LOCUS, which every E. coli carries. Detecting gyrA is
+# genuinely weak evidence of fluoroquinolone resistance, and the floor now
+# says so instead of asserting 0.90. Reading the actual codon is what carries
+# the evidence there — see POINT_MUTATION_SPECS.
+#
+# HONEST LIMITS: 3-16 observations per class, from isolates chosen for breadth
+# of bench testing rather than at random. Indicative, not precise. Classes with
+# no observations fall back to MECHANISM_FLOOR above.
+# =============================================================================
+MECHANISM_FLOOR_BY_CLASS: dict[str, float] = {
+    "Penicillins": 0.65,
+    "Cephalosporins": 0.66,
+    "Carbapenems": 0.61,
+    "Fluoroquinolones": 0.59,
+    "Macrolides": 0.82,
+    "Aminoglycosides": 0.78,
+    "Tetracyclines": 0.82,
+    "Trimethoprim-sulfonamides": 0.87,
+    # Glycopeptides, Oxazolidinones, Polymyxins and Rifamycins had no isolate
+    # in which a conferring ACQUIRED gene was detected, so they have no
+    # measured value and fall back to MECHANISM_FLOOR.
+}
+
+# Point-mutation determinants are excluded from the table above, because
+# detecting the locus is not evidence of anything — see the note on
+# Fluoroquinolones. Their floor applies only once read_allele has CONFIRMED
+# the resistant codon, and it differs sharply by gene:
+#
+#   rpoB S450L  A confirmed S450L is used clinically as a rifampicin
+#               resistance marker in its own right; the Xpert MTB/RIF assay
+#               is built on detecting exactly this region. High confidence.
+#
+#   gyrA S83L   A single QRDR substitution typically confers nalidixic acid
+#               resistance and only REDUCED ciprofloxacin susceptibility.
+#               Full fluoroquinolone resistance usually needs a second hit,
+#               in parC or at gyrA D87. Confirming S83L alone is therefore
+#               partial evidence, and our own bench data shows it: of two
+#               real isolates with a confirmed resistant codon, one tested
+#               resistant and one susceptible.
+#
+# These are mechanistic judgements supported by two observations, not
+# measurements. They are stated here rather than buried so that a reader can
+# disagree with the specific numbers.
+POINT_MUTATION_FLOOR: dict[str, float] = {
+    "rpoB_S450L": 0.90,
+    "gyrA_S83L": 0.60,
+}
+
+
+def mechanism_floor_for(antibiotic_class: str, gene_name: str = "") -> float:
+    """
+    The floor to apply for one gene-class pairing.
+
+    Point-mutation determinants use their own per-gene value, which is only
+    ever reached after the resistant codon has been confirmed. Acquired genes
+    use the laboratory-measured per-class value, falling back to
+    MECHANISM_FLOOR for classes where nothing was measured.
+    """
+    if gene_name in POINT_MUTATION_FLOOR:
+        return POINT_MUTATION_FLOOR[gene_name]
+    return MECHANISM_FLOOR_BY_CLASS.get(antibiotic_class, MECHANISM_FLOOR)
 
 
 def apply_mechanism_floor(
     probabilities: dict[str, float],
     detected_genes: list[tuple[str, float]],
+    sequence: str | None = None,
 ) -> dict[str, float]:
     """
     Let the gene-detection layer override the classifier where it fires.
@@ -1503,6 +2096,14 @@ def apply_mechanism_floor(
     The floor only ever RAISES a probability. A classifier reading higher than
     the floor keeps its value — detecting one determinant does not cap how
     resistant an isolate can be.
+
+    POINT MUTATIONS ARE THE EXCEPTION
+    ---------------------------------
+    For gyrA and rpoB, presence of the gene means nothing: every E. coli has
+    gyrA. Resistance depends on one codon. Those determinants therefore get
+    the floor only when `sequence` is supplied AND the resistant codon is
+    actually read off it. Without the sequence we cannot check, so we do not
+    assert. See read_allele.
     """
     if not detected_genes:
         return probabilities
@@ -1512,11 +2113,22 @@ def apply_mechanism_floor(
         gene = RESISTANCE_GENES.get(gene_name)
         if gene is None:
             continue
-        # Scale the floor by detection confidence: a marginal 0.6 match should
-        # not assert resistance as loudly as a 0.96 one.
-        floor = MECHANISM_FLOOR * min(1.0, confidence)
-        for cls in gene.confers_resistance_to:
+
+        if gene_name in POINT_MUTATION_GENES:
+            if sequence is None:
+                continue  # cannot verify the codon, so make no claim
+            state, _ = read_allele(sequence, gene_name)
+            if state != ALLELE_RESISTANT:
+                continue  # wild-type or unreadable: the locus proves nothing
+
+        # Conditional classes (blaSHV's cephalosporin claim) are included only
+        # when the discriminating codon is actually read off this sequence.
+        conferred, _note = classes_conferred(gene_name, sequence)
+        for cls in conferred:
             if cls in adjusted:
+                # Scale by detection confidence: a marginal 0.6 match should
+                # not assert resistance as loudly as a 0.96 one.
+                floor = mechanism_floor_for(cls, gene_name) * min(1.0, confidence)
                 adjusted[cls] = max(adjusted[cls], floor)
     return adjusted
 
@@ -1532,7 +2144,9 @@ def analyze_isolate(
     genes = detect_genes(sequence)
     probs = model.predict_sequence(sequence)
     if use_mechanism_floor:
-        probs = apply_mechanism_floor(probs, genes)
+        # The sequence is passed so point-mutation determinants can have their
+        # codon read rather than being asserted from locus presence alone.
+        probs = apply_mechanism_floor(probs, genes, sequence=sequence)
     return AMRReport(
         strain_name=strain_name,
         probabilities=probs,

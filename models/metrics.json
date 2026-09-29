@@ -3,28 +3,28 @@
     "n_pairs": 741,
     "n_drugs": 39,
     "n_features": 1378,
-    "significant_rate": 0.1970310391363023,
+    "significant_rate": 0.19838056680161945,
     "screening_threshold": 0.35,
     "class_distribution": {
       "None": 478,
-      "Mild": 117,
+      "Mild": 116,
       "Moderate": 82,
-      "Severe": 64
+      "Severe": 65
     },
     "random_split": {
-      "roc_auc": 0.8140758207872302,
-      "recall": 0.7567567567567568,
-      "precision": 0.3783783783783784,
-      "accuracy": 0.7043010752688172,
+      "roc_auc": 0.8345728278614184,
+      "recall": 0.8378378378378378,
+      "precision": 0.3974358974358974,
+      "accuracy": 0.7150537634408602,
       "n_test": 186
     },
     "cold_drug_split": {
-      "roc_auc": 0.6788063370757278,
-      "roc_auc_std": 0.06023812995345239,
-      "recall": 0.60727969348659,
-      "precision": 0.2783143107989464,
-      "accuracy": 0.6278985507246376,
-      "flagged_rate": 0.4126811594202899,
+      "roc_auc": 0.6796398001004427,
+      "roc_auc_std": 0.06161009417324194,
+      "recall": 0.6072106261859582,
+      "precision": 0.28368794326241137,
+      "accuracy": 0.6322463768115942,
+      "flagged_rate": 0.40869565217391307,
       "n_test": 2760,
       "n_repeats": 10,
       "held_out_drugs_example": [
@@ -44,17 +44,17 @@
     "n_features": 1024,
     "k": 5,
     "random_split": {
-      "exact_match": 0.5885714285714285,
-      "per_label_accuracy": 0.950952380952381,
-      "macro_f1": 0.9000752717627508,
+      "exact_match": 0.6457142857142857,
+      "per_label_accuracy": 0.959047619047619,
+      "macro_f1": 0.9159003287221347,
       "n_test": 175
     },
     "cold_combination_split": {
-      "exact_match": 0.5114155251141552,
-      "per_label_accuracy": 0.9425418569254186,
-      "macro_f1": 0.8407831429802943,
-      "n_test": 219,
-      "n_unseen_combinations": 113
+      "exact_match": 0.44047619047619047,
+      "per_label_accuracy": 0.9226190476190477,
+      "macro_f1": 0.7634474308515952,
+      "n_test": 252,
+      "n_unseen_combinations": 106
     }
   },
   "forecast": {
@@ -67,10 +67,17 @@
     "p90_ae_pp": 11.994629980782607,
     "within_5pp": 0.6358695652173914,
     "within_10pp": 0.8532608695652174,
+    "interval_coverage": 0.8260869565217391,
+    "interval_nominal": 0.95,
+    "mean_interval_width_pp": 21.45887207260126,
+    "mae_pp_thin_series": 5.127678903331335,
+    "mae_pp_adequate_series": 0.47500000000000003,
+    "n_thin_predictions": 176,
     "best": [
       {
         "organism": "Staphylococcus aureus",
         "antibiotic": "Vancomycin",
+        "reliability": "flat",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 0.15,
@@ -79,6 +86,7 @@
       {
         "organism": "Enterococcus faecium",
         "antibiotic": "Vancomycin",
+        "reliability": "thin",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 0.7807132066427096,
@@ -87,6 +95,7 @@
       {
         "organism": "Staphylococcus aureus",
         "antibiotic": "Linezolid",
+        "reliability": "flat",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 0.8,
@@ -97,6 +106,7 @@
       {
         "organism": "Escherichia coli",
         "antibiotic": "Imipenem",
+        "reliability": "thin",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 13.559214543058816,
@@ -105,6 +115,7 @@
       {
         "organism": "Pseudomonas aeruginosa",
         "antibiotic": "Imipenem",
+        "reliability": "thin",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 15.535215795598862,
@@ -113,6 +124,7 @@
       {
         "organism": "Klebsiella pneumoniae",
         "antibiotic": "Ciprofloxacin",
+        "reliability": "thin",
         "n_train": 5,
         "n_test": 4,
         "mae_pp": 17.18139707870737,

@@ -1684,6 +1684,74 @@ with tab_methods:
                 f"{fb.get('within_10pp', 0):.0%} within 10 pp",
                 viz.RISK_COLORS["Low"]), unsafe_allow_html=True)
 
+        # ------------------------------------------------------------------
+        # Real genomes with laboratory AST. This sits ABOVE the constructed
+        # figures deliberately: everything below is measured on isolates we
+        # built ourselves, and a reader who sees only those walks away with a
+        # number that does not describe real bacteria.
+        # ------------------------------------------------------------------
+        _real_path = MODELS_DIR / "validation_real.json"
+        if _real_path.exists():
+            R = json.loads(_real_path.read_text())
+            rs = R.get("screening", {})
+            rd = R.get("data", {})
+            st.markdown("---")
+            st.markdown("#### The honest test: real genomes, laboratory AST")
+
+            rr1, rr2, rr3 = st.columns(3)
+            with rr1:
+                st.markdown(viz.stat(
+                    "Accuracy on real isolates", f"{rs.get('accuracy', 0):.3f}",
+                    f"{rs.get('n_comparisons', 0)} bench comparisons",
+                    viz.RISK_COLORS["High"]), unsafe_allow_html=True)
+            with rr2:
+                st.markdown(viz.stat(
+                    "Very major errors", f"{rs.get('very_major_error_rate', 0):.1%}",
+                    "predicted S, laboratory R", viz.RISK_COLORS["High"]),
+                    unsafe_allow_html=True)
+            with rr3:
+                st.markdown(viz.stat(
+                    "Real isolates tested", f"{rd.get('n_isolates', 0)}",
+                    "7 organisms, BV-BRC", viz.RISK_COLORS["Low"]),
+                    unsafe_allow_html=True)
+
+            st.markdown(
+                f"""
+These are **{rd.get('n_isolates', 0)} real bacterial genomes** with
+**bench-measured** susceptibility results — broth dilution and disk diffusion,
+read against CLSI or EUCAST breakpoints. Rows whose evidence column said
+*Computational Method* (another group's machine-learning predictions) were
+filtered out, so we never score a prediction against a prediction.
+
+With {rs.get('n_resistant', 0)} resistant and {rs.get('n_susceptible', 0)}
+susceptible comparisons, **{rs.get('accuracy', 0):.3f} is approximately
+chance**, and no threshold rescues it — the full sweep peaks at 0.503.
+
+**Why.** The model trains on ~900 bp cassettes planted in ~2.6 kb of
+background. A real genome is 2.5-7 Mb, where a determinant is about 0.02% of
+the sequence, so a whole-genome 5-mer profile is dominated by ordinary
+housekeeping DNA. This is architectural, not a threshold that needs nudging.
+
+**What did transfer: gene detection.** On the same genomes it found real
+determinants — mecA in 9 *S. aureus*, blaSHV in 5, plus blaNDM-1, blaVIM and
+blaCTX-M-15 — at a 13.8% false-resistance rate. It is precise but narrow: 21
+reference genes cannot cover real resistance, so it misses 73% of it.
+
+So the claim we defend is that Module 3 **detects known resistance genes in
+real genomes with high precision** and resolves two point-mutation
+determinants to the specific codon. It does **not** predict laboratory
+phenotype on real bacteria, and it is not clinically validated.
+
+*{rd.get('caveat', '')}*
+"""
+            )
+            st.caption(
+                "Reproduce: `python -m trialsense.ingest` then "
+                "`python validate_real.py`. Everything below this line is "
+                "measured on CONSTRUCTED isolates."
+            )
+            st.markdown("---")
+
         mc1, mc2 = st.columns(2)
         with mc1:
             st.markdown("**1 + 2 · Error types and calibration**")
@@ -1744,18 +1812,55 @@ work.
 """
             )
             st.markdown("**4 · Dark Genome detector**")
-            st.markdown(
-                f"""
+            _nc_path = MODELS_DIR / "novelty_calibration.json"
+            if _nc_path.exists():
+                NC = json.loads(_nc_path.read_text())
+                th = NC.get("test_half", {})
+                shipped_m = th.get("chosen", {})
+                old_m = th.get("shipped", {})
+                st.markdown(
+                    f"""
+An earlier version of this panel reported **0 false positives and 100%
+sensitivity**. That was measured on 19 cases from the same generator that
+produced the training data, and it did not survive real genomes: on 42 real
+assemblies the old thresholds flagged something in **every single one**, at
+{old_m.get('segments_per_mb', 0):.1f} segments per megabase — roughly a
+hundred flags on a 5 Mb genome. Real genomes carry prophages and genomic
+islands; generated "clean" strains are uniform by construction.
+
+Recalibrated by splitting the 42 genomes in half, sweeping on one and
+reporting on the other. **Held-out half:**
+
+| thresholds | false alarms | sensitivity |
+|---|---|---|
+| previous | {old_m.get('segments_per_mb', 0):.2f} /Mb | {old_m.get('sensitivity', 0):.0%} |
+| **shipped** | **{shipped_m.get('segments_per_mb', 0):.2f} /Mb** | **{shipped_m.get('sensitivity', 0):.0%}** |
+
+Sensitivity is measured with a real 1200 bp segment from the most GC-distant
+genome inserted into a real recipient — both real sequence, so this does not
+repeat the original mistake of testing a generator against itself.
+
+**The trade-off is real and is not tuned away.** The frontier runs from 100%
+sensitivity at ~22 flags/Mb to ~24% at 0.5 flags/Mb: tetranucleotide
+composition cannot tell an acquired element from a native genomic island,
+because both are foreign to the host core. We chose about eight flags per
+genome — reviewable by a person — and accept missing roughly half of true
+insertions.
+"""
+                )
+            else:
+                st.markdown(
+                    f"""
 - **False positives:** {nv.get('false_positives', 0)} of
   {nv.get('clean_strains_assessed', 0)} clean strains
-  ({nv.get('false_positive_rate', 0):.0%})
+  ({nv.get('false_positive_rate', 0):.0%}) — **constructed strains only**
 - **Sensitivity:** {nv.get('detected', 0)}/{nv.get('spiked_cases', 0)} planted
   unknown elements found ({nv.get('sensitivity', 0):.0%})
-- **Separation:** clean peak {nv.get('peak_divergence_clean', 0):.3f} vs spiked
-  minimum {nv.get('peak_divergence_spiked_min', 0):.3f} — the detection floor
-  sits between them with better than 2× margin
+
+⚠️ These are same-generator cases. Run `python calibrate_novelty.py` for the
+real-genome figures.
 """
-            )
+                )
             st.markdown("**5 · Resistance-trend forecaster**")
             if fb.get("available"):
                 st.markdown(

@@ -1,0 +1,747 @@
+{
+  "data": "real genome assemblies (BV-BRC), unmodified and spiked",
+  "insert": {
+    "length_bp": 1200,
+    "source": "a real segment from the most GC-distant genome in the set",
+    "note": "both donor and recipient are real sequence; nothing is generated"
+  },
+  "false_alarms": {
+    "n_genomes": 42,
+    "n_genomes_flagged": 42,
+    "genome_flag_rate": 1.0,
+    "total_segments": 4600,
+    "segments_per_megabase": 24.026818525909764,
+    "rows": [
+      {
+        "genome_id": "1280.15930",
+        "organism": "Staphylococcus aureus",
+        "length": 2846282,
+        "n_windows": 18970,
+        "n_segments": 52,
+        "peak": 0.6603
+      },
+      {
+        "genome_id": "1280.15931",
+        "organism": "Staphylococcus aureus",
+        "length": 2872137,
+        "n_windows": 19142,
+        "n_segments": 41,
+        "peak": 0.6593
+      },
+      {
+        "genome_id": "1280.15938",
+        "organism": "Staphylococcus aureus",
+        "length": 2718123,
+        "n_windows": 18115,
+        "n_segments": 55,
+        "peak": 0.7038
+      },
+      {
+        "genome_id": "1280.16051",
+        "organism": "Staphylococcus aureus",
+        "length": 2711022,
+        "n_windows": 18068,
+        "n_segments": 57,
+        "peak": 0.6795
+      },
+      {
+        "genome_id": "1280.16052",
+        "organism": "Staphylococcus aureus",
+        "length": 2754920,
+        "n_windows": 18361,
+        "n_segments": 80,
+        "peak": 0.6802
+      },
+      {
+        "genome_id": "1280.16436",
+        "organism": "Staphylococcus aureus",
+        "length": 2666430,
+        "n_windows": 17771,
+        "n_segments": 41,
+        "peak": 0.6953
+      },
+      {
+        "genome_id": "1352.10125",
+        "organism": "Enterococcus faecium",
+        "length": 2640017,
+        "n_windows": 17595,
+        "n_segments": 15,
+        "peak": 0.3168
+      },
+      {
+        "genome_id": "1352.10126",
+        "organism": "Enterococcus faecium",
+        "length": 2671610,
+        "n_windows": 17805,
+        "n_segments": 13,
+        "peak": 0.3013
+      },
+      {
+        "genome_id": "1352.10127",
+        "organism": "Enterococcus faecium",
+        "length": 2515099,
+        "n_windows": 16762,
+        "n_segments": 19,
+        "peak": 0.4733
+      },
+      {
+        "genome_id": "1352.10128",
+        "organism": "Enterococcus faecium",
+        "length": 2731871,
+        "n_windows": 18207,
+        "n_segments": 12,
+        "peak": 0.3025
+      },
+      {
+        "genome_id": "1352.10129",
+        "organism": "Enterococcus faecium",
+        "length": 2776734,
+        "n_windows": 18506,
+        "n_segments": 27,
+        "peak": 0.4068
+      },
+      {
+        "genome_id": "1352.4398",
+        "organism": "Enterococcus faecium",
+        "length": 2831009,
+        "n_windows": 18868,
+        "n_segments": 10,
+        "peak": 0.6424
+      },
+      {
+        "genome_id": "287.32645",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 7347693,
+        "n_windows": 48979,
+        "n_segments": 311,
+        "peak": 0.6043
+      },
+      {
+        "genome_id": "287.32646",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 6947985,
+        "n_windows": 46314,
+        "n_segments": 180,
+        "peak": 0.5374
+      },
+      {
+        "genome_id": "287.32647",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 7361863,
+        "n_windows": 49074,
+        "n_segments": 296,
+        "peak": 0.602
+      },
+      {
+        "genome_id": "287.32668",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 6982877,
+        "n_windows": 46547,
+        "n_segments": 191,
+        "peak": 0.6038
+      },
+      {
+        "genome_id": "287.34624",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 6982771,
+        "n_windows": 46546,
+        "n_segments": 191,
+        "peak": 0.5885
+      },
+      {
+        "genome_id": "287.5956",
+        "organism": "Pseudomonas aeruginosa",
+        "length": 6859232,
+        "n_windows": 45723,
+        "n_segments": 162,
+        "peak": 0.5512
+      },
+      {
+        "genome_id": "28901.21720",
+        "organism": "Salmonella enterica",
+        "length": 4669805,
+        "n_windows": 31127,
+        "n_segments": 139,
+        "peak": 0.323
+      },
+      {
+        "genome_id": "28901.22054",
+        "organism": "Salmonella enterica",
+        "length": 4919451,
+        "n_windows": 32791,
+        "n_segments": 125,
+        "peak": 0.3293
+      },
+      {
+        "genome_id": "28901.22371",
+        "organism": "Salmonella enterica",
+        "length": 5053673,
+        "n_windows": 33686,
+        "n_segments": 148,
+        "peak": 0.3333
+      },
+      {
+        "genome_id": "28901.23138",
+        "organism": "Salmonella enterica",
+        "length": 4762207,
+        "n_windows": 31743,
+        "n_segments": 130,
+        "peak": 0.3617
+      },
+      {
+        "genome_id": "28901.23171",
+        "organism": "Salmonella enterica",
+        "length": 4827590,
+        "n_windows": 32178,
+        "n_segments": 126,
+        "peak": 0.3165
+      },
+      {
+        "genome_id": "28901.24807",
+        "organism": "Salmonella enterica",
+        "length": 4713081,
+        "n_windows": 31415,
+        "n_segments": 146,
+        "peak": 0.333
+      },
+      {
+        "genome_id": "470.1561",
+        "organism": "Acinetobacter baumannii",
+        "length": 3946021,
+        "n_windows": 26301,
+        "n_segments": 21,
+        "peak": 0.4699
+      },
+      {
+        "genome_id": "470.1562",
+        "organism": "Acinetobacter baumannii",
+        "length": 3949960,
+        "n_windows": 26328,
+        "n_segments": 22,
+        "peak": 0.62
+      },
+      {
+        "genome_id": "470.1563",
+        "organism": "Acinetobacter baumannii",
+        "length": 4028653,
+        "n_windows": 26852,
+        "n_segments": 24,
+        "peak": 0.6442
+      },
+      {
+        "genome_id": "470.22944",
+        "organism": "Acinetobacter baumannii",
+        "length": 4039522,
+        "n_windows": 26925,
+        "n_segments": 36,
+        "peak": 0.6301
+      },
+      {
+        "genome_id": "470.24294",
+        "organism": "Acinetobacter baumannii",
+        "length": 4039554,
+        "n_windows": 26925,
+        "n_segments": 37,
+        "peak": 0.6283
+      },
+      {
+        "genome_id": "470.5040",
+        "organism": "Acinetobacter baumannii",
+        "length": 3954761,
+        "n_windows": 26360,
+        "n_segments": 39,
+        "peak": 0.6126
+      },
+      {
+        "genome_id": "562.30349",
+        "organism": "Escherichia coli",
+        "length": 5234796,
+        "n_windows": 34893,
+        "n_segments": 94,
+        "peak": 0.3199
+      },
+      {
+        "genome_id": "562.58783",
+        "organism": "Escherichia coli",
+        "length": 4961129,
+        "n_windows": 33069,
+        "n_segments": 92,
+        "peak": 0.2969
+      },
+      {
+        "genome_id": "562.58786",
+        "organism": "Escherichia coli",
+        "length": 4773875,
+        "n_windows": 31820,
+        "n_segments": 64,
+        "peak": 0.3299
+      },
+      {
+        "genome_id": "562.7635",
+        "organism": "Escherichia coli",
+        "length": 5096665,
+        "n_windows": 33972,
+        "n_segments": 88,
+        "peak": 0.3082
+      },
+      {
+        "genome_id": "562.7712",
+        "organism": "Escherichia coli",
+        "length": 4970260,
+        "n_windows": 33130,
+        "n_segments": 81,
+        "peak": 0.3128
+      },
+      {
+        "genome_id": "562.7724",
+        "organism": "Escherichia coli",
+        "length": 5264774,
+        "n_windows": 35093,
+        "n_segments": 96,
+        "peak": 0.3241
+      },
+      {
+        "genome_id": "573.12928",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5577519,
+        "n_windows": 37178,
+        "n_segments": 246,
+        "peak": 0.6269
+      },
+      {
+        "genome_id": "573.12972",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5448536,
+        "n_windows": 36318,
+        "n_segments": 217,
+        "peak": 0.6651
+      },
+      {
+        "genome_id": "573.13071",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5511136,
+        "n_windows": 36735,
+        "n_segments": 212,
+        "peak": 0.5439
+      },
+      {
+        "genome_id": "573.18476",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5391141,
+        "n_windows": 35935,
+        "n_segments": 223,
+        "peak": 0.4797
+      },
+      {
+        "genome_id": "573.18477",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5561616,
+        "n_windows": 37072,
+        "n_segments": 194,
+        "peak": 0.5289
+      },
+      {
+        "genome_id": "573.62712",
+        "organism": "Klebsiella pneumoniae",
+        "length": 5539330,
+        "n_windows": 36923,
+        "n_segments": 247,
+        "peak": 0.6209
+      }
+    ]
+  },
+  "sensitivity": {
+    "n_spiked": 42,
+    "n_detected": 42,
+    "rate": 1.0,
+    "rows": [
+      {
+        "genome_id": "1280.15930",
+        "donor": "287.5956",
+        "gc_host": 0.326,
+        "gc_donor": 0.66,
+        "gc_gap": 0.334,
+        "detected": true,
+        "n_segments": 53
+      },
+      {
+        "genome_id": "1280.15931",
+        "donor": "287.5956",
+        "gc_host": 0.326,
+        "gc_donor": 0.66,
+        "gc_gap": 0.334,
+        "detected": true,
+        "n_segments": 43
+      },
+      {
+        "genome_id": "1280.15938",
+        "donor": "287.5956",
+        "gc_host": 0.327,
+        "gc_donor": 0.66,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 55
+      },
+      {
+        "genome_id": "1280.16051",
+        "donor": "287.5956",
+        "gc_host": 0.327,
+        "gc_donor": 0.66,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 58
+      },
+      {
+        "genome_id": "1280.16052",
+        "donor": "287.5956",
+        "gc_host": 0.327,
+        "gc_donor": 0.66,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 81
+      },
+      {
+        "genome_id": "1280.16436",
+        "donor": "287.5956",
+        "gc_host": 0.327,
+        "gc_donor": 0.66,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 44
+      },
+      {
+        "genome_id": "1352.10125",
+        "donor": "287.5956",
+        "gc_host": 0.381,
+        "gc_donor": 0.66,
+        "gc_gap": 0.28,
+        "detected": true,
+        "n_segments": 16
+      },
+      {
+        "genome_id": "1352.10126",
+        "donor": "287.5956",
+        "gc_host": 0.38,
+        "gc_donor": 0.66,
+        "gc_gap": 0.28,
+        "detected": true,
+        "n_segments": 14
+      },
+      {
+        "genome_id": "1352.10127",
+        "donor": "287.5956",
+        "gc_host": 0.381,
+        "gc_donor": 0.66,
+        "gc_gap": 0.279,
+        "detected": true,
+        "n_segments": 20
+      },
+      {
+        "genome_id": "1352.10128",
+        "donor": "287.5956",
+        "gc_host": 0.379,
+        "gc_donor": 0.66,
+        "gc_gap": 0.281,
+        "detected": true,
+        "n_segments": 13
+      },
+      {
+        "genome_id": "1352.10129",
+        "donor": "287.5956",
+        "gc_host": 0.379,
+        "gc_donor": 0.66,
+        "gc_gap": 0.281,
+        "detected": true,
+        "n_segments": 28
+      },
+      {
+        "genome_id": "1352.4398",
+        "donor": "287.5956",
+        "gc_host": 0.383,
+        "gc_donor": 0.66,
+        "gc_gap": 0.278,
+        "detected": true,
+        "n_segments": 11
+      },
+      {
+        "genome_id": "287.32645",
+        "donor": "1280.15931",
+        "gc_host": 0.655,
+        "gc_donor": 0.326,
+        "gc_gap": 0.329,
+        "detected": true,
+        "n_segments": 312
+      },
+      {
+        "genome_id": "287.32646",
+        "donor": "1280.15931",
+        "gc_host": 0.66,
+        "gc_donor": 0.326,
+        "gc_gap": 0.334,
+        "detected": true,
+        "n_segments": 181
+      },
+      {
+        "genome_id": "287.32647",
+        "donor": "1280.15931",
+        "gc_host": 0.655,
+        "gc_donor": 0.326,
+        "gc_gap": 0.329,
+        "detected": true,
+        "n_segments": 297
+      },
+      {
+        "genome_id": "287.32668",
+        "donor": "1280.15931",
+        "gc_host": 0.659,
+        "gc_donor": 0.326,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 192
+      },
+      {
+        "genome_id": "287.34624",
+        "donor": "1280.15931",
+        "gc_host": 0.659,
+        "gc_donor": 0.326,
+        "gc_gap": 0.333,
+        "detected": true,
+        "n_segments": 192
+      },
+      {
+        "genome_id": "287.5956",
+        "donor": "1280.15931",
+        "gc_host": 0.66,
+        "gc_donor": 0.326,
+        "gc_gap": 0.334,
+        "detected": true,
+        "n_segments": 163
+      },
+      {
+        "genome_id": "28901.21720",
+        "donor": "1280.15931",
+        "gc_host": 0.521,
+        "gc_donor": 0.326,
+        "gc_gap": 0.195,
+        "detected": true,
+        "n_segments": 140
+      },
+      {
+        "genome_id": "28901.22054",
+        "donor": "1280.15931",
+        "gc_host": 0.522,
+        "gc_donor": 0.326,
+        "gc_gap": 0.195,
+        "detected": true,
+        "n_segments": 126
+      },
+      {
+        "genome_id": "28901.22371",
+        "donor": "1280.15931",
+        "gc_host": 0.521,
+        "gc_donor": 0.326,
+        "gc_gap": 0.195,
+        "detected": true,
+        "n_segments": 149
+      },
+      {
+        "genome_id": "28901.23138",
+        "donor": "1280.15931",
+        "gc_host": 0.522,
+        "gc_donor": 0.326,
+        "gc_gap": 0.195,
+        "detected": true,
+        "n_segments": 131
+      },
+      {
+        "genome_id": "28901.23171",
+        "donor": "1280.15931",
+        "gc_host": 0.522,
+        "gc_donor": 0.326,
+        "gc_gap": 0.196,
+        "detected": true,
+        "n_segments": 127
+      },
+      {
+        "genome_id": "28901.24807",
+        "donor": "1280.15931",
+        "gc_host": 0.52,
+        "gc_donor": 0.326,
+        "gc_gap": 0.194,
+        "detected": true,
+        "n_segments": 147
+      },
+      {
+        "genome_id": "470.1561",
+        "donor": "287.5956",
+        "gc_host": 0.389,
+        "gc_donor": 0.66,
+        "gc_gap": 0.271,
+        "detected": true,
+        "n_segments": 22
+      },
+      {
+        "genome_id": "470.1562",
+        "donor": "287.5956",
+        "gc_host": 0.389,
+        "gc_donor": 0.66,
+        "gc_gap": 0.271,
+        "detected": true,
+        "n_segments": 23
+      },
+      {
+        "genome_id": "470.1563",
+        "donor": "287.5956",
+        "gc_host": 0.388,
+        "gc_donor": 0.66,
+        "gc_gap": 0.272,
+        "detected": true,
+        "n_segments": 25
+      },
+      {
+        "genome_id": "470.22944",
+        "donor": "287.5956",
+        "gc_host": 0.389,
+        "gc_donor": 0.66,
+        "gc_gap": 0.271,
+        "detected": true,
+        "n_segments": 37
+      },
+      {
+        "genome_id": "470.24294",
+        "donor": "287.5956",
+        "gc_host": 0.389,
+        "gc_donor": 0.66,
+        "gc_gap": 0.271,
+        "detected": true,
+        "n_segments": 38
+      },
+      {
+        "genome_id": "470.5040",
+        "donor": "287.5956",
+        "gc_host": 0.39,
+        "gc_donor": 0.66,
+        "gc_gap": 0.27,
+        "detected": true,
+        "n_segments": 40
+      },
+      {
+        "genome_id": "562.30349",
+        "donor": "1280.15931",
+        "gc_host": 0.505,
+        "gc_donor": 0.326,
+        "gc_gap": 0.179,
+        "detected": true,
+        "n_segments": 96
+      },
+      {
+        "genome_id": "562.58783",
+        "donor": "1280.15931",
+        "gc_host": 0.507,
+        "gc_donor": 0.326,
+        "gc_gap": 0.181,
+        "detected": true,
+        "n_segments": 93
+      },
+      {
+        "genome_id": "562.58786",
+        "donor": "1280.15931",
+        "gc_host": 0.508,
+        "gc_donor": 0.326,
+        "gc_gap": 0.182,
+        "detected": true,
+        "n_segments": 65
+      },
+      {
+        "genome_id": "562.7635",
+        "donor": "1280.15931",
+        "gc_host": 0.505,
+        "gc_donor": 0.326,
+        "gc_gap": 0.179,
+        "detected": true,
+        "n_segments": 90
+      },
+      {
+        "genome_id": "562.7712",
+        "donor": "1280.15931",
+        "gc_host": 0.505,
+        "gc_donor": 0.326,
+        "gc_gap": 0.179,
+        "detected": true,
+        "n_segments": 81
+      },
+      {
+        "genome_id": "562.7724",
+        "donor": "1280.15931",
+        "gc_host": 0.505,
+        "gc_donor": 0.326,
+        "gc_gap": 0.178,
+        "detected": true,
+        "n_segments": 97
+      },
+      {
+        "genome_id": "573.12928",
+        "donor": "1280.15931",
+        "gc_host": 0.572,
+        "gc_donor": 0.326,
+        "gc_gap": 0.246,
+        "detected": true,
+        "n_segments": 247
+      },
+      {
+        "genome_id": "573.12972",
+        "donor": "1280.15931",
+        "gc_host": 0.573,
+        "gc_donor": 0.326,
+        "gc_gap": 0.247,
+        "detected": true,
+        "n_segments": 218
+      },
+      {
+        "genome_id": "573.13071",
+        "donor": "1280.15931",
+        "gc_host": 0.571,
+        "gc_donor": 0.326,
+        "gc_gap": 0.245,
+        "detected": true,
+        "n_segments": 213
+      },
+      {
+        "genome_id": "573.18476",
+        "donor": "1280.15931",
+        "gc_host": 0.574,
+        "gc_donor": 0.326,
+        "gc_gap": 0.248,
+        "detected": true,
+        "n_segments": 224
+      },
+      {
+        "genome_id": "573.18477",
+        "donor": "1280.15931",
+        "gc_host": 0.573,
+        "gc_donor": 0.326,
+        "gc_gap": 0.247,
+        "detected": true,
+        "n_segments": 195
+      },
+      {
+        "genome_id": "573.62712",
+        "donor": "1280.15931",
+        "gc_host": 0.571,
+        "gc_donor": 0.326,
+        "gc_gap": 0.245,
+        "detected": true,
+        "n_segments": 248
+      }
+    ]
+  },
+  "prior_claim": {
+    "source": "models/validation.json -> novelty",
+    "clean_strains_assessed": 12,
+    "false_positive_rate": 0.0,
+    "spiked_cases": 7,
+    "sensitivity": 1.0,
+    "caveat": "all 19 cases came from the same generator as the training data; this file replaces that evidence"
+  },
+  "runtime_seconds": 615.0
+}

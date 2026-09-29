@@ -1,0 +1,13 @@
+{
+  "ran": false,
+  "reason": "DNABERT-2's published code requires Triton flash-attention, which is CUDA-only and cannot load on CPU. This is a known upstream issue, not a fault in this project. Use the Kaggle notebook for a GPU run.",
+  "n_samples": 0,
+  "kmer_macro_f1": 0.0,
+  "dnabert_macro_f1": 0.0,
+  "kmer_per_label_acc": 0.0,
+  "dnabert_per_label_acc": 0.0,
+  "kmer_dim": 0,
+  "dnabert_dim": 0,
+  "seconds": 0.0,
+  "notes": []
+}

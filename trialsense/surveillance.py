@@ -48,6 +48,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+import math
+
 import numpy as np
 
 # =============================================================================
@@ -329,6 +331,11 @@ def drugs_for_class(organism: str, antibiotic_class: str, source: str = "icmr") 
 # 100 makes the logit blow up on observed values like 98.7%.
 CEILING = 99.0
 
+# Below this many annual observations a fitted trend is reported as thin.
+# Chosen because every series in the backtest's worst-error tail has five or
+# fewer points, while the well-behaved ones have eight or nine.
+THIN_SERIES_POINTS = 6
+
 # Above this, an indication is treated as commercially non-viable: the drug
 # would fail in the majority of patients who need it.
 VIABILITY_THRESHOLD = 75.0
@@ -354,6 +361,13 @@ class Forecast:
     annual_change_pp: float = 0.0  # recent percentage-points per year
     residual_std: float = 0.0
     r_squared: float = 0.0
+    n_points: int = 0  # observations the fit is based on
+    reliability: str = ""  # "adequate" | "thin" | "insufficient"
+
+    @property
+    def is_thin(self) -> bool:
+        """True when too few observations support the projection to trust it."""
+        return self.reliability == "thin"
 
 
 def _logit(p, ceiling: float):
@@ -383,7 +397,8 @@ def fit_trend(points: list[SeriesPoint], horizon_year: int) -> Forecast:
     """
     usable = sorted([p for p in points if p.comparable], key=lambda p: p.year)
     if len(usable) < 2:
-        return Forecast(method="insufficient")
+        return Forecast(method="insufficient", n_points=len(usable),
+                        reliability="insufficient")
 
     x = np.array([p.year for p in usable], dtype=float)
     y = np.array([p.percent for p in usable], dtype=float)
@@ -403,6 +418,8 @@ def fit_trend(points: list[SeriesPoint], horizon_year: int) -> Forecast:
             lo={yr: max(0.0, flat - 1.0) for yr in proj_years},
             hi={yr: min(CEILING, flat + 2.0) for yr in proj_years},
             annual_change_pp=0.0,
+            n_points=len(usable),
+            reliability="flat",
         )
 
     z = _logit(y, CEILING)
@@ -421,23 +438,54 @@ def fit_trend(points: list[SeriesPoint], horizon_year: int) -> Forecast:
         int(yr): float(v) for yr, v in zip(x, _inv_logit(z_hat, CEILING))
     }
 
+    # Terms of the prediction interval, computed once.
+    n_obs = len(x)
+    sxx = float(np.sum((x - x0) ** 2)) or 1.0
+    # Student's t at 95%, two-sided. Table lookup keeps scipy off the import
+    # path of a module the UI loads on every page render.
+    _T95 = {1: 12.71, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447,
+            7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228, 12: 2.179, 15: 2.131,
+            20: 2.086, 30: 2.042}
+    df = max(1, n_obs - 2)
+    t_mult = _T95.get(df) or (2.086 if df <= 20 else 1.96)
+
     projected: dict[int, float] = {}
     lo: dict[int, float] = {}
     hi: dict[int, float] = {}
     for yr in proj_years:
         zc = slope * (yr - x0) + intercept
-        # Uncertainty widens with extrapolation distance. This is an honest
-        # cone, not a strict statistical confidence interval — we say so in
-        # the UI rather than dressing it up.
-        spread = resid_std * (1.0 + 0.18 * (yr - last_year))
+        # PREDICTION INTERVAL, not a hand-tuned cone.
+        #
+        # The previous version widened the band by an arbitrary 18% per year
+        # of extrapolation and always used the normal multiplier 1.96. Both
+        # understated the uncertainty on short series, which is precisely
+        # where the backtest hurts: the worst series (K. pneumoniae /
+        # ciprofloxacin, 17.2 pp error) has only five training points.
+        #
+        # This is the standard interval for a prediction from a linear fit:
+        #
+        #     se = s * sqrt(1 + 1/n + (x - xbar)^2 / Sxx)
+        #
+        # The 1 is the noise in the new observation, 1/n the uncertainty in
+        # the intercept, and the last term the uncertainty in the slope, which
+        # grows with the square of extrapolation distance. The multiplier is
+        # Student's t on n-2 degrees of freedom, which is materially wider
+        # than 1.96 when n is small — t(0.975, 3) is 3.18.
+        se = resid_std * math.sqrt(1.0 + 1.0 / n_obs + ((yr - x0) ** 2) / sxx)
+        half = t_mult * se
         projected[yr] = float(_inv_logit(zc, CEILING))
-        lo[yr] = float(_inv_logit(zc - 1.96 * spread, CEILING))
-        hi[yr] = float(_inv_logit(zc + 1.96 * spread, CEILING))
+        lo[yr] = float(_inv_logit(zc - half, CEILING))
+        hi[yr] = float(_inv_logit(zc + half, CEILING))
 
     # Recent slope on the percentage scale, which is what a reader understands.
     recent = usable[-5:]
     span = recent[-1].year - recent[0].year
     annual = (recent[-1].percent - recent[0].percent) / span if span else 0.0
+
+    # A projection from five annual points is not the same evidence as one
+    # from nine, and the backtest's worst series are all short. Say so in the
+    # object rather than leaving the reader to infer it from the band width.
+    reliability = "thin" if n_obs < THIN_SERIES_POINTS else "adequate"
 
     return Forecast(
         method="logistic",
@@ -448,6 +496,8 @@ def fit_trend(points: list[SeriesPoint], horizon_year: int) -> Forecast:
         annual_change_pp=float(annual),
         residual_std=resid_std,
         r_squared=float(r2),
+        n_points=n_obs,
+        reliability=reliability,
     )
 
 
@@ -760,6 +810,10 @@ def backtest_forecast(
     """
     errors: list[float] = []
     per_series: list[dict] = []
+    covered: list[bool] = []
+    widths: list[float] = []
+    thin_errors: list[float] = []
+    adequate_errors: list[float] = []
 
     for organism, block in SURVEILLANCE_DATA[source_key].items():
         for antibiotic, series in block.items():
@@ -779,13 +833,22 @@ def backtest_forecast(
                 if pred is None:
                     continue
                 series_err.append(abs(pred - actual))
+                # Does the 95% prediction interval actually contain the truth?
+                # An interval nobody checks is decoration; this is the number
+                # that says whether the stated uncertainty is honest.
+                lo_v, hi_v = fc.lo.get(yr), fc.hi.get(yr)
+                if lo_v is not None and hi_v is not None:
+                    covered.append(bool(lo_v <= actual <= hi_v))
+                    widths.append(float(hi_v - lo_v))
 
             if series_err:
                 errors.extend(series_err)
+                (thin_errors if fc.is_thin else adequate_errors).extend(series_err)
                 per_series.append(
                     {
                         "organism": organism,
                         "antibiotic": antibiotic,
+                        "reliability": fc.reliability,
                         "n_train": len(train),
                         "n_test": len(series_err),
                         "mae_pp": float(np.mean(series_err)),
@@ -808,6 +871,17 @@ def backtest_forecast(
         "p90_ae_pp": float(np.percentile(arr, 90)),
         "within_5pp": float((arr <= 5).mean()),
         "within_10pp": float((arr <= 10).mean()),
+        # Interval honesty. Nominal coverage is 95%; what matters is the
+        # measured figure, and whether the bands are so wide that covering
+        # the truth costs nothing.
+        "interval_coverage": (float(np.mean(covered)) if covered else None),
+        "interval_nominal": 0.95,
+        "mean_interval_width_pp": (float(np.mean(widths)) if widths else None),
+        # Split by how much data the fit had, which is the audit's point:
+        # the headline MAE averages thin and well-supported series together.
+        "mae_pp_thin_series": (float(np.mean(thin_errors)) if thin_errors else None),
+        "mae_pp_adequate_series": (float(np.mean(adequate_errors)) if adequate_errors else None),
+        "n_thin_predictions": len(thin_errors),
         "best": per_series[:3],
         "worst": per_series[-3:],
     }

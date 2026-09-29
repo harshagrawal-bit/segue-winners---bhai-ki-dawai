@@ -1,0 +1,956 @@
+{
+  "generated": "2026-09-29",
+  "source": {
+    "labels": "BV-BRC genome_amr, evidence == 'Laboratory Method' only",
+    "genomes": "BV-BRC genome_sequence API",
+    "url": "https://www.bv-brc.org/api"
+  },
+  "data_classification": {
+    "genomes": "real observed data",
+    "ast_labels": "laboratory-confirmed labels (bench MIC / disk diffusion)",
+    "excluded": "computational predictions from the same table were filtered out"
+  },
+  "counts": {
+    "isolates_downloaded": 42,
+    "total_bp": 191455873,
+    "label_comparisons": 350,
+    "by_organism": {
+      "Staphylococcus aureus": 6,
+      "Salmonella enterica": 6,
+      "Enterococcus faecium": 6,
+      "Escherichia coli": 6,
+      "Acinetobacter baumannii": 6,
+      "Klebsiella pneumoniae": 6,
+      "Pseudomonas aeruginosa": 6
+    },
+    "by_class": {
+      "Penicillins": {
+        "resistant": 21,
+        "susceptible": 20
+      },
+      "Cephalosporins": {
+        "resistant": 13,
+        "susceptible": 15
+      },
+      "Carbapenems": {
+        "resistant": 13,
+        "susceptible": 20
+      },
+      "Fluoroquinolones": {
+        "resistant": 21,
+        "susceptible": 16
+      },
+      "Macrolides": {
+        "resistant": 19,
+        "susceptible": 14
+      },
+      "Aminoglycosides": {
+        "resistant": 19,
+        "susceptible": 23
+      },
+      "Tetracyclines": {
+        "resistant": 22,
+        "susceptible": 15
+      },
+      "Trimethoprim-sulfonamides": {
+        "resistant": 20,
+        "susceptible": 13
+      },
+      "Glycopeptides": {
+        "resistant": 4,
+        "susceptible": 12
+      },
+      "Oxazolidinones": {
+        "resistant": 5,
+        "susceptible": 12
+      },
+      "Polymyxins": {
+        "resistant": 7,
+        "susceptible": 8
+      },
+      "Rifamycins": {
+        "resistant": 12,
+        "susceptible": 6
+      }
+    }
+  },
+  "aggregation": {
+    "rule": "class is Resistant if ANY drug tested in that class was Resistant",
+    "intermediate_rows": "dropped, not coerced",
+    "resolution_lost": "per-drug distinctions within a class; see perdrug.py"
+  },
+  "ingestion_stats": {
+    "rows_seen": 161121,
+    "dropped_unmapped_drug": 23393,
+    "dropped_intermediate": 10494,
+    "dropped_non_lab_evidence": 0,
+    "used": 127234,
+    "unmapped_drug_names": {
+      "extended spectrum beta lactamase": 158,
+      "cefalotin": 157,
+      "cefpodoxime": 147,
+      "tylosin": 125,
+      "cefpodoxime_clavulanic_acid": 113,
+      "ceftazidime/clavulanic acid": 83,
+      "trimethoprim/sulfobactam": 82,
+      "cefotaxime/clavulanic acid": 68,
+      "ceftarolin": 66,
+      "aminogycosides": 64,
+      "fluoroquinolones": 60,
+      "beta-lactam": 58,
+      "avilamycin": 57,
+      "bacitracin": 57,
+      "trimotheprim": 56
+    },
+    "n_isolates": 25832
+  },
+  "probes": [
+    {
+      "source": "NCBI Pathogen Detection AST directory (Salmonella)",
+      "url": "https://ftp.ncbi.nlm.nih.gov/pathogen/Results/Salmonella/latest_snps/AST/",
+      "ok": false,
+      "detail": "HTTP 404 \u2014 per-isolate MIC tables from NARMS not served here",
+      "looks_like_data": false
+    },
+    {
+      "source": "NCBI Isolates Browser bulk download",
+      "url": "https://www.ncbi.nlm.nih.gov/pathogens/isolates/api/download/?format=tsv&limit=5",
+      "ok": true,
+      "detail": "HTML page, not tabular data \u2014 no labels here",
+      "looks_like_data": false
+    },
+    {
+      "source": "BV-BRC FTP genome AMR table",
+      "url": "https://ftp.bvbrc.org/RELEASE_NOTES/PATRIC_genomes_AMR.txt",
+      "ok": false,
+      "detail": "URLError: <urlopen error [WinError 10060] A connection attempt failed because the connected party di",
+      "looks_like_data": false
+    },
+    {
+      "source": "BV-BRC API genome_amr (laboratory evidence only)",
+      "url": "https://www.bv-brc.org/api/genome_amr/?eq(evidence,%22Laboratory%20Method%22)&limit(2)",
+      "ok": true,
+      "detail": "tabular payload with susceptibility fields",
+      "looks_like_data": true
+    }
+  ],
+  "usable_for": {
+    "gene_detection_on_real_sequence": true,
+    "novelty_scanning_on_real_sequence": true,
+    "resistance_prediction_accuracy": true
+  },
+  "isolates": [
+    {
+      "genome_id": "562.30349",
+      "genome_name": "Escherichia coli strain CCUG 70745",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 1,
+        "Glycopeptides": 1,
+        "Carbapenems": 1,
+        "Oxazolidinones": 1,
+        "Rifamycins": 1,
+        "Macrolides": 1,
+        "Penicillins": 1,
+        "Cephalosporins": 1
+      },
+      "local_path": "data\\real\\genomes\\562.30349.fna",
+      "length_bp": 5235096,
+      "n_contigs": 7
+    },
+    {
+      "genome_id": "562.58783",
+      "genome_name": "Escherichia coli strain ENV323",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Tetracyclines": 1,
+        "Carbapenems": 0,
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Polymyxins": 0,
+        "Cephalosporins": 0,
+        "Penicillins": 0
+      },
+      "local_path": "data\\real\\genomes\\562.58783.fna",
+      "length_bp": 4961129,
+      "n_contigs": 127
+    },
+    {
+      "genome_id": "562.58786",
+      "genome_name": "Escherichia coli strain ENV463",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Penicillins": 1,
+        "Fluoroquinolones": 0,
+        "Cephalosporins": 1,
+        "Aminoglycosides": 0,
+        "Polymyxins": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Carbapenems": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\562.58786.fna",
+      "length_bp": 4773875,
+      "n_contigs": 138
+    },
+    {
+      "genome_id": "562.7635",
+      "genome_name": "Escherichia coli strain 505545",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Macrolides": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 0,
+        "Tetracyclines": 0,
+        "Cephalosporins": 0,
+        "Carbapenems": 0,
+        "Penicillins": 0
+      },
+      "local_path": "data\\real\\genomes\\562.7635.fna",
+      "length_bp": 5096679,
+      "n_contigs": 135
+    },
+    {
+      "genome_id": "562.7712",
+      "genome_name": "Escherichia coli strain 403726_aEPEC",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Aminoglycosides": 1,
+        "Fluoroquinolones": 0,
+        "Penicillins": 1,
+        "Tetracyclines": 1,
+        "Cephalosporins": 0,
+        "Macrolides": 0,
+        "Carbapenems": 0,
+        "Trimethoprim-sulfonamides": 1
+      },
+      "local_path": "data\\real\\genomes\\562.7712.fna",
+      "length_bp": 4970268,
+      "n_contigs": 202
+    },
+    {
+      "genome_id": "562.7724",
+      "genome_name": "Escherichia coli strain 703753",
+      "taxon_id": 562,
+      "organism": "Escherichia coli",
+      "class_labels": {
+        "Fluoroquinolones": 0,
+        "Cephalosporins": 0,
+        "Macrolides": 0,
+        "Tetracyclines": 1,
+        "Penicillins": 0,
+        "Carbapenems": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Aminoglycosides": 0
+      },
+      "local_path": "data\\real\\genomes\\562.7724.fna",
+      "length_bp": 5264902,
+      "n_contigs": 221
+    },
+    {
+      "genome_id": "573.18476",
+      "genome_name": "Klebsiella pneumoniae strain CCUG 70742",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Macrolides": 1,
+        "Penicillins": 1,
+        "Carbapenems": 1,
+        "Polymyxins": 0,
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 1,
+        "Cephalosporins": 1,
+        "Glycopeptides": 1,
+        "Oxazolidinones": 1
+      },
+      "local_path": "data\\real\\genomes\\573.18476.fna",
+      "length_bp": 5391141,
+      "n_contigs": 5
+    },
+    {
+      "genome_id": "573.18477",
+      "genome_name": "Klebsiella pneumoniae strain CCUG 70747",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Cephalosporins": 1,
+        "Fluoroquinolones": 1,
+        "Aminoglycosides": 1,
+        "Polymyxins": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Oxazolidinones": 1,
+        "Rifamycins": 1,
+        "Carbapenems": 1
+      },
+      "local_path": "data\\real\\genomes\\573.18477.fna",
+      "length_bp": 5561916,
+      "n_contigs": 4
+    },
+    {
+      "genome_id": "573.62712",
+      "genome_name": "Klebsiella pneumoniae MGL_K_10",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Rifamycins": 1,
+        "Aminoglycosides": 1,
+        "Tetracyclines": 1,
+        "Macrolides": 1,
+        "Polymyxins": 1,
+        "Fluoroquinolones": 1,
+        "Penicillins": 1,
+        "Trimethoprim-sulfonamides": 1
+      },
+      "local_path": "data\\real\\genomes\\573.62712.fna",
+      "length_bp": 5539330,
+      "n_contigs": 57
+    },
+    {
+      "genome_id": "573.12928",
+      "genome_name": "Klebsiella pneumoniae 96",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Aminoglycosides": 0,
+        "Cephalosporins": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Penicillins": 0,
+        "Fluoroquinolones": 0,
+        "Carbapenems": 0,
+        "Tetracyclines": 0
+      },
+      "local_path": "data\\real\\genomes\\573.12928.fna",
+      "length_bp": 5577519,
+      "n_contigs": 285
+    },
+    {
+      "genome_id": "573.12972",
+      "genome_name": "Klebsiella pneumoniae 3244",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Tetracyclines": 1,
+        "Cephalosporins": 1,
+        "Penicillins": 1,
+        "Aminoglycosides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Carbapenems": 0,
+        "Fluoroquinolones": 1
+      },
+      "local_path": "data\\real\\genomes\\573.12972.fna",
+      "length_bp": 5448536,
+      "n_contigs": 238
+    },
+    {
+      "genome_id": "573.13071",
+      "genome_name": "Klebsiella pneumoniae KPN1052ec",
+      "taxon_id": 573,
+      "organism": "Klebsiella pneumoniae",
+      "class_labels": {
+        "Cephalosporins": 1,
+        "Fluoroquinolones": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Penicillins": 1,
+        "Carbapenems": 0,
+        "Tetracyclines": 0,
+        "Aminoglycosides": 0
+      },
+      "local_path": "data\\real\\genomes\\573.13071.fna",
+      "length_bp": 5511136,
+      "n_contigs": 149
+    },
+    {
+      "genome_id": "287.5956",
+      "genome_name": "Pseudomonas aeruginosa strain CCUG 70744",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Rifamycins": 1,
+        "Macrolides": 1,
+        "Penicillins": 1,
+        "Oxazolidinones": 1,
+        "Aminoglycosides": 0,
+        "Glycopeptides": 1,
+        "Carbapenems": 1,
+        "Cephalosporins": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Polymyxins": 0,
+        "Fluoroquinolones": 1,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\287.5956.fna",
+      "length_bp": 6859232,
+      "n_contigs": 1
+    },
+    {
+      "genome_id": "287.32668",
+      "genome_name": "Pseudomonas aeruginosa 20200317_MGL_47",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Tetracyclines": 1,
+        "Penicillins": 1,
+        "Aminoglycosides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Fluoroquinolones": 1,
+        "Macrolides": 1,
+        "Polymyxins": 1,
+        "Rifamycins": 1,
+        "Carbapenems": 0
+      },
+      "local_path": "data\\real\\genomes\\287.32668.fna",
+      "length_bp": 6982877,
+      "n_contigs": 190
+    },
+    {
+      "genome_id": "287.34624",
+      "genome_name": "Pseudomonas aeruginosa 20200317_MGL_47",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Macrolides": 1,
+        "Penicillins": 1,
+        "Aminoglycosides": 1,
+        "Carbapenems": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Polymyxins": 1,
+        "Tetracyclines": 1,
+        "Rifamycins": 1,
+        "Fluoroquinolones": 1
+      },
+      "local_path": "data\\real\\genomes\\287.34624.fna",
+      "length_bp": 6982771,
+      "n_contigs": 190
+    },
+    {
+      "genome_id": "287.32645",
+      "genome_name": "Pseudomonas aeruginosa MGL_95",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Aminoglycosides": 1,
+        "Macrolides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Penicillins": 1,
+        "Fluoroquinolones": 1,
+        "Tetracyclines": 1,
+        "Rifamycins": 1,
+        "Carbapenems": 1
+      },
+      "local_path": "data\\real\\genomes\\287.32645.fna",
+      "length_bp": 7347693,
+      "n_contigs": 287
+    },
+    {
+      "genome_id": "287.32646",
+      "genome_name": "Pseudomonas aeruginosa MGL_96",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Tetracyclines": 1,
+        "Fluoroquinolones": 1,
+        "Penicillins": 1,
+        "Aminoglycosides": 1,
+        "Rifamycins": 1,
+        "Macrolides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Carbapenems": 1
+      },
+      "local_path": "data\\real\\genomes\\287.32646.fna",
+      "length_bp": 6947985,
+      "n_contigs": 201
+    },
+    {
+      "genome_id": "287.32647",
+      "genome_name": "Pseudomonas aeruginosa MGL_100",
+      "taxon_id": 287,
+      "organism": "Pseudomonas aeruginosa",
+      "class_labels": {
+        "Aminoglycosides": 1,
+        "Fluoroquinolones": 1,
+        "Carbapenems": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Penicillins": 1,
+        "Tetracyclines": 1,
+        "Macrolides": 1,
+        "Rifamycins": 1
+      },
+      "local_path": "data\\real\\genomes\\287.32647.fna",
+      "length_bp": 7361863,
+      "n_contigs": 217
+    },
+    {
+      "genome_id": "470.5040",
+      "genome_name": "Acinetobacter baumannii strain CCUG 70743",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Fluoroquinolones": 1,
+        "Macrolides": 1,
+        "Penicillins": 1,
+        "Glycopeptides": 1,
+        "Carbapenems": 1,
+        "Aminoglycosides": 1,
+        "Cephalosporins": 1,
+        "Polymyxins": 0,
+        "Trimethoprim-sulfonamides": 1,
+        "Oxazolidinones": 1
+      },
+      "local_path": "data\\real\\genomes\\470.5040.fna",
+      "length_bp": 3954761,
+      "n_contigs": 3
+    },
+    {
+      "genome_id": "470.22944",
+      "genome_name": "Acinetobacter baumannii MGL_Ab_3",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Fluoroquinolones": 1,
+        "Aminoglycosides": 1,
+        "Penicillins": 1,
+        "Tetracyclines": 1,
+        "Carbapenems": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Rifamycins": 1,
+        "Polymyxins": 1,
+        "Macrolides": 1
+      },
+      "local_path": "data\\real\\genomes\\470.22944.fna",
+      "length_bp": 4039522,
+      "n_contigs": 149
+    },
+    {
+      "genome_id": "470.24294",
+      "genome_name": "Acinetobacter baumannii MGL_Ab_3",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Polymyxins": 1,
+        "Aminoglycosides": 1,
+        "Rifamycins": 1,
+        "Carbapenems": 1,
+        "Tetracyclines": 1,
+        "Penicillins": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Macrolides": 1,
+        "Fluoroquinolones": 1
+      },
+      "local_path": "data\\real\\genomes\\470.24294.fna",
+      "length_bp": 4039554,
+      "n_contigs": 149
+    },
+    {
+      "genome_id": "470.1561",
+      "genome_name": "Acinetobacter baumannii strain MRSN4119",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Cephalosporins": 1,
+        "Penicillins": 1,
+        "Aminoglycosides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Tetracyclines": 1,
+        "Fluoroquinolones": 1,
+        "Carbapenems": 1,
+        "Polymyxins": 1
+      },
+      "local_path": "data\\real\\genomes\\470.1561.fna",
+      "length_bp": 3946021,
+      "n_contigs": 113
+    },
+    {
+      "genome_id": "470.1562",
+      "genome_name": "Acinetobacter baumannii strain MRSN3941",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Aminoglycosides": 1,
+        "Carbapenems": 1,
+        "Fluoroquinolones": 1,
+        "Cephalosporins": 1,
+        "Penicillins": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Polymyxins": 1,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\470.1562.fna",
+      "length_bp": 3949960,
+      "n_contigs": 112
+    },
+    {
+      "genome_id": "470.1563",
+      "genome_name": "Acinetobacter baumannii strain MRSN5540",
+      "taxon_id": 470,
+      "organism": "Acinetobacter baumannii",
+      "class_labels": {
+        "Tetracyclines": 1,
+        "Cephalosporins": 1,
+        "Fluoroquinolones": 1,
+        "Carbapenems": 1,
+        "Aminoglycosides": 1,
+        "Trimethoprim-sulfonamides": 1,
+        "Penicillins": 1,
+        "Polymyxins": 0
+      },
+      "local_path": "data\\real\\genomes\\470.1563.fna",
+      "length_bp": 4028653,
+      "n_contigs": 117
+    },
+    {
+      "genome_id": "1280.15938",
+      "genome_name": "Staphylococcus aureus strain 0780-1302-2015",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Penicillins": 0,
+        "Macrolides": 0,
+        "Carbapenems": 0,
+        "Oxazolidinones": 0,
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 0,
+        "Tetracyclines": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Glycopeptides": 0,
+        "Cephalosporins": 0,
+        "Rifamycins": 0
+      },
+      "local_path": "data\\real\\genomes\\1280.15938.fna",
+      "length_bp": 2718298,
+      "n_contigs": 15
+    },
+    {
+      "genome_id": "1280.16052",
+      "genome_name": "Staphylococcus aureus strain 0908-2002-2015",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Fluoroquinolones": 0,
+        "Carbapenems": 0,
+        "Penicillins": 0,
+        "Rifamycins": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Glycopeptides": 0,
+        "Aminoglycosides": 0,
+        "Macrolides": 0,
+        "Cephalosporins": 0,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 0
+      },
+      "local_path": "data\\real\\genomes\\1280.16052.fna",
+      "length_bp": 2754974,
+      "n_contigs": 59
+    },
+    {
+      "genome_id": "1280.15930",
+      "genome_name": "Staphylococcus aureus strain 13C",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Aminoglycosides": 0,
+        "Oxazolidinones": 0,
+        "Penicillins": 1,
+        "Trimethoprim-sulfonamides": 0,
+        "Cephalosporins": 1,
+        "Fluoroquinolones": 1,
+        "Rifamycins": 0,
+        "Macrolides": 0,
+        "Tetracyclines": 0,
+        "Glycopeptides": 0
+      },
+      "local_path": "data\\real\\genomes\\1280.15930.fna",
+      "length_bp": 2846282,
+      "n_contigs": 33
+    },
+    {
+      "genome_id": "1280.15931",
+      "genome_name": "Staphylococcus aureus strain LAC",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Cephalosporins": 1,
+        "Oxazolidinones": 0,
+        "Glycopeptides": 0,
+        "Aminoglycosides": 0,
+        "Tetracyclines": 0,
+        "Penicillins": 1,
+        "Trimethoprim-sulfonamides": 0,
+        "Macrolides": 1,
+        "Rifamycins": 0,
+        "Fluoroquinolones": 1
+      },
+      "local_path": "data\\real\\genomes\\1280.15931.fna",
+      "length_bp": 2872137,
+      "n_contigs": 38
+    },
+    {
+      "genome_id": "1280.16051",
+      "genome_name": "Staphylococcus aureus strain 1014-2602-2015",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 0,
+        "Cephalosporins": 0,
+        "Carbapenems": 0,
+        "Tetracyclines": 0,
+        "Penicillins": 0,
+        "Glycopeptides": 0,
+        "Macrolides": 0,
+        "Oxazolidinones": 0,
+        "Rifamycins": 0
+      },
+      "local_path": "data\\real\\genomes\\1280.16051.fna",
+      "length_bp": 2713020,
+      "n_contigs": 176
+    },
+    {
+      "genome_id": "1280.16436",
+      "genome_name": "Staphylococcus aureus strain 0257-2201-2015",
+      "taxon_id": 1280,
+      "organism": "Staphylococcus aureus",
+      "class_labels": {
+        "Penicillins": 0,
+        "Aminoglycosides": 0,
+        "Fluoroquinolones": 0,
+        "Macrolides": 0,
+        "Cephalosporins": 0,
+        "Carbapenems": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Rifamycins": 0,
+        "Glycopeptides": 0,
+        "Oxazolidinones": 0
+      },
+      "local_path": "data\\real\\genomes\\1280.16436.fna",
+      "length_bp": 2666594,
+      "n_contigs": 86
+    },
+    {
+      "genome_id": "1352.4398",
+      "genome_name": "Enterococcus faecium strain 270",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Glycopeptides": 0,
+        "Tetracyclines": 0,
+        "Penicillins": 0,
+        "Aminoglycosides": 0,
+        "Oxazolidinones": 0,
+        "Rifamycins": 1,
+        "Macrolides": 1,
+        "Fluoroquinolones": 0
+      },
+      "local_path": "data\\real\\genomes\\1352.4398.fna",
+      "length_bp": 2831009,
+      "n_contigs": 89
+    },
+    {
+      "genome_id": "1352.10125",
+      "genome_name": "Enterococcus faecium strain 17651_4#1",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Penicillins": 0,
+        "Glycopeptides": 0,
+        "Macrolides": 1,
+        "Aminoglycosides": 1,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\1352.10125.fna",
+      "length_bp": 2640017,
+      "n_contigs": 281
+    },
+    {
+      "genome_id": "1352.10126",
+      "genome_name": "Enterococcus faecium strain 17328_1#79",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Glycopeptides": 0,
+        "Penicillins": 0,
+        "Macrolides": 1,
+        "Aminoglycosides": 1,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\1352.10126.fna",
+      "length_bp": 2671612,
+      "n_contigs": 300
+    },
+    {
+      "genome_id": "1352.10127",
+      "genome_name": "Enterococcus faecium strain 17651_2#87",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Glycopeptides": 0,
+        "Penicillins": 0,
+        "Macrolides": 1,
+        "Aminoglycosides": 1,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\1352.10127.fna",
+      "length_bp": 2515099,
+      "n_contigs": 240
+    },
+    {
+      "genome_id": "1352.10128",
+      "genome_name": "Enterococcus faecium strain 17651_2#88",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Glycopeptides": 0,
+        "Penicillins": 0,
+        "Macrolides": 1,
+        "Aminoglycosides": 1,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\1352.10128.fna",
+      "length_bp": 2731871,
+      "n_contigs": 202
+    },
+    {
+      "genome_id": "1352.10129",
+      "genome_name": "Enterococcus faecium strain 17651_2#89",
+      "taxon_id": 1352,
+      "organism": "Enterococcus faecium",
+      "class_labels": {
+        "Glycopeptides": 0,
+        "Penicillins": 0,
+        "Macrolides": 1,
+        "Aminoglycosides": 0,
+        "Oxazolidinones": 0,
+        "Tetracyclines": 1
+      },
+      "local_path": "data\\real\\genomes\\1352.10129.fna",
+      "length_bp": 2776734,
+      "n_contigs": 246
+    },
+    {
+      "genome_id": "28901.24807",
+      "genome_name": "Salmonella enterica IndS87",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Trimethoprim-sulfonamides": 0,
+        "Macrolides": 0,
+        "Tetracyclines": 0,
+        "Fluoroquinolones": 1,
+        "Aminoglycosides": 0,
+        "Penicillins": 0,
+        "Carbapenems": 0,
+        "Polymyxins": 0,
+        "Cephalosporins": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.24807.fna",
+      "length_bp": 4713081,
+      "n_contigs": 56
+    },
+    {
+      "genome_id": "28901.21720",
+      "genome_name": "Salmonella enterica AUSMDU00018105",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Trimethoprim-sulfonamides": 0,
+        "Tetracyclines": 0,
+        "Carbapenems": 0,
+        "Fluoroquinolones": 0,
+        "Penicillins": 0,
+        "Aminoglycosides": 0,
+        "Macrolides": 0,
+        "Cephalosporins": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.21720.fna",
+      "length_bp": 4669805,
+      "n_contigs": 83
+    },
+    {
+      "genome_id": "28901.22054",
+      "genome_name": "Salmonella enterica AUSMDU00033118",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Trimethoprim-sulfonamides": 0,
+        "Carbapenems": 0,
+        "Tetracyclines": 0,
+        "Fluoroquinolones": 0,
+        "Penicillins": 0,
+        "Cephalosporins": 0,
+        "Aminoglycosides": 0,
+        "Macrolides": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.22054.fna",
+      "length_bp": 4919451,
+      "n_contigs": 98
+    },
+    {
+      "genome_id": "28901.22371",
+      "genome_name": "Salmonella enterica AUSMDU00018920",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Fluoroquinolones": 0,
+        "Aminoglycosides": 0,
+        "Tetracyclines": 0,
+        "Trimethoprim-sulfonamides": 0,
+        "Cephalosporins": 0,
+        "Penicillins": 0,
+        "Macrolides": 0,
+        "Carbapenems": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.22371.fna",
+      "length_bp": 5053673,
+      "n_contigs": 50
+    },
+    {
+      "genome_id": "28901.23138",
+      "genome_name": "Salmonella enterica AUSMDU00033639",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Macrolides": 0,
+        "Tetracyclines": 0,
+        "Carbapenems": 0,
+        "Fluoroquinolones": 0,
+        "Cephalosporins": 0,
+        "Aminoglycosides": 0,
+        "Penicillins": 0,
+        "Trimethoprim-sulfonamides": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.23138.fna",
+      "length_bp": 4762207,
+      "n_contigs": 33
+    },
+    {
+      "genome_id": "28901.23171",
+      "genome_name": "Salmonella enterica AUSMDU00004705",
+      "taxon_id": 28901,
+      "organism": "Salmonella enterica",
+      "class_labels": {
+        "Trimethoprim-sulfonamides": 0,
+        "Penicillins": 0,
+        "Tetracyclines": 0,
+        "Aminoglycosides": 0,
+        "Macrolides": 0,
+        "Carbapenems": 0,
+        "Cephalosporins": 0,
+        "Fluoroquinolones": 0
+      },
+      "local_path": "data\\real\\genomes\\28901.23171.fna",
+      "length_bp": 4827590,
+      "n_contigs": 45
+    }
+  ]
+}

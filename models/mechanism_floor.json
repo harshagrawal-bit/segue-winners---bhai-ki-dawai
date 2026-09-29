@@ -1,0 +1,120 @@
+{
+  "source": "42 real genomes with laboratory AST (models/validation_real.json)",
+  "quantity": "P(laboratory resistant | a gene conferring that class detected)",
+  "overall": 0.709,
+  "pseudo_count": 5.0,
+  "previous_constant": 0.9,
+  "floors": {
+    "Penicillins": 0.645,
+    "Cephalosporins": 0.659,
+    "Carbapenems": 0.61,
+    "Fluoroquinolones": 0.591,
+    "Macrolides": 0.818,
+    "Aminoglycosides": 0.777,
+    "Tetracyclines": 0.818,
+    "Trimethoprim-sulfonamides": 0.868
+  },
+  "rows": [
+    {
+      "class": "Penicillins",
+      "resistant": 10,
+      "n": 16,
+      "raw": 0.625,
+      "floor": 0.645,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Cephalosporins",
+      "resistant": 7,
+      "n": 11,
+      "raw": 0.636,
+      "floor": 0.659,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Carbapenems",
+      "resistant": 5,
+      "n": 9,
+      "raw": 0.556,
+      "floor": 0.61,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Fluoroquinolones",
+      "resistant": 0,
+      "n": 1,
+      "raw": 0.0,
+      "floor": 0.591,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Macrolides",
+      "resistant": 3,
+      "n": 3,
+      "raw": 1.0,
+      "floor": 0.818,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Aminoglycosides",
+      "resistant": 5,
+      "n": 6,
+      "raw": 0.833,
+      "floor": 0.777,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Tetracyclines",
+      "resistant": 3,
+      "n": 3,
+      "raw": 1.0,
+      "floor": 0.818,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Trimethoprim-sulfonamides",
+      "resistant": 6,
+      "n": 6,
+      "raw": 1.0,
+      "floor": 0.868,
+      "basis": "laboratory AST on real genomes"
+    },
+    {
+      "class": "Glycopeptides",
+      "resistant": 0,
+      "n": 0,
+      "raw": null,
+      "floor": null,
+      "basis": "no observations"
+    },
+    {
+      "class": "Oxazolidinones",
+      "resistant": 0,
+      "n": 0,
+      "raw": null,
+      "floor": null,
+      "basis": "no observations"
+    },
+    {
+      "class": "Polymyxins",
+      "resistant": 0,
+      "n": 0,
+      "raw": null,
+      "floor": null,
+      "basis": "no observations"
+    },
+    {
+      "class": "Rifamycins",
+      "resistant": 0,
+      "n": 0,
+      "raw": null,
+      "floor": null,
+      "basis": "no observations"
+    }
+  ],
+  "caveats": [
+    "3-16 observations per class; indicative, not precise",
+    "isolates selected for breadth of bench testing, so not a random sample",
+    "class-level aggregation: resistant if any drug in the class failed"
+  ]
+}

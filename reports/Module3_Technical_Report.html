@@ -1,0 +1,1096 @@
+<title>Module 3 Technical Report</title>
+<div style="border:3px solid #b3261e;background:#fff4f2;padding:16px 20px;margin:0 0 24px;border-radius:8px">
+<p style="margin:0 0 8px;font-weight:700;color:#b3261e;font-size:1.05em">
+READ THIS FIRST — this document was written before real-genome validation</p>
+<p style="margin:0 0 8px">
+Module 3 has since been measured against <strong>42 real bacterial genomes with
+350 laboratory-measured susceptibility results</strong>. On that test it scores
+<strong>0.526 accuracy</strong>, which with 176 resistant and 174 susceptible
+comparisons is approximately <strong>chance</strong>. No threshold changes this;
+the sweep peaks at 0.503.</p>
+<p style="margin:0 0 8px">
+Every accuracy figure in this document is measured on <strong>constructed</strong>
+isolates — generated background sequence with real resistance genes planted into
+it. Those figures are correct for constructed isolates and must not be presented
+as real-world performance.</p>
+<p style="margin:0">
+What did transfer is <strong>gene detection</strong>: on real genomes it found
+genuine determinants (mecA in 9 real <em>S. aureus</em>, blaSHV in 5, plus
+blaNDM-1, blaVIM, blaCTX-M-15) at a 13.8% false-resistance rate, though it misses
+73% of laboratory-confirmed resistance because 21 reference genes cannot cover
+real resistance. Full analysis: <strong>reports/AUDIT_RESPONSE.md</strong>.</p>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ink:#17242B;--ink-soft:#47585F;--ink-faint:#76868C;
+    --paper:#FBFCFC;--panel:#F2F6F6;--rule:#D4DDE0;--rule-firm:#A9BAC0;
+    --accent:#0E6E7D;--ok:#1F5F4B;--ok-bg:#EAF3EF;
+    --warn:#A33A22;--warn-bg:#FBEFEC;--note:#7A4E17;--note-bg:#F7F0E6;
+    --measure:70ch;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+      --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+      --accent:#4FB3C4;--ok:#67C39E;--ok-bg:#142A23;
+      --warn:#E58A70;--warn-bg:#2E1A15;--note:#D6A868;--note-bg:#2B2317;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E4ECEE;--ink-soft:#A9BAC0;--ink-faint:#7E9198;
+    --paper:#10181C;--panel:#182328;--rule:#2A3941;--rule-firm:#3D505A;
+    --accent:#4FB3C4;--ok:#67C39E;--ok-bg:#142A23;
+    --warn:#E58A70;--warn-bg:#2E1A15;--note:#D6A868;--note-bg:#2B2317;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14.5px;line-height:1.62;
+    -webkit-font-smoothing:antialiased}
+  .sheet{max-width:920px;margin:0 auto;padding-inline:24px;padding-block:46px 70px}
+  h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;text-wrap:balance;margin:0}
+  p{margin:0 0 13px;max-width:var(--measure)}p:last-child{margin-bottom:0}
+  ul,ol{margin:0 0 13px;padding-left:21px;max-width:var(--measure)}li{margin-bottom:6px}
+  strong{font-weight:600}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--panel);
+    padding:1px 5px;border-radius:2px}
+
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px}
+  .masthead h1{font-size:33px;font-weight:600;line-height:1.15;margin-top:10px}
+  .masthead .sub{color:var(--ink-soft);max-width:var(--measure);margin-top:12px}
+
+  .part{margin-top:52px}
+  .part-head{display:flex;gap:18px;align-items:baseline;border-bottom:1px solid var(--rule-firm);
+    padding-bottom:11px;margin-bottom:24px}
+  .part-no{font-family:"IBM Plex Mono",monospace;font-size:32px;font-weight:600;
+    color:var(--rule-firm);line-height:1}
+  .part-head h2{font-size:24px;font-weight:600;line-height:1.2}
+
+  h3.sec{font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:28px 0 11px}
+
+  .tbl-wrap{overflow-x:auto;margin:0 0 16px}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--rule);vertical-align:top}
+  th{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--rule-firm);
+    white-space:nowrap}
+  td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:none}
+  td.k{font-family:"IBM Plex Mono",monospace;font-size:11.5px;white-space:nowrap;
+    color:var(--ink-faint);width:150px}
+
+  /* feature spec sheet */
+  .feature{border:1px solid var(--rule-firm);margin-bottom:30px}
+  .feature>header{background:var(--panel);padding:14px 18px;border-bottom:1px solid var(--rule-firm)}
+  .feature>header h3{font-size:19px;font-weight:600;font-family:"IBM Plex Serif",serif}
+  .feature>header .oneline{font-size:13px;color:var(--ink-soft);margin-top:4px}
+  .feature .body{padding:18px}
+  .spec{display:grid;grid-template-columns:150px 1fr;gap:0;border-top:1px solid var(--rule)}
+  .spec:first-of-type{border-top:none}
+  .spec dt{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+    padding:11px 12px 11px 0}
+  .spec dd{margin:0;padding:11px 0;font-size:13.5px}
+  .spec dd p{max-width:none;margin-bottom:8px;font-size:13.5px}
+  .spec dd ul{max-width:none;margin-bottom:0;font-size:13.5px}
+
+  .callout{border-left:3px solid var(--accent);background:var(--panel);padding:13px 17px;
+    margin:0 0 16px;max-width:var(--measure)}
+  .callout.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+  .callout.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+  .callout .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    display:block;margin-bottom:5px}
+  .callout p{font-size:13.5px}
+
+  pre{background:var(--panel);border:1px solid var(--rule);padding:13px 15px;
+    overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.55;
+    margin:0 0 16px}
+  pre code{background:none;padding:0;font-size:inherit}
+
+  .numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:1px;
+    background:var(--rule);border:1px solid var(--rule);margin-bottom:16px}
+  .numbers div{background:var(--paper);padding:11px 13px}
+  .numbers dt{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink-faint);margin:0}
+  .numbers dd{margin:3px 0 0;font-size:18px;font-weight:600;font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums}
+  .numbers dd small{font-size:11px;font-weight:400;color:var(--ink-soft);display:block;
+    font-family:"IBM Plex Sans",sans-serif;line-height:1.4;margin-top:2px}
+
+  footer{margin-top:54px;padding-top:20px;border-top:2px solid var(--ink);
+    font-size:12px;color:var(--ink-faint);max-width:var(--measure)}
+
+  @media print{
+    body{background:#fff;font-size:10pt}
+    .sheet{max-width:none;padding:0}
+    .part{page-break-before:always}
+    .part:first-of-type{page-break-before:avoid}
+    .feature,.callout,pre,table,.numbers{page-break-inside:avoid}
+    h3.sec,.part-head,.feature>header{page-break-after:avoid}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="eyebrow">TrialSense · Segue 3.0 · Technical Report</div>
+  <h1>Module&nbsp;3 — Feature-by-Feature Technical Documentation</h1>
+  <p class="sub">
+    Tech stack, models, datasets, training, validation, accuracy, dependencies,
+    limitations and future scope for each of the six features. Written for readers
+    with an engineering background and no healthcare training.
+  </p>
+  <dl class="numbers" style="margin-top:24px">
+    <div><dt>Features</dt><dd>6</dd></div>
+    <div><dt>ML models</dt><dd>1<small>see §1.3</small></dd></div>
+    <div><dt>Held-out score</dt><dd>0.763<small>macro-F1</small></dd></div>
+    <div><dt>Validation checks</dt><dd>8</dd></div>
+    <div><dt>Automated tests</dt><dd>51</dd></div>
+    <div><dt>Lines of code</dt><dd>12,084</dd></div>
+  </dl>
+</header>
+
+<!-- ============ PART 1 ============ -->
+<section class="part" style="page-break-before:avoid">
+  <div class="part-head"><div class="part-no">01</div><div><h2>Introduction</h2></div></div>
+
+  <h3 class="sec">1.1 · What the module does</h3>
+  <p>
+    Module 3 takes the genetic sequence of one bacterial sample and determines which
+    antibiotics that sample can already survive. It then answers five further
+    questions about what that means for a company deciding whether to fund a drug
+    development programme.
+  </p>
+  <p>
+    The input is a text file of A, C, G and T characters. The output is six separate
+    reports. They are kept separate rather than combined into one score, because a
+    single number would hide cases where the six answers disagree.
+  </p>
+
+  <h3 class="sec">1.2 · Shared technical foundation</h3>
+  <p>All six features run on the same base stack. Per-feature sections list only what
+     is additional or specific.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Version</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Python</td><td class="k">3.13.5</td><td>Runtime</td></tr>
+        <tr><td class="k">NumPy</td><td class="k">2.5.3</td><td>Array maths, all sequence processing</td></tr>
+        <tr><td class="k">scikit-learn</td><td class="k">1.9.0</td><td>The classifier and its calibration</td></tr>
+        <tr><td class="k">SciPy</td><td class="k">1.18.1</td><td>Statistical helpers (via scikit-learn)</td></tr>
+        <tr><td class="k">pandas</td><td class="k">3.0.5</td><td>Tabular handling</td></tr>
+        <tr><td class="k">Plotly</td><td class="k">7.0.0</td><td>All charts</td></tr>
+        <tr><td class="k">Streamlit</td><td class="k">1.63.0</td><td>Web interface</td></tr>
+        <tr><td class="k">RDKit</td><td class="k">2026.03.6</td><td>Used by Modules 1–2, not Module 3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    No paid services, no network calls at runtime, no GPU. The full system runs on a
+    laptop CPU.
+  </p>
+
+  <h3 class="sec">1.3 · What is, and is not, machine learning</h3>
+  <div class="callout warn">
+    <span class="lbl">Read this before describing the system to anyone</span>
+    <p>
+      Module 3 contains <strong>one</strong> machine-learning model. The other
+      components are similarity matching, lookup tables and statistics. Describing all
+      six features as “AI” would be inaccurate, and the distinction is easy to defend
+      once stated.
+    </p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Category</th><th>Why built this way</th></tr></thead>
+      <tbody>
+        <tr><td>Resistance classifier</td><td><strong>Machine learning</strong></td>
+            <td>The only part where the correct answer must be inferred from data</td></tr>
+        <tr><td>Trend forecaster</td><td>Fitted statistical model</td>
+            <td>A curve fit to real figures, not a learned model</td></tr>
+        <tr><td>Gene search</td><td>Similarity matching</td>
+            <td>Comparison against known published sequences is exact and verifiable</td></tr>
+        <tr><td>Mechanism logic</td><td>Lookup table</td>
+            <td>Established published science; inferring it would be worse</td></tr>
+        <tr><td>Unknown-element scan</td><td>Statistical anomaly detection</td>
+            <td>Needs no training data, so it generalises to anything</td></tr>
+        <tr><td>Cost model</td><td>Arithmetic on user inputs</td>
+            <td>Must be auditable line by line</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">1.4 · The two-layer architecture</h3>
+  <p>
+    Gene search and the classifier answer the same question by different means. Gene
+    search is exact but only recognises the 21 genes we hold. The classifier covers
+    anything but is less reliable.
+  </p>
+  <p>
+    Where gene search finds a definite match, its result takes priority. Measured
+    effect: the classifier alone produces 5 missed detections across the 12 bundled
+    samples; with the override, <strong>zero</strong>.
+  </p>
+</section>
+
+<!-- ============ FEATURE 1 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">02</div><div><h2>Feature 1 — Runway</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Resistance projection to launch year</h3>
+      <div class="oneline">Estimates how resistant the target will be when the drug reaches market, not today.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Python, NumPy (curve fitting via <code>numpy.polyfit</code> on transformed values),
+        Plotly for the projection chart. Implemented in
+        <code>trialsense/surveillance.py</code>, 1,215 lines.
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        <p>A logistic (S-shaped) curve, fitted by least squares after transforming the
+        percentages onto a logit scale. This is a statistical fit, not a trained model.</p>
+        <p><strong>Why logistic and not a straight line:</strong> resistance cannot exceed
+        100%. Klebsiella carbapenem resistance rises about 2.5 percentage points a year;
+        a straight line extended to 2035 produces a figure above 110%, which is not a
+        valid number. A logistic curve flattens as it approaches a ceiling, which is also
+        how the underlying process behaves.</p>
+        <p><strong>Why a transform instead of an optimiser:</strong> with nine annual data
+        points a non-linear optimiser can fail to converge. The logit transform makes the
+        problem linear, so the fit always returns a result.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        <p><strong>ICMR AMRSN Annual Reports, 2015–2024.</strong> India's national
+        antimicrobial resistance surveillance network. 7 organisms, 46 organism-antibiotic
+        series, <strong>408 individual data points</strong>.</p>
+        <p><strong>Why chosen:</strong> it is the authoritative national source for the
+        market this product targets, it is free and public, and it spans enough years to
+        fit a trend.</p>
+        <p>A second source, the WHO Global Health Observatory API, is included so the
+        interface can show that independent surveillance programmes report different
+        figures for the same organism and year.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>
+        <p>No training in the machine-learning sense. The curve is fitted at runtime to
+        whichever organism and antibiotic group the user selects.</p>
+        <p>The 2015 figures are deliberately <strong>excluded from every fit</strong>.
+        That year covered only blood and spinal-fluid samples, while 2016 onward covers
+        all sample types. Combining them produces a false step in the data — the
+        methicillin-resistance figure reads 42.6% for 2015 and 28.4% for 2016, and both
+        are correct for their own sample sets.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        <p><strong>Time-split backtest.</strong> The curve is fitted using only data up
+        to 2020, then asked to predict 2021–2024 — four years it has never seen. The
+        predictions are compared against what actually happened.</p>
+        <p>This is the only component in Module 3 tested against real-world outcomes
+        rather than labels we assigned.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <div class="tbl-wrap"><table><tbody>
+          <tr><td>Predictions evaluated</td><td class="num">184</td></tr>
+          <tr><td>Series covered</td><td class="num">46</td></tr>
+          <tr><td>Mean absolute error</td><td class="num"><strong>4.93 pp</strong></td></tr>
+          <tr><td>Median absolute error</td><td class="num">3.55 pp</td></tr>
+          <tr><td>Within 5 percentage points</td><td class="num">64%</td></tr>
+          <tr><td>Within 10 percentage points</td><td class="num">85%</td></tr>
+        </tbody></table></div>
+        <p>In plain terms: when it predicts a resistance figure for a year it has not
+        seen, it is typically within about five percentage points.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        <ul>
+          <li>Feature 6 (Spread) supplies a multiplier that shortens the projection when
+              the detected gene is of a type that transfers rapidly.</li>
+          <li>The core gene search supplies which genes are present.</li>
+          <li>Independent of Modules 1 and 2.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>It is an extrapolation. It is drawn as a dashed line inside a widening
+              uncertainty band so it cannot be mistaken for measured data.</li>
+          <li>Only the 7 organisms ICMR reports are covered. For others — including
+              tuberculosis — the feature returns “no data available” rather than
+              substituting a proxy figure.</li>
+          <li>It assumes the trend continues. A new drug, a policy change or an outbreak
+              would break that assumption, and nothing in the model would detect it.</li>
+          <li>Surveillance sources disagree with one another by up to 15 percentage
+              points for the same organism and year.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Add state-level rather than national figures, so projections reflect the
+              region a trial would actually run in.</li>
+          <li>Add confidence weighting by sample size — some series rest on a few hundred
+              samples, others on tens of thousands.</li>
+          <li>Extend beyond India using WHO country data, for companies targeting export
+              markets.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        A company can spend nine years building a product for a market that has
+        disappeared by the time it is finished. This feature identifies that before any
+        money is committed. The saving is the entire development budget, not a portion
+        of it.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 2 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">03</div><div><h2>Feature 2 — Rescue</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Mechanism analysis and workaround assessment</h3>
+      <div class="oneline">Determines whether detected resistance can be worked around, or whether the programme must be abandoned.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Pure Python. No model, no numerical libraries. Implemented in
+        <code>trialsense/mechanisms.py</code> (476 lines) and
+        <code>trialsense/perdrug.py</code> (341 lines).
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        <p>None. This is a structured lookup over annotations attached to each of the 21
+        genes: how the gene physically blocks the drug, whether a second compound can
+        counteract that, and which individual drugs are affected.</p>
+        <p><strong>Why no model:</strong> these relationships are established published
+        science. A model asked to infer them would be less accurate than reading them,
+        and would not be able to cite a source.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        <ul>
+          <li><strong>CARD</strong> (Comprehensive Antibiotic Resistance Database)
+              ontology — individual drug relationships, 177 extracted rows.</li>
+          <li><strong>NCBI AMRFinderPlus Reference Gene Catalog</strong>, database version
+              2026-08-07.1 — per-drug subclass fields.</li>
+        </ul>
+        <p>Both are stored in <code>trialsense/reference_sequences/gene_drug_mappings.csv</code>
+        with a source identifier and resolvable URL on every row.</p>
+        <p><strong>Why both:</strong> they disagree in places. Rather than silently
+        choosing one, both are retained and the disagreement is reported.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>
+        No training. The annotations were written from published references and then
+        cross-checked against the two databases above. Discrepancies found during that
+        check are recorded in the code.
+      </dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        <ul>
+          <li>Verified against CARD and NCBI for all 21 genes.</li>
+          <li>9 automated tests assert the decision logic, including that two genes
+              producing the same antibiotic-group result return opposite verdicts.</li>
+          <li>A test asserts that a drug absent from a sparsely curated database is never
+              reported as unaffected — absence of a record is not evidence.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <p>Not applicable in the statistical sense; this feature makes no predictions. The
+        relevant measures are coverage and correctness of lookup:</p>
+        <div class="tbl-wrap"><table><tbody>
+          <tr><td>Genes with mechanism annotations</td><td class="num">21 / 21</td></tr>
+          <tr><td>Genes present in the per-drug database</td><td class="num">19 / 21</td></tr>
+          <tr><td>Gene–class pairs resolvable to individual drugs</td><td class="num">14</td></tr>
+          <tr><td>Documented database disagreements recorded</td><td class="num">2</td></tr>
+        </tbody></table></div>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        Requires the core gene search to identify which genes are present. Supplies its
+        verdict to Feature 3, which uses it to distinguish a blocked candidate that could
+        be recovered from one that could not.
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>Only works for the 21 genes we hold. An unrecognised gene produces no
+              mechanism assessment.</li>
+          <li>Three genes have only group-level entries in both databases, so no
+              individual-drug detail is available for them.</li>
+          <li>Two genes cause resistance through a single-character change in the DNA
+              rather than through an added gene. Our method detects that the region is
+              present but cannot determine whether the change is there.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Read gene annotations directly from CARD at build time instead of from a
+              stored extract, so they update automatically.</li>
+          <li>Add read-level variant detection to resolve the two single-character
+              cases.</li>
+          <li>Extend coverage beyond 21 genes; CARD holds several thousand.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        It works in both directions. It prevents a team abandoning a programme that a
+        formulation change would have saved, and prevents a team spending months
+        attempting a fix that cannot work. Two genes can produce an identical result on
+        screen and require opposite decisions; without this feature that distinction is
+        invisible.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 3 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">04</div><div><h2>Feature 3 — Portfolio</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Multi-candidate, multi-target screening grid</h3>
+      <div class="oneline">Tests every candidate drug against every target organism and ranks them.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Python, Plotly heatmap, Streamlit caching to avoid re-analysing the same organism
+        once per candidate. Implemented in <code>trialsense/portfolio.py</code>, 341 lines.
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        None of its own. It orchestrates repeated calls to the core classifier and to
+        Feature 2, then ranks the results. Ranking is by number of organisms the candidate
+        remains viable against, with mean predicted resistance as a tie-break.
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        Inherits from the core classifier. For validation it additionally uses the ICMR
+        national figures described under Feature 1.
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>
+        None. Every result is computed at request time.
+      </dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        <p><strong>Cross-check against national data.</strong> Because this feature
+        produces no data of its own, it would otherwise have no validation claim. Every
+        prediction in the grid is compared against the real ICMR figure for the same
+        organism and antibiotic group.</p>
+        <p>The two numbers measure different things — ours describes one sample, ICMR
+        describes a national population — so each comparison is judged against its
+        expected direction rather than treated as a target to match.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <div class="tbl-wrap"><table><tbody>
+          <tr><td>Comparisons with an ICMR reference</td><td class="num">49</td></tr>
+          <tr><td>Track the national figure within 15 pp</td><td class="num">14</td></tr>
+          <tr><td>Differ in the expected direction</td><td class="num">34</td></tr>
+          <tr><td>Flagged for review</td><td class="num">16</td></tr>
+          <tr><td>Mean gap across aligned comparisons</td><td class="num">5.1 pp</td></tr>
+        </tbody></table></div>
+        <p>Separately, 2 automated tests assert the grid is constructed correctly and that
+        an unscreened antibiotic group is marked as not assessed rather than scored zero.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        <ul>
+          <li>Core classifier — supplies every cell value.</li>
+          <li>Feature 2 — supplies the recoverable/not-recoverable distinction.</li>
+          <li>Feature 1's dataset — supplies the national figures for cross-checking.</li>
+        </ul>
+        <p>This is the most dependent feature in the module. If the classifier is wrong,
+        the grid is wrong.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>Inherits every limitation of the classifier.</li>
+          <li>The ranking rule is a design decision, not a validated one. No evidence
+              establishes that breadth of viability is the correct primary criterion.</li>
+          <li>Cost, manufacturing difficulty and regulatory status are not considered —
+              only resistance.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Allow the user to weight the ranking criteria.</li>
+          <li>Accept multiple uploaded sample files rather than only bundled organisms.</li>
+          <li>Export the grid in a format a portfolio committee can annotate.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        Producing the same comparison by laboratory testing takes weeks and costs lakhs.
+        Here it takes seconds. It also changes the question from “is this candidate
+        viable” to “which of ours is most viable”, which is the decision that actually
+        allocates the budget.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 4 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">05</div><div><h2>Feature 4 — Unknown</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Unidentified acquired-sequence detection</h3>
+      <div class="oneline">Reports DNA that appears to have come from another organism but matches nothing known.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Python, NumPy. Implemented in <code>trialsense/novelty.py</code>, 504 lines.
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        <p>Statistical anomaly detection, not a trained model. The sequence is divided into
+        overlapping 900-character windows stepped 150 characters apart. For each window
+        the frequency of every 4-character combination is measured, giving 256 numbers.</p>
+        <p>Windows already explained by an identified gene are removed. A reference
+        profile is estimated from what remains, using an iteratively trimmed average so
+        that a few unusual windows cannot distort it. Any remaining window that differs
+        sufficiently from that reference is reported.</p>
+        <p>A window must exceed <strong>two</strong> separate thresholds — a relative one
+        (8 robust deviations) and an absolute one (0.18). The relative measure alone
+        becomes unstable when few windows remain.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        None. This feature requires no training data, which is why it can operate on
+        organisms the system has never seen.
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>
+        None. Thresholds were calibrated by measurement, described below.
+      </dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        <p>Tested in two directions. <strong>Specificity:</strong> the 12 unmodified
+        bundled samples are scanned; every gene in them is known, so any report is a false
+        alarm. <strong>Sensitivity:</strong> synthetic sequences matching no reference are
+        inserted into 7 samples and the scan must find them.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <div class="tbl-wrap"><table><tbody>
+          <tr><td>False alarms on unmodified samples</td><td class="num"><strong>0 / 12</strong></td></tr>
+          <tr><td>Inserted unknown elements detected</td><td class="num"><strong>7 / 7</strong></td></tr>
+          <tr><td>Highest score on a clean sample</td><td class="num">0.118</td></tr>
+          <tr><td>Lowest score on a sample with an insert</td><td class="num">0.232</td></tr>
+        </tbody></table></div>
+        <p>The detection threshold sits between those two values with roughly a twofold
+        margin on each side.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        Requires the core gene search to know which regions are already explained. The
+        model-distribution indicator additionally requires the trained classifier, which
+        stores a summary of its training data.
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>Tested only against inserts we created. It has never encountered a genuinely
+              novel resistance gene, because we have no example of one.</li>
+          <li>It reports that something unidentified is present. It does not identify it
+              and makes no claim that it causes resistance.</li>
+          <li>Requires at least 8 windows. Short sequences return “not assessed” rather
+              than a clean result.</li>
+          <li>If most of a sequence is already explained by known genes, too little
+              remains to estimate a reference profile, and the scan declines to run.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Validate against genes deliberately withheld from the reference set, as a
+              closer proxy for genuine novelty.</li>
+          <li>Report which known gene family an unidentified region most resembles.</li>
+          <li>Feed flagged regions directly into a public database search.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        Every comparable tool reports only what is in its database, so silence from such a
+        tool is indistinguishable from confirmation that nothing is present. Those are
+        very different statements. This feature prevents a company proceeding on a
+        clearance that was never actually given.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 5 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">06</div><div><h2>Feature 5 — Value</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Cost-of-late-discovery calculator</h3>
+      <div class="oneline">Converts a finding into the spending that would have been committed before it surfaced otherwise.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Python, Plotly waterfall chart, Streamlit sliders. Implemented in
+        <code>trialsense/economics.py</code>, 272 lines.
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        <p>Arithmetic over user-supplied inputs. It totals the cost of each development
+        stage up to the point the problem would normally surface, then multiplies by the
+        probability the programme survives long enough to reach that point.</p>
+        <p>The framework is the expected value of information, a standard
+        decision-analysis approach. The calculation is deliberately simple enough to
+        verify by hand from the figures shown.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        <div class="callout warn">
+          <span class="lbl">State this plainly whenever the feature is shown</span>
+          <p>
+            <strong>There is no dataset.</strong> The default stage costs and success
+            probabilities are order-of-magnitude figures supplied as starting values, not
+            measurements. Every one is an adjustable slider, and the interface says so on
+            the same screen.
+          </p>
+        </div>
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>None.</dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        <p>Two automated tests. One asserts that a triggered finding produces a positive
+        figure with a probability weighting applied. The other asserts that a clean result
+        produces <strong>zero</strong> — the feature must never present the absence of a
+        problem as a saving.</p>
+        <p>No external validation is possible or claimed. No drug programme has been run
+        through this system.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <p>Not applicable. This feature measures nothing; it computes a consequence from
+        assumptions the user supplies. Its correctness is arithmetic correctness only.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        Requires a resistance result from the core scan to determine whether a finding
+        was triggered at all.
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>Entirely dependent on inputs the user provides. Poor inputs produce a poor
+              figure, and the feature cannot detect this.</li>
+          <li>Assumes the problem would have surfaced at one identifiable stage. In
+              practice it might surface earlier, later, or not at all.</li>
+          <li>Ignores the value of information gained along the way, and any parallel
+              programme that might have absorbed the work.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Preload published industry cost figures with citations, so defaults are
+              sourced rather than estimated.</li>
+          <li>Add a sensitivity view showing which input most affects the result.</li>
+          <li>Allow a company to save its own cost profile.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        It does not reduce cost directly. It <strong>measures</strong> the reduction the
+        other features produce, in the format required by the person who authorises
+        spending. A scientific finding that cannot be expressed financially does not reach
+        that person.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 6 ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">07</div><div><h2>Feature 6 — Spread</h2></div></div>
+
+  <div class="feature">
+    <header>
+      <h3>Transfer-rate assessment</h3>
+      <div class="oneline">Reports how quickly a detected resistance gene moves through a bacterial population.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Tech stack</dt><dd>
+        Pure Python, Plotly bar chart. Implemented in
+        <code>trialsense/mechanisms.py</code> alongside Feature 2.
+      </dd></dl>
+
+      <dl class="spec"><dt>Model</dt><dd>
+        <p>A lookup. Each gene is annotated with the type of genetic element it sits on.
+        Some elements can be passed directly between bacteria, including between different
+        species; others are fixed in the main chromosome and pass only to descendants.</p>
+        <p>Each type carries a multiplier, from 1.0 for fixed genes to 2.5 for freely
+        transferable ones. The fastest-moving gene present determines the multiplier for
+        the sample, which is then applied to Feature 1's projection.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        The element-type classifications come from published references and were verified
+        against NCBI and CARD annotations for all 21 genes. The multipliers themselves are
+        not from a dataset — see Limitations.
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>None.</dd></dl>
+
+      <dl class="spec"><dt>Validity</dt><dd>
+        3 automated tests assert that a transferable gene scores higher than a fixed one,
+        that the fastest gene present governs the result, and that a sample with no
+        detected genes returns a neutral multiplier rather than an error.
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <p>The classifications are verifiable and were checked for all 21 genes. The
+        multipliers are not measured quantities and no accuracy figure is claimed for
+        them.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Dependencies</dt><dd>
+        Requires the core gene search. Feeds its multiplier into Feature 1.
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <div class="callout warn">
+          <span class="lbl">Principal limitation</span>
+          <p>
+            The multipliers are reasoned estimates of relative magnitude, not values
+            fitted to data. They are defensible as ordering — transferable genes do spread
+            faster than fixed ones — but the specific numbers are not measured. The
+            interface states this.
+          </p>
+        </div>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li>Derive the multipliers from observed historical spread rates rather than
+              assigning them.</li>
+          <li>Account for the fact that transfer rates differ by organism and setting.</li>
+          <li>Detect the transferable element directly in the sequence rather than
+              inferring it from the gene's identity.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>How it reduces cost</dt><dd>
+        It corrects the planning timeline. A team working to an unadjusted projection is
+        planning against a deadline further away than the real one, which affects how much
+        development delay the programme can absorb.
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORE CLASSIFIER ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">08</div><div><h2>The core classifier</h2></div></div>
+  <p>
+    Every feature above depends on this component, so it is documented separately. It is
+    the only machine-learning model in Module 3.
+  </p>
+
+  <div class="feature">
+    <header>
+      <h3>Multi-label resistance classifier</h3>
+      <div class="oneline">Estimates resistance across 12 antibiotic groups from a genetic sequence.</div>
+    </header>
+    <div class="body">
+      <dl class="spec"><dt>Model</dt><dd>
+        <pre><code>MultiOutputClassifier            12 labels, one per antibiotic group
+  └─ CalibratedClassifierCV      method=isotonic, cv=3
+       └─ RandomForestClassifier n_estimators=250
+                                 min_samples_leaf=2
+                                 max_features=sqrt
+                                 random_state=42</code></pre>
+        <p><strong>Why a random forest:</strong> it performs well on small datasets, needs
+        no GPU, and trains in under two minutes on a laptop.</p>
+        <p><strong>Why calibration was added:</strong> the uncompensated forest was
+        systematically under-confident — when it reported 55%, the observed rate was 97%.
+        Because that number is multiplied into a downstream score, the understatement
+        propagated. Isotonic regression corrects it.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Input representation</dt><dd>
+        Each sequence is converted into the frequency of every 5-character combination,
+        producing <strong>1,024 numbers</strong>. This is a standard alignment-free
+        representation and scales linearly with sequence length, so it works on a complete
+        genome as readily as on a fragment.
+      </dd></dl>
+
+      <dl class="spec"><dt>Dataset</dt><dd>
+        <p><strong>700 constructed samples.</strong> Each is assembled from real published
+        gene sequences placed into generated species-typical background DNA.</p>
+        <p><strong>Real:</strong> all 21 gene sequences, from the NCBI Bacterial
+        Antimicrobial Resistance Reference Gene Database, version 2026-08-07.1 — the same
+        curated set NCBI's own tool uses. Accession numbers appear in every file header.</p>
+        <p><strong>Constructed:</strong> the background DNA, and the choice of which genes
+        each sample carries. Complete annotated genomes are substantially larger than a
+        demonstration can distribute.</p>
+        <p>Gene combinations are sampled to reflect which genes genuinely occur together.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Training</dt><dd>
+        <p><code>python train.py</code>, approximately two minutes on a laptop CPU. It
+        generates the 700 samples, converts each to its 1,024-number representation, fits
+        the calibrated forest, records a summary of the training distribution for later
+        out-of-distribution checks, and writes the evaluation figures.</p>
+        <p>Fully deterministic — fixed random seeds throughout, so the same command
+        reproduces the same model.</p>
+      </dd></dl>
+
+      <dl class="spec"><dt>Accuracy</dt><dd>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Evaluation</th><th class="num">Macro-F1</th><th class="num">Per-label</th><th class="num">Exact match</th></tr></thead>
+          <tbody>
+            <tr><td>Random split</td><td class="num">0.900</td><td class="num">95.1%</td><td class="num">58.9%</td></tr>
+            <tr><td><strong>Unseen gene combinations</strong></td><td class="num"><strong>0.763</strong></td><td class="num">94.3%</td><td class="num">51.1%</td></tr>
+            <tr><td>Entire species withheld</td><td class="num">0.897</td><td class="num">—</td><td class="num">—</td></tr>
+          </tbody>
+        </table></div>
+        <p><strong>Quote 0.526, the real-genome figure.</strong> The 0.763 above is the hardest CONSTRUCTED test — the model is evaluated on gene combinations absent from its training data — but constructed is the operative word. On 42 real genomes with laboratory AST the model scores 0.526, approximately chance, and that is the number that describes real-world behaviour.</p>
+        <div class="callout">
+          <span class="lbl">Error types, reported separately</span>
+          <p>
+            Missed detections (reporting susceptible when resistant) end a programme;
+            false alarms (the reverse) cost one confirmatory test. The two are counted
+            separately because the costs are not comparable.
+          </p>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th></th><th class="num">Missed</th><th class="num">False alarm</th><th class="num">Correct</th></tr></thead>
+            <tbody>
+              <tr><td>Classifier alone</td><td class="num">3.15%</td><td class="num">14.39%</td><td class="num">—</td></tr>
+              <tr><td>Deployed, across 144 calls</td><td class="num"><strong>0</strong></td><td class="num"><strong>0</strong></td><td class="num"><strong>100%</strong></td></tr>
+            </tbody>
+          </table></div>
+          <p>The deployed figure is an integration check on samples whose contents we
+          chose, not a held-out test. <strong>0.526 on real genomes is the figure to quote.</strong></p>
+        </div>
+      </dd></dl>
+
+      <dl class="spec"><dt>Limitations</dt><dd>
+        <ul>
+          <li>Trained on constructed sample scaffolds with labels we assigned, not
+              laboratory-confirmed results.</li>
+          <li>On its own the missed-detection rate exceeds the standard applied to
+              commercial testing equipment. It is not deployed on its own.</li>
+          <li>Real sequencing data carries noise, contamination and incomplete assembly
+              that our samples do not.</li>
+        </ul>
+      </dd></dl>
+
+      <dl class="spec"><dt>Future scope</dt><dd>
+        <ul>
+          <li><strong>Highest priority:</strong> retrain on complete genomes from NCBI
+              Pathogen Detection, which carry laboratory-confirmed results. This addresses
+              both remaining data limitations at once.</li>
+          <li>DNABERT-2, a genomic language model, is integrated as an optional comparison
+              path with a ready-to-run notebook for free cloud GPU. It has not been run.
+              We expect it to underperform on constructed scaffolds, and consider
+              measuring that more useful than asserting it.</li>
+        </ul>
+      </dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEFECTS ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">09</div><div><h2>Defects found and corrected</h2></div></div>
+  <p>
+    Recorded because a validation process that never finds anything is not evidence of
+    correctness. Each of these was found by our own testing.
+  </p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Defect</th><th>Effect</th><th>Resolution</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Unscreened antibiotic group reported as 0%</td>
+          <td>A drug from a group we do not check was reported as facing no resistance,
+              rather than as unchecked</td>
+          <td>Now reports “not screened”, and is excluded from the combined score</td>
+        </tr>
+        <tr>
+          <td>Incorrect position number on one gene</td>
+          <td>A resistance marker was labelled with the position used for a different
+              organism</td>
+          <td>Corrected throughout after verification against the reference sequence</td>
+        </tr>
+        <tr>
+          <td>Three India-relevant genes absent</td>
+          <td>Coverage of genes reported in Indian surveillance was 5 of 8</td>
+          <td>Added; coverage now 8 of 8</td>
+        </tr>
+        <tr>
+          <td>Unknown-element scan re-detecting known genes</td>
+          <td>Unmodified samples scored higher than deliberately modified ones</td>
+          <td>Known regions are now masked before scoring; rebuilt and recalibrated</td>
+        </tr>
+        <tr>
+          <td>Detection threshold calibrated on constructed sequences</td>
+          <td>After switching to real sequences the gene search matched almost everything</td>
+          <td>Recalibrated from 0.55 to 0.83 by measurement</td>
+        </tr>
+        <tr>
+          <td>Model under-confident in its mid-range</td>
+          <td>Reported percentages were systematically below observed rates</td>
+          <td>Isotonic calibration added; error reduced from 0.100 to 0.015</td>
+        </tr>
+        <tr>
+          <td>Clean control sample reported as elevated risk</td>
+          <td>A single borderline group pushed a sample with no detected genes above
+              threshold</td>
+          <td>Separate screening and confirmation thresholds introduced</td>
+        </tr>
+        <tr>
+          <td>Incorrect “unaffected drug” claim</td>
+          <td>A drug absent from a sparsely curated database was reported as unaffected</td>
+          <td>Absence of a record is no longer treated as evidence; test added</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ REPRODUCIBILITY ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">10</div><div><h2>Reproducibility and provenance</h2></div></div>
+
+  <h3 class="sec">10.1 · Regenerating every figure in this report</h3>
+  <pre><code>conda deactivate            # if a conda environment is active
+.venv\Scripts\activate      # prompt must show (.venv)
+pip install -r requirements.txt
+
+python train.py             # ~2 min  -> models/, metrics.json
+python validate_module3.py  # ~2 min  -> models/validation.json
+python smoke_test.py        # ~2 min  -> 51 checks
+streamlit run app.py</code></pre>
+  <p>
+    All figures in this report are read from <code>models/metrics.json</code> and
+    <code>models/validation.json</code>. Random seeds are fixed, so the commands above
+    reproduce the same values.
+  </p>
+
+  <h3 class="sec">10.2 · Data provenance</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Data</th><th>Source</th><th>Used by</th></tr></thead>
+      <tbody>
+        <tr><td>21 gene sequences</td><td>NCBI AMRFinderPlus reference database 2026-08-07.1</td><td>All features</td></tr>
+        <tr><td>Resistance figures 2015–2024</td><td>ICMR AMRSN Annual Reports</td><td>Features 1, 3</td></tr>
+        <tr><td>National figures, cross-check</td><td>WHO Global Health Observatory API</td><td>Feature 1</td></tr>
+        <tr><td>Per-drug relationships</td><td>CARD ontology; NCBI Reference Gene Catalog</td><td>Feature 2</td></tr>
+        <tr><td>Gene prevalence in India</td><td>ICMR AMRSN 2018 molecular chapter</td><td>Validation</td></tr>
+        <tr><td>Stage costs, success rates</td><td>None — user-supplied assumptions</td><td>Feature 5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sec">10.3 · Terms used in this report</h3>
+  <div class="tbl-wrap">
+    <table>
+      <tbody>
+        <tr><td class="k">Resistance</td><td>A bacterium's ability to survive an antibiotic that would normally kill it</td></tr>
+        <tr><td class="k">Gene</td><td>A section of DNA. Certain genes cause resistance</td></tr>
+        <tr><td class="k">Antibiotic group</td><td>A set of antibiotics that work in a similar way. We track 12</td></tr>
+        <tr><td class="k">Sample / isolate</td><td>One bacterial specimen</td></tr>
+        <tr><td class="k">Macro-F1</td><td>An accuracy measure from 0 to 1 that treats all 12 groups equally regardless of how often each occurs</td></tr>
+        <tr><td class="k">Held-out test</td><td>Evaluation on data deliberately excluded from training</td></tr>
+        <tr><td class="k">Calibration</td><td>Whether a stated probability matches the observed rate</td></tr>
+        <tr><td class="k">Percentage point (pp)</td><td>The difference between two percentages. 66% to 84% is 18 pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ CONCLUSION ============ -->
+<section class="part">
+  <div class="part-head"><div class="part-no">11</div><div><h2>Conclusion</h2></div></div>
+
+  <h3 class="sec">What has been built</h3>
+  <p>
+    Six features over one machine-learning model and a set of verifiable reference data.
+    The system runs on a laptop with no paid services and no network access at runtime.
+    It is covered by 51 automated tests and 8 independent validation checks.
+  </p>
+
+  <h3 class="sec">What the measurements establish</h3>
+  <dl class="numbers">
+    <div><dt>Classifier</dt><dd>0.763<small>unseen gene combinations</small></dd></div>
+    <div><dt>Forecaster</dt><dd>4.93 pp<small>184 unseen predictions</small></dd></div>
+    <div><dt>Gene search</dt><dd>12 / 12<small>no false matches</small></dd></div>
+    <div><dt>Unknown scan</dt><dd>0 / 7<small>false alarms / detections missed</small></dd></div>
+    <div><dt>Deployed errors</dt><dd>0<small>across 144 calls</small></dd></div>
+    <div><dt>Gene coverage</dt><dd>8 / 8<small>India-relevant determinants</small></dd></div>
+  </dl>
+
+  <h3 class="sec">The principal limitation</h3>
+  <div class="callout warn">
+    <span class="lbl">Stated once, clearly</span>
+    <p>
+      The gene sequences are real; the sample scaffolds around them are constructed, and
+      the gene contents are assigned by us rather than laboratory-confirmed. Every
+      accuracy figure in this report should be read with that in mind.
+    </p>
+    <p>
+      Replacing the constructed scaffolds with complete genomes from NCBI Pathogen
+      Detection would resolve both points at once, and is the single highest-value
+      improvement available.
+    </p>
+  </div>
+
+  <h3 class="sec">A measurement worth recording</h3>
+  <p>
+    The gene sequences were originally constructed rather than real. Replacing them with
+    published sequences <strong>reduced</strong> measured accuracy from 0.99 to 0.92, and
+    to 0.763 on the hardest test. The change was retained, because the reduction
+    represents the degree to which constructed data had been overstating performance.
+  </p>
+  <p>
+    The deployed system nonetheless improved, because gene search on real sequences is
+    exact and now takes priority over the model where it applies.
+  </p>
+</section>
+
+<footer>
+  <p>
+    TrialSense is a research screening prototype for pharmaceutical research and
+    development. It is not a diagnostic tool and not a clinical decision-support system.
+    No output should be used to treat anyone.
+  </p>
+  <p style="margin-top:10px">
+    All figures generated from <code>models/metrics.json</code> and
+    <code>models/validation.json</code>. Reproduce with the commands in §10.1.
+  </p>
+</footer>
+
+</div>

@@ -17,6 +17,16 @@ import traceback
 PASS, FAIL = [], []
 
 
+def pytest_approx(value, tol=1e-6):
+    """Compare a float for equality within tolerance, without pulling in pytest."""
+    class _Approx:
+        def __eq__(self, other):
+            return abs(other - value) < tol
+        def __repr__(self):
+            return f"~{value}"
+    return _Approx()
+
+
 def check(name: str, fn):
     try:
         fn()
@@ -223,6 +233,62 @@ def main() -> int:
             for m in mechs:
                 assert m.text and m.consequence
     check("all 741 knowledge-base pairs produce valid output", all_pairs_run)
+
+
+    # --- Module 1 calibration against published severities -------------------
+    # The only external validation Module 1 has. Everything else measures the
+    # model against labels the knowledge base itself produced.
+    print("\n[Module 1 · published-severity calibration]")
+    from trialsense.known_pairs import KNOWN_PAIRS, evaluate as kp_eval
+
+    _kp = kp_eval()
+
+    def kp_no_under_calls():
+        # The one that matters. An over-call costs a review; an under-call
+        # tells a team a dangerous pairing is safe.
+        under = [r for r in _kp["disagreements"] if r["ours"] < r["published"]]
+        assert not under, "under-called: " + "; ".join(
+            f"{r['pair']} published {r['published']} ours {r['ours']}" for r in under)
+    check("no published-severe pair is under-called", kp_no_under_calls)
+
+    def kp_direction():
+        assert _kp["direction"] == _kp["n_pairs"], (
+            f"{_kp['n_pairs'] - _kp['direction']} pair(s) disagree on whether the "
+            "interaction is clinically significant")
+    check("significant/not-significant agrees on all known pairs", kp_direction)
+
+    def kp_within_one():
+        assert _kp["within_one"] == _kp["n_pairs"], (
+            f"{_kp['n_pairs'] - _kp['within_one']} pair(s) off by more than one level")
+    check("every known pair is within one severity level", kp_within_one)
+
+    def kp_exact_floor():
+        # Guards against a change that quietly degrades calibration. Measured
+        # at 21/27; the floor sits just below so normal variation does not fail
+        # the build but a real regression does.
+        assert _kp["exact"] >= 20, f"exact matches fell to {_kp['exact']}/{_kp['n_pairs']}"
+    check("exact severity match holds at or above its measured floor", kp_exact_floor)
+
+    def kp_antifolate_rule():
+        # Regression test for the defect this calibration check found.
+        from trialsense.ddi import knowledge_base_assess
+        mtx_tmp, _, _ = knowledge_base_assess(DRUGS["Methotrexate"], DRUGS["Trimethoprim"])
+        assert mtx_tmp == 3, f"methotrexate + trimethoprim should be Severe, got {mtx_tmp}"
+        # …but co-trimoxazole is a deliberate combination and must not fire.
+        _, _, mechs = knowledge_base_assess(DRUGS["Trimethoprim"], DRUGS["Sulfamethoxazole"])
+        assert not any("folate" in m.text for m in mechs), (
+            "the antifolate rule must not fire on a co-formulated pair")
+    check("antifolate rule fires on methotrexate, spares co-trimoxazole",
+          kp_antifolate_rule)
+
+    def kp_coverage():
+        assert len(KNOWN_PAIRS) >= 25, "reference set shrank"
+        names = {d for kp in KNOWN_PAIRS for d in (kp.drug_a, kp.drug_b)}
+        missing = [n for n in names if n not in DRUGS]
+        assert not missing, f"reference pairs name unknown drugs: {missing}"
+        assert any(kp.published == 0 for kp in KNOWN_PAIRS), "need negative controls"
+        assert any(kp.published == 3 for kp in KNOWN_PAIRS), "need severe cases"
+    check("calibration set is well-formed and spans the severity range", kp_coverage)
 
     # --- Report invariants ---------------------------------------------------
     print("\n[Report invariants]")
@@ -645,6 +711,142 @@ def main() -> int:
         assert "exhausted" in both or "gentamicin" not in both.split("but")[-1]
     check("combined determinants narrow the surviving options",
           perdrug_verdict_combines)
+
+    print("\n[Module 3 · real-data ingestion]")
+
+    def computational_predictions_never_become_labels():
+        # BV-BRC's genome_amr table mixes bench measurements with other
+        # groups' ML predictions, flagged in its `evidence` column. Scoring
+        # our model against their model and calling it accuracy would be
+        # meaningless, so the aggregator must drop every non-laboratory row.
+        from trialsense import ingest
+        rows = [
+            {"genome_id": "1.1", "genome_name": "real", "taxon_id": 562,
+             "antibiotic": "ciprofloxacin", "resistant_phenotype": "Resistant",
+             "evidence": "Laboratory Method"},
+            {"genome_id": "1.1", "genome_name": "real", "taxon_id": 562,
+             "antibiotic": "gentamicin", "resistant_phenotype": "Resistant",
+             "evidence": "Computational Method"},
+        ]
+        isolates, stats = ingest.aggregate_to_classes(rows)
+        labels = isolates["1.1"].class_labels
+        assert labels == {"Fluoroquinolones": 1}, labels
+        assert "Aminoglycosides" not in labels, "a prediction became a label"
+        assert stats["dropped_non_lab_evidence"] == 1
+    check("computational predictions are never used as laboratory labels",
+          computational_predictions_never_become_labels)
+
+    def intermediate_results_are_dropped_not_coerced():
+        from trialsense import ingest
+        rows = [{"genome_id": "2.1", "genome_name": "x", "taxon_id": 573,
+                 "antibiotic": "meropenem", "resistant_phenotype": "Intermediate",
+                 "evidence": "Laboratory Method"}]
+        isolates, stats = ingest.aggregate_to_classes(rows)
+        assert not isolates, "an Intermediate result was coerced into a label"
+        assert stats["dropped_intermediate"] == 1
+    check("CLSI Intermediate is dropped rather than forced to R or S",
+          intermediate_results_are_dropped_not_coerced)
+
+    def ingested_labels_are_bench_measurements():
+        # Guards the saved label set, if ingestion has been run.
+        import json
+        from pathlib import Path
+        p = Path("data/real/lab_ast_labels.json")
+        if not p.exists():
+            return  # ingestion not run in this checkout; nothing to guard
+        data = json.loads(p.read_text())
+        assert data, "label file exists but is empty"
+        for gid, rec in data.items():
+            assert rec["class_labels"], f"{gid} carries no labels"
+            for ev in rec["evidence"]:
+                assert ev["class"] in amr_mod.ANTIBIOTIC_CLASSES, ev
+    check("saved real-isolate labels are class-valid bench results",
+          ingested_labels_are_bench_measurements)
+
+    print("\n[Module 3 · point-mutation alleles]")
+
+    def wild_type_locus_is_not_called_resistant():
+        # THE BUG: gyrA exists in every E. coli, and our reference is the
+        # wild-type K-12 gene. Detection matched it at ~0.999, and the
+        # mechanism floor then raised Fluoroquinolones to 0.89 on a fully
+        # susceptible isolate. Presence of the locus must prove nothing.
+        wt = amr_mod._load_reference("gyrA_S83L")
+        state, _ = amr_mod.read_allele(wt, "gyrA_S83L")
+        assert state == amr_mod.ALLELE_WILD_TYPE, state
+        out = amr_mod.apply_mechanism_floor(
+            {"Fluoroquinolones": 0.02}, [("gyrA_S83L", 0.99)], sequence=wt)
+        assert out["Fluoroquinolones"] == 0.02, out
+    check("wild-type gyrA locus does not trigger the resistance floor",
+          wild_type_locus_is_not_called_resistant)
+
+    def resistant_allele_still_triggers_the_floor():
+        # The fix must not cost us the true positive it exists to keep.
+        wt = amr_mod._load_reference("gyrA_S83L")
+        i = (83 - 1) * 3
+        mutant = wt[:i] + "TTG" + wt[i + 3:]
+        state, _ = amr_mod.read_allele(mutant, "gyrA_S83L")
+        assert state == amr_mod.ALLELE_RESISTANT, state
+        out = amr_mod.apply_mechanism_floor(
+            {"Fluoroquinolones": 0.02}, [("gyrA_S83L", 0.99)], sequence=mutant)
+        # The floor is the gene's own confirmed-allele value, scaled by
+        # detection confidence — not a flat constant.
+        expected = amr_mod.mechanism_floor_for("Fluoroquinolones", "gyrA_S83L") * 0.99
+        assert abs(out["Fluoroquinolones"] - expected) < 1e-6, out
+        assert out["Fluoroquinolones"] > 0.02, "the floor did not fire at all"
+    check("S83L resistant allele does trigger the floor",
+          resistant_allele_still_triggers_the_floor)
+
+    def allele_is_read_on_either_strand():
+        # Assembly contigs come in either orientation.
+        wt = amr_mod._load_reference("gyrA_S83L")
+        i = (83 - 1) * 3
+        mutant = wt[:i] + "TTG" + wt[i + 3:]
+        rc = mutant.translate(str.maketrans("ACGT", "TGCA"))[::-1]
+        assert amr_mod.read_allele(rc, "gyrA_S83L")[0] == amr_mod.ALLELE_RESISTANT
+    check("resistant allele is found on the reverse strand too",
+          allele_is_read_on_either_strand)
+
+    def unverifiable_allele_asserts_nothing():
+        # No sequence to check, and an unrelated sequence, must both decline to
+        # assert resistance rather than guessing in either direction.
+        out = amr_mod.apply_mechanism_floor(
+            {"Fluoroquinolones": 0.02}, [("gyrA_S83L", 0.99)])
+        assert out["Fluoroquinolones"] == 0.02, out
+        state, _ = amr_mod.read_allele("ACGT" * 300, "gyrA_S83L")
+        assert state == amr_mod.ALLELE_UNDETERMINED, state
+    check("an allele we cannot read is never asserted as resistant",
+          unverifiable_allele_asserts_nothing)
+
+    def ancestral_shv_does_not_claim_cephalosporins():
+        # SHV-1 is a narrow-spectrum penicillinase, and it is what most
+        # Klebsiella carry chromosomally. Mapping blaSHV to Cephalosporins at
+        # class level called every one of them cephalosporin-resistant from
+        # the locus alone. Only the Gly238Ser variant earns that claim.
+        shv1 = amr_mod._load_reference("blaSHV")
+        classes, _ = amr_mod.classes_conferred("blaSHV", shv1)
+        assert "Penicillins" in classes, classes
+        assert "Cephalosporins" not in classes, classes
+        out = amr_mod.apply_mechanism_floor(
+            {"Penicillins": 0.1, "Cephalosporins": 0.1},
+            [("blaSHV", 0.99)], sequence=shv1)
+        assert out["Cephalosporins"] == 0.1, out
+        assert out["Penicillins"] == pytest_approx(
+            amr_mod.mechanism_floor_for("Penicillins", "blaSHV") * 0.99), out
+    check("ancestral SHV-1 does not assert cephalosporin resistance",
+          ancestral_shv_does_not_claim_cephalosporins)
+
+    def esbl_shv_does_claim_cephalosporins():
+        shv1 = amr_mod._load_reference("blaSHV")
+        i = 233 * 3
+        esbl = shv1[:i] + "AGC" + shv1[i + 3:]
+        classes, _ = amr_mod.classes_conferred("blaSHV", esbl)
+        assert "Cephalosporins" in classes, classes
+        out = amr_mod.apply_mechanism_floor(
+            {"Cephalosporins": 0.1}, [("blaSHV", 0.99)], sequence=esbl)
+        assert out["Cephalosporins"] == pytest_approx(
+            amr_mod.mechanism_floor_for("Cephalosporins", "blaSHV") * 0.99), out
+    check("SHV Gly238Ser does assert cephalosporin resistance",
+          esbl_shv_does_claim_cephalosporins)
 
     print("\n[Module 3 · cross-cutting]")
 

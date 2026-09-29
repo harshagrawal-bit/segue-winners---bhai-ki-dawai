@@ -1,0 +1,941 @@
+<title>Module 3 Validation Dossier</title>
+<div style="border:3px solid #b3261e;background:#fff4f2;padding:16px 20px;margin:0 0 24px;border-radius:8px">
+<p style="margin:0 0 8px;font-weight:700;color:#b3261e;font-size:1.05em">
+READ THIS FIRST — this document was written before real-genome validation</p>
+<p style="margin:0 0 8px">
+Module 3 has since been measured against <strong>42 real bacterial genomes with
+350 laboratory-measured susceptibility results</strong>. On that test it scores
+<strong>0.526 accuracy</strong>, which with 176 resistant and 174 susceptible
+comparisons is approximately <strong>chance</strong>. No threshold changes this;
+the sweep peaks at 0.503.</p>
+<p style="margin:0 0 8px">
+Every accuracy figure in this document is measured on <strong>constructed</strong>
+isolates — generated background sequence with real resistance genes planted into
+it. Those figures are correct for constructed isolates and must not be presented
+as real-world performance.</p>
+<p style="margin:0">
+What did transfer is <strong>gene detection</strong>: on real genomes it found
+genuine determinants (mecA in 9 real <em>S. aureus</em>, blaSHV in 5, plus
+blaNDM-1, blaVIM, blaCTX-M-15) at a 13.8% false-resistance rate, though it misses
+73% of laboratory-confirmed resistance because 21 reference genes cannot cover
+real resistance. Full analysis: <strong>reports/AUDIT_RESPONSE.md</strong>.</p>
+</div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ink:        #17242B;
+    --ink-soft:   #47585F;
+    --ink-faint:  #76868C;
+    --paper:      #FBFCFC;
+    --panel:      #F2F6F6;
+    --rule:       #D4DDE0;
+    --rule-firm:  #A9BAC0;
+    --accent:     #0E6E7D;
+    --real:       #1F5F4B;
+    --real-bg:    #EAF3EF;
+    --model:      #7A4E17;
+    --model-bg:   #F7F0E6;
+    --warn:       #A33A22;
+    --warn-bg:    #FBEFEC;
+    --measure:    68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink:        #E4ECEE;
+      --ink-soft:   #A9BAC0;
+      --ink-faint:  #7E9198;
+      --paper:      #10181C;
+      --panel:      #182328;
+      --rule:       #2A3941;
+      --rule-firm:  #3D505A;
+      --accent:     #4FB3C4;
+      --real:       #67C39E;
+      --real-bg:    #142A23;
+      --model:      #D6A868;
+      --model-bg:   #2B2317;
+      --warn:       #E58A70;
+      --warn-bg:    #2E1A15;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink:        #E4ECEE;
+    --ink-soft:   #A9BAC0;
+    --ink-faint:  #7E9198;
+    --paper:      #10181C;
+    --panel:      #182328;
+    --rule:       #2A3941;
+    --rule-firm:  #3D505A;
+    --accent:     #4FB3C4;
+    --real:       #67C39E;
+    --real-bg:    #142A23;
+    --model:      #D6A868;
+    --model-bg:   #2B2317;
+    --warn:       #E58A70;
+    --warn-bg:    #2E1A15;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet {
+    max-width: 920px;
+    margin: 0 auto;
+    padding-inline: 24px;
+    padding-block: 48px 72px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 20px; }
+  .masthead h1 { font-size: 34px; font-weight: 600; line-height: 1.15; margin-top: 10px; }
+  .masthead .sub {
+    color: var(--ink-soft); max-width: var(--measure); margin-top: 12px; font-size: 15px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 28px;
+  }
+  .meta-grid div { background: var(--paper); padding: 11px 14px; }
+  .meta-grid dt {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0;
+  }
+  .meta-grid dd {
+    margin: 3px 0 0; font-size: 14px; font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- report sections ---------- */
+  .report { margin-top: 64px; }
+  .report + .report { border-top: 1px solid var(--rule-firm); padding-top: 56px; }
+
+  .report-head { display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; }
+  .report-no {
+    font-family: "IBM Plex Mono", monospace; font-size: 42px; font-weight: 600;
+    color: var(--rule-firm); line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .report-head h2 { font-size: 26px; font-weight: 600; line-height: 1.2; }
+  .report-head .organism { font-style: italic; }
+
+  .specimen {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+    margin-top: 22px;
+  }
+  .specimen div { background: var(--panel); padding: 10px 13px; }
+  .specimen dt {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0;
+  }
+  .specimen dd {
+    margin: 2px 0 0; font-size: 13.5px; font-weight: 500;
+    font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums;
+  }
+
+  h3.sec {
+    font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    font-family: "IBM Plex Sans", sans-serif; color: var(--accent);
+    margin: 38px 0 12px; padding-bottom: 7px; border-bottom: 1px solid var(--rule);
+  }
+
+  p { margin: 0 0 14px; max-width: var(--measure); }
+  p:last-child { margin-bottom: 0; }
+  ul { margin: 0 0 14px; padding-left: 20px; max-width: var(--measure); }
+  li { margin-bottom: 7px; }
+  strong { font-weight: 600; }
+  em.term { font-style: normal; border-bottom: 1px dotted var(--rule-firm); }
+
+  /* ---------- tables ---------- */
+  .tbl-wrap { overflow-x: auto; margin: 0 0 18px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td {
+    text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule-firm); white-space: nowrap;
+  }
+  td.num, th.num { text-align: right; font-family: "IBM Plex Mono", monospace;
+                   font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* the two data sources carry distinct hues throughout */
+  .col-real  { background: var(--real-bg);  color: var(--real);  }
+  .col-model { background: var(--model-bg); color: var(--model); }
+  th.col-real, th.col-model { color: inherit; opacity: .85; }
+  .src-key { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 12px; font-size: 12.5px; }
+  .src-key span { display: flex; align-items: center; gap: 7px; }
+  .swatch { width: 12px; height: 12px; border-radius: 2px; flex: none; }
+
+  /* ---------- verdict + callouts ---------- */
+  .verdict {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    font-weight: 600; letter-spacing: .08em; padding: 5px 11px; border-radius: 3px;
+  }
+  .v-dead { background: var(--warn-bg); color: var(--warn); border: 1px solid currentColor; }
+  .v-save { background: var(--real-bg); color: var(--real); border: 1px solid currentColor; }
+
+  .note {
+    border-left: 3px solid var(--accent); background: var(--panel);
+    padding: 14px 18px; margin: 0 0 18px; max-width: var(--measure);
+  }
+  .note.caution { border-left-color: var(--warn); background: var(--warn-bg); }
+  .note p { margin-bottom: 8px; }
+  .note p:last-child { margin-bottom: 0; }
+  .note .lbl {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
+    display: block; margin-bottom: 5px;
+  }
+
+  .feature-list { display: grid; gap: 1px; background: var(--rule);
+                  border: 1px solid var(--rule); margin-bottom: 18px; }
+  .feature-list > div { background: var(--paper); padding: 13px 16px; }
+  .feature-list h4 {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 13.5px; font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .feature-list p { font-size: 13.5px; color: var(--ink-soft); margin: 0; max-width: none; }
+
+  /* ---------- signature ---------- */
+  .sign {
+    margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--rule-firm);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 30px;
+  }
+  .sign div { font-size: 12px; color: var(--ink-faint); }
+  .sign .line { border-bottom: 1px solid var(--rule-firm); height: 34px; margin-bottom: 6px; }
+  .sign .cap {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  footer {
+    margin-top: 64px; padding-top: 22px; border-top: 2px solid var(--ink);
+    font-size: 12.5px; color: var(--ink-faint); max-width: var(--measure);
+  }
+
+  @media print {
+    body { background: #fff; font-size: 10.5pt; }
+    .sheet { max-width: none; padding: 0; }
+    .report { page-break-before: always; margin-top: 0; padding-top: 0; border-top: none; }
+    .report:first-of-type { page-break-before: avoid; }
+    .sign, .note, .feature-list, table { page-break-inside: avoid; }
+    h3.sec { page-break-after: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="eyebrow">TrialSense · Segue 3.0 · Validation Dossier</div>
+    <h1>Module&nbsp;3 Validated Against Indian National Surveillance</h1>
+    <p class="sub">
+      Three bacteria–antibiotic pairs, each compared side by side against published
+      ICMR AMRSN data. Prepared so the comparison can be read and checked without
+      specialist knowledge.
+    </p>
+
+    <dl class="meta-grid">
+      <div><dt>Module</dt><dd>3 — Resistance Intelligence</dd></div>
+      <div><dt>Reference source</dt><dd>ICMR AMRSN 2015–2024</dd></div>
+      <div><dt>Gene sequences</dt><dd>NCBI AMRFinderPlus 2026-08-07.1</dd></div>
+      <div><dt>Pairs compared</dt><dd>3</dd></div>
+      <div><dt>Model</dt><dd>Calibrated multi-label RF</dd></div>
+      <div><dt>Held-out score</dt><dd>0.763 macro-F1</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============================== HOW TO READ ============================== -->
+  <section class="report" style="border-top:none;padding-top:0;">
+    <h3 class="sec">How to read these reports</h3>
+    <p>
+      Each report compares two numbers that are <strong>not measuring the same
+      thing</strong>, and the comparison is only meaningful once that is understood.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Column</th><th>What it measures</th><th>Scope</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-real"><strong>Real ICMR data</strong></td>
+            <td>Out of every sample of this bacterium tested in Indian hospitals,
+                what share survived this antibiotic.</td>
+            <td>A whole country, all samples</td>
+          </tr>
+          <tr>
+            <td class="col-model"><strong>Module 3 output</strong></td>
+            <td>For one specific bacterial sample, does its DNA carry the
+                instructions to survive this antibiotic.</td>
+            <td>A single sample</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Why the two numbers differ, and why that is correct</span>
+      <p>
+        A national average mixes resistant and non-resistant samples together. A
+        sample chosen <em class="term">because</em> it is resistant should therefore
+        read higher than that average. A difference is expected; its
+        <strong>direction</strong> is what carries information, and each report states
+        the direction expected before giving the result.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================== REPORT 1 ============================== -->
+  <section class="report">
+    <div class="report-head">
+      <div class="report-no">01</div>
+      <div>
+        <div class="eyebrow">Last-resort class · programme-level finding</div>
+        <h2><span class="organism">Klebsiella pneumoniae</span> × Carbapenems</h2>
+      </div>
+    </div>
+
+    <dl class="specimen">
+      <div><dt>Sample analysed</dt><dd>6,941 bp</dd></div>
+      <div><dt>Resistance gene</dt><dd>blaNDM-1</dd></div>
+      <div><dt>Detection score</dt><dd>90%</dd></div>
+      <div><dt>NCBI accession</dt><dd>NG_049326.1</dd></div>
+    </dl>
+
+    <h3 class="sec">1 · Problem statement</h3>
+    <p>
+      Carbapenems are the antibiotics doctors hold back until everything else has
+      failed. A company considering developing a new carbapenem needs to know, before
+      committing funds, whether the bacterium it is aimed at can already survive that
+      entire class.
+    </p>
+    <p>
+      <em class="term">Klebsiella pneumoniae</em> is a major cause of hospital
+      infection in India, which makes it a plausible development target and therefore
+      a question worth answering early rather than during human trials.
+    </p>
+
+    <h3 class="sec">2 · Real Indian data outcomes</h3>
+    <p>
+      ICMR AMRSN publishes national resistance figures annually. Three carbapenem
+      drugs are reported for this organism.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Drug</th><th class="num">2016</th><th class="num">2018</th>
+            <th class="num">2020</th><th class="num">2022</th><th class="num">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Imipenem</td><td class="num">35.2%</td><td class="num">48.2%</td><td class="num">55.1%</td><td class="num">57.8%</td><td class="num"><strong>68.8%</strong></td></tr>
+          <tr><td>Meropenem</td><td class="num">48.5%</td><td class="num">49.5%</td><td class="num">52.9%</td><td class="num">56.2%</td><td class="num"><strong>64.9%</strong></td></tr>
+          <tr><td>Ertapenem</td><td class="num">54.1%</td><td class="num">52.2%</td><td class="num">59.1%</td><td class="num">59.6%</td><td class="num"><strong>63.2%</strong></td></tr>
+          <tr class="col-real"><td><strong>Class average</strong></td><td class="num">45.9%</td><td class="num">50.0%</td><td class="num">55.7%</td><td class="num">57.9%</td><td class="num"><strong>65.6%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Resistance rose from roughly <strong>46% to 66%</strong> across nine years — an
+      average increase of about 2.5 percentage points per year.
+    </p>
+
+    <h3 class="sec">3 · Module 3 outcomes</h3>
+    <p>
+      Module 3 read the DNA of one carbapenem-resistant sample and produced the
+      following.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Output</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Carbapenem resistance predicted</td><td class="col-model"><strong>82%</strong></td></tr>
+          <tr><td>Gene responsible</td><td>blaNDM-1, detected at 90% confidence</td></tr>
+          <tr><td>How it works</td><td>Produces an enzyme that destroys the drug before it acts</td></tr>
+          <tr><td>Can a partner drug fix it</td><td><span class="verdict v-dead">DEAD END</span></td></tr>
+          <tr><td>Projection to 2035</td><td>84% — class becomes non-viable around 2030</td></tr>
+          <tr><td>How fast it spreads</td><td>Highly mobile — transfers between species</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sec">4 · Side-by-side comparison</h3>
+    <div class="src-key">
+      <span><span class="swatch" style="background:var(--real)"></span> Real ICMR data</span>
+      <span><span class="swatch" style="background:var(--model)"></span> Module 3 output</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th class="col-real num">ICMR 2024</th>
+            <th class="col-model num">Module 3</th>
+            <th class="num">Difference</th>
+            <th>Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carbapenem resistance</td>
+            <td class="col-real num">65.6%</td>
+            <td class="col-model num">82%</td>
+            <td class="num">+16 pp</td>
+            <td>Expected direction</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Reading the difference</span>
+      <p>
+        The 65.6% figure averages every <em class="term">K. pneumoniae</em> sample
+        tested in India, including the roughly one-third that are still treatable.
+        The sample Module 3 examined carries blaNDM-1, so it belongs to the resistant
+        portion. Reading <strong>above</strong> the national average is the correct
+        outcome; reading below it would have been the error.
+      </p>
+    </div>
+
+    <h3 class="sec">5 · Why we used our model here</h3>
+    <p>
+      National statistics tell a company how common resistance is. They cannot tell it
+      <strong>why</strong>, or whether anything can be done about it. Those two
+      questions decide whether a development programme continues.
+    </p>
+    <p>
+      Module 3 named the specific gene and identified its mechanism. That mechanism is
+      the deciding detail: blaNDM-1 belongs to a category of enzyme that existing
+      partner drugs cannot neutralise. A different gene producing an identical
+      "carbapenem resistant" result would have been fixable.
+    </p>
+
+    <h3 class="sec">6 · How each feature helps an R&amp;D team</h3>
+    <div class="feature-list">
+      <div>
+        <h4>Runway — will it still work at launch</h4>
+        <p>A drug starting development now reaches market around 2035. Resistance is
+           projected to reach 84% by then, crossing the commercial viability line
+           around 2030. The team learns the target is closing faster than the drug can
+           be built.</p>
+      </div>
+      <div>
+        <h4>Rescue — fixable or fatal</h4>
+        <p>Returns <strong>DEAD END</strong>. This enzyme is not neutralised by
+           existing partner drugs, so no reformulation saves the programme. The team
+           re-targets rather than spending months on a fix that cannot work.</p>
+      </div>
+      <div>
+        <h4>Spread — how fast it is moving</h4>
+        <p>The gene sits on transferable DNA that passes between bacterial species, so
+           the 2030 estimate should be treated as optimistic. This tightens the
+           planning window further.</p>
+      </div>
+      <div>
+        <h4>Portfolio — which candidate to back instead</h4>
+        <p>Screens every candidate the team holds against every target organism at
+           once, so the decision is not "is this one viable" but "which of ours is
+           most viable".</p>
+      </div>
+    </div>
+
+    <h3 class="sec">7 · Conclusion</h3>
+    <p>
+      Module 3 agrees with national data on direction and magnitude, and adds three
+      things the national data cannot supply: the gene responsible, the fact that no
+      partner drug can rescue it, and a projection to the year the candidate would
+      actually launch. The recommendation is to <strong>not</strong> pursue a
+      carbapenem against this organism.
+    </p>
+
+    <div class="sign">
+      <div><div class="line"></div><div class="cap">Prepared by</div></div>
+      <div><div class="line"></div><div class="cap">Reviewed by (mentor)</div></div>
+      <div><div class="line"></div><div class="cap">Date</div></div>
+    </div>
+  </section>
+
+  <!-- ============================== REPORT 2 ============================== -->
+  <section class="report">
+    <div class="report-head">
+      <div class="report-no">02</div>
+      <div>
+        <div class="eyebrow">Largest observed difference · resolved by design</div>
+        <h2><span class="organism">Escherichia coli</span> × Aminoglycosides</h2>
+      </div>
+    </div>
+
+    <dl class="specimen">
+      <div><dt>Sample analysed</dt><dd>9,554 bp</dd></div>
+      <div><dt>Resistance gene</dt><dd>aac(6')-Ib</dd></div>
+      <div><dt>Detection score</dt><dd>89%</dd></div>
+      <div><dt>NCBI accession</dt><dd>NG_047284.1</dd></div>
+    </dl>
+
+    <h3 class="sec">1 · Problem statement</h3>
+    <p>
+      Aminoglycosides are a family of four commonly used antibiotics. Reporting the
+      family as a single unit is convenient but imprecise, because a bacterium can be
+      resistant to some members and not others.
+    </p>
+    <p>
+      This pair was selected deliberately: it is where our model and the national data
+      differ most, and understanding that difference is more informative than the
+      pairs where they agree.
+    </p>
+
+    <h3 class="sec">2 · Real Indian data outcomes</h3>
+    <p>
+      ICMR reports one aminoglycoside for this organism: <strong>amikacin</strong>.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Drug</th><th class="num">2016</th><th class="num">2018</th>
+            <th class="num">2020</th><th class="num">2022</th><th class="num">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="col-real"><td><strong>Amikacin</strong></td><td class="num">17.2%</td><td class="num">20.7%</td><td class="num">18.7%</td><td class="num">23.1%</td><td class="num"><strong>27.5%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Roughly <strong>one in four</strong> Indian <em class="term">E. coli</em> samples
+      survives amikacin, rising slowly.
+    </p>
+
+    <h3 class="sec">3 · Module 3 outcomes</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Output</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Aminoglycoside resistance predicted</td><td class="col-model"><strong>100%</strong> (whole family)</td></tr>
+          <tr><td>Gene responsible</td><td>aac(6')-Ib, detected at 89% confidence</td></tr>
+          <tr><td>How it works</td><td>Chemically alters the drug so it no longer binds</td></tr>
+          <tr><td>Can a partner drug fix it</td><td><span class="verdict v-save">SALVAGEABLE</span></td></tr>
+          <tr><td>Drugs actually defeated</td><td>amikacin, kanamycin, tobramycin</td></tr>
+          <tr><td>Drug <strong>not</strong> affected</td><td class="col-real"><strong>gentamicin</strong> — remains usable</td></tr>
+          <tr><td>Purpose-built alternative</td><td>plazomicin, engineered to resist this enzyme</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sec">4 · Side-by-side comparison</h3>
+    <div class="src-key">
+      <span><span class="swatch" style="background:var(--real)"></span> Real ICMR data</span>
+      <span><span class="swatch" style="background:var(--model)"></span> Module 3 output</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th class="col-real num">ICMR 2024</th>
+            <th class="col-model num">Module 3</th>
+            <th class="num">Difference</th>
+            <th>Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Family reported as one unit</td>
+            <td class="col-real num">27.5%</td>
+            <td class="col-model num">100%</td>
+            <td class="num">+72 pp</td>
+            <td>Too coarse</td>
+          </tr>
+          <tr>
+            <td>Amikacin specifically</td>
+            <td class="col-real num">27.5%</td>
+            <td class="col-model num">Resistant</td>
+            <td class="num">—</td>
+            <td>Correct for this sample</td>
+          </tr>
+          <tr>
+            <td>Gentamicin specifically</td>
+            <td class="col-real num">not reported</td>
+            <td class="col-model num">Not affected</td>
+            <td class="num">—</td>
+            <td>Recovered detail</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note caution">
+      <span class="lbl">A limitation we identified and addressed</span>
+      <p>
+        The 72-point difference has two separate causes, and only one of them is a
+        fault.
+      </p>
+      <p>
+        <strong>Not a fault:</strong> the 27.5% is a national average across all
+        samples, while ours was selected because it carries the gene. Our sample
+        genuinely is amikacin-resistant.
+      </p>
+      <p>
+        <strong>A genuine fault:</strong> declaring the whole family resistant was too
+        broad. Two reference databases — CARD and NCBI — both confirm this gene does
+        not affect gentamicin. Reporting the family as lost discarded a drug that
+        still works.
+      </p>
+      <p>
+        Module 3 now reports at individual-drug level for this gene, so gentamicin is
+        correctly identified as remaining available.
+      </p>
+    </div>
+
+    <h3 class="sec">5 · Why we used our model here</h3>
+    <p>
+      The national figure records how often amikacin fails. It does not indicate which
+      other drugs in the same family remain usable, because the gene responsible is
+      not identified.
+    </p>
+    <p>
+      Module 3 identifies the gene and consults reference databases for the individual
+      drugs that gene affects. The practical result is that one antibiotic is
+      recovered from a family that would otherwise have been written off entirely.
+    </p>
+
+    <h3 class="sec">6 · How each feature helps an R&amp;D team</h3>
+    <div class="feature-list">
+      <div>
+        <h4>Rescue — with individual-drug detail</h4>
+        <p>Returns <strong>SALVAGEABLE</strong> and names gentamicin as unaffected.
+           The family is not lost, and the team retains a development option it would
+           otherwise have discarded.</p>
+      </div>
+      <div>
+        <h4>Runway — a slower decline</h4>
+        <p>Resistance is rising about 2.2 points per year, projected to 47% by 2035 —
+           below the viability line. Unlike Report 01, this target remains commercially
+           addressable.</p>
+      </div>
+      <div>
+        <h4>Portfolio — comparing across the pipeline</h4>
+        <p>Places this partial resistance beside the team's other candidates, so a
+           usable-but-narrowed option can be weighed against fully clear ones.</p>
+      </div>
+      <div>
+        <h4>Unknown-element check</h4>
+        <p>Confirms every foreign section of this DNA is accounted for by an
+           identified gene, so no unexplained resistance is present.</p>
+      </div>
+    </div>
+
+    <h3 class="sec">7 · Conclusion</h3>
+    <p>
+      This pair demonstrates both a limitation and its correction. Comparing against
+      real national data revealed that family-level reporting was too coarse; the
+      module now resolves to individual drugs where the reference data supports it.
+      The practical outcome is that gentamicin is correctly retained as a viable
+      option for this sample.
+    </p>
+
+    <div class="sign">
+      <div><div class="line"></div><div class="cap">Prepared by</div></div>
+      <div><div class="line"></div><div class="cap">Reviewed by (mentor)</div></div>
+      <div><div class="line"></div><div class="cap">Date</div></div>
+    </div>
+  </section>
+
+  <!-- ============================== REPORT 3 ============================== -->
+  <section class="report">
+    <div class="report-head">
+      <div class="report-no">03</div>
+      <div>
+        <div class="eyebrow">Non-enzymatic mechanism · different failure mode</div>
+        <h2><span class="organism">Staphylococcus aureus</span> × Penicillins (MRSA)</h2>
+      </div>
+    </div>
+
+    <dl class="specimen">
+      <div><dt>Sample analysed</dt><dd>7,634 bp</dd></div>
+      <div><dt>Resistance gene</dt><dd>mecA</dd></div>
+      <div><dt>Detection score</dt><dd>98%</dd></div>
+      <div><dt>NCBI accession</dt><dd>NG_047936.1</dd></div>
+    </dl>
+
+    <h3 class="sec">1 · Problem statement</h3>
+    <p>
+      The previous two reports both involved enzymes — the bacterium producing
+      something that attacks or alters the drug. This pair uses a different mechanism
+      entirely, which matters because the available responses differ.
+    </p>
+    <p>
+      A sample carrying the <strong>mecA</strong> gene is what is commonly called
+      MRSA. The gene supplies the bacterium with a replacement component that
+      penicillin-type antibiotics cannot attach to.
+    </p>
+
+    <h3 class="sec">2 · Real Indian data outcomes</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th><th class="num">2016</th><th class="num">2018</th>
+            <th class="num">2020</th><th class="num">2022</th><th class="num">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="col-real"><td><strong>MRSA rate</strong></td><td class="num">28.4%</td><td class="num">38.6%</td><td class="num">41.4%</td><td class="num">44.5%</td><td class="num"><strong>52.4%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Slightly more than <strong>half</strong> of Indian <em class="term">S. aureus</em>
+      samples are now MRSA, up from roughly a quarter in 2016 — the steepest rise of
+      the three pairs in this dossier.
+    </p>
+
+    <h3 class="sec">3 · Module 3 outcomes</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Output</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Penicillin resistance predicted</td><td class="col-model"><strong>88%</strong></td></tr>
+          <tr><td>Gene responsible</td><td>mecA, detected at 98% confidence</td></tr>
+          <tr><td>How it works</td><td>Supplies a replacement target the drug cannot bind</td></tr>
+          <tr><td>Can a partner drug fix it</td><td><span class="verdict v-dead">DEAD END</span></td></tr>
+          <tr><td>Projection to 2035</td><td>75% — closing</td></tr>
+          <tr><td>How fast it spreads</td><td>Mobile, but slower than a free-floating gene</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sec">4 · Side-by-side comparison</h3>
+    <div class="src-key">
+      <span><span class="swatch" style="background:var(--real)"></span> Real ICMR data</span>
+      <span><span class="swatch" style="background:var(--model)"></span> Module 3 output</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th class="col-real num">ICMR 2024</th>
+            <th class="col-model num">Module 3</th>
+            <th class="num">Difference</th>
+            <th>Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Penicillin resistance</td>
+            <td class="col-real num">52.4%</td>
+            <td class="col-model num">88%</td>
+            <td class="num">+36 pp</td>
+            <td>Expected by definition</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="lbl">Reading the difference</span>
+      <p>
+        The 52.4% states what proportion of all Indian <em class="term">S. aureus</em>
+        samples are MRSA. Our sample <strong>is</strong> an MRSA sample — it carries
+        mecA. The two numbers therefore answer different questions: one is how common
+        the category is, the other is whether this particular sample belongs to it.
+      </p>
+      <p>
+        A high reading is the only correct outcome here. Anything near 52% would have
+        indicated the module had failed to recognise a gene it detected at 98%
+        confidence.
+      </p>
+    </div>
+
+    <h3 class="sec">5 · Why we used our model here</h3>
+    <p>
+      This pair was included to demonstrate that the module distinguishes between
+      mechanisms rather than treating all resistance identically.
+    </p>
+    <p>
+      In Report 01 the bacterium destroys the drug; in Report 02 it alters the drug. In
+      both cases a partner drug is at least conceivable. Here the bacterium has
+      replaced the component the drug needs to attach to, so there is nothing for a
+      partner drug to act on. Module 3 reaches <strong>DEAD END</strong> by a
+      different route, and gives the correct reason.
+    </p>
+
+    <h3 class="sec">6 · How each feature helps an R&amp;D team</h3>
+    <div class="feature-list">
+      <div>
+        <h4>Rescue — the reason, not just the verdict</h4>
+        <p>States that no partner drug applies because there is no enzyme to block.
+           A team that assumed the enzyme-blocking approach from Report 01 would
+           transfer here is corrected immediately.</p>
+      </div>
+      <div>
+        <h4>Runway — the steepest trend in this dossier</h4>
+        <p>Rising about 2.8 points per year, reaching 75% by 2035. Of the three pairs,
+           this target is deteriorating fastest.</p>
+      </div>
+      <div>
+        <h4>Spread — a slower transfer mechanism</h4>
+        <p>This gene travels on an element embedded in the chromosome rather than a
+           free-floating one, so it spreads more slowly. Module 3 applies a smaller
+           acceleration factor to the projection and states why.</p>
+      </div>
+      <div>
+        <h4>Value — the cost of finding out later</h4>
+        <p>Converts the finding into the figure a budget committee needs: what
+           carrying this programme to trial stage would have cost before the same
+           result emerged. All inputs are adjustable.</p>
+      </div>
+    </div>
+
+    <h3 class="sec">7 · Conclusion</h3>
+    <p>
+      Module 3 correctly identified a resistance mechanism that works differently from
+      the other two pairs and reported the appropriate consequence. Taken together,
+      the three reports show the module distinguishing enzyme-based resistance that
+      can be worked around, enzyme-based resistance that cannot, and
+      replacement-based resistance where the question does not arise.
+    </p>
+
+    <div class="sign">
+      <div><div class="line"></div><div class="cap">Prepared by</div></div>
+      <div><div class="line"></div><div class="cap">Reviewed by (mentor)</div></div>
+      <div><div class="line"></div><div class="cap">Date</div></div>
+    </div>
+  </section>
+
+  <!-- ============================== SUMMARY ============================== -->
+  <section class="report">
+    <div class="report-head">
+      <div class="report-no">—</div>
+      <div><h2>Summary across all three pairs</h2></div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Pair</th><th>Gene</th><th>Mechanism</th>
+            <th class="col-real num">ICMR</th><th class="col-model num">Module 3</th>
+            <th>Verdict</th><th>Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><em class="term">K. pneumoniae</em> × Carbapenems</td>
+            <td>blaNDM-1</td><td>Destroys the drug</td>
+            <td class="col-real num">65.6%</td><td class="col-model num">82%</td>
+            <td><span class="verdict v-dead">DEAD END</span></td><td>As expected</td>
+          </tr>
+          <tr>
+            <td><em class="term">E. coli</em> × Aminoglycosides</td>
+            <td>aac(6')-Ib</td><td>Alters the drug</td>
+            <td class="col-real num">27.5%</td><td class="col-model num">100%</td>
+            <td><span class="verdict v-save">SALVAGEABLE</span></td><td>Too coarse — corrected</td>
+          </tr>
+          <tr>
+            <td><em class="term">S. aureus</em> × Penicillins</td>
+            <td>mecA</td><td>Replaces the target</td>
+            <td class="col-real num">52.4%</td><td class="col-model num">88%</td>
+            <td><span class="verdict v-dead">DEAD END</span></td><td>As expected by definition</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sec">What the three pairs establish</h3>
+    <ul>
+      <li><strong>Three mechanisms, correctly distinguished.</strong> The module does
+          not treat resistance as a single phenomenon — it identifies how each gene
+          works and gives the matching recommendation.</li>
+      <li><strong>Two different verdicts from similar-looking results.</strong>
+          Reports 01 and 02 both begin as enzyme-based resistance and end in opposite
+          recommendations.</li>
+      <li><strong>One limitation found and corrected.</strong> Report 02's difference
+          against real data exposed family-level reporting as too coarse. The
+          correction recovered a usable antibiotic.</li>
+      <li><strong>Direction is consistent throughout.</strong> In all three pairs the
+          module reads above the national average, which is the expected outcome when
+          examining samples selected for carrying resistance genes.</li>
+    </ul>
+
+    <h3 class="sec">Stated limitations</h3>
+    <div class="note caution">
+      <span class="lbl">Declared for completeness</span>
+      <p>
+        <strong>Gene sequences are real; surrounding DNA is generated.</strong> All 21
+        reference genes come from NCBI's published database with verifiable accession
+        numbers. The remaining sample DNA is constructed, because complete annotated
+        genomes exceed what a demonstration can carry.
+      </p>
+      <p>
+        <strong>Sample contents are assigned by us, not laboratory-confirmed.</strong>
+        We select which genes each sample carries, so these are not independent
+        laboratory results.
+      </p>
+      <p>
+        <strong>Held-out score is 0.763, not higher.</strong> Replacing generated gene
+        sequences with real ones reduced measured accuracy from 0.99 to 0.92, and to
+        0.763 on the most demanding test. The reduction was retained because it
+        reflects genuine performance.
+      </p>
+    </div>
+
+    <div class="sign">
+      <div><div class="line"></div><div class="cap">Prepared by</div></div>
+      <div><div class="line"></div><div class="cap">Reviewed by (mentor)</div></div>
+      <div><div class="line"></div><div class="cap">Date</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      <strong>Sources.</strong> Resistance figures: ICMR AMRSN Annual Reports 2015–2024.
+      Gene sequences: NCBI Bacterial Antimicrobial Resistance Reference Gene Database,
+      AMRFinderPlus 2026-08-07.1. Individual-drug relationships: CARD ontology and NCBI
+      Reference Gene Catalog.
+    </p>
+    <p>
+      TrialSense is a research screening prototype for pharmaceutical R&amp;D. It is not
+      a diagnostic tool and not a clinical decision-support system. No output should be
+      used to treat anyone.
+    </p>
+  </footer>
+
+</div>
